@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:visibility="visible"
     android:background="@drawable/gradient"
+    android:visibility="visible"
     tools:context="gunner.gunner.MainActivity"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="81dp">
@@ -89,6 +89,17 @@
         android:text="Create account"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/loggedInUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/logIn"
+        app:layout_constraintEnd_toStartOf="@+id/logIn"
+        app:layout_constraintStart_toEndOf="@+id/createAccount"
         app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

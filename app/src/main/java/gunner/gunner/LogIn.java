@@ -80,6 +80,7 @@ public class LogIn extends AppCompatActivity {
 
                        if (userName.equals(username) ) {
                            rowNumberUsername=rs.getRow();
+                           MainActivity.loggedUsername=username;
                            System.out.println("Username correct");
                        } else {
                            System.out.println("Username wrong");
@@ -97,6 +98,8 @@ public class LogIn extends AppCompatActivity {
                    }
                    if(rowNumberPassword==rowNumberUsername){
                        System.out.println("Log in correct");
+                       MainActivity.loggedIn=true;
+
                    }
                }catch (Exception e){
                    e.printStackTrace();
