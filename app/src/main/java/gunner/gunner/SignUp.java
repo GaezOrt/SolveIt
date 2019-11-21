@@ -29,6 +29,7 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
 
+        //Ir para atras
         final Button atrasBut=(Button) findViewById(button2) ;
         atrasBut.setOnClickListener(new View.OnClickListener() {
             @Override

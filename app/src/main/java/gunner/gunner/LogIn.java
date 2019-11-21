@@ -32,13 +32,14 @@ public class LogIn extends AppCompatActivity {
         Statement st;
     int rowNumberPassword;
     int rowNumberUsername;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
 
-
+        //Apretar boton para ir para atras
         final Button atrasBut=(Button) findViewById(button2) ;
         atrasBut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +48,7 @@ public class LogIn extends AppCompatActivity {
                 setContentView(R.layout.activity_main);
             }
         });
-
+//Apretar boton para loggear
         final Button logInButt=(Button) findViewById(button7) ;
         logInButt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +60,7 @@ public class LogIn extends AppCompatActivity {
                 password=passwordText.getText().toString();
 
                try {
-                   Class.forName(driver1);
+                  Class.forName(driver1);
                    con= DriverManager.getConnection(url, userName, passwordDatabase);
                    st=con.createStatement();
                    System.out.println("Connection is successful");

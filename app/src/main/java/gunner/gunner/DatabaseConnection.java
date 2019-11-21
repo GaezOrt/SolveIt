@@ -9,14 +9,7 @@ public class DatabaseConnection {
         Connection con;
         Statement st;
 
-
-    private static final String CREATE_TABLE_SQL="CREATE TABLE boraji.users ("
-            + "UID INT NOT NULL,"
-            + "NAME VARCHAR(45) NOT NULL,"
-            + "DOB DATE NOT NULL,"
-            + "EMAIL VARCHAR(45) NOT NULL,"
-            + "PRIMARY KEY (UID))";
-
+    //Conectar a Database
         public void DatabaseConnection(String email, String username, String password) {
             userName="9QFW2Os9pV";
             passwordDatabase="dKObZerUnf";

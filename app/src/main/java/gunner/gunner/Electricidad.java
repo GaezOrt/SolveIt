@@ -33,6 +33,7 @@ public class Electricidad extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.electr);
 
+       //Ir para atras
         final Button atrasBut=(Button) findViewById(button2) ;
         atrasBut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,8 +46,11 @@ public class Electricidad extends AppCompatActivity {
                 //setContentView(R.layout.activity_main);
             }
         });
+
+
         final ListView list= (ListView) findViewById(lista);
         list.setAdapter(adapter);
+        //Realizar ampliacion cuando se clickea item de lista
         list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){

@@ -18,27 +18,24 @@ public class MainActivity extends AppCompatActivity  {
     DatabaseConnection connection= new DatabaseConnection();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        getSupportActionBar().hide();
         setTheme(R.style.Theme_Design_NoActionBar);
-        System.out.println("Hol");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final Animation animation= AnimationUtils.loadAnimation(MainActivity.this,R.anim.fadeout);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-
         StrictMode.setThreadPolicy(policy);
-        final Button electricidadBut = (Button) findViewById(button);
 
+        //Boton para electricistas
+        final Button electricidadBut = (Button) findViewById(button);
         electricidadBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, Electricidad.class));
-                electricidadBut.startAnimation(animation);
                 setContentView(R.layout.electr);
 
             }
         });
 
+        //Log in boton
         final Button login= (Button)findViewById(logIn);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +45,8 @@ public class MainActivity extends AppCompatActivity  {
 
             }
         });
+
+        //Boton para signup
         final Button signup= (Button)findViewById(createAccount);
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
