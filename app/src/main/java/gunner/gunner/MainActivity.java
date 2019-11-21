@@ -1,29 +1,21 @@
 package gunner.gunner;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.graphics.Camera;
-import android.graphics.Color;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
-import android.media.MediaPlayer;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
-import java.security.Policy;
-
 import static gunner.gunner.R.id.button;
+import static gunner.gunner.R.id.createAccount;
+import static gunner.gunner.R.id.logIn;
 
 public class MainActivity extends AppCompatActivity  {
 
-
+    DatabaseConnection connection= new DatabaseConnection();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 //        getSupportActionBar().hide();
@@ -31,88 +23,39 @@ public class MainActivity extends AppCompatActivity  {
         System.out.println("Hol");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final Animation animation= AnimationUtils.loadAnimation(MainActivity.this,R.anim.fadeout);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
+        StrictMode.setThreadPolicy(policy);
         final Button electricidadBut = (Button) findViewById(button);
+
         electricidadBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, Electricidad.class));
+                electricidadBut.startAnimation(animation);
                 setContentView(R.layout.electr);
+
             }
         });
 
-        final SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-       // final Sensor proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-        //final MediaPlayer future = MediaPlayer.create(this, R.raw.poweringupp);
-        //final MediaPlayer ak47 = MediaPlayer.create(this, R.raw.ak);
-        //final MediaPlayer bSound = MediaPlayer.create(this, R.raw.bulet);
-        //final MediaPlayer rSound = MediaPlayer.create(this, R.raw.g);
-        View view = getWindow().getDecorView();
-        int orientation = getResources().getConfiguration().orientation;
-
-        /*
-        if (Configuration.ORIENTATION_LANDSCAPE == orientation || Configuration.ORIENTATION_UNDEFINED == orientation) {
-
-
-               bSound.start();
-
-               bSound.stop();
-                ak47.start();
-
-            // Landscape
-        } else {
-            rSound.start();///Do SomeThing;  // Portrait
-        }
-
-
-        SensorEventListener proximityListener = new SensorEventListener() {
+        final Button login= (Button)findViewById(logIn);
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onSensorChanged(SensorEvent sensorEvent) {
-
-                if (sensorEvent.values[0] < proximitySensor.getMaximumRange()) {
-
-
-                } else {
-
-
-                }
-
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, LogIn.class));
+                setContentView(R.layout.login);
 
             }
-
+        });
+        final Button signup= (Button)findViewById(createAccount);
+        signup.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onAccuracyChanged(Sensor sensor, int i) {
-
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SignUp.class));
+                setContentView(R.layout.register);
             }
-        };
-        sensorManager.registerListener(proximityListener, proximitySensor, 2 * 1000 * 1000);
-
-
-    }
-
-
-
-
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    */
+        });
     }
 
 }

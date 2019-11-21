@@ -1,53 +1,110 @@
 package gunner.gunner;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.MediaController;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.VideoView;
 
-public class CreateAccount extends AppCompatActivity {
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
-    private VideoView mVideoView;
+import static gunner.gunner.R.id.button2;
+import static gunner.gunner.R.id.button7;
+import static gunner.gunner.R.id.editText;
+import static gunner.gunner.R.id.editText2;
+import static gunner.gunner.R.id.editText3;
 
-    @SuppressLint("ResourceType")
+public class LogIn extends AppCompatActivity {
+    String userName="9QFW2Os9pV",passwordDatabase="dKObZerUnf",url="jdbc:mysql://remotemysql.com:3306/9QFW2Os9pV",driver,driver1="com.mysql.jdbc.Driver";
+        String username;
+        String password;
+        DatabaseConnection database= new DatabaseConnection();
+        Connection con;
+        Statement st;
+    int rowNumberPassword;
+    int rowNumberUsername;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.registeracc);
+        setContentView(R.layout.login);
 
-        VideoView videoHolder = new VideoView(this);
-       // videoHolder.setMediaController(new MediaController(this));
-        Uri video = Uri.parse("android.resource://" + getPackageName() + "/"
-                + R.raw.bg_video); //do not add any extension
 
-        videoHolder.setVideoURI(video);
-        //setContentView(videoHolder);
-        videoHolder.start();
 
-        //mVideoView = (VideoView)findViewById(R.raw.bg_video);
-        //Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.bg_video);
-        //Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.bg_video);
-
-        //mVideoView.setVideoURI(uri);
-        //mVideoView.start();
-        videoHolder.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+        final Button atrasBut=(Button) findViewById(button2) ;
+        atrasBut.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onPrepared(MediaPlayer mediaPlayer) {
-                mediaPlayer.setLooping(true);
+            public void onClick(View v) {
+                startActivity(new Intent(LogIn.this, MainActivity.class));
+                setContentView(R.layout.activity_main);
             }
         });
-        /*
-       mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-           @Override
-            public void onPrepared(MediaPlayer mediaPlayer) {
-                mediaPlayer.setLooping(true);
+
+        final Button logInButt=(Button) findViewById(button7) ;
+        logInButt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                EditText usernameText=(EditText) findViewById(editText);
+                username=usernameText.getText().toString();
+                EditText passwordText=(EditText) findViewById(editText2);
+                password=passwordText.getText().toString();
+
+               try {
+                   Class.forName(driver1);
+                   con= DriverManager.getConnection(url, userName, passwordDatabase);
+                   st=con.createStatement();
+                   System.out.println("Connection is successful");
+                   st=con.createStatement();
+                  // PreparedStatement upd = con.prepareStatement("SELECT User FROM Users WHERE '"+username+"'=User AND Password='"+password+"'");
+                   PreparedStatement updN = con.prepareStatement("SELECT User FROM Users");
+                   PreparedStatement updP = con.prepareStatement("SELECT Password FROM Users");
+
+                   ResultSet rs = updN.executeQuery();
+                   ResultSet rsP=updP.executeQuery();
+                  // for (int x=1;x<=rs.getMetaData().getColumnCount();x++)
+                  // System.out.print(rs.getMetaData().getColumnName(x)+ "\t");
+
+
+                   while(rs.next()) {
+                       String userName = rs.getString("User");
+
+                       if (userName.equals(username) ) {
+                           rowNumberUsername=rs.getRow();
+                           System.out.println("Username correct");
+                       } else {
+                           System.out.println("Username wrong");
+                       }
+
+                   }
+                   while(rsP.next()){
+                       String passWord=rsP.getString("Password");
+                       if (passWord.equals(password)) {
+                           rowNumberPassword=rsP.getRow();
+                           System.out.println("Password succesfull");
+                       } else {
+                           System.out.println("Username or Password wrong");
+                       }
+                   }
+                   if(rowNumberPassword==rowNumberUsername){
+                       System.out.println("Log in correct");
+                   }
+               }catch (Exception e){
+                   e.printStackTrace();
+               }
+
+               // startActivity(new Intent(LogIn.this, MainActivity.class));
+               // setContentView(R.layout.activity_main);
             }
         });
-    }
-    */
 
     }
 }

@@ -28,7 +28,7 @@ public class Electricidad extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, values);
-//        getSupportActionBar().hide();
+
         setTheme(R.style.Theme_Design_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.electr);
