@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.VideoView;
 
 import java.sql.Connection;
@@ -17,6 +18,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import static gunner.gunner.R.id.PasswordInc;
 import static gunner.gunner.R.id.button2;
 import static gunner.gunner.R.id.button7;
 import static gunner.gunner.R.id.editText;
@@ -27,6 +29,8 @@ public class LogIn extends AppCompatActivity {
     String userName="9QFW2Os9pV",passwordDatabase="dKObZerUnf",url="jdbc:mysql://remotemysql.com:3306/9QFW2Os9pV",driver,driver1="com.mysql.jdbc.Driver";
         String username;
         String password;
+        String usernameCorrect;
+        String passwordCorrect;
         DatabaseConnection database= new DatabaseConnection();
         Connection con;
         Statement st;
@@ -78,27 +82,34 @@ public class LogIn extends AppCompatActivity {
                    while(rs.next()) {
                        String userName = rs.getString("User");
 
-                       if (userName.equals(username) ) {
+                       if (userName.equals(username)&& username!=null ) {
                            rowNumberUsername=rs.getRow();
+                           usernameCorrect=username;
                            MainActivity.loggedUsername=username;
                            System.out.println("Username correct");
                        } else {
-                           System.out.println("Username wrong");
+                           final TextView passwordIncText=(TextView) findViewById(PasswordInc) ;
+                           passwordIncText.setText("Username or password incorrect.");
+
+                           System.out.println("Username or password wrong");
                        }
 
                    }
                    while(rsP.next()){
                        String passWord=rsP.getString("Password");
-                       if (passWord.equals(password)) {
+                       if (passWord.equals(password) && password!=null) {
+                           passwordCorrect=password;
                            rowNumberPassword=rsP.getRow();
                            System.out.println("Password succesfull");
                        } else {
                            System.out.println("Username or Password wrong");
                        }
                    }
-                   if(rowNumberPassword==rowNumberUsername){
+                   if(rowNumberPassword==rowNumberUsername && usernameCorrect!=null && passwordCorrect!=null){
                        System.out.println("Log in correct");
                        MainActivity.loggedIn=true;
+                       startActivity(new Intent(LogIn.this, MainActivity.class));
+                       setContentView(R.layout.activity_main);
 
                    }
                }catch (Exception e){
