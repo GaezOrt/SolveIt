@@ -19,6 +19,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import static gunner.gunner.R.id.PasswordInc;
+import static gunner.gunner.R.id.Profile;
 import static gunner.gunner.R.id.button2;
 import static gunner.gunner.R.id.button7;
 import static gunner.gunner.R.id.editText;
@@ -48,6 +49,7 @@ public class LogIn extends AppCompatActivity {
         atrasBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
                 startActivity(new Intent(LogIn.this, MainActivity.class));
                 setContentView(R.layout.activity_main);
             }
@@ -63,6 +65,7 @@ public class LogIn extends AppCompatActivity {
                 EditText passwordText=(EditText) findViewById(editText2);
                 password=passwordText.getText().toString();
 
+
                try {
                   Class.forName(driver1);
                    con= DriverManager.getConnection(url, userName, passwordDatabase);
@@ -70,9 +73,11 @@ public class LogIn extends AppCompatActivity {
                    System.out.println("Connection is successful");
                    st=con.createStatement();
                   // PreparedStatement upd = con.prepareStatement("SELECT User FROM Users WHERE '"+username+"'=User AND Password='"+password+"'");
-                   PreparedStatement updN = con.prepareStatement("SELECT User FROM Users");
+                   PreparedStatement updN = con.prepareStatement("SELECT * FROM Users");
                    PreparedStatement updP = con.prepareStatement("SELECT Password FROM Users");
+                   PreparedStatement updEmail=con.prepareStatement("SELECT email FROM Users");
 
+                   ResultSet rsE = updEmail.executeQuery();
                    ResultSet rs = updN.executeQuery();
                    ResultSet rsP=updP.executeQuery();
                   // for (int x=1;x<=rs.getMetaData().getColumnCount();x++)
@@ -81,12 +86,17 @@ public class LogIn extends AppCompatActivity {
 
                    while(rs.next()) {
                        String userName = rs.getString("User");
-
+                       String email=rs.getString("email");
+                       String phone=rs.getString("telefono");
+                       String location=rs.getString("location");
                        if (userName.equals(username)&& username!=null ) {
                            rowNumberUsername=rs.getRow();
                            usernameCorrect=username;
+                           MainActivity.loggedEmail=email;
+                           MainActivity.loggedPhone=phone;
                            MainActivity.loggedUsername=username;
-                           System.out.println("Username correct");
+                           MainActivity.loggedLocation=location;
+                           System.out.println("Username correct" + MainActivity.loggedLocation);
                        } else {
                            final TextView passwordIncText=(TextView) findViewById(PasswordInc) ;
                            passwordIncText.setText("Username or password incorrect.");
@@ -105,9 +115,12 @@ public class LogIn extends AppCompatActivity {
                            System.out.println("Username or Password wrong");
                        }
                    }
+
                    if(rowNumberPassword==rowNumberUsername && usernameCorrect!=null && passwordCorrect!=null){
                        System.out.println("Log in correct");
+                       System.out.println(MainActivity.loggedEmail);
                        MainActivity.loggedIn=true;
+
                        startActivity(new Intent(LogIn.this, MainActivity.class));
                        setContentView(R.layout.activity_main);
 
@@ -115,9 +128,6 @@ public class LogIn extends AppCompatActivity {
                }catch (Exception e){
                    e.printStackTrace();
                }
-
-               // startActivity(new Intent(LogIn.this, MainActivity.class));
-               // setContentView(R.layout.activity_main);
             }
         });
 

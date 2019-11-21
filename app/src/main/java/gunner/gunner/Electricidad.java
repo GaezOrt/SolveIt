@@ -38,7 +38,7 @@ public class Electricidad extends AppCompatActivity {
         atrasBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Holaa");
+                finish();
                 startActivity(new Intent(Electricidad.this, MainActivity.class));
                 setContentView(R.layout.activity_main);
 

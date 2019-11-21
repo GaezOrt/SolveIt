@@ -11,7 +11,7 @@ public class DatabaseConnection {
         Connection con;
         Statement st;
     //Conectar a Database
-        public void DatabaseConnection(String email, String username, String password,String phoneNumber) {
+        public void DatabaseConnection(String email, String username, String password,String phoneNumber,String location) {
             userName="9QFW2Os9pV";
             passwordDatabase="dKObZerUnf";
             url="jdbc:mysql://remotemysql.com:3306/9QFW2Os9pV";
@@ -24,7 +24,7 @@ public class DatabaseConnection {
                 st=con.createStatement();
                 System.out.println("Connection is successful");
                 st=con.createStatement();
-                st.executeUpdate("INSERT INTO Users " + "VALUES ('"+email+"', '"+username+"', '"+password+"','"+phoneNumber+"')");
+                st.executeUpdate("INSERT INTO Users " + "VALUES ('"+email+"', '"+username+"', '"+password+"','"+phoneNumber+"','"+location+"')");
                 SignUp.creadConExito=true;
 
             } catch (Exception e) {

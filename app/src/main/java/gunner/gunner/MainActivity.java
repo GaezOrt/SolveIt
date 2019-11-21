@@ -12,18 +12,22 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import static gunner.gunner.R.id.Profile;
 import static gunner.gunner.R.id.button;
 import static gunner.gunner.R.id.createAccount;
 import static gunner.gunner.R.id.logIn;
-import static gunner.gunner.R.id.loggedInUsername;
+
 
 public class MainActivity extends AppCompatActivity  {
     static boolean loggedIn=false;
     static String loggedUsername;
     static String loggedEmail;
+    static String loggedPhone;
+    static String loggedLocation;
     DatabaseConnection connection= new DatabaseConnection();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         setTheme(R.style.Theme_Design_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -31,6 +35,7 @@ public class MainActivity extends AppCompatActivity  {
         StrictMode.setThreadPolicy(policy);
 
 
+        Button profile=(Button) findViewById(Profile) ;
 
         //Boton para electricistas
         final Button electricidadBut = (Button) findViewById(button);
@@ -67,10 +72,39 @@ public class MainActivity extends AppCompatActivity  {
         });
 
         if(loggedIn){
+
+            profile.setVisibility(View.VISIBLE);
             login.setVisibility(View.INVISIBLE);
             signup.setVisibility(View.INVISIBLE);
-            TextView usernameLogged=(TextView) findViewById(loggedInUsername);
-            usernameLogged.setText("Ingresado como: "+loggedUsername);
+
+            profile.setText(MainActivity.loggedUsername);
+            profile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(MainActivity.this, ProfileUser.class));
+                    setContentView(R.layout.user_profile);
+
+                }
+            });
+
+            Button logOutButt=(Button) findViewById(R.id.logOutButt);;
+            logOutButt.setVisibility(View.VISIBLE);
+            logOutButt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    loggedIn=false;
+                    login.setVisibility(View.VISIBLE);
+                    signup.setVisibility(View.VISIBLE);
+                    logOutButt.setVisibility(View.INVISIBLE);
+                    profile.setVisibility(View.INVISIBLE);
+
+                }
+            });
+
+
+        }else{
+            login.setVisibility(View.VISIBLE);
+            signup.setVisibility(View.VISIBLE);
         }
 
 

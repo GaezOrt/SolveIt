@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import static gunner.gunner.R.id.CuentaNoCreada;
 import static gunner.gunner.R.id.button2;
 import static gunner.gunner.R.id.button7;
 import static gunner.gunner.R.id.cuentaCreada;
@@ -27,10 +28,12 @@ public class SignUp extends AppCompatActivity {
     String username;
     String password;
     String number;
+    String location;
     static boolean creadConExito=false;
     DatabaseConnection databaseAccess=new DatabaseConnection();
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
 
@@ -39,7 +42,7 @@ public class SignUp extends AppCompatActivity {
         atrasBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Holaa");
+                finish();
                 startActivity(new Intent(SignUp.this, MainActivity.class));
                 setContentView(R.layout.activity_main);
             }
@@ -49,7 +52,12 @@ public class SignUp extends AppCompatActivity {
         final Button registerBut=(Button) findViewById(button7) ;
         registerBut.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
+
+                TextView nosePudoCrearLaCuenta= (TextView)findViewById(CuentaNoCreada);
+                TextView cuentaCreadaConExito= (TextView)findViewById(cuentaCreada);
+
                 EditText emailText=(EditText) findViewById(editText3);
                 email=emailText.getText().toString();
                 EditText usernameText=(EditText)findViewById(editText);
@@ -58,11 +66,22 @@ public class SignUp extends AppCompatActivity {
                 password=passwordText.getText().toString();
                 EditText phoneNumberText=(EditText)findViewById(editText5);
                 number=phoneNumberText.getText().toString();
-                databaseAccess.DatabaseConnection(email,username,password,number);
-                if(creadConExito){
-                TextView cuentaCreadaConExito= (TextView)findViewById(cuentaCreada);
-                cuentaCreadaConExito.setVisibility(View.VISIBLE);
-                         }
+                EditText locationButt=(EditText)findViewById(R.id.location);
+                location=locationButt.getText().toString();
+
+                if(email.length()!=0 && username.length()!=0 && password.length()!=0 && number.length()!=0)
+                {
+                    databaseAccess.DatabaseConnection(email, username, password, number,location);
+                }else
+                {
+                    nosePudoCrearLaCuenta.setVisibility(View.VISIBLE);
+                    cuentaCreadaConExito.setVisibility(View.INVISIBLE);
+                }
+                if(creadConExito)
+                {
+                    cuentaCreadaConExito.setVisibility(View.VISIBLE);
+                    nosePudoCrearLaCuenta.setVisibility(View.INVISIBLE);
+                }
                 //startActivity(new Intent(SignUp.this, MainActivity.class));
                 //setContentView(R.layout.activity_main);
             }
