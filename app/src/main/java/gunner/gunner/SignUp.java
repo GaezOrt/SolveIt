@@ -4,11 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import static gunner.gunner.R.id.CuentaNoCreada;
@@ -19,8 +16,6 @@ import static gunner.gunner.R.id.editText;
 import static gunner.gunner.R.id.editText2;
 import static gunner.gunner.R.id.editText3;
 import static gunner.gunner.R.id.editText5;
-import static gunner.gunner.R.id.imageView;
-import static gunner.gunner.R.id.imageView2;
 
 public class SignUp extends AppCompatActivity {
 
@@ -31,6 +26,7 @@ public class SignUp extends AppCompatActivity {
     String location;
     static boolean creadConExito=false;
     DatabaseConnection databaseAccess=new DatabaseConnection();
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -82,8 +78,6 @@ public class SignUp extends AppCompatActivity {
                     cuentaCreadaConExito.setVisibility(View.VISIBLE);
                     nosePudoCrearLaCuenta.setVisibility(View.INVISIBLE);
                 }
-                //startActivity(new Intent(SignUp.this, MainActivity.class));
-                //setContentView(R.layout.activity_main);
             }
         });
     }

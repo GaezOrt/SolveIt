@@ -54,7 +54,7 @@ public class LogIn extends AppCompatActivity {
                 setContentView(R.layout.activity_main);
             }
         });
-//Apretar boton para loggear
+        //Apretar boton para loggear
         final Button logInButt=(Button) findViewById(button7) ;
         logInButt.setOnClickListener(new View.OnClickListener() {
             @Override

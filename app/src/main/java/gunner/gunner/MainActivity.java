@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
 
+        //Cuenta loggeada
         if(loggedIn){
 
             profile.setVisibility(View.VISIBLE);

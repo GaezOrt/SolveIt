@@ -22,6 +22,7 @@ public class ProfileUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_profile);
 
+        //Boton para atras
         final Button atrasBut=(Button) findViewById(button2) ;
         atrasBut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,14 +33,17 @@ public class ProfileUser extends AppCompatActivity {
             }
         });
 
+        //Mostrar email
         final TextView emailButt=(TextView) findViewById(editText3) ;
         emailButt.setText(MainActivity.loggedEmail);
-
+        //Mostrar username
         final TextView usernameButt=(TextView) findViewById(editText) ;
         usernameButt.setText(MainActivity.loggedUsername);
+        //Mostrar telefono
         final TextView phoneButt=(TextView) findViewById(editText5) ;
         phoneButt.setText(MainActivity.loggedPhone);
-         TextView locatText=(TextView) findViewById(editText2) ;
+        //Mostrar ubicacion
+        TextView locatText=(TextView) findViewById(editText2) ;
         locatText.setText(MainActivity.loggedLocation);
     }
 

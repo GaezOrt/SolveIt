@@ -41,9 +41,6 @@ public class Electricidad extends AppCompatActivity {
                 finish();
                 startActivity(new Intent(Electricidad.this, MainActivity.class));
                 setContentView(R.layout.activity_main);
-
-                //navigateUpTo(new Intent(getBaseContext(), MainActivity.class));
-                //setContentView(R.layout.activity_main);
             }
         });
 

@@ -1,6 +1,5 @@
 package gunner.gunner;
 
-import android.widget.TextView;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
