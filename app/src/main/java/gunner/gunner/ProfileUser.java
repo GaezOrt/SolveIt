@@ -1,22 +1,38 @@
 package gunner.gunner;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import static gunner.gunner.R.id.button2;
 import static gunner.gunner.R.id.editText;
 import static gunner.gunner.R.id.editText2;
 import static gunner.gunner.R.id.editText3;
 import static gunner.gunner.R.id.editText5;
+import static gunner.gunner.R.id.imageView2;
 import static gunner.gunner.R.id.location;
 
 
 public class ProfileUser extends AppCompatActivity {
+
+    String userName="9QFW2Os9pV",passwordDatabase="dKObZerUnf",url="jdbc:mysql://remotemysql.com:3306/9QFW2Os9pV",driver,driver1="com.mysql.jdbc.Driver";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,15 +52,25 @@ public class ProfileUser extends AppCompatActivity {
         //Mostrar email
         final TextView emailButt=(TextView) findViewById(editText3) ;
         emailButt.setText(MainActivity.loggedEmail);
+
         //Mostrar username
         final TextView usernameButt=(TextView) findViewById(editText) ;
         usernameButt.setText(MainActivity.loggedUsername);
+
         //Mostrar telefono
         final TextView phoneButt=(TextView) findViewById(editText5) ;
         phoneButt.setText(MainActivity.loggedPhone);
+
         //Mostrar ubicacion
         TextView locatText=(TextView) findViewById(editText2) ;
         locatText.setText(MainActivity.loggedLocation);
+
+        Log.w(" Activity"," Array in database" + MainActivity.loggedImageInDatabaseArray);
+
+        //Settear imagen con los bytes extraidos de la base de datos
+        ImageView image=(ImageView)findViewById(imageView2);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(MainActivity.loggedImageInDatabaseArray, 0, MainActivity.loggedImageInDatabaseArray .length);
+        image.setImageBitmap(bitmap);
     }
 
 }

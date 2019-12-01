@@ -2,16 +2,21 @@ package gunner.gunner;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -27,16 +32,16 @@ import static gunner.gunner.R.id.editText2;
 import static gunner.gunner.R.id.editText3;
 
 public class LogIn extends AppCompatActivity {
-    String userName="9QFW2Os9pV",passwordDatabase="dKObZerUnf",url="jdbc:mysql://remotemysql.com:3306/9QFW2Os9pV",driver,driver1="com.mysql.jdbc.Driver";
+        String userName="9QFW2Os9pV",passwordDatabase="dKObZerUnf",url="jdbc:mysql://remotemysql.com:3306/9QFW2Os9pV",driver,driver1="com.mysql.jdbc.Driver";
         String username;
         String password;
         String usernameCorrect;
         String passwordCorrect;
-        DatabaseConnection database= new DatabaseConnection();
         Connection con;
         Statement st;
-    int rowNumberPassword;
-    int rowNumberUsername;
+        int rowNumberPassword;
+        int rowNumberUsername;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +59,7 @@ public class LogIn extends AppCompatActivity {
                 setContentView(R.layout.activity_main);
             }
         });
+
         //Apretar boton para loggear
         final Button logInButt=(Button) findViewById(button7) ;
         logInButt.setOnClickListener(new View.OnClickListener() {
@@ -89,13 +95,24 @@ public class LogIn extends AppCompatActivity {
                        String email=rs.getString("email");
                        String phone=rs.getString("telefono");
                        String location=rs.getString("location");
+
+
                        if (userName.equals(username)&& username!=null ) {
+                         Blob blob =rs.getBlob("Foto");
+                           int blobLength = (int) blob.length();
+                           byte[] blobAsBytes = blob.getBytes(1, blobLength);
+                           //MainActivity.loggedImageInDatabaseArray=blobAsBytes;;
+                           Log.w("Activity"," Array setteado desde base de datos a variable principal en MAiActivity" + MainActivity.loggedImageInDatabaseArray);
+                         //  bitmapFromDatabase = BitmapFactory.decodeByteArray(blobAsBytes, 0, blobAsBytes.length);
                            rowNumberUsername=rs.getRow();
                            usernameCorrect=username;
                            MainActivity.loggedEmail=email;
                            MainActivity.loggedPhone=phone;
                            MainActivity.loggedUsername=username;
                            MainActivity.loggedLocation=location;
+                           MainActivity.loggedImageInDatabaseArray=blobAsBytes ;
+
+
                            System.out.println("Username correct" + MainActivity.loggedLocation);
                        } else {
                            final TextView passwordIncText=(TextView) findViewById(PasswordInc) ;
@@ -118,6 +135,7 @@ public class LogIn extends AppCompatActivity {
 
                    if(rowNumberPassword==rowNumberUsername && usernameCorrect!=null && passwordCorrect!=null){
                        System.out.println("Log in correct");
+
                        System.out.println(MainActivity.loggedEmail);
                        MainActivity.loggedIn=true;
 

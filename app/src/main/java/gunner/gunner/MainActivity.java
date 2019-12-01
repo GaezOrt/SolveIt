@@ -1,6 +1,7 @@
 package gunner.gunner;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,9 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
+import java.sql.Blob;
+
 import static gunner.gunner.R.id.Profile;
 import static gunner.gunner.R.id.button;
 import static gunner.gunner.R.id.createAccount;
@@ -19,12 +23,15 @@ import static gunner.gunner.R.id.logIn;
 
 
 public class MainActivity extends AppCompatActivity  {
+
     static boolean loggedIn=false;
     static String loggedUsername;
     static String loggedEmail;
     static String loggedPhone;
     static String loggedLocation;
-    DatabaseConnection connection= new DatabaseConnection();
+    static byte[] loggedImageArray;
+    static byte[] loggedImageInDatabaseArray;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -35,7 +42,6 @@ public class MainActivity extends AppCompatActivity  {
         StrictMode.setThreadPolicy(policy);
 
 
-        Button profile=(Button) findViewById(Profile) ;
 
         //Boton para electricistas
         final Button electricidadBut = (Button) findViewById(button);
@@ -72,6 +78,7 @@ public class MainActivity extends AppCompatActivity  {
         });
 
         //Cuenta loggeada
+        Button profile=(Button) findViewById(Profile) ;
         if(loggedIn){
 
             profile.setVisibility(View.VISIBLE);

@@ -44,9 +44,9 @@ public class Electricidad extends AppCompatActivity {
             }
         });
 
-
         final ListView list= (ListView) findViewById(lista);
         list.setAdapter(adapter);
+
         //Realizar ampliacion cuando se clickea item de lista
         list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
