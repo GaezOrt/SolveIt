@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -16,9 +17,12 @@ import org.w3c.dom.Text;
 import java.io.IOException;
 import java.sql.Blob;
 
+import static android.view.View.INVISIBLE;
 import static gunner.gunner.R.id.Profile;
 import static gunner.gunner.R.id.button;
 import static gunner.gunner.R.id.createAccount;
+import static gunner.gunner.R.id.imageView2;
+import static gunner.gunner.R.id.imageView5;
 import static gunner.gunner.R.id.logIn;
 
 
@@ -29,7 +33,7 @@ public class MainActivity extends AppCompatActivity  {
     static String loggedEmail;
     static String loggedPhone;
     static String loggedLocation;
-    static byte[] loggedImageArray;
+    static Bitmap profileImage;
     static byte[] loggedImageInDatabaseArray;
 
     @Override
@@ -79,11 +83,14 @@ public class MainActivity extends AppCompatActivity  {
 
         //Cuenta loggeada
         Button profile=(Button) findViewById(Profile) ;
+        ImageView image=(ImageView)findViewById(imageView5);
         if(loggedIn){
 
+
+            image.setImageBitmap(profileImage);
             profile.setVisibility(View.VISIBLE);
-            login.setVisibility(View.INVISIBLE);
-            signup.setVisibility(View.INVISIBLE);
+            login.setVisibility(INVISIBLE);
+            signup.setVisibility(INVISIBLE);
 
             profile.setText(MainActivity.loggedUsername);
             profile.setOnClickListener(new View.OnClickListener() {
@@ -95,24 +102,26 @@ public class MainActivity extends AppCompatActivity  {
                 }
             });
 
-            Button logOutButt=(Button) findViewById(R.id.logOutButt);;
+            Button logOutButt=(Button) findViewById(R.id.logOutButt);
             logOutButt.setVisibility(View.VISIBLE);
-            logOutButt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            logOutButt.setOnClickListener((v)-> {
                     loggedIn=false;
                     login.setVisibility(View.VISIBLE);
                     signup.setVisibility(View.VISIBLE);
-                    logOutButt.setVisibility(View.INVISIBLE);
-                    profile.setVisibility(View.INVISIBLE);
+                    logOutButt.setVisibility(INVISIBLE);
+                    profile.setVisibility(INVISIBLE);
+                    image.setVisibility(INVISIBLE);
 
-                }
-            });
+
+                });
+
 
 
         }else{
             login.setVisibility(View.VISIBLE);
             signup.setVisibility(View.VISIBLE);
+            image.setVisibility(INVISIBLE);
+
         }
 
 

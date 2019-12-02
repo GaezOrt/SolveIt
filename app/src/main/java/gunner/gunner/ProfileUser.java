@@ -71,6 +71,7 @@ public class ProfileUser extends AppCompatActivity {
         ImageView image=(ImageView)findViewById(imageView2);
         Bitmap bitmap = BitmapFactory.decodeByteArray(MainActivity.loggedImageInDatabaseArray, 0, MainActivity.loggedImageInDatabaseArray .length);
         image.setImageBitmap(bitmap);
+        MainActivity.profileImage=bitmap;
     }
 
 }

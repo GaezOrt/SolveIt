@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -30,6 +31,8 @@ import static gunner.gunner.R.id.button7;
 import static gunner.gunner.R.id.editText;
 import static gunner.gunner.R.id.editText2;
 import static gunner.gunner.R.id.editText3;
+import static gunner.gunner.R.id.imageView2;
+import static gunner.gunner.R.id.imageView5;
 
 public class LogIn extends AppCompatActivity {
         String userName="9QFW2Os9pV",passwordDatabase="dKObZerUnf",url="jdbc:mysql://remotemysql.com:3306/9QFW2Os9pV",driver,driver1="com.mysql.jdbc.Driver";
@@ -37,6 +40,7 @@ public class LogIn extends AppCompatActivity {
         String password;
         String usernameCorrect;
         String passwordCorrect;
+        Bitmap profile;
         Connection con;
         Statement st;
         int rowNumberPassword;
@@ -97,13 +101,12 @@ public class LogIn extends AppCompatActivity {
                        String location=rs.getString("location");
 
 
-                       if (userName.equals(username)&& username!=null ) {
+                       if (userName.equals(username)) {
                          Blob blob =rs.getBlob("Foto");
                            int blobLength = (int) blob.length();
                            byte[] blobAsBytes = blob.getBytes(1, blobLength);
-                           //MainActivity.loggedImageInDatabaseArray=blobAsBytes;;
                            Log.w("Activity"," Array setteado desde base de datos a variable principal en MAiActivity" + MainActivity.loggedImageInDatabaseArray);
-                         //  bitmapFromDatabase = BitmapFactory.decodeByteArray(blobAsBytes, 0, blobAsBytes.length);
+
                            rowNumberUsername=rs.getRow();
                            usernameCorrect=username;
                            MainActivity.loggedEmail=email;
@@ -111,6 +114,9 @@ public class LogIn extends AppCompatActivity {
                            MainActivity.loggedUsername=username;
                            MainActivity.loggedLocation=location;
                            MainActivity.loggedImageInDatabaseArray=blobAsBytes ;
+                           Bitmap bitmap = BitmapFactory.decodeByteArray(MainActivity.loggedImageInDatabaseArray, 0, MainActivity.loggedImageInDatabaseArray .length);
+                           MainActivity.profileImage=bitmap;
+
 
 
                            System.out.println("Username correct" + MainActivity.loggedLocation);
@@ -138,9 +144,12 @@ public class LogIn extends AppCompatActivity {
 
                        System.out.println(MainActivity.loggedEmail);
                        MainActivity.loggedIn=true;
-
                        startActivity(new Intent(LogIn.this, MainActivity.class));
                        setContentView(R.layout.activity_main);
+
+
+
+
 
                    }
                }catch (Exception e){
