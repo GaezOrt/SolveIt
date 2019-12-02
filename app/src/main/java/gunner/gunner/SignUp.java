@@ -74,19 +74,8 @@ public class SignUp extends AppCompatActivity {
     Uri selectedImage;
     byte[] byteArray;
     private ImageView imageView;
-    DatabaseConnection databaseAccess = new DatabaseConnection();
 
-    public String getPath(Uri uri)
-    {
-        String[] projection = { MediaStore.Images.Media.DATA };
-        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
-        if (cursor == null) return null;
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        String s=cursor.getString(column_index);
-        cursor.close();
-        return s;
-    }
+
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.w("Activity", "Activity result");

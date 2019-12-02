@@ -12,8 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <service android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService" android:enabled="true" />
-
+        <activity android:name=".FindInDatabase"></activity>
         <activity android:name=".ProfileUser"></activity>
         <activity android:name=".SignUp"></activity>
         <activity android:name=".LogIn"></activity>
