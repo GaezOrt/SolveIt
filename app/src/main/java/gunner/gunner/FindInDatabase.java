@@ -1,22 +1,31 @@
 package gunner.gunner;
 
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static gunner.gunner.R.id.button2;
 import static gunner.gunner.R.id.editText;
 import static gunner.gunner.R.id.editText2;
 import static gunner.gunner.R.id.editText3;
 import static gunner.gunner.R.id.editText5;
+import static gunner.gunner.R.id.imageView2;
 import static gunner.gunner.R.id.textView;
 
 public class FindInDatabase extends AppCompatActivity {
@@ -24,7 +33,6 @@ public class FindInDatabase extends AppCompatActivity {
         Connection con;
         static String nombre;
         static String numeroTelefono;
-        static String email;
         static String location;
         static String namePassedViaParam;
 
@@ -38,6 +46,14 @@ public class FindInDatabase extends AppCompatActivity {
         final String url = "jdbc:mysql://remotemysql.com:3306/9QFW2Os9pV";
         final DatabaseConnection data = new DatabaseConnection();
 
+
+        //Atras button
+        final Button atrasBut=(Button) findViewById(button2) ;
+        atrasBut.setOnClickListener((v)-> {
+            finish();
+            startActivity(new Intent(FindInDatabase.this, Electricidad.class));
+            setContentView(R.layout.activity_main);
+        });
         //Conectar con base de datos
         con = null;
         try {
@@ -61,6 +77,11 @@ public class FindInDatabase extends AppCompatActivity {
                     String emaill=rs.getString("email");
                     String phone=rs.getString("telefono");
                     String locationn=rs.getString("location");
+
+                    Blob blob =rs.getBlob("Foto");
+                    int blobLength = (int) blob.length();
+                    byte[] blobAsBytes = blob.getBytes(1, blobLength);
+
                     boolean electricista= rs.getBoolean("electricista");
                     boolean carpintero= rs.getBoolean("carpintero");
                     boolean pintor= rs.getBoolean("pintor");
@@ -82,6 +103,10 @@ public class FindInDatabase extends AppCompatActivity {
                         MainActivity.albanil=albanil;
                         MainActivity.cerrajero=cerrajero;
                         MainActivity.computacion=computacion;
+                        MainActivity.loggedImageInDatabaseArray=blobAsBytes;
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(MainActivity.loggedImageInDatabaseArray, 0, MainActivity.loggedImageInDatabaseArray .length);
+                        ImageView image= (ImageView) findViewById(imageView2);
+                        image.setImageBitmap(bitmap);
 
                     }else{
                         TextView locatText=(TextView) findViewById(textView) ;
