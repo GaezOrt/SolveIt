@@ -27,6 +27,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -55,6 +56,7 @@ import java.util.Date;
 
 
 import static gunner.gunner.R.id.CuentaNoCreada;
+import static gunner.gunner.R.id.Electricista;
 import static gunner.gunner.R.id.button2;
 import static gunner.gunner.R.id.button7;
 import static gunner.gunner.R.id.cuentaCreada;
@@ -146,6 +148,57 @@ public class SignUp extends AppCompatActivity {
                         EditText locationButt = (EditText) findViewById(R.id.location);
                         location = locationButt.getText().toString();
 
+
+                        CheckBox electricista= (CheckBox) findViewById(Electricista);
+                        if(electricista.isChecked()){
+                            MainActivity.electricista=true;
+                        }else{
+                            MainActivity.electricista=false;
+                        }
+                        CheckBox gasista= (CheckBox) findViewById(R.id.gasista);
+                        if(gasista.isChecked()){
+                            MainActivity.gasista=true;
+                        }else{
+                            MainActivity.gasista=false;
+                        }
+                        CheckBox plomero= (CheckBox) findViewById(R.id.plomero);
+                        if(plomero.isChecked()){
+                            MainActivity.plomero=true;
+                        }else{
+                            MainActivity.plomero=false;
+                        }
+                        CheckBox computacion= (CheckBox) findViewById(R.id.computacion);
+                        if(computacion.isChecked()){
+                            MainActivity.computacion=true;
+                        }else{
+                            MainActivity.computacion=false;
+                        }
+                        CheckBox pintor= (CheckBox) findViewById(R.id.pintor);
+                        if(pintor.isChecked())
+                            {
+                                MainActivity.pintor = true;
+                            }else{
+                            MainActivity.pintor=false;
+                        }
+                            CheckBox carpintero = (CheckBox) findViewById(R.id.carpintero);
+                            if (carpintero.isChecked()) {
+                                MainActivity.carpintero = true;
+                            }else{
+                                MainActivity.carpintero=false;
+                        }
+                            CheckBox cerrajero = (CheckBox) findViewById(R.id.cerrajero);
+                            if (cerrajero.isChecked()) {
+                                MainActivity.cerrajero = true;
+                            }else{
+                                MainActivity.cerrajero=false;
+                            }
+                            CheckBox albanil = (CheckBox) findViewById(R.id.albanil);
+                            if (albanil.isChecked()) {
+                                MainActivity.albanil = true;
+                            }else{
+                                MainActivity.albanil=false;
+                            }
+
                         boolean datosOK = true;
 
                         if ( email.length() == 0 ) {
@@ -156,8 +209,7 @@ public class SignUp extends AppCompatActivity {
 
                         if ( username.length() == 0 ||
                              password.length() == 0 ||
-                             number.length() == 0 ||
-                             selectedImage == null ) {
+                             number.length() == 0) {
                             datosOK = false;
                         }
 
@@ -169,9 +221,18 @@ public class SignUp extends AppCompatActivity {
                         else {
                             boolean creacionCuentaOk = false;
                             try {
+
                                 databaseConnection.createUser(
                                     email, username, password,
-                                    number, location, byteArray );
+                                    number, location, byteArray,
+                                        MainActivity.electricista,
+                                        MainActivity.carpintero,
+                                        MainActivity.computacion,
+                                        MainActivity.plomero,
+                                        MainActivity.gasista,
+                                        MainActivity.albanil,
+                                        MainActivity.pintor,
+                                        MainActivity.cerrajero);
                                 creacionCuentaOk = true;
                             }
 

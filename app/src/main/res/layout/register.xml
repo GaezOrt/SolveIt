@@ -9,6 +9,99 @@
     tools:context=".LogIn">
 
 
+    <CheckBox
+        android:id="@+id/Electricista"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Electricista"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.126"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/carpintero" />
+
+    <CheckBox
+        android:id="@+id/gasista"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gasista"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.187"
+        app:layout_constraintStart_toEndOf="@+id/plomero"
+        app:layout_constraintTop_toBottomOf="@+id/carpintero" />
+
+    <CheckBox
+        android:id="@+id/carpintero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Carpintero"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/cuentaCreada"
+        app:layout_constraintEnd_toStartOf="@+id/pintor"
+        app:layout_constraintStart_toEndOf="@+id/Electricista"
+        app:layout_constraintTop_toBottomOf="@+id/location" />
+
+    <CheckBox
+        android:id="@+id/albanil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Albañil"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.097"
+        app:layout_constraintStart_toEndOf="@+id/computacion"
+        app:layout_constraintTop_toBottomOf="@+id/gasista" />
+
+    <CheckBox
+        android:id="@+id/plomero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Plomero"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.122"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Electricista" />
+
+    <CheckBox
+        android:id="@+id/computacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Computacion"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.131"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plomero" />
+
+    <CheckBox
+        android:id="@+id/cerrajero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:text="Cerrajero"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/cuentaCreada"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.394"
+        app:layout_constraintStart_toEndOf="@+id/gasista"
+        app:layout_constraintTop_toBottomOf="@+id/carpintero" />
+
+    <CheckBox
+        android:id="@+id/pintor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:text="Pintor"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/cerrajero"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.63"
+        app:layout_constraintStart_toEndOf="@+id/Electricista"
+        app:layout_constraintTop_toTopOf="@+id/carpintero"
+        app:layout_constraintVertical_bias="0.0" />
+
     <EditText
         android:id="@+id/location"
         android:layout_width="250dp"
@@ -24,10 +117,10 @@
         android:textSize="16dp"
         app:layout_constraintBottom_toTopOf="@+id/button7"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.468"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText5"
-        app:layout_constraintVertical_bias="0.214" />
+        app:layout_constraintVertical_bias="0.065" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -62,15 +155,13 @@
     <Button
         android:id="@+id/button7"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
+        android:layout_width="110dp"
+        android:layout_height="37dp"
         android:layout_weight="1"
         android:text="Register"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editText"
@@ -105,10 +196,10 @@
         android:textSize="16dp"
         app:layout_constraintBottom_toTopOf="@+id/button7"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText2"
-        app:layout_constraintVertical_bias="0.108" />
+        app:layout_constraintVertical_bias="0.032" />
 
     <EditText
         android:id="@+id/editText2"
@@ -213,8 +304,10 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/button7"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cuentaCreada" />
+        app:layout_constraintTop_toTopOf="@+id/cuentaCreada"
+        app:layout_constraintVertical_bias="0.869" />
 
     <TextView
         android:id="@+id/cuentaCreada"
@@ -227,8 +320,10 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/button7"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/location" />
+        app:layout_constraintTop_toBottomOf="@+id/location"
+        app:layout_constraintVertical_bias="0.867" />
 
 
 </android.support.constraint.ConstraintLayout>

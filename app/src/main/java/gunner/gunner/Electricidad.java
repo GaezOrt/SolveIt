@@ -22,16 +22,22 @@ import static gunner.gunner.R.id.lista;
 
 public class Electricidad extends AppCompatActivity {
 
-    List<String> electricistas =new ArrayList<String>();
+    static List<String> electricistas =new ArrayList<String>();
 
 
     protected void onCreate(Bundle savedInstanceState) {
+        FindInDatabase findInDatabase= new FindInDatabase();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, electricistas);
 
         setTheme(R.style.Theme_Design_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.electr);
-        electricistas.add("ss");
+
+
+        //Cargar datos electricidad
+        findInDatabase.findElectricistas();
+
+
        //Ir para atras
         final Button atrasBut=(Button) findViewById(button2) ;
         atrasBut.setOnClickListener((v)-> {
@@ -48,14 +54,11 @@ public class Electricidad extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                int item = position;
-                FindInDatabase database= new FindInDatabase();
                 FindInDatabase.namePassedViaParam=listView.getItemAtPosition(position).toString();
                 Log.w("A","List object "+listView.getItemAtPosition(position).toString());
                 startActivity(new Intent(Electricidad.this, FindInDatabase.class));
                 setContentView(R.layout.find_user);
             }
-
         });
 
     }

@@ -35,6 +35,14 @@ public class MainActivity extends AppCompatActivity  {
     static String loggedLocation;
     static Bitmap profileImage;
     static byte[] loggedImageInDatabaseArray;
+    static boolean electricista;
+    static boolean plomero;
+    static boolean computacion;
+    static boolean carpintero;
+    static boolean pintor;
+    static boolean gasista;
+    static boolean cerrajero;
+    static boolean albanil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

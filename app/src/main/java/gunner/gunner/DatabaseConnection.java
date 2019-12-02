@@ -42,9 +42,10 @@ public class DatabaseConnection {
             String password,
             String phoneNumber,
             String location,
-            byte[] pathForImage) throws SQLException, FileNotFoundException {
+            byte[] pathForImage, boolean electricista, boolean plomero,boolean gasista,boolean computacion, boolean pintor, boolean albanil,
+            boolean cerrajero, boolean carpintero) throws SQLException, FileNotFoundException {
 
-        String updateSQL = "INSERT INTO Users VALUES (?, ?, ?, ?, ?, ?)";
+        String updateSQL = "INSERT INTO Users VALUES (?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?)";
 
 
 
@@ -55,6 +56,14 @@ public class DatabaseConnection {
         pstmt.setString(4, phoneNumber);
         pstmt.setString(5, location);
         pstmt.setBytes(6, pathForImage);
+        pstmt.setBoolean(7,electricista );
+        pstmt.setBoolean(8,plomero);
+        pstmt.setBoolean(9,gasista );
+        pstmt.setBoolean(10,computacion );
+        pstmt.setBoolean(11,pintor );
+        pstmt.setBoolean(12,albanil );
+        pstmt.setBoolean(13,cerrajero );
+        pstmt.setBoolean(14,carpintero );
 
         pstmt.executeUpdate();
     }

@@ -27,6 +27,8 @@ public class FindInDatabase extends AppCompatActivity {
         static String email;
         static String location;
         static String namePassedViaParam;
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.Theme_Design_NoActionBar);
@@ -49,7 +51,7 @@ public class FindInDatabase extends AppCompatActivity {
 
         //Buscar en base de datos
 
-        public void findOnDatabase (String name) {
+        public void findOnDatabase (String email) {
             try {
                 PreparedStatement updN = con.prepareStatement("SELECT * FROM Users");
 
@@ -59,11 +61,27 @@ public class FindInDatabase extends AppCompatActivity {
                     String emaill=rs.getString("email");
                     String phone=rs.getString("telefono");
                     String locationn=rs.getString("location");
-                    if(userName.equals(name)){
+                    boolean electricista= rs.getBoolean("electricista");
+                    boolean carpintero= rs.getBoolean("carpintero");
+                    boolean pintor= rs.getBoolean("pintor");
+                    boolean plomero= rs.getBoolean("plomero");
+                    boolean gasista= rs.getBoolean("gasista");
+                    boolean albanil= rs.getBoolean("albanil");
+                    boolean cerrajero= rs.getBoolean("cerrajero");
+                    boolean computacion= rs.getBoolean("computacion");
+                    if(emaill.equals(email)){
                         numeroTelefono=phone;
                         nombre=userName;
                         email=emaill;
                         location=locationn;
+                        MainActivity.electricista=electricista;
+                        MainActivity.carpintero=carpintero;
+                        MainActivity.pintor=pintor;
+                        MainActivity.plomero=plomero;
+                        MainActivity.gasista=gasista;
+                        MainActivity.albanil=albanil;
+                        MainActivity.cerrajero=cerrajero;
+                        MainActivity.computacion=computacion;
 
                     }else{
                         TextView locatText=(TextView) findViewById(textView) ;
@@ -90,6 +108,37 @@ public class FindInDatabase extends AppCompatActivity {
             //Mostrar ubicacion
             TextView locatText=(TextView) findViewById(editText2) ;
             locatText.setText(location);
+
+        }
+        public void findElectricistas(){
+        try {
+            final String userName = "9QFW2Os9pV";
+            final String passwordDatabase = "dKObZerUnf";
+            final String url = "jdbc:mysql://remotemysql.com:3306/9QFW2Os9pV";
+            final DatabaseConnection data = new DatabaseConnection();
+
+            //Conectar con base de datos
+            con = null;
+            try {
+                con = DriverManager.getConnection(url, userName, passwordDatabase);
+                data.connect();
+            } catch (Exception e) {
+
+            }
+
+            PreparedStatement updN = con.prepareStatement("SELECT * FROM Users");
+
+            ResultSet rs = updN.executeQuery();
+            while (rs.next()) {
+                boolean electricista = rs.getBoolean("electricista");
+                String email = rs.getString("email");
+                if (electricista) {
+                    Electricidad.electricistas.add(email);
+                }
+            }
+        }catch(SQLException e){
+            Log.e("Error", ""+e.getMessage());
+        }
 
         }
 }
