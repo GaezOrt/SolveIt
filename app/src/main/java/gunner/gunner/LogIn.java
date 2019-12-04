@@ -22,6 +22,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import static gunner.gunner.R.id.PasswordInc;
@@ -39,12 +40,7 @@ public class LogIn extends AppCompatActivity {
         String username;
         String password;
         String usernameCorrect;
-        String passwordCorrect;
-        Bitmap profile;
-        Connection con;
         Statement st;
-        int rowNumberPassword;
-        int rowNumberUsername;
 
 
     @Override
@@ -74,84 +70,58 @@ public class LogIn extends AppCompatActivity {
                 username=usernameText.getText().toString();
                 EditText passwordText=(EditText) findViewById(editText2);
                 password=passwordText.getText().toString();
-
-
                try {
-                  Class.forName(driver1);
-                   con= DriverManager.getConnection(url, userName, passwordDatabase);
-                   st=con.createStatement();
                    System.out.println("Connection is successful");
-                   st=con.createStatement();
-                  // PreparedStatement upd = con.prepareStatement("SELECT User FROM Users WHERE '"+username+"'=User AND Password='"+password+"'");
-                   PreparedStatement updN = con.prepareStatement("SELECT * FROM Users");
-                   PreparedStatement updP = con.prepareStatement("SELECT Password FROM Users");
-                   PreparedStatement updEmail=con.prepareStatement("SELECT email FROM Users");
 
-                   ResultSet rsE = updEmail.executeQuery();
-                   ResultSet rs = updN.executeQuery();
-                   ResultSet rsP=updP.executeQuery();
+                  // PreparedStatement upd = con.prepareStatement("SELECT User FROM Users WHERE '"+username+"'=User AND Password='"+password+"'");
+                   PreparedStatement pt = DatabaseConnection.conn.prepareStatement("SELECT * FROM Users");
+
+
+                   pt.setFetchSize(1);
+                   ResultSet rs= pt.executeQuery();
+
                   // for (int x=1;x<=rs.getMetaData().getColumnCount();x++)
                   // System.out.print(rs.getMetaData().getColumnName(x)+ "\t");
 
 
-                   while(rs.next()) {
+                   while( rs.next() ) {
+
                        String userName = rs.getString("User");
-                       String email=rs.getString("email");
-                       String phone=rs.getString("telefono");
-                       String location=rs.getString("location");
+                       String passwordd = rs.getString("Password");
+                      System.out.println( userName);
 
-
-                       if (userName.equals(username)) {
-                         Blob blob =rs.getBlob("Foto");
+                       if (userName.equals(username) && passwordd.equals(password)) {
+                           String location=rs.getString("location");
+                           String emails=rs.getString("email");
+                           String phone=rs.getString("telefono");
+                           Blob blob =rs.getBlob("Foto");
                            int blobLength = (int) blob.length();
                            byte[] blobAsBytes = blob.getBytes(1, blobLength);
                            Log.w("Activity"," Array setteado desde base de datos a variable principal en MAiActivity" + MainActivity.loggedImageInDatabaseArray);
 
-                           rowNumberUsername=rs.getRow();
                            usernameCorrect=username;
-                           MainActivity.loggedEmail=email;
+                           MainActivity.loggedEmail=emails;
                            MainActivity.loggedPhone=phone;
                            MainActivity.loggedUsername=username;
                            MainActivity.loggedLocation=location;
                            MainActivity.loggedImageInDatabaseArray=blobAsBytes ;
                            Bitmap bitmap = BitmapFactory.decodeByteArray(MainActivity.loggedImageInDatabaseArray, 0, MainActivity.loggedImageInDatabaseArray .length);
                            MainActivity.profileImage=bitmap;
+                           System.out.println("Log in correct");
 
-
-
-                           System.out.println("Username correct" + MainActivity.loggedLocation);
+                           System.out.println(MainActivity.loggedEmail);
+                           MainActivity.loggedIn=true;
+                           startActivity(new Intent(LogIn.this, MainActivity.class));
+                           setContentView(R.layout.activity_main);
+                            finish();
                        } else {
                            final TextView passwordIncText=(TextView) findViewById(PasswordInc) ;
                            passwordIncText.setText("Username or password incorrect.");
 
                            System.out.println("Username or password wrong");
                        }
-
-                   }
-                   while(rsP.next()){
-                       String passWord=rsP.getString("Password");
-                       if (passWord.equals(password) && password!=null) {
-                           passwordCorrect=password;
-                           rowNumberPassword=rsP.getRow();
-                           System.out.println("Password succesfull");
-                       } else {
-                           System.out.println("Username or Password wrong");
-                       }
                    }
 
-                   if(rowNumberPassword==rowNumberUsername && usernameCorrect!=null && passwordCorrect!=null){
-                       System.out.println("Log in correct");
-
-                       System.out.println(MainActivity.loggedEmail);
-                       MainActivity.loggedIn=true;
-                       startActivity(new Intent(LogIn.this, MainActivity.class));
-                       setContentView(R.layout.activity_main);
-
-
-
-
-
-                   }
                }catch (Exception e){
                    e.printStackTrace();
                }

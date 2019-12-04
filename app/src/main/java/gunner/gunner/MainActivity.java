@@ -16,6 +16,7 @@ import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.sql.Blob;
+import java.sql.SQLException;
 
 import static android.view.View.INVISIBLE;
 import static gunner.gunner.R.id.Profile;
@@ -23,6 +24,7 @@ import static gunner.gunner.R.id.button;
 import static gunner.gunner.R.id.createAccount;
 import static gunner.gunner.R.id.imageView2;
 import static gunner.gunner.R.id.imageView5;
+import static gunner.gunner.R.id.imageView6;
 import static gunner.gunner.R.id.logIn;
 
 
@@ -44,8 +46,12 @@ public class MainActivity extends AppCompatActivity  {
     static boolean cerrajero;
     static boolean albanil;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.button_animation);
 
         setTheme(R.style.Theme_Design_NoActionBar);
         super.onCreate(savedInstanceState);
@@ -54,12 +60,20 @@ public class MainActivity extends AppCompatActivity  {
         StrictMode.setThreadPolicy(policy);
 
 
-
+        DatabaseConnection database= new DatabaseConnection();
+        try {
+            database.connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         //Boton para electricistas
         final Button electricidadBut = (Button) findViewById(button);
         electricidadBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                electricidadBut.startAnimation(myAnim);
                 startActivity(new Intent(MainActivity.this, Electricidad.class));
                 setContentView(R.layout.electr);
 
@@ -92,9 +106,10 @@ public class MainActivity extends AppCompatActivity  {
         //Cuenta loggeada
         Button profile=(Button) findViewById(Profile) ;
         ImageView image=(ImageView)findViewById(imageView5);
+        ImageView randomImage=(ImageView)findViewById(imageView6);
         if(loggedIn){
 
-
+            randomImage.setVisibility(INVISIBLE);
             image.setImageBitmap(profileImage);
             profile.setVisibility(View.VISIBLE);
             login.setVisibility(INVISIBLE);
@@ -113,15 +128,15 @@ public class MainActivity extends AppCompatActivity  {
             Button logOutButt=(Button) findViewById(R.id.logOutButt);
             logOutButt.setVisibility(View.VISIBLE);
             logOutButt.setOnClickListener((v)-> {
-                    loggedIn=false;
-                    login.setVisibility(View.VISIBLE);
-                    signup.setVisibility(View.VISIBLE);
-                    logOutButt.setVisibility(INVISIBLE);
-                    profile.setVisibility(INVISIBLE);
-                    image.setVisibility(INVISIBLE);
+                loggedIn=false;
+                login.setVisibility(View.VISIBLE);
+                signup.setVisibility(View.VISIBLE);
+                logOutButt.setVisibility(INVISIBLE);
+                profile.setVisibility(INVISIBLE);
+                image.setVisibility(INVISIBLE);
 
 
-                });
+            });
 
 
 

@@ -30,11 +30,11 @@ import static gunner.gunner.R.id.textView;
 
 public class FindInDatabase extends AppCompatActivity {
 
-        Connection con;
-        static String nombre;
-        static String numeroTelefono;
-        static String location;
-        static String namePassedViaParam;
+    Connection con;
+    static String nombre;
+    static String numeroTelefono;
+    static String location;
+    static String namePassedViaParam;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,77 +65,77 @@ public class FindInDatabase extends AppCompatActivity {
         }
     }
 
-        //Buscar en base de datos
+    //Buscar en base de datos
 
-        public void findOnDatabase (String email) {
-            try {
-                PreparedStatement updN = con.prepareStatement("SELECT * FROM Users");
+    public void findOnDatabase (String email) {
+        try {
+            PreparedStatement updN = con.prepareStatement("SELECT * FROM Users");
 
-                ResultSet rs = updN.executeQuery();
-                while (rs.next()) {
-                    String userName = rs.getString("User");
-                    String emaill=rs.getString("email");
-                    String phone=rs.getString("telefono");
-                    String locationn=rs.getString("location");
+            ResultSet rs = updN.executeQuery();
+            while (rs.next()) {
+                String userName = rs.getString("User");
+                String emaill=rs.getString("email");
+                String phone=rs.getString("telefono");
+                String locationn=rs.getString("location");
 
-                    Blob blob =rs.getBlob("Foto");
-                    int blobLength = (int) blob.length();
-                    byte[] blobAsBytes = blob.getBytes(1, blobLength);
+                Blob blob =rs.getBlob("Foto");
+                int blobLength = (int) blob.length();
+                byte[] blobAsBytes = blob.getBytes(1, blobLength);
 
-                    boolean electricista= rs.getBoolean("electricista");
-                    boolean carpintero= rs.getBoolean("carpintero");
-                    boolean pintor= rs.getBoolean("pintor");
-                    boolean plomero= rs.getBoolean("plomero");
-                    boolean gasista= rs.getBoolean("gasista");
-                    boolean albanil= rs.getBoolean("albanil");
-                    boolean cerrajero= rs.getBoolean("cerrajero");
-                    boolean computacion= rs.getBoolean("computacion");
-                    if(emaill.equals(email)){
-                        numeroTelefono=phone;
-                        nombre=userName;
-                        email=emaill;
-                        location=locationn;
-                        MainActivity.electricista=electricista;
-                        MainActivity.carpintero=carpintero;
-                        MainActivity.pintor=pintor;
-                        MainActivity.plomero=plomero;
-                        MainActivity.gasista=gasista;
-                        MainActivity.albanil=albanil;
-                        MainActivity.cerrajero=cerrajero;
-                        MainActivity.computacion=computacion;
-                        MainActivity.loggedImageInDatabaseArray=blobAsBytes;
-                        Bitmap bitmap = BitmapFactory.decodeByteArray(MainActivity.loggedImageInDatabaseArray, 0, MainActivity.loggedImageInDatabaseArray .length);
-                        ImageView image= (ImageView) findViewById(imageView2);
-                        image.setImageBitmap(bitmap);
+                boolean electricista= rs.getBoolean("electricista");
+                boolean carpintero= rs.getBoolean("carpintero");
+                boolean pintor= rs.getBoolean("pintor");
+                boolean plomero= rs.getBoolean("plomero");
+                boolean gasista= rs.getBoolean("gasista");
+                boolean albanil= rs.getBoolean("albanil");
+                boolean cerrajero= rs.getBoolean("cerrajero");
+                boolean computacion= rs.getBoolean("computacion");
+                if(emaill.equals(email)){
+                    numeroTelefono=phone;
+                    nombre=userName;
+                    email=emaill;
+                    location=locationn;
+                    MainActivity.electricista=electricista;
+                    MainActivity.carpintero=carpintero;
+                    MainActivity.pintor=pintor;
+                    MainActivity.plomero=plomero;
+                    MainActivity.gasista=gasista;
+                    MainActivity.albanil=albanil;
+                    MainActivity.cerrajero=cerrajero;
+                    MainActivity.computacion=computacion;
+                    MainActivity.loggedImageInDatabaseArray=blobAsBytes;
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(MainActivity.loggedImageInDatabaseArray, 0, MainActivity.loggedImageInDatabaseArray .length);
+                    ImageView image= (ImageView) findViewById(imageView2);
+                    image.setImageBitmap(bitmap);
 
-                    }else{
-                        TextView locatText=(TextView) findViewById(textView) ;
-                        locatText.setVisibility(View.VISIBLE);
-                    }
+                }else{
+                    TextView locatText=(TextView) findViewById(textView) ;
+                    locatText.setVisibility(View.VISIBLE);
                 }
-            }catch( Exception e){
-                TextView locatText=(TextView) findViewById(textView) ;
-                locatText.setVisibility(View.VISIBLE);
-                Log.e("Error","Error en subida");
             }
-
-            final TextView emailButt=(TextView) findViewById(editText3) ;
-            emailButt.setText(email);
-
-            //Mostrar username
-            final TextView usernameButt=(TextView) findViewById(editText) ;
-            usernameButt.setText(nombre);
-
-            //Mostrar telefono
-            final TextView phoneButt=(TextView) findViewById(editText5) ;
-            phoneButt.setText(numeroTelefono);
-
-            //Mostrar ubicacion
-            TextView locatText=(TextView) findViewById(editText2) ;
-            locatText.setText(location);
-
+        }catch( Exception e){
+            TextView locatText=(TextView) findViewById(textView) ;
+            locatText.setVisibility(View.VISIBLE);
+            Log.e("Error","Error en subida");
         }
-        public void findElectricistas(){
+
+        final TextView emailButt=(TextView) findViewById(editText3) ;
+        emailButt.setText(email);
+
+        //Mostrar username
+        final TextView usernameButt=(TextView) findViewById(editText) ;
+        usernameButt.setText(nombre);
+
+        //Mostrar telefono
+        final TextView phoneButt=(TextView) findViewById(editText5) ;
+        phoneButt.setText(numeroTelefono);
+
+        //Mostrar ubicacion
+        TextView locatText=(TextView) findViewById(editText2) ;
+        locatText.setText(location);
+
+    }
+    public void findElectricistas(){
         try {
             final String userName = "9QFW2Os9pV";
             final String passwordDatabase = "dKObZerUnf";
@@ -165,5 +165,5 @@ public class FindInDatabase extends AppCompatActivity {
             Log.e("Error", ""+e.getMessage());
         }
 
-        }
+    }
 }

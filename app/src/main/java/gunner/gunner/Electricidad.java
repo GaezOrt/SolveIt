@@ -38,12 +38,12 @@ public class Electricidad extends AppCompatActivity {
         findInDatabase.findElectricistas();
 
 
-       //Ir para atras
+        //Ir para atras
         final Button atrasBut=(Button) findViewById(button2) ;
         atrasBut.setOnClickListener((v)-> {
-                finish();
-                startActivity(new Intent(Electricidad.this, MainActivity.class));
-                setContentView(R.layout.activity_main);
+            finish();
+            startActivity(new Intent(Electricidad.this, MainActivity.class));
+            setContentView(R.layout.activity_main);
         });
 
         final ListView listView= (ListView) findViewById(lista);
@@ -64,5 +64,3 @@ public class Electricidad extends AppCompatActivity {
 
     }
 }
-
-

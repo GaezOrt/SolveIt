@@ -17,7 +17,7 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
 
-    private Connection conn;
+    public static Connection conn;
 
     DatabaseConnection() {
         conn = null;
@@ -42,8 +42,15 @@ public class DatabaseConnection {
             String password,
             String phoneNumber,
             String location,
-            byte[] pathForImage, boolean electricista, boolean plomero,boolean gasista,boolean computacion, boolean pintor, boolean albanil,
-            boolean cerrajero, boolean carpintero) throws SQLException, FileNotFoundException {
+            byte[] pathForImage,
+            boolean electricista,
+            boolean plomero,
+            boolean gasista,
+            boolean computacion,
+            boolean pintor,
+            boolean albanil,
+            boolean cerrajero,
+            boolean carpintero) throws SQLException, FileNotFoundException {
 
         String updateSQL = "INSERT INTO Users VALUES (?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?)";
 

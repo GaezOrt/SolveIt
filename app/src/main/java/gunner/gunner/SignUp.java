@@ -87,7 +87,7 @@ public class SignUp extends AppCompatActivity {
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-             byteArray= stream.toByteArray();
+            byteArray= stream.toByteArray();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -110,10 +110,10 @@ public class SignUp extends AppCompatActivity {
         final Button atrasBut = (Button) findViewById(button2);
         atrasBut.setOnClickListener(
                 (View v) ->  {
-                finish();
-                startActivity(new Intent(SignUp.this, MainActivity.class));
-                setContentView(R.layout.activity_main);
-            }
+                    finish();
+                    startActivity(new Intent(SignUp.this, MainActivity.class));
+                    setContentView(R.layout.activity_main);
+                }
         );
 
         //Clicking on image
@@ -175,29 +175,29 @@ public class SignUp extends AppCompatActivity {
                         }
                         CheckBox pintor= (CheckBox) findViewById(R.id.pintor);
                         if(pintor.isChecked())
-                            {
-                                MainActivity.pintor = true;
-                            }else{
+                        {
+                            MainActivity.pintor = true;
+                        }else{
                             MainActivity.pintor=false;
                         }
-                            CheckBox carpintero = (CheckBox) findViewById(R.id.carpintero);
-                            if (carpintero.isChecked()) {
-                                MainActivity.carpintero = true;
-                            }else{
-                                MainActivity.carpintero=false;
+                        CheckBox carpintero = (CheckBox) findViewById(R.id.carpintero);
+                        if (carpintero.isChecked()) {
+                            MainActivity.carpintero = true;
+                        }else{
+                            MainActivity.carpintero=false;
                         }
-                            CheckBox cerrajero = (CheckBox) findViewById(R.id.cerrajero);
-                            if (cerrajero.isChecked()) {
-                                MainActivity.cerrajero = true;
-                            }else{
-                                MainActivity.cerrajero=false;
-                            }
-                            CheckBox albanil = (CheckBox) findViewById(R.id.albanil);
-                            if (albanil.isChecked()) {
-                                MainActivity.albanil = true;
-                            }else{
-                                MainActivity.albanil=false;
-                            }
+                        CheckBox cerrajero = (CheckBox) findViewById(R.id.cerrajero);
+                        if (cerrajero.isChecked()) {
+                            MainActivity.cerrajero = true;
+                        }else{
+                            MainActivity.cerrajero=false;
+                        }
+                        CheckBox albanil = (CheckBox) findViewById(R.id.albanil);
+                        if (albanil.isChecked()) {
+                            MainActivity.albanil = true;
+                        }else{
+                            MainActivity.albanil=false;
+                        }
 
                         boolean datosOK = true;
 
@@ -208,8 +208,8 @@ public class SignUp extends AppCompatActivity {
 
 
                         if ( username.length() == 0 ||
-                             password.length() == 0 ||
-                             number.length() == 0) {
+                                password.length() == 0 ||
+                                number.length() == 0) {
                             datosOK = false;
                         }
 
@@ -223,8 +223,8 @@ public class SignUp extends AppCompatActivity {
                             try {
 
                                 databaseConnection.createUser(
-                                    email, username, password,
-                                    number, location, byteArray,
+                                        email, username, password,
+                                        number, location, byteArray,
                                         MainActivity.electricista,
                                         MainActivity.carpintero,
                                         MainActivity.computacion,
