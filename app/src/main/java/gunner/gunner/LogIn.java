@@ -37,8 +37,8 @@ import static gunner.gunner.R.id.imageView5;
 
 public class LogIn extends AppCompatActivity {
 
-        String username;
-        String password;
+    String username;
+    String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,70 +49,73 @@ public class LogIn extends AppCompatActivity {
         //Apretar boton para ir para atras
         final Button atrasBut=(Button) findViewById(button2) ;
         atrasBut.setOnClickListener ((v)-> {
-                finish();
-                startActivity(new Intent(LogIn.this, MainActivity.class));
-                setContentView(R.layout.activity_main);
-            });
+            finish();
+            startActivity(new Intent(LogIn.this, MainActivity.class));
+            setContentView(R.layout.activity_main);
+        });
 
         //Apretar boton para loggear
         final Button logInButt=(Button) findViewById(button7) ;
         logInButt.setOnClickListener((v)-> {
 
-                EditText usernameText=(EditText) findViewById(editText);
-                username=usernameText.getText().toString();
-                EditText passwordText=(EditText) findViewById(editText2);
-                password=passwordText.getText().toString();
+            EditText usernameText=(EditText) findViewById(editText);
+            username=usernameText.getText().toString();
+            EditText passwordText=(EditText) findViewById(editText2);
+            password=passwordText.getText().toString();
+
 
 
             final TextView passwordIncText=(TextView) findViewById(PasswordInc) ;
-               try {
-                   System.out.println("Connection is successful");
+            try {
+                System.out.println("Connection is successful");
 
-                  // PreparedStatement upd = con.prepareStatement("SELECT User FROM Users WHERE '"+username+"'=User AND Password='"+password+"'");
-                   PreparedStatement pt = DatabaseConnection.conn.prepareStatement("SELECT * FROM Users");
-                   pt.setFetchSize(1);
 
-                   ResultSet rs= pt.executeQuery();
-                   while( rs.next() ) {
-                       pt.executeQuery();
-                       String userName = rs.getString("User");
-                       String passwordd = rs.getString("Password");
+                PreparedStatement pt = DatabaseConnection.conn.prepareStatement("SELECT * FROM Users where User = ? AND Password = ?");
+                pt.setString(1, username);
+                pt.setString(2,password);
+                ResultSet rs= pt.executeQuery();
+                while( rs.next() ) {
 
-                       if (userName.equals(username) && passwordd.equals(password)) {
-                           String location=rs.getString("location");
-                           String emails=rs.getString("email");
-                           String phone=rs.getString("telefono");
+                    String userName = rs.getString("User");
+                    String passwordd = rs.getString("Password");
 
-                            //Agarrando imagen
-                           Blob blob =rs.getBlob("Foto");
-                           int blobLength = (int) blob.length();
-                           byte[] blobAsBytes = blob.getBytes(1, blobLength);
-                           Log.w("Activity"," Array setteado desde base de datos a variable principal en MAiActivity" + MainActivity.loggedImageInDatabaseArray);
+                    if (userName.equals(username) && passwordd.equals(password)) {
+                        String location=rs.getString("location");
+                        String emails=rs.getString("email");
+                        String phone=rs.getString("telefono");
 
-                           MainActivity.loggedEmail=emails;
-                           MainActivity.loggedPhone=phone;
-                           MainActivity.loggedUsername=username;
-                           MainActivity.loggedLocation=location;
-                           MainActivity.loggedImageInDatabaseArray=blobAsBytes ;
-                           Bitmap bitmap = BitmapFactory.decodeByteArray(MainActivity.loggedImageInDatabaseArray, 0, MainActivity.loggedImageInDatabaseArray .length);
-                           MainActivity.profileImage=bitmap;
+                        //Agarrando imagen
+                        Blob blob =rs.getBlob("Foto");
+                        int blobLength = (int) blob.length();
+                        byte[] blobAsBytes = blob.getBytes(1, blobLength);
+                        Log.w("Activity"," Array setteado desde base de datos a variable principal en MAiActivity" + MainActivity.loggedImageInDatabaseArray);
 
-                           MainActivity.loggedIn=true;
-                           startActivity(new Intent(LogIn.this, MainActivity.class));
-                           setContentView(R.layout.activity_main);
-                            finish();
-                       } else {
+                        MainActivity.loggedEmail=emails;
+                        MainActivity.loggedPhone=phone;
+                        MainActivity.loggedUsername=username;
+                        MainActivity.loggedLocation=location;
+                        MainActivity.loggedImageInDatabaseArray=blobAsBytes ;
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(MainActivity.loggedImageInDatabaseArray, 0, MainActivity.loggedImageInDatabaseArray .length);
+                        MainActivity.profileImage=bitmap;
 
-                           passwordIncText.setText("Username or password incorrect.");
+                        MainActivity.loggedIn=true;
+                        startActivity(new Intent(LogIn.this, MainActivity.class));
+                        setContentView(R.layout.activity_main);
+                        finish();
+                        return;
+                    } else {
 
-                           System.out.println("Username or password wrong");
-                       }
-                   }
-               }catch (Exception e){
-                   passwordIncText.setText("Username or password incorrect.");
+                        passwordIncText.setText("Username or password incorrect.");
 
-               }
-            });
+                        System.out.println("Username or password wrong");
+                    }
+
+                }
+            }catch (Exception e){
+                passwordIncText.setText("Username or password incorrect.");
+
+            }
+        });
 
     }
 }
