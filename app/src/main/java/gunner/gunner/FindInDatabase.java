@@ -21,6 +21,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static gunner.gunner.R.id.all;
 import static gunner.gunner.R.id.button2;
 import static gunner.gunner.R.id.editText;
 import static gunner.gunner.R.id.editText2;
@@ -51,9 +52,11 @@ public class FindInDatabase extends AppCompatActivity {
         //Atras button
         final Button atrasBut=(Button) findViewById(button2) ;
         atrasBut.setOnClickListener((v)-> {
-            finish();
+
             startActivity(new Intent(FindInDatabase.this, Electricidad.class));
             setContentView(R.layout.activity_main);
+            Electricidad.electricistas.remove(all);
+            finish();
         });
         //Conectar con base de datos
         con = null;

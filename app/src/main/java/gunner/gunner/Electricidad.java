@@ -13,6 +13,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static gunner.gunner.R.id.all;
 import static gunner.gunner.R.id.button2;
 import static gunner.gunner.R.id.lista;
 
@@ -41,6 +42,8 @@ public class Electricidad extends AppCompatActivity {
         //Ir para atras
         final Button atrasBut=(Button) findViewById(button2) ;
         atrasBut.setOnClickListener((v)-> {
+
+            Electricidad.electricistas.remove(all);
             finish();
             startActivity(new Intent(Electricidad.this, MainActivity.class));
             setContentView(R.layout.activity_main);
