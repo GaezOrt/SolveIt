@@ -59,79 +59,83 @@ public class LogIn extends AppCompatActivity {
         //Apretar boton para loggear
         final Button logInButt=(Button) findViewById(button7) ;
         logInButt.setOnClickListener((v)-> {
+            logIn();
 
-            EditText usernameText=(EditText) findViewById(editText);
-            username=usernameText.getText().toString();
-            EditText passwordText=(EditText) findViewById(editText2);
-            password=passwordText.getText().toString();
-
+    });
+    }
 
 
-            final TextView passwordIncText=(TextView) findViewById(PasswordInc) ;
-            try {
-                System.out.println("Connection is successful");
+    public void logIn(){
+        EditText usernameText=(EditText) findViewById(editText);
+        username=usernameText.getText().toString();
+        EditText passwordText=(EditText) findViewById(editText2);
+        password=passwordText.getText().toString();
 
-                PreparedStatement pt = DatabaseConnection.conn.prepareStatement("SELECT * FROM Users where User = ? AND Password = ?");
-                pt.setString(1, username);
-                pt.setString(2,password);
-                pt.setFetchSize(1);
-                Log.w("statement","statement antes del query");
-                ResultSet rs= pt.executeQuery();
-                Log.w("statement","statement despues del query");
-                while( rs.next() ) {
 
-                    String userName = rs.getString("User");
-                    String passwordd = rs.getString("Password");
 
-                    if (userName.equals(username) && passwordd.equals(password)) {
-                        String location=rs.getString("location");
-                        String emails=rs.getString("email");
-                        String phone=rs.getString("telefono");
+        final TextView passwordIncText=(TextView) findViewById(PasswordInc) ;
+        try {
+            System.out.println("Connection is successful");
 
-                        //Agarrando imagen
-                        Blob blob =rs.getBlob("Foto");
-                        int blobLength = (int) blob.length();
-                        byte[] blobAsBytes = blob.getBytes(1, blobLength);
-                        Log.w("Activity"," Array setteado desde base de datos a variable principal en MAiActivity" + MainActivity.loggedImageInDatabaseArray);
+            PreparedStatement pt = DatabaseConnection.conn.prepareStatement("SELECT * FROM Users where User = ? AND Password = ?");
+            pt.setString(1, username);
+            pt.setString(2,password);
+            pt.setFetchSize(1);
+            Log.w("statement","statement antes del query");
+            ResultSet rs= pt.executeQuery();
+            Log.w("statement","statement despues del query");
+            while( rs.next() ) {
 
-                        MainActivity.loggedEmail=emails;
-                        MainActivity.loggedPhone=phone;
-                        MainActivity.loggedUsername=username;
-                        MainActivity.loggedLocation=location;
-                        MainActivity.loggedImageInDatabaseArray=blobAsBytes ;
-                        Bitmap bitmap = BitmapFactory.decodeByteArray(MainActivity.loggedImageInDatabaseArray, 0, MainActivity.loggedImageInDatabaseArray .length);
-                        MainActivity.profileImage=bitmap;
+                String userName = rs.getString("User");
+                String passwordd = rs.getString("Password");
 
-                        MainActivity.loggedIn=true;
-                        startActivity(new Intent(LogIn.this, MainActivity.class));
-                        setContentView(R.layout.activity_main);
-                        finish();
-                        return;
-                    } else {
+                if (userName.equals(username) && passwordd.equals(password)) {
+                    String location=rs.getString("location");
+                    String emails=rs.getString("email");
+                    String phone=rs.getString("telefono");
 
-                        passwordIncText.setText("Username or password incorrect.");
+                    //Agarrando imagen
+                    Blob blob =rs.getBlob("Foto");
+                    int blobLength = (int) blob.length();
+                    byte[] blobAsBytes = blob.getBytes(1, blobLength);
+                    Log.w("Activity"," Array setteado desde base de datos a variable principal en MAiActivity" + MainActivity.loggedImageInDatabaseArray);
 
-                        System.out.println("Username or password wrong");
-                    }
+                    MainActivity.loggedEmail=emails;
+                    MainActivity.loggedPhone=phone;
+                    MainActivity.loggedUsername=username;
+                    MainActivity.loggedLocation=location;
+                    MainActivity.loggedImageInDatabaseArray=blobAsBytes ;
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(MainActivity.loggedImageInDatabaseArray, 0, MainActivity.loggedImageInDatabaseArray .length);
+                    MainActivity.profileImage=bitmap;
 
+                    MainActivity.loggedIn=true;
+                    startActivity(new Intent(LogIn.this, MainActivity.class));
+                    setContentView(R.layout.activity_main);
+                    finish();
+                    return;
+                } else {
+
+                    passwordIncText.setText("Username or password incorrect.");
+
+                    System.out.println("Username or password wrong");
                 }
-            }catch (Exception e){
-                passwordIncText.setText("Username or password incorrect.");
 
             }
-        });
+        }catch (Exception e){
+            passwordIncText.setText("Username or password incorrect.");
 
-    }
-}
+        }
+    };
+
+
+
+        }
 class LogInDatabase extends AsyncTask<Void,Void,Void> {
 
     @Override
     protected Void doInBackground(Void... voids) {
         Log.w("Background","Entering doInBACKGROUND");
         Looper.prepare();
-
-
-
         return null;
     }
 }
