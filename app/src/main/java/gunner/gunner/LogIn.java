@@ -73,6 +73,7 @@ public class LogIn extends AppCompatActivity {
                 PreparedStatement pt = DatabaseConnection.conn.prepareStatement("SELECT * FROM Users where User = ? AND Password = ?");
                 pt.setString(1, username);
                 pt.setString(2,password);
+                pt.setFetchSize(1);
                 ResultSet rs= pt.executeQuery();
                 while( rs.next() ) {
 

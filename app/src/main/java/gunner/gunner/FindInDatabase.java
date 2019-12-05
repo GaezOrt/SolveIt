@@ -151,15 +151,12 @@ public class FindInDatabase extends AppCompatActivity {
 
             }
 
-            PreparedStatement updN = con.prepareStatement("SELECT * FROM Rubro");
-
+            PreparedStatement updN = con.prepareStatement("SELECT * FROM Rubro WHERE electricista= ?");
+            updN.setBoolean(1,true);
             ResultSet rs = updN.executeQuery();
             while (rs.next()) {
-                boolean electricista = rs.getBoolean("electricista");
                 String email = rs.getString("email");
-                if (electricista) {
                     Electricidad.electricistas.add(email);
-                }
             }
         }catch(SQLException e){
             Log.e("Error", ""+e.getMessage());
