@@ -1,7 +1,10 @@
 package gunner.gunner;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -28,7 +31,7 @@ public class Electricidad extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         FindInDatabase findInDatabase= new FindInDatabase();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, electricistas);
+
 
         setTheme(R.style.Theme_Design_NoActionBar);
         super.onCreate(savedInstanceState);
@@ -36,21 +39,25 @@ public class Electricidad extends AppCompatActivity {
 
 
         //Cargar datos electricidad
-        findInDatabase.findElectricistas();
+
+        DownloadList download= new DownloadList();
+        download.execute();
+        //download.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, electricistas);
 
 
         //Ir para atras
         final Button atrasBut=(Button) findViewById(button2) ;
         atrasBut.setOnClickListener((v)-> {
 
-            Electricidad.electricistas.remove(all);
+            //Electricidad.electricistas.remove(all);
             finish();
             startActivity(new Intent(Electricidad.this, MainActivity.class));
             setContentView(R.layout.activity_main);
         });
 
         final ListView listView= (ListView) findViewById(lista);
-
         listView.setAdapter(adapter);
 
         //Realizar ampliacion cuando se clickea item de lista
@@ -65,5 +72,21 @@ public class Electricidad extends AppCompatActivity {
             }
         });
 
+    }
+}
+
+ class DownloadList extends AsyncTask<Void,Void,Void>{
+
+    @Override
+    protected Void doInBackground(Void... voids) {
+        Log.w("Background","Entering doInBACKGROUND");
+        Looper.prepare();
+
+        FindInDatabase find= new FindInDatabase();
+                find.findElectricistas();
+                Log.w("LISTA: ",Electricidad.electricistas.get(0));
+                System.out.println();
+
+    return null;
     }
 }

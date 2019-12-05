@@ -142,6 +142,7 @@ public class FindInDatabase extends AppCompatActivity {
     }
     public void findElectricistas(){
         try {
+            Log.w("","Eeee");
             final String userName = "9QFW2Os9pV";
             final String passwordDatabase = "dKObZerUnf";
             final String url = "jdbc:mysql://remotemysql.com:3306/9QFW2Os9pV";
