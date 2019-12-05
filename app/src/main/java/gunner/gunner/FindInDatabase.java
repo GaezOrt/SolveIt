@@ -151,7 +151,7 @@ public class FindInDatabase extends AppCompatActivity {
 
             }
 
-            PreparedStatement updN = con.prepareStatement("SELECT * FROM Users");
+            PreparedStatement updN = con.prepareStatement("SELECT * FROM Rubro");
 
             ResultSet rs = updN.executeQuery();
             while (rs.next()) {

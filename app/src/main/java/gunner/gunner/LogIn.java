@@ -36,12 +36,9 @@ import static gunner.gunner.R.id.imageView2;
 import static gunner.gunner.R.id.imageView5;
 
 public class LogIn extends AppCompatActivity {
-        String userName="9QFW2Os9pV",passwordDatabase="dKObZerUnf",url="jdbc:mysql://remotemysql.com:3306/9QFW2Os9pV",driver,driver1="com.mysql.jdbc.Driver";
+
         String username;
         String password;
-        String usernameCorrect;
-        Statement st;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,55 +48,47 @@ public class LogIn extends AppCompatActivity {
 
         //Apretar boton para ir para atras
         final Button atrasBut=(Button) findViewById(button2) ;
-        atrasBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        atrasBut.setOnClickListener ((v)-> {
                 finish();
                 startActivity(new Intent(LogIn.this, MainActivity.class));
                 setContentView(R.layout.activity_main);
-            }
-        });
+            });
 
         //Apretar boton para loggear
         final Button logInButt=(Button) findViewById(button7) ;
-        logInButt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        logInButt.setOnClickListener((v)-> {
 
                 EditText usernameText=(EditText) findViewById(editText);
                 username=usernameText.getText().toString();
                 EditText passwordText=(EditText) findViewById(editText2);
                 password=passwordText.getText().toString();
+
+
+            final TextView passwordIncText=(TextView) findViewById(PasswordInc) ;
                try {
                    System.out.println("Connection is successful");
 
                   // PreparedStatement upd = con.prepareStatement("SELECT User FROM Users WHERE '"+username+"'=User AND Password='"+password+"'");
                    PreparedStatement pt = DatabaseConnection.conn.prepareStatement("SELECT * FROM Users");
-
-
                    pt.setFetchSize(1);
+
                    ResultSet rs= pt.executeQuery();
-
-                  // for (int x=1;x<=rs.getMetaData().getColumnCount();x++)
-                  // System.out.print(rs.getMetaData().getColumnName(x)+ "\t");
-
-
                    while( rs.next() ) {
-
+                       pt.executeQuery();
                        String userName = rs.getString("User");
                        String passwordd = rs.getString("Password");
-                      System.out.println( userName);
 
                        if (userName.equals(username) && passwordd.equals(password)) {
                            String location=rs.getString("location");
                            String emails=rs.getString("email");
                            String phone=rs.getString("telefono");
+
+                            //Agarrando imagen
                            Blob blob =rs.getBlob("Foto");
                            int blobLength = (int) blob.length();
                            byte[] blobAsBytes = blob.getBytes(1, blobLength);
                            Log.w("Activity"," Array setteado desde base de datos a variable principal en MAiActivity" + MainActivity.loggedImageInDatabaseArray);
 
-                           usernameCorrect=username;
                            MainActivity.loggedEmail=emails;
                            MainActivity.loggedPhone=phone;
                            MainActivity.loggedUsername=username;
@@ -107,26 +96,23 @@ public class LogIn extends AppCompatActivity {
                            MainActivity.loggedImageInDatabaseArray=blobAsBytes ;
                            Bitmap bitmap = BitmapFactory.decodeByteArray(MainActivity.loggedImageInDatabaseArray, 0, MainActivity.loggedImageInDatabaseArray .length);
                            MainActivity.profileImage=bitmap;
-                           System.out.println("Log in correct");
 
-                           System.out.println(MainActivity.loggedEmail);
                            MainActivity.loggedIn=true;
                            startActivity(new Intent(LogIn.this, MainActivity.class));
                            setContentView(R.layout.activity_main);
                             finish();
                        } else {
-                           final TextView passwordIncText=(TextView) findViewById(PasswordInc) ;
+
                            passwordIncText.setText("Username or password incorrect.");
 
                            System.out.println("Username or password wrong");
                        }
                    }
-
                }catch (Exception e){
-                   e.printStackTrace();
+                   passwordIncText.setText("Username or password incorrect.");
+
                }
-            }
-        });
+            });
 
     }
 }

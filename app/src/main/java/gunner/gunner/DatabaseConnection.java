@@ -52,26 +52,31 @@ public class DatabaseConnection {
             boolean cerrajero,
             boolean carpintero) throws SQLException, FileNotFoundException {
 
-        String updateSQL = "INSERT INTO Users VALUES (?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?)";
+        String updateSQL = "INSERT INTO Users VALUES (?,?,?,?,?,?)";
+        String updateRubro= " INSERT INTO Rubro VALUES (?,?,?,?,?,?,?,?,?)";
 
 
 
         PreparedStatement pstmt = conn.prepareStatement(updateSQL);
+        PreparedStatement pstmtRubro= conn.prepareStatement(updateRubro);
         pstmt.setString(1, email);
         pstmt.setString(2, username);
         pstmt.setString(3, password);
         pstmt.setString(4, phoneNumber);
         pstmt.setString(5, location);
         pstmt.setBytes(6, pathForImage);
-        pstmt.setBoolean(7,electricista );
-        pstmt.setBoolean(8,plomero);
-        pstmt.setBoolean(9,gasista );
-        pstmt.setBoolean(10,computacion );
-        pstmt.setBoolean(11,pintor );
-        pstmt.setBoolean(12,albanil );
-        pstmt.setBoolean(13,cerrajero );
-        pstmt.setBoolean(14,carpintero );
+
+        pstmtRubro.setString(1,email );
+        pstmtRubro.setBoolean(2,electricista);
+        pstmtRubro.setBoolean(3,plomero );
+        pstmtRubro.setBoolean(4,gasista);
+        pstmtRubro.setBoolean(5,computacion);
+        pstmtRubro.setBoolean(6,pintor);
+        pstmtRubro.setBoolean(7,albanil);
+        pstmtRubro.setBoolean(8,cerrajero);
+        pstmtRubro.setBoolean(9,carpintero);
 
         pstmt.executeUpdate();
+        pstmtRubro.executeUpdate();
     }
 }

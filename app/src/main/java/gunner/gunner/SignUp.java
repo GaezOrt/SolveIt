@@ -201,13 +201,10 @@ public class SignUp extends AppCompatActivity {
 
                         boolean datosOK = true;
 
-                        if ( email.length() == 0 ) {
-                            // cartel de email mal
-                            datosOK = false;
-                        }
 
 
-                        if ( username.length() == 0 ||
+
+                        if ( email.length()==0||username.length() == 0 ||
                                 password.length() == 0 ||
                                 number.length() == 0) {
                             datosOK = false;
@@ -215,7 +212,7 @@ public class SignUp extends AppCompatActivity {
 
                         if ( !datosOK ) {
                             Log.e( "", "errores en los datos" );
-                            // /algun dato estuvo
+                            nosePudoCrearLaCuenta.setVisibility(View.VISIBLE);
                         }
 
                         else {
@@ -237,7 +234,8 @@ public class SignUp extends AppCompatActivity {
                             }
 
                             catch ( Throwable e ) {
-                                Log.e( "FileNotFound", e.getMessage(), e );
+                                Log.e( "e", ""+e.getMessage() );
+                                nosePudoCrearLaCuenta.setVisibility(View.VISIBLE);
                             }
 
                             nosePudoCrearLaCuenta.setVisibility( creacionCuentaOk ? View.INVISIBLE : View.VISIBLE);
