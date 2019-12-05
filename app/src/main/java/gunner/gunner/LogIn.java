@@ -6,7 +6,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
@@ -119,5 +121,17 @@ public class LogIn extends AppCompatActivity {
             }
         });
 
+    }
+}
+class LogInDatabase extends AsyncTask<Void,Void,Void> {
+
+    @Override
+    protected Void doInBackground(Void... voids) {
+        Log.w("Background","Entering doInBACKGROUND");
+        Looper.prepare();
+
+
+
+        return null;
     }
 }

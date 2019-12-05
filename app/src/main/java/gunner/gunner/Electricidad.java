@@ -30,7 +30,6 @@ public class Electricidad extends AppCompatActivity {
 
 
     protected void onCreate(Bundle savedInstanceState) {
-        FindInDatabase findInDatabase= new FindInDatabase();
 
 
         setTheme(R.style.Theme_Design_NoActionBar);
@@ -39,11 +38,15 @@ public class Electricidad extends AppCompatActivity {
 
 
         //Cargar datos electricidad
-
         DownloadList download= new DownloadList();
         download.execute();
-        //download.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
+        while(electricistas.isEmpty()){
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, electricistas);
 
 
