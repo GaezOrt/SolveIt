@@ -2,6 +2,7 @@ package gunner.gunner;
 
 
 import android.content.Intent;
+import android.database.CursorJoiner;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
@@ -69,27 +70,28 @@ public class FindInDatabase extends AppCompatActivity {
 
     public void findOnDatabase (String email) {
         try {
-            PreparedStatement updN = con.prepareStatement("SELECT * FROM Users");
-
-            ResultSet rs = updN.executeQuery();
-            while (rs.next()) {
+            PreparedStatement usersPt = con.prepareStatement("SELECT * FROM Users WHERE email= ?");
+            PreparedStatement rubrosPt= con.prepareStatement("SELECT * FROM Rubro");
+            usersPt.setString(1,email);
+            ResultSet rs = usersPt.executeQuery();
+            ResultSet rsRubros= rubrosPt.executeQuery();
+            while (rs.next()&& rsRubros.next()) {
                 String userName = rs.getString("User");
                 String emaill=rs.getString("email");
                 String phone=rs.getString("telefono");
                 String locationn=rs.getString("location");
-
                 Blob blob =rs.getBlob("Foto");
                 int blobLength = (int) blob.length();
                 byte[] blobAsBytes = blob.getBytes(1, blobLength);
 
-                boolean electricista= rs.getBoolean("electricista");
-                boolean carpintero= rs.getBoolean("carpintero");
-                boolean pintor= rs.getBoolean("pintor");
-                boolean plomero= rs.getBoolean("plomero");
-                boolean gasista= rs.getBoolean("gasista");
-                boolean albanil= rs.getBoolean("albanil");
-                boolean cerrajero= rs.getBoolean("cerrajero");
-                boolean computacion= rs.getBoolean("computacion");
+                boolean electricista= rsRubros.getBoolean("electricista");
+                boolean carpintero= rsRubros.getBoolean("carpintero");
+                boolean pintor= rsRubros.getBoolean("pintor");
+                boolean plomero= rsRubros.getBoolean("plomero");
+                boolean gasista= rsRubros.getBoolean("gasista");
+                boolean albanil= rsRubros.getBoolean("albanil");
+                boolean cerrajero= rsRubros.getBoolean("cerrajero");
+                boolean computacion= rsRubros.getBoolean("computacion");
                 if(emaill.equals(email)){
                     numeroTelefono=phone;
                     nombre=userName;
