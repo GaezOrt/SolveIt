@@ -19,6 +19,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -36,6 +40,7 @@ import static gunner.gunner.R.id.editText2;
 import static gunner.gunner.R.id.editText3;
 import static gunner.gunner.R.id.imageView2;
 import static gunner.gunner.R.id.imageView5;
+import static gunner.gunner.R.id.imageView8;
 
 public class LogIn extends AppCompatActivity {
 
@@ -59,12 +64,25 @@ public class LogIn extends AppCompatActivity {
         //Apretar boton para loggear
         final Button logInButt=(Button) findViewById(button7) ;
         logInButt.setOnClickListener((v)-> {
-            logIn();
+
+            Intent i = new Intent(this, LogInService.class);
+            // Add extras to the bundle
+            i.putExtra("foo", "bar");
+            // Start the service
+            startService(i);
+            ImageView imageView = (ImageView) findViewById(imageView8);
+            GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(imageView);
+            Glide.with(this).load(R.drawable.loading_animation_grey).into(imageViewTarget);
+            imageView.setVisibility(View.VISIBLE);
+
     });
     }
 
 
     public void logIn(){
+
+
+
         EditText usernameText=(EditText) findViewById(editText);
         username=usernameText.getText().toString();
         EditText passwordText=(EditText) findViewById(editText2);

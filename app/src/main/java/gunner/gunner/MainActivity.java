@@ -59,20 +59,16 @@ public class MainActivity extends AppCompatActivity  {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-
-        Intent i = new Intent(this, DownloadStuffInBackground.class);
-        // Add extras to the bundle
-        i.putExtra("foo", "bar");
-        // Start the service
-        startService(i);
-        DatabaseConnection database= new DatabaseConnection();
-        try {
-            database.connect();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        //Load electricistas list in background
+        if(Electricidad.electricistas.isEmpty()) {
+            Intent i = new Intent(this, DownloadStuffInBackground.class);
+            // Add extras to the bundle
+            i.putExtra("foo", "bar");
+            // Start the service
+            startService(i);
         }
+
+
         //Boton para electricistas
         final Button electricidadBut = (Button) findViewById(button);
         electricidadBut.setOnClickListener(new View.OnClickListener() {
@@ -108,10 +104,12 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
 
+
         //Cuenta loggeada
         Button profile=(Button) findViewById(Profile) ;
         ImageView image=(ImageView)findViewById(imageView5);
         ImageView randomImage=(ImageView)findViewById(imageView6);
+
         if(loggedIn){
 
             randomImage.setVisibility(INVISIBLE);
