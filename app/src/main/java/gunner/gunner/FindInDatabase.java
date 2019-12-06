@@ -160,12 +160,29 @@ public class FindInDatabase extends AppCompatActivity {
             PreparedStatement updN = con.prepareStatement("SELECT * FROM Rubro WHERE electricista= ?");
             updN.setBoolean(1,true);
             ResultSet rs = updN.executeQuery();
+
+            PreparedStatement profilePt= con.prepareStatement("SELECT * FROM Users WHERE email= ?");
+
             while (rs.next()) {
+
                 String email = rs.getString("email");
-                    Electricidad.electricistas.add(email);
+
+                profilePt.setString(1, email);
+                ResultSet rsProfile = profilePt.executeQuery();
+                while (rsProfile.next()) {
+                    String name = rsProfile.getString("User");
+
+                    Blob photo = rsProfile.getBlob("Foto");
+                    int blobLength = (int) photo.length();
+                    byte[] photoBytes = photo.getBytes(1, blobLength);
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes .length);
+                    Electricista electricista = new Electricista(bitmap, name, email, 9);
+                    Electricidad.electricistas.add(electricista);
+                }
             }
         }catch(SQLException e){
-            Log.e("Error", ""+e.getMessage());
+            e.printStackTrace();
+            Log.e("Error", ""+e.getMessage()+"Tomatela loro");
         }
 
     }

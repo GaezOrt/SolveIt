@@ -31,7 +31,7 @@ public class DatabaseConnection {
         StrictMode.setThreadPolicy(policy);
 
         final String userName = "9QFW2Os9pV";
-        final String passwordDatabase = "dKObZerUnf";
+            final String passwordDatabase = "dKObZerUnf";
         final String url = "jdbc:mysql://remotemysql.com:3306/9QFW2Os9pV";
         conn = DriverManager.getConnection(url, userName, passwordDatabase);
     }

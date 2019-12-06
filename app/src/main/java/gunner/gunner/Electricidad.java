@@ -1,6 +1,7 @@
 package gunner.gunner;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,7 +27,8 @@ import static gunner.gunner.R.id.lista;
 
 public class Electricidad extends AppCompatActivity {
 
-    static List<String> electricistas =new ArrayList<String>();
+
+    static ArrayList<Electricista> electricistas =new ArrayList<Electricista>();
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,10 @@ public class Electricidad extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, electricistas);
+
+        MyListAdaptor adapter = new MyListAdaptor(this,R.layout.list_view,electricistas);
+
+
 
 
         //Ir para atras
@@ -60,8 +65,10 @@ public class Electricidad extends AppCompatActivity {
             setContentView(R.layout.activity_main);
         });
 
+
         final ListView listView= (ListView) findViewById(lista);
         listView.setAdapter(adapter);
+        System.out.println(electricistas.get(0).name);
 
         //Realizar ampliacion cuando se clickea item de lista
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -86,8 +93,8 @@ public class Electricidad extends AppCompatActivity {
         Looper.prepare();
 
         FindInDatabase find= new FindInDatabase();
-                find.findElectricistas();
-                Log.w("LISTA: ",Electricidad.electricistas.get(0));
+        find.findElectricistas();
+
                 System.out.println();
 
     return null;

@@ -60,7 +60,6 @@ public class LogIn extends AppCompatActivity {
         final Button logInButt=(Button) findViewById(button7) ;
         logInButt.setOnClickListener((v)-> {
             logIn();
-
     });
     }
 
@@ -130,12 +129,3 @@ public class LogIn extends AppCompatActivity {
 
 
         }
-class LogInDatabase extends AsyncTask<Void,Void,Void> {
-
-    @Override
-    protected Void doInBackground(Void... voids) {
-        Log.w("Background","Entering doInBACKGROUND");
-        Looper.prepare();
-        return null;
-    }
-}
