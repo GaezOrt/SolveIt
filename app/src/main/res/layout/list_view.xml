@@ -7,6 +7,19 @@
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal">
 
+    <RatingBar
+        android:id="@+id/MyRating"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/editText4"
+        android:layout_marginStart="94dp"
+        android:layout_marginBottom="13dp"
+        android:layout_toEndOf="@+id/editText4"
+        android:isIndicator="false"
+        android:numStars="5"
+        android:stepSize="0.1" />
+
     <ImageView
         android:id="@+id/imageView7"
         android:layout_width="56dp"
@@ -16,19 +29,12 @@
 
     <EditText
         android:id="@+id/editText4"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_width="151dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="-3dp"
         android:layout_toEndOf="@+id/imageView7"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name" />
 
-    <RatingBar
-        android:id="@+id/ratingBar2"
-        style="@android:style/Widget.Holo.RatingBar"
-        android:layout_width="201dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="1dp"
-        android:layout_toEndOf="@+id/editText4" />
 </RelativeLayout>
