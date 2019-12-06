@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:descendantFocusability="blocksDescendants"
-    android:orientation="horizontal">
+  >
 
     <RatingBar
         android:id="@+id/MyRating"
@@ -13,28 +13,46 @@
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/editText4"
-        android:layout_marginStart="94dp"
-        android:layout_marginBottom="13dp"
+        android:layout_marginStart="64dp"
         android:layout_toEndOf="@+id/editText4"
         android:isIndicator="false"
         android:numStars="5"
-        android:stepSize="0.1" />
+        android:stepSize="0.1"
+        app:layout_constraintBottom_toBottomOf="@+id/editText4"
+        app:layout_constraintStart_toEndOf="@+id/editText4"
+        app:layout_constraintTop_toTopOf="@+id/editText4" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="500dp"
+        android:layout_height="2dp"
+        android:layout_alignParentTop="false"
+        android:background="#000000"
+        app:layout_constraintBottom_toBottomOf="@+id/editText4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="56dp"
-        android:layout_height="46dp"
+        android:layout_width="47dp"
+        android:layout_height="50dp"
         android:layout_weight="1"
+        app:layout_constraintBottom_toBottomOf="@+id/editText4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <EditText
         android:id="@+id/editText4"
         android:layout_width="151dp"
         android:layout_height="46dp"
-        android:layout_marginStart="-3dp"
         android:layout_toEndOf="@+id/imageView7"
-        android:ems="10"
+        android:background="@drawable/empty_background"
         android:inputType="textPersonName"
-        android:text="Name" />
+        android:text="Name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toEndOf="@+id/imageView7"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

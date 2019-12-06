@@ -163,10 +163,10 @@ public class FindInDatabase extends AppCompatActivity {
 
             PreparedStatement profilePt= con.prepareStatement("SELECT * FROM Users WHERE email= ?");
 
+
             while (rs.next()) {
 
                 String email = rs.getString("email");
-
                 profilePt.setString(1, email);
                 ResultSet rsProfile = profilePt.executeQuery();
                 while (rsProfile.next()) {

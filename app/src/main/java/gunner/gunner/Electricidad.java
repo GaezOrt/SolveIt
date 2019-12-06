@@ -70,6 +70,7 @@ public class Electricidad extends AppCompatActivity {
         listView.setAdapter(adapter);
         System.out.println(electricistas.get(0).name);
 
+
         //Realizar ampliacion cuando se clickea item de lista
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
