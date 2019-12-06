@@ -46,12 +46,11 @@ public class LogIn extends AppCompatActivity {
 
     String username;
     String password;
-
+     boolean ingresoCorrecto;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-
 
         //Apretar boton para ir para atras
         final Button atrasBut=(Button) findViewById(button2) ;
@@ -64,6 +63,18 @@ public class LogIn extends AppCompatActivity {
         //Apretar boton para loggear
         final Button logInButt=(Button) findViewById(button7) ;
         logInButt.setOnClickListener((v)-> {
+            System.out.println("Hey hey");
+
+            EditText usernameText=(EditText) findViewById(editText);
+            username=usernameText.getText().toString();
+            LogInService.username=username;
+
+
+            EditText passwordText=(EditText) findViewById(editText2);
+
+            password=passwordText.getText().toString();
+            LogInService.password=password;
+            TextView passwordIncText=(TextView) findViewById(PasswordInc);
 
             Intent i = new Intent(this, LogInService.class);
             // Add extras to the bundle
@@ -75,6 +86,8 @@ public class LogIn extends AppCompatActivity {
             Glide.with(this).load(R.drawable.loading_animation_grey).into(imageViewTarget);
             imageView.setVisibility(View.VISIBLE);
 
+
+
     });
     }
 
@@ -82,35 +95,27 @@ public class LogIn extends AppCompatActivity {
     public void logIn(){
 
 
-
-        EditText usernameText=(EditText) findViewById(editText);
-        username=usernameText.getText().toString();
-        EditText passwordText=(EditText) findViewById(editText2);
-        password=passwordText.getText().toString();
-
-
-
-        final TextView passwordIncText=(TextView) findViewById(PasswordInc) ;
         try {
             System.out.println("Connection is successful");
-
-            PreparedStatement pt = DatabaseConnection.conn.prepareStatement("SELECT * FROM Users where User = ? AND Password = ?");
-            pt.setString(1, username);
-            pt.setString(2,password);
+            DatabaseConnection database= new DatabaseConnection();
+            database.connect();
+            PreparedStatement pt = DatabaseConnection.conn.prepareStatement("SELECT * FROM Users WHERE User = ? AND Password = ?");
+            pt.setString(1, LogInService.username);
+            pt.setString(2, LogInService.password);
             pt.setFetchSize(1);
             Log.w("statement","statement antes del query");
             ResultSet rs= pt.executeQuery();
             Log.w("statement","statement despues del query");
-            while( rs.next() ) {
 
+                rs.next();
                 String userName = rs.getString("User");
                 String passwordd = rs.getString("Password");
-
-                if (userName.equals(username) && passwordd.equals(password)) {
+                System.out.println(passwordd);
+                if (userName.equals(LogInService.username) && passwordd.equals(LogInService.password)) {
                     String location=rs.getString("location");
                     String emails=rs.getString("email");
                     String phone=rs.getString("telefono");
-
+                    System.out.println("Adentro del login");
                     //Agarrando imagen
                     Blob blob =rs.getBlob("Foto");
                     int blobLength = (int) blob.length();
@@ -126,23 +131,20 @@ public class LogIn extends AppCompatActivity {
                     MainActivity.profileImage=bitmap;
 
                     MainActivity.loggedIn=true;
-                    startActivity(new Intent(LogIn.this, MainActivity.class));
-                    setContentView(R.layout.activity_main);
+
                     finish();
                     return;
                 } else {
 
-                    passwordIncText.setText("Username or password incorrect.");
-
                     System.out.println("Username or password wrong");
                 }
 
-            }
+
         }catch (Exception e){
-            passwordIncText.setText("Username or password incorrect.");
+           e.printStackTrace();
 
         }
-    };
+    }
 
 
 

@@ -59,6 +59,14 @@ public class MainActivity extends AppCompatActivity  {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        DatabaseConnection database= new DatabaseConnection();
+        try {
+            database.connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         //Load electricistas list in background
         if(Electricidad.electricistas.isEmpty()) {
             Intent i = new Intent(this, DownloadStuffInBackground.class);
