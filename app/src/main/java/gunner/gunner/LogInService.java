@@ -20,6 +20,7 @@ public class LogInService extends IntentService {
 
         if(MainActivity.loggedIn){
             startActivity(new Intent(LogInService.this, MainActivity.class));
+
         }
 
         }
