@@ -20,7 +20,7 @@ public class MyListAdaptor extends ArrayAdapter<Electricista> {
    int resource;
    Context context;
     public MyListAdaptor(Context context,int resource, ArrayList <Electricista> electricista){
-        super(context,R.layout.list_view);
+        super(context, R.layout.list_view,electricista);
         this.resource=resource;
         this.context=context;
         this.electricistas=electricista;
@@ -36,7 +36,7 @@ public class MyListAdaptor extends ArrayAdapter<Electricista> {
         Electricista electricista= electricistas.get(position);
         if(convertView==null){
             LayoutInflater inflater= LayoutInflater.from(getContext());
-            convertView=inflater.inflate(R.layout.list_view,parent,false);
+            convertView=inflater.inflate(R.layout.list_view,null,false);
             ViewHolder viewHolder=new ViewHolder();
             viewHolder.image=(ImageView)convertView.findViewById(R.id.imageView7);
             viewHolder.name=(TextView)convertView.findViewById(R.id.editText4);

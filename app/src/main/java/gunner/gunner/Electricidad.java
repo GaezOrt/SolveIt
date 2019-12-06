@@ -50,7 +50,7 @@ public class Electricidad extends AppCompatActivity {
             }
         }
 
-        MyListAdaptor adapter = new MyListAdaptor(this,R.layout.list_view,electricistas);
+
 
 
 
@@ -65,7 +65,7 @@ public class Electricidad extends AppCompatActivity {
             setContentView(R.layout.activity_main);
         });
 
-
+        MyListAdaptor adapter = new MyListAdaptor(this,R.layout.list_view,electricistas);
         final ListView listView= (ListView) findViewById(lista);
         listView.setAdapter(adapter);
         System.out.println(electricistas.get(0).name);
