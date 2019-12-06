@@ -43,15 +43,14 @@ public class Electricidad extends AppCompatActivity {
         //Cargar datos electricidad
         //DownloadList download= new DownloadList();
        // download.execute();
-        FindInDatabase find= new FindInDatabase();
-        find.findElectricistas();
+       // FindInDatabase find= new FindInDatabase();
+       // find.findElectricistas();
         System.out.println(electricistas.size());
 
         //Ir para atras
         final Button atrasBut=(Button) findViewById(button2) ;
         atrasBut.setOnClickListener((v)-> {
 
-            Electricidad.electricistas.clear();
             finish();
             startActivity(new Intent(Electricidad.this, MainActivity.class));
             setContentView(R.layout.activity_main);
@@ -78,18 +77,4 @@ public class Electricidad extends AppCompatActivity {
     }
 }
 
- class DownloadList extends AsyncTask<Void,Void,Void>{
 
-    @Override
-    protected Void doInBackground(Void... voids) {
-        Log.w("Background","Entering doInBACKGROUND");
-        Looper.prepare();
-
-        FindInDatabase find= new FindInDatabase();
-        find.findElectricistas();
-
-                System.out.println();
-
-    return null;
-    }
-}

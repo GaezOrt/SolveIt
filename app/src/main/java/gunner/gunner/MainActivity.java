@@ -60,6 +60,11 @@ public class MainActivity extends AppCompatActivity  {
         StrictMode.setThreadPolicy(policy);
 
 
+        Intent i = new Intent(this, DownloadStuffInBackground.class);
+        // Add extras to the bundle
+        i.putExtra("foo", "bar");
+        // Start the service
+        startService(i);
         DatabaseConnection database= new DatabaseConnection();
         try {
             database.connect();

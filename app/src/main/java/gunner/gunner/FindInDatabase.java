@@ -159,6 +159,7 @@ public class FindInDatabase extends AppCompatActivity {
 
             PreparedStatement updN = con.prepareStatement("SELECT * FROM Rubro WHERE electricista= ?");
             updN.setBoolean(1,true);
+            updN.setFetchSize(1);
             ResultSet rs = updN.executeQuery();
 
             PreparedStatement profilePt= con.prepareStatement("SELECT * FROM Users WHERE email= ?");
@@ -166,10 +167,12 @@ public class FindInDatabase extends AppCompatActivity {
             while (rs.next()) {
 
                 String email = rs.getString("email");
-
+                profilePt.setFetchSize(1);
                 profilePt.setString(1, email);
+
                 ResultSet rsProfile = profilePt.executeQuery();
                 while (rsProfile.next()) {
+
                     String name = rsProfile.getString("User");
                     X++;
                     Blob photo = rsProfile.getBlob("Foto");
@@ -183,6 +186,9 @@ public class FindInDatabase extends AppCompatActivity {
                     break;
                 }
             }
+
+            rs.last();    // moves cursor to the last row
+            Electricista.cantidadElectricistas = rs.getRow();
         }catch(SQLException e){
             e.printStackTrace();
             Log.e("Error", ""+e.getMessage()+"Tomatela loro");

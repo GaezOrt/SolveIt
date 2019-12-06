@@ -3,6 +3,7 @@ package gunner.gunner;
 import android.graphics.Bitmap;
 
 public class Electricista {
+    static int cantidadElectricistas;
      public Bitmap  photo;
      public String name;
     public  String email;
