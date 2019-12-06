@@ -74,7 +74,7 @@ public class Electricidad extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                FindInDatabase.namePassedViaParam=listView.getItemAtPosition(position).toString();
+                FindInDatabase.namePassedViaParam=electricistas.get(position).email;
                 Log.w("A","List object "+listView.getItemAtPosition(position).toString());
                 finish();
                 startActivity(new Intent(Electricidad.this, FindInDatabase.class));
