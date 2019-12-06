@@ -38,7 +38,7 @@ public class FindInDatabase extends AppCompatActivity {
     static String location;
     static String namePassedViaParam;
 
-
+    public static int X;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.Theme_Design_NoActionBar);
@@ -163,21 +163,24 @@ public class FindInDatabase extends AppCompatActivity {
 
             PreparedStatement profilePt= con.prepareStatement("SELECT * FROM Users WHERE email= ?");
 
-
             while (rs.next()) {
 
                 String email = rs.getString("email");
+
                 profilePt.setString(1, email);
                 ResultSet rsProfile = profilePt.executeQuery();
                 while (rsProfile.next()) {
                     String name = rsProfile.getString("User");
-
+                    X++;
                     Blob photo = rsProfile.getBlob("Foto");
                     int blobLength = (int) photo.length();
                     byte[] photoBytes = photo.getBytes(1, blobLength);
                     Bitmap bitmap = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes .length);
                     Electricista electricista = new Electricista(bitmap, name, email, 9);
                     Electricidad.electricistas.add(electricista);
+
+
+                    break;
                 }
             }
         }catch(SQLException e){

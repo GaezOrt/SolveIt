@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static gunner.gunner.R.id.all;
@@ -40,26 +41,17 @@ public class Electricidad extends AppCompatActivity {
 
 
         //Cargar datos electricidad
-        DownloadList download= new DownloadList();
-        download.execute();
-        while(electricistas.isEmpty()){
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-
-
-
-
+        //DownloadList download= new DownloadList();
+       // download.execute();
+        FindInDatabase find= new FindInDatabase();
+        find.findElectricistas();
+        System.out.println(electricistas.size());
 
         //Ir para atras
         final Button atrasBut=(Button) findViewById(button2) ;
         atrasBut.setOnClickListener((v)-> {
 
-            //Electricidad.electricistas.remove(all);
+            Electricidad.electricistas.clear();
             finish();
             startActivity(new Intent(Electricidad.this, MainActivity.class));
             setContentView(R.layout.activity_main);
@@ -68,7 +60,7 @@ public class Electricidad extends AppCompatActivity {
         MyListAdaptor adapter = new MyListAdaptor(this,R.layout.list_view,electricistas);
         final ListView listView= (ListView) findViewById(lista);
         listView.setAdapter(adapter);
-        System.out.println(electricistas.get(0).name);
+
 
 
         //Realizar ampliacion cuando se clickea item de lista
