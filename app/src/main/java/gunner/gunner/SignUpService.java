@@ -12,7 +12,7 @@ public class SignUpService extends IntentService {
     static String location;
     static byte[] pathForImage;
     static boolean datosOk;
-
+    static int estado;
     SignUp signUp= new SignUp();
 
 

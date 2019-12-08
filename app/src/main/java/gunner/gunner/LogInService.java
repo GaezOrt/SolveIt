@@ -10,6 +10,7 @@ public class LogInService extends IntentService {
     static String username;
     static String password;
     static boolean logIn;
+    static int estado;
     public LogInService() {
         super("Log in service");
     }

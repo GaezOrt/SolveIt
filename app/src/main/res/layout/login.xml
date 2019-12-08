@@ -85,6 +85,7 @@
         android:fontFamily="sans-serif-black"
         android:text="Log in or password incorrect."
         android:textColor="#FFFFFF"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -62,11 +62,11 @@ public class LogIn extends AppCompatActivity {
         });
 
 
-        if(!LogInService.logIn){
+        if(LogInService.estado==2){
             TextView passwordIncText=(TextView) findViewById(PasswordInc);
             passwordIncText.setVisibility(VISIBLE);
 
-        }else{
+        }else if(LogInService.estado==1){
             LogInService.logIn=true;
         }
 
@@ -118,7 +118,9 @@ public class LogIn extends AppCompatActivity {
             Log.w("statement", "statement despues del query");
             if (rs.next()==false) {
                 LogInService.logIn=false;
+                LogInService.estado=1;
             } else {
+                LogInService.estado=2;
                 String userName = rs.getString("User");
                 String passwordd = rs.getString("Password");
                 System.out.println(passwordd);

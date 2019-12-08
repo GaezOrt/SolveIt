@@ -112,10 +112,10 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
 
-        if(!SignUpService.datosOk){
+        if(SignUpService.estado==1){
             TextView nosePudoCrearLaCuenta = (TextView) findViewById(CuentaNoCreada);
             nosePudoCrearLaCuenta.setVisibility(View.VISIBLE);
-        }else{
+        }else if(SignUpService.estado==2){
             TextView cuentaCreadaConExito = (TextView) findViewById(cuentaCreada);
             cuentaCreadaConExito.setVisibility(View.VISIBLE);
             SignUpService.datosOk=true;
@@ -231,10 +231,12 @@ public class SignUp extends AppCompatActivity {
 
         if (SignUpService.email.length() == 0 || SignUpService.username.length() == 0 ||
                 SignUpService.password.length() == 0 ||
-                SignUpService.phoneNumber.length() == 0) {
+                SignUpService.phoneNumber.length() == 0|| SignUpService.pathForImage==null) {
             SignUpService.datosOk = false;
+            SignUpService.estado=1;
         }else{
             SignUpService.datosOk=true;
+            SignUpService.estado=2;
         }
 
         if (!SignUpService.datosOk) {
@@ -259,6 +261,7 @@ public class SignUp extends AppCompatActivity {
             } catch (Exception e) {
                 SignUpService.datosOk=false;
                 e.printStackTrace();
+                SignUpService.estado=1;
             }
 
         }
