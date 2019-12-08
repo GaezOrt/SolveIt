@@ -252,7 +252,6 @@
         android:background="#11000000"
         android:ems="10"
         android:hint="Password"
-        android:inputType="textPassword"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="14dp"
@@ -448,4 +447,16 @@
         app:layout_constraintBottom_toTopOf="@+id/carpintero"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/location" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Rubro en el que te desempeñas"
+        android:textColor="#F2F7F7F7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
 </android.support.constraint.ConstraintLayout>

@@ -1,7 +1,9 @@
 package gunner.gunner;
 
 import android.app.IntentService;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 
 public class SignUpService extends IntentService {
 
@@ -15,6 +17,7 @@ public class SignUpService extends IntentService {
     static int estado;
     SignUp signUp= new SignUp();
     static boolean imagenUsada=false;
+    static boolean cuentaYaUtilizada;
 
     public SignUpService() {
         super("Log in service");
@@ -25,6 +28,9 @@ public class SignUpService extends IntentService {
 
 
         signUp.signUp();
+        if(cuentaYaUtilizada){
+            startActivity(new Intent(SignUpService.this, SignUp.class));
+        }
         if(datosOk){
             startActivity(new Intent(SignUpService.this, SignUp.class));
         }else{

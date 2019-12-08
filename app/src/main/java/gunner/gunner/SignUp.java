@@ -54,6 +54,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -117,7 +119,39 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
 
-        if(SignUpService.estado==1){
+        //Si el email ya ha sido utilizado
+        if(SignUpService.cuentaYaUtilizada){
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this,R.style.MyDialogTheme);
+            builder1.setTitle("Sign up incorrecto");
+            builder1.setIcon(R.drawable.usercorrect);
+
+            builder1.setMessage("No se pudo crear la cuenta correctamente. Email ya utilizado.");
+            builder1.setCancelable(true);
+            builder1.setPositiveButton(
+                    "Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+
+            EditText email= (EditText)findViewById(editText3);
+            email.setText(SignUpService.email);
+            EditText username= (EditText)findViewById(editText);
+            username.setText(SignUpService.username);
+            EditText password= (EditText)findViewById(editText2);
+            password.setText(SignUpService.password);
+            EditText phone= (EditText)findViewById(editText2);
+            phone.setText(SignUpService.phoneNumber);
+            EditText location= (EditText)findViewById(R.id.location);
+            location.setText(SignUpService.location);
+
+        }
+
+        //Si el error esta en algun campo vacío
+        if(SignUpService.estado==1 && SignUpService.imagenUsada){
 
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this,R.style.MyDialogTheme);
             builder1.setTitle("Sign up error");
@@ -148,7 +182,10 @@ public class SignUp extends AppCompatActivity {
 
             SignUpService.estado=0;
 
-        }else if(SignUpService.estado==2){
+        }
+
+        // si esta todo bien
+        else if(SignUpService.estado==2 && !SignUpService.cuentaYaUtilizada){
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this,R.style.MyDialogTheme);
             builder1.setTitle("Sign up correcto");
             builder1.setIcon(R.drawable.usercorrect);
@@ -166,6 +203,36 @@ public class SignUp extends AppCompatActivity {
             alert11.show();
 
             SignUpService.datosOk=true;
+        }
+
+        //Si el error esta en que el usuario no registro una foto
+        else if(SignUpService.imagenUsada==false && SignUpService.estado==1){
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this,R.style.MyDialogTheme);
+            builder1.setTitle("Sign up error");
+            builder1.setIcon(R.drawable.errorlogin);
+
+            builder1.setMessage("No se pudo crear la cuenta. Por favor selecciona una foto");
+            builder1.setCancelable(true);
+            builder1.setPositiveButton(
+                    "Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+            EditText email= (EditText)findViewById(editText3);
+            email.setText(SignUpService.email);
+            EditText username= (EditText)findViewById(editText);
+            username.setText(SignUpService.username);
+            EditText password= (EditText)findViewById(editText2);
+            password.setText(SignUpService.password);
+            EditText phone= (EditText)findViewById(editText2);
+            phone.setText(SignUpService.phoneNumber);
+            EditText location= (EditText)findViewById(R.id.location);
+            location.setText(SignUpService.location);
+
         }
 
 
@@ -275,12 +342,29 @@ public class SignUp extends AppCompatActivity {
     }
 
     public void signUp() {
+        try {
+            PreparedStatement pt = DatabaseConnection.conn.prepareStatement("SELECT * FROM Users WHERE email = ?");
+            pt.setString(1, SignUpService.email);
+            pt.setFetchSize(1);
+            ResultSet rs = pt.executeQuery();
+            if (rs.next()==false) {
+            SignUpService.cuentaYaUtilizada=false;
+            }else{
+                SignUpService.cuentaYaUtilizada=true;
+            }
 
+        }catch (Exception e){
+
+        }
         if (SignUpService.email.length() == 0 || SignUpService.username.length() == 0 ||
                 SignUpService.password.length() == 0 ||
-                SignUpService.phoneNumber.length() == 0|| SignUpService.imagenUsada==false) {
+                SignUpService.phoneNumber.length() == 0|| SignUpService.imagenUsada==false || SignUpService.cuentaYaUtilizada) {
             SignUpService.datosOk = false;
             SignUpService.estado=1;
+            if(SignUpService.imagenUsada==false){
+                SignUpService.imagenUsada=false;
+
+            }
         }else{
             SignUpService.datosOk=true;
             SignUpService.estado=2;
@@ -291,19 +375,21 @@ public class SignUp extends AppCompatActivity {
 
         } else {
             try {
+
                 final DatabaseConnection databaseConnection = new DatabaseConnection();
                 databaseConnection.connect();
-                databaseConnection.createUser(
-                        SignUpService.email, SignUpService.username, SignUpService.password,
-                        SignUpService.phoneNumber, SignUpService.location, SignUpService.pathForImage,
-                        MainActivity.electricista,
-                        MainActivity.carpintero,
-                        MainActivity.computacion,
-                        MainActivity.plomero,
-                        MainActivity.gasista,
-                        MainActivity.albanil,
-                        MainActivity.pintor,
-                        MainActivity.cerrajero);
+
+                    databaseConnection.createUser(
+                            SignUpService.email, SignUpService.username, SignUpService.password,
+                            SignUpService.phoneNumber, SignUpService.location, SignUpService.pathForImage,
+                            MainActivity.electricista,
+                            MainActivity.carpintero,
+                            MainActivity.computacion,
+                            MainActivity.plomero,
+                            MainActivity.gasista,
+                            MainActivity.albanil,
+                            MainActivity.pintor,
+                            MainActivity.cerrajero);
 
             } catch (Exception e) {
                 SignUpService.datosOk=false;

@@ -47,7 +47,7 @@ import static gunner.gunner.R.id.imageView8;
 
 public class LogIn extends AppCompatActivity {
 
-    String username;
+    String email;
     String password;
     boolean ingresoCorrecto;
     @Override
@@ -82,8 +82,6 @@ public class LogIn extends AppCompatActivity {
             passwordIncText.setVisibility(VISIBLE);
 
 
-
-
         }
 
         //Apretar boton para loggear
@@ -92,8 +90,8 @@ public class LogIn extends AppCompatActivity {
             System.out.println("Hey hey");
 
             EditText usernameText=(EditText) findViewById(editText);
-            username=usernameText.getText().toString();
-            LogInService.username=username;
+            email=usernameText.getText().toString();
+            LogInService.email=email;
 
 
             EditText passwordText=(EditText) findViewById(editText2);
@@ -126,7 +124,7 @@ public class LogIn extends AppCompatActivity {
             DatabaseConnection database = new DatabaseConnection();
             database.connect();
             PreparedStatement pt = DatabaseConnection.conn.prepareStatement("SELECT * FROM Users WHERE User = ? AND Password = ?");
-            pt.setString(1, LogInService.username);
+            pt.setString(1, LogInService.email);
             pt.setString(2, LogInService.password);
             pt.setFetchSize(1);
             Log.w("statement", "statement antes del query");
@@ -141,7 +139,7 @@ public class LogIn extends AppCompatActivity {
                 String userName = rs.getString("User");
                 String passwordd = rs.getString("Password");
                 System.out.println(passwordd);
-                if (userName.equals(LogInService.username) && passwordd.equals(LogInService.password)) {
+                if (userName.equals(LogInService.email) && passwordd.equals(LogInService.password)) {
                     String location = rs.getString("location");
                     String emails = rs.getString("email");
                     String phone = rs.getString("telefono");
@@ -154,7 +152,7 @@ public class LogIn extends AppCompatActivity {
 
                     MainActivity.loggedEmail = emails;
                     MainActivity.loggedPhone = phone;
-                    MainActivity.loggedUsername = username;
+                    MainActivity.loggedUsername = email;
                     MainActivity.loggedLocation = location;
                     MainActivity.loggedImageInDatabaseArray = blobAsBytes;
                     Bitmap bitmap = BitmapFactory.decodeByteArray(MainActivity.loggedImageInDatabaseArray, 0, MainActivity.loggedImageInDatabaseArray.length);

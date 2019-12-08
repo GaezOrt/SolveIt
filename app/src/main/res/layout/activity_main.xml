@@ -248,7 +248,7 @@
         android:visibility="visible"
         app:layout_constraintEnd_toStartOf="@+id/logIn"
         app:layout_constraintTop_toTopOf="@+id/imageView5"
-        app:srcCompat="@drawable/descarga"
+        app:srcCompat="@drawable/usuariorandom"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
