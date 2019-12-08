@@ -3,6 +3,7 @@ package gunner.gunner;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -22,6 +23,7 @@ import android.provider.OpenableColumns;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
@@ -113,11 +115,35 @@ public class SignUp extends AppCompatActivity {
         setContentView(R.layout.register);
 
         if(SignUpService.estado==1){
-            TextView nosePudoCrearLaCuenta = (TextView) findViewById(CuentaNoCreada);
-            nosePudoCrearLaCuenta.setVisibility(View.VISIBLE);
+
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+            builder1.setMessage("No se pudo crear la cuenta.");
+            builder1.setCancelable(true);
+            builder1.setPositiveButton(
+                    "Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+
         }else if(SignUpService.estado==2){
-            TextView cuentaCreadaConExito = (TextView) findViewById(cuentaCreada);
-            cuentaCreadaConExito.setVisibility(View.VISIBLE);
+
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+            builder1.setMessage("Cuenta creada con exito.");
+            builder1.setCancelable(true);
+            builder1.setPositiveButton(
+                    "Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+
             SignUpService.datosOk=true;
         }
 

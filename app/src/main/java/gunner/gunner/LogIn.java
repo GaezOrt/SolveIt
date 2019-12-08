@@ -1,6 +1,7 @@
 package gunner.gunner;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,6 +10,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
@@ -62,12 +64,23 @@ public class LogIn extends AppCompatActivity {
         });
 
 
-        if(LogInService.estado==2){
+        if(LogInService.estado==1){
+
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+            builder1.setMessage("Incorrect log in or password.");
+            builder1.setCancelable(true);
+            builder1.setPositiveButton(
+                    "Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
             TextView passwordIncText=(TextView) findViewById(PasswordInc);
             passwordIncText.setVisibility(VISIBLE);
 
-        }else if(LogInService.estado==1){
-            LogInService.logIn=true;
         }
 
         //Apretar boton para loggear
@@ -119,6 +132,7 @@ public class LogIn extends AppCompatActivity {
             if (rs.next()==false) {
                 LogInService.logIn=false;
                 LogInService.estado=1;
+
             } else {
                 LogInService.estado=2;
                 String userName = rs.getString("User");
