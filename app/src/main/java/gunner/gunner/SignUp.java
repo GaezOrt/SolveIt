@@ -116,7 +116,10 @@ public class SignUp extends AppCompatActivity {
 
         if(SignUpService.estado==1){
 
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this,R.style.MyDialogTheme);
+            builder1.setTitle("Sign up error");
+            builder1.setIcon(R.drawable.errorlogin);
+
             builder1.setMessage("No se pudo crear la cuenta.");
             builder1.setCancelable(true);
             builder1.setPositiveButton(
@@ -128,7 +131,7 @@ public class SignUp extends AppCompatActivity {
                     });
             AlertDialog alert11 = builder1.create();
             alert11.show();
-
+            SignUpService.estado=0;
         }else if(SignUpService.estado==2){
 
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);

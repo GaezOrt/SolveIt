@@ -12,4 +12,8 @@
         <item name="android:minHeight">48dip</item>
         <item name="android:maxHeight">48dip</item>
     </style>
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/coloralerta</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+    </style>
 </resources>
