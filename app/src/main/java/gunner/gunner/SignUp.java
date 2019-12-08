@@ -133,9 +133,11 @@ public class SignUp extends AppCompatActivity {
             alert11.show();
             SignUpService.estado=0;
         }else if(SignUpService.estado==2){
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this,R.style.MyDialogTheme);
+            builder1.setTitle("Sign up correcto");
+            builder1.setIcon(R.drawable.usercorrect);
 
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-            builder1.setMessage("Cuenta creada con exito.");
+            builder1.setMessage("Se creo la cuenta correctamente");
             builder1.setCancelable(true);
             builder1.setPositiveButton(
                     "Ok",
