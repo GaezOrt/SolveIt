@@ -33,6 +33,11 @@ public class DownloadStuffInBackground extends IntentService {
             if(Electricista.cantidadElectricistas==Electricidad.electricistas.size()){
                 stopSelf();
             }
+            if(Electricista.cantidadElectricistas>Electricidad.electricistas.size()){
+                Electricidad.showLoad=true;
+            }else{
+                Electricidad.showLoad=false;
+            }
 
     }
 }

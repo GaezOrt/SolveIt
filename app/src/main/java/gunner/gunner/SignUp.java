@@ -96,6 +96,9 @@ public class SignUp extends AppCompatActivity {
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byteArray= stream.toByteArray();
             SignUpService.pathForImage=byteArray;
+            SignUpService.imagenUsada=true;
+            ImageView image= (ImageView)findViewById(imageView2);
+            image.setImageResource(R.drawable.usercorrect);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -131,7 +134,20 @@ public class SignUp extends AppCompatActivity {
                     });
             AlertDialog alert11 = builder1.create();
             alert11.show();
+
+           EditText email= (EditText)findViewById(editText3);
+           email.setText(SignUpService.email);
+            EditText username= (EditText)findViewById(editText);
+            username.setText(SignUpService.username);
+            EditText password= (EditText)findViewById(editText2);
+            password.setText(SignUpService.password);
+            EditText phone= (EditText)findViewById(editText2);
+            phone.setText(SignUpService.phoneNumber);
+            EditText location= (EditText)findViewById(R.id.location);
+            location.setText(SignUpService.location);
+
             SignUpService.estado=0;
+
         }else if(SignUpService.estado==2){
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this,R.style.MyDialogTheme);
             builder1.setTitle("Sign up correcto");
@@ -262,7 +278,7 @@ public class SignUp extends AppCompatActivity {
 
         if (SignUpService.email.length() == 0 || SignUpService.username.length() == 0 ||
                 SignUpService.password.length() == 0 ||
-                SignUpService.phoneNumber.length() == 0|| SignUpService.pathForImage==null) {
+                SignUpService.phoneNumber.length() == 0|| SignUpService.imagenUsada==false) {
             SignUpService.datosOk = false;
             SignUpService.estado=1;
         }else{

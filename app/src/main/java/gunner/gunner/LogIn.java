@@ -49,7 +49,7 @@ public class LogIn extends AppCompatActivity {
 
     String username;
     String password;
-     boolean ingresoCorrecto;
+    boolean ingresoCorrecto;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +81,9 @@ public class LogIn extends AppCompatActivity {
             TextView passwordIncText=(TextView) findViewById(PasswordInc);
             passwordIncText.setVisibility(VISIBLE);
 
+
+
+
         }
 
         //Apretar boton para loggear
@@ -111,7 +114,7 @@ public class LogIn extends AppCompatActivity {
 
 
 
-    });
+        });
     }
 
 
@@ -166,11 +169,11 @@ public class LogIn extends AppCompatActivity {
 
             }
         }catch (Exception e){
-           e.printStackTrace();
+            e.printStackTrace();
 
         }
     }
 
 
 
-        }
+}

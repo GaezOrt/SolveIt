@@ -26,7 +26,7 @@ public class LogInService extends IntentService {
         if(!logIn){
             startActivity(new Intent(LogInService.this, LogIn.class));
         }
-        }
-
     }
+
+}
 

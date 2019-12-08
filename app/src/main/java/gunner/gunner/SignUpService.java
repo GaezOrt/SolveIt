@@ -14,7 +14,7 @@ public class SignUpService extends IntentService {
     static boolean datosOk;
     static int estado;
     SignUp signUp= new SignUp();
-
+    static boolean imagenUsada=false;
 
     public SignUpService() {
         super("Log in service");

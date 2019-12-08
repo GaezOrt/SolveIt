@@ -12,14 +12,22 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
 import static gunner.gunner.R.id.all;
 import static gunner.gunner.R.id.button2;
+import static gunner.gunner.R.id.imageView10;
+import static gunner.gunner.R.id.imageView11;
 import static gunner.gunner.R.id.lista;
 
 /**
@@ -30,7 +38,7 @@ public class Electricidad extends AppCompatActivity {
 
 
     static ArrayList<Electricista> electricistas =new ArrayList<Electricista>();
-
+    static boolean showLoad;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -38,8 +46,17 @@ public class Electricidad extends AppCompatActivity {
         setTheme(R.style.Theme_Design_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.electr);
+        ImageView imageView = (ImageView) findViewById(imageView11);
+            if(showLoad){
 
 
+
+            GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(imageView);
+            Glide.with(this).load(R.drawable.loading_animation_grey).into(imageViewTarget);
+            imageView.setVisibility(VISIBLE);
+        }else{
+                imageView.setVisibility(INVISIBLE);
+            }
         //Cargar datos electricidad
         //DownloadList download= new DownloadList();
        // download.execute();

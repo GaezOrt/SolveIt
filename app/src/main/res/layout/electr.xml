@@ -27,8 +27,8 @@
     <TextView
         android:id="@+id/textView2"
         style="@android:style/Widget.DeviceDefault.Light.TextView"
-        android:layout_width="163dp"
-        android:layout_height="42dp"
+        android:layout_width="155dp"
+        android:layout_height="37dp"
         android:background="@drawable/empty_background"
         android:text=" Electricistas"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -36,5 +36,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        app:layout_constraintBottom_toTopOf="@+id/lista"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:srcCompat="@drawable/loading_animation_grey" />
 
 </android.support.constraint.ConstraintLayout>
