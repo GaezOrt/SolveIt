@@ -137,10 +137,7 @@ public class SignUp extends AppCompatActivity {
         imageView.setOnClickListener( e -> selectImage( ));
 
         //Registrar usuario en tabla base de datos
-
-
         try {
-
 
 
             final Button registerBut = (Button) findViewById(button7);
@@ -149,8 +146,6 @@ public class SignUp extends AppCompatActivity {
 
                         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                         StrictMode.setThreadPolicy(policy);
-
-
 
 
                         EditText emailText = (EditText) findViewById(editText3);

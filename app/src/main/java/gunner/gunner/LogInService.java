@@ -9,6 +9,7 @@ public class LogInService extends IntentService {
     LogIn login= new LogIn();
     static String username;
     static String password;
+    static boolean logIn;
     public LogInService() {
         super("Log in service");
     }
@@ -20,9 +21,10 @@ public class LogInService extends IntentService {
 
         if(MainActivity.loggedIn){
             startActivity(new Intent(LogInService.this, MainActivity.class));
-
         }
-
+        if(!logIn){
+            startActivity(new Intent(LogInService.this, LogIn.class));
+        }
         }
 
     }
