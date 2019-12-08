@@ -33,6 +33,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -55,6 +57,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
+import static android.view.View.VISIBLE;
 import static gunner.gunner.R.id.CuentaNoCreada;
 import static gunner.gunner.R.id.Electricista;
 import static gunner.gunner.R.id.button2;
@@ -64,7 +67,9 @@ import static gunner.gunner.R.id.editText;
 import static gunner.gunner.R.id.editText2;
 import static gunner.gunner.R.id.editText3;
 import static gunner.gunner.R.id.editText5;
+import static gunner.gunner.R.id.imageView10;
 import static gunner.gunner.R.id.imageView2;
+import static gunner.gunner.R.id.imageView8;
 
 public class SignUp extends AppCompatActivity {
 
@@ -88,6 +93,7 @@ public class SignUp extends AppCompatActivity {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byteArray= stream.toByteArray();
+            SignUpService.pathForImage=byteArray;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -106,6 +112,16 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
 
+        if(!SignUpService.datosOk){
+            TextView nosePudoCrearLaCuenta = (TextView) findViewById(CuentaNoCreada);
+            nosePudoCrearLaCuenta.setVisibility(View.VISIBLE);
+        }else{
+            TextView cuentaCreadaConExito = (TextView) findViewById(cuentaCreada);
+            cuentaCreadaConExito.setVisibility(View.VISIBLE);
+            SignUpService.datosOk=true;
+        }
+
+
         //Ir para atras
         final Button atrasBut = (Button) findViewById(button2);
         atrasBut.setOnClickListener(
@@ -121,11 +137,11 @@ public class SignUp extends AppCompatActivity {
         imageView.setOnClickListener( e -> selectImage( ));
 
         //Registrar usuario en tabla base de datos
-        final DatabaseConnection databaseConnection = new DatabaseConnection();
+
 
         try {
 
-            databaseConnection.connect();
+
 
             final Button registerBut = (Button) findViewById(button7);
             registerBut.setOnClickListener(
@@ -134,20 +150,24 @@ public class SignUp extends AppCompatActivity {
                         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                         StrictMode.setThreadPolicy(policy);
 
-                        TextView nosePudoCrearLaCuenta = (TextView) findViewById(CuentaNoCreada);
-                        TextView cuentaCreadaConExito = (TextView) findViewById(cuentaCreada);
+
+
 
                         EditText emailText = (EditText) findViewById(editText3);
                         email = emailText.getText().toString();
+                        SignUpService.email=email;
                         EditText usernameText = (EditText) findViewById(editText);
                         username = usernameText.getText().toString();
+                        SignUpService.username=email;
                         EditText passwordText = (EditText) findViewById(editText2);
                         password = passwordText.getText().toString();
+                        SignUpService.password=password;
                         EditText phoneNumberText = (EditText) findViewById(editText5);
                         number = phoneNumberText.getText().toString();
+                        SignUpService.phoneNumber=number;
                         EditText locationButt = (EditText) findViewById(R.id.location);
                         location = locationButt.getText().toString();
-
+                        SignUpService.location=location;
 
                         CheckBox electricista= (CheckBox) findViewById(Electricista);
                         if(electricista.isChecked()){
@@ -199,56 +219,54 @@ public class SignUp extends AppCompatActivity {
                             MainActivity.albanil=false;
                         }
 
-                        boolean datosOK = true;
+                        Intent i = new Intent(this, SignUpService.class);
+                        startService(i);
+                        ImageView imageView = (ImageView) findViewById(imageView10);
+                        GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(imageView);
+                        Glide.with(this).load(R.drawable.loading_animation_grey).into(imageViewTarget);
+                        imageView.setVisibility(VISIBLE);
 
-
-
-
-                        if ( email.length()==0||username.length() == 0 ||
-                                password.length() == 0 ||
-                                number.length() == 0) {
-                            datosOK = false;
-                        }
-
-                        if ( !datosOK ) {
-                            Log.e( "", "errores en los datos" );
-                            nosePudoCrearLaCuenta.setVisibility(View.VISIBLE);
-                        }
-
-                        else {
-                            boolean creacionCuentaOk = false;
-                            try {
-
-                                databaseConnection.createUser(
-                                        email, username, password,
-                                        number, location, byteArray,
-                                        MainActivity.electricista,
-                                        MainActivity.carpintero,
-                                        MainActivity.computacion,
-                                        MainActivity.plomero,
-                                        MainActivity.gasista,
-                                        MainActivity.albanil,
-                                        MainActivity.pintor,
-                                        MainActivity.cerrajero);
-                                creacionCuentaOk = true;
-                            }
-
-                            catch ( Throwable e ) {
-                                Log.e( "e", ""+e.getMessage() );
-                                nosePudoCrearLaCuenta.setVisibility(View.VISIBLE);
-                            }
-
-                            nosePudoCrearLaCuenta.setVisibility( creacionCuentaOk ? View.INVISIBLE : View.VISIBLE);
-                            cuentaCreadaConExito.setVisibility( !creacionCuentaOk ? View.INVISIBLE : View.VISIBLE);
-                        }
-                    }
-            );
-        }
-        catch ( SQLException | ClassNotFoundException ex )
-        {
-            Log.e("", ex.toString(), ex );
+                    });
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
+
+    public void signUp() {
+
+        if (SignUpService.email.length() == 0 || SignUpService.username.length() == 0 ||
+                SignUpService.password.length() == 0 ||
+                SignUpService.phoneNumber.length() == 0) {
+            SignUpService.datosOk = false;
+        }else{
+            SignUpService.datosOk=true;
+        }
+
+        if (!SignUpService.datosOk) {
+            Log.e("", "errores en los datos");
+
+        } else {
+            try {
+                final DatabaseConnection databaseConnection = new DatabaseConnection();
+                databaseConnection.connect();
+                databaseConnection.createUser(
+                        SignUpService.email, SignUpService.username, SignUpService.password,
+                        SignUpService.phoneNumber, SignUpService.location, SignUpService.pathForImage,
+                        MainActivity.electricista,
+                        MainActivity.carpintero,
+                        MainActivity.computacion,
+                        MainActivity.plomero,
+                        MainActivity.gasista,
+                        MainActivity.albanil,
+                        MainActivity.pintor,
+                        MainActivity.cerrajero);
+
+            } catch (Exception e) {
+                SignUpService.datosOk=false;
+                e.printStackTrace();
+            }
+
+        }
+    }
+
 }
-
-
