@@ -42,8 +42,7 @@ import static gunner.gunner.R.id.imageView10;
 import static gunner.gunner.R.id.imageView14;
 import static gunner.gunner.R.id.imageView16;
 import static gunner.gunner.R.id.imageView2;
-import static gunner.gunner.R.id.imageView5;
-import static gunner.gunner.R.id.imageView6;
+
 
 import static gunner.gunner.R.id.nav_viw;
 import static gunner.gunner.R.id.navDrawer;
@@ -117,8 +116,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //Cuenta loggeada
 
-        ImageView image = (ImageView) findViewById(imageView5);
-        ImageView randomImage = (ImageView) findViewById(imageView6);
         NavigationView nav = (NavigationView) findViewById(nav_viw);
         if (loggedIn) {
 
@@ -135,7 +132,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ImageView profileImage=(ImageView)hView.findViewById(imageView14);
             Bitmap bitmap = BitmapFactory.decodeByteArray(LogInService.photo, 0, LogInService.photo.length);
             profileImage.setImageBitmap(bitmap);
-            randomImage.setVisibility(INVISIBLE);
             //image.setImageBitmap(profileImage);
 
             nav.getMenu().clear();
@@ -143,7 +139,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             nav.getMenu().clear();
             navigationView.inflateMenu(R.menu.menu_loggedout);
-            image.setVisibility(INVISIBLE);
         }
 
 
