@@ -18,8 +18,8 @@
     <ListView
 
         android:id="@+id/lista"
-        android:layout_width="399dp"
-        android:layout_height="608dp"
+        android:layout_width="407dp"
+        android:layout_height="583dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />

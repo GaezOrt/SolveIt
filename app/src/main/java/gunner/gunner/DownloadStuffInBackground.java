@@ -30,6 +30,7 @@ public class DownloadStuffInBackground extends IntentService {
                 }
             }
             find.findElectricistas();
+
             if(Electricista.cantidadElectricistas==Electricidad.electricistas.size()){
                 stopSelf();
             }

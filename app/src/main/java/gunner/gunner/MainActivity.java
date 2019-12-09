@@ -81,13 +81,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_viw);
         navigationView.setNavigationItemSelectedListener(this);
 
-
         //Load electricistas list in background
         if (Electricidad.electricistas.isEmpty()) {
             Intent i = new Intent(this, DownloadStuffInBackground.class);
             startService(i);
         }
-
 
         //Boton para electricistas
         final Button electricidadBut = (Button) findViewById(button);
@@ -140,13 +138,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             nav.getMenu().clear();
             navigationView.inflateMenu(R.menu.menu_loggedout);
         }
-
-
-    }
-
-    public boolean onCreateOptionMenu(Menu menu) {
-
-        return true;
     }
 
     @Override
@@ -157,7 +148,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

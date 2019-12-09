@@ -39,7 +39,7 @@ public class Electricidad extends AppCompatActivity {
 
     static ArrayList<Electricista> electricistas =new ArrayList<Electricista>();
     static boolean showLoad;
-
+    static   MyListAdaptor adapter ;
     protected void onCreate(Bundle savedInstanceState) {
 
 
@@ -48,8 +48,6 @@ public class Electricidad extends AppCompatActivity {
         setContentView(R.layout.electr);
         ImageView imageView = (ImageView) findViewById(imageView11);
             if(showLoad){
-
-
 
             GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(imageView);
             Glide.with(this).load(R.drawable.loading_animation_grey).into(imageViewTarget);
@@ -73,10 +71,10 @@ public class Electricidad extends AppCompatActivity {
             setContentView(R.layout.activity_main);
         });
 
-        MyListAdaptor adapter = new MyListAdaptor(this,R.layout.list_view,electricistas);
+         adapter = new MyListAdaptor(this,R.layout.list_view,electricistas);
         final ListView listView= (ListView) findViewById(lista);
         listView.setAdapter(adapter);
-
+        adapter.notifyDataSetChanged();
 
 
         //Realizar ampliacion cuando se clickea item de lista
@@ -88,6 +86,7 @@ public class Electricidad extends AppCompatActivity {
                 finish();
                 startActivity(new Intent(Electricidad.this, FindInDatabase.class));
                 setContentView(R.layout.find_user);
+
             }
         });
 
