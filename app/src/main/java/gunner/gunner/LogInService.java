@@ -9,9 +9,13 @@ import android.util.Log;
 
 public class LogInService extends IntentService {
     LogIn login= new LogIn();
+    static String name;
+    static String phone;
     static String email;
     static String password;
+    static String location;
     static boolean logIn;
+    static byte[] photo;
     static int estado;
 
     public LogInService() {

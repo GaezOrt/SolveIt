@@ -269,7 +269,7 @@ public class SignUp extends AppCompatActivity {
                         SignUpService.email=email;
                         EditText usernameText = (EditText) findViewById(editText);
                         username = usernameText.getText().toString();
-                        SignUpService.username=email;
+                        SignUpService.username=username;
                         EditText passwordText = (EditText) findViewById(editText2);
                         password = passwordText.getText().toString();
                         SignUpService.password=password;

@@ -29,7 +29,7 @@ import static gunner.gunner.R.id.imageView8;
 
 public class LogIn extends AppCompatActivity {
 
-    String email;
+    String emailRetrieved;
     String password;
     boolean ingresoCorrecto;
     @Override
@@ -72,8 +72,8 @@ public class LogIn extends AppCompatActivity {
             System.out.println("Hey hey");
 
             EditText usernameText=(EditText) findViewById(editText);
-            email=usernameText.getText().toString();
-            LogInService.email=email;
+            emailRetrieved=usernameText.getText().toString();
+            LogInService.email=emailRetrieved;
 
 
             EditText passwordText=(EditText) findViewById(editText2);
@@ -105,7 +105,7 @@ public class LogIn extends AppCompatActivity {
             System.out.println("Connection is successful");
             DatabaseConnection database = new DatabaseConnection();
             database.connect();
-            PreparedStatement pt = DatabaseConnection.conn.prepareStatement("SELECT * FROM Users WHERE User = ? AND Password = ?");
+            PreparedStatement pt = DatabaseConnection.conn.prepareStatement("SELECT * FROM Users WHERE email = ? AND Password = ?");
             pt.setString(1, LogInService.email);
             pt.setString(2, LogInService.password);
             pt.setFetchSize(1);
@@ -118,12 +118,12 @@ public class LogIn extends AppCompatActivity {
 
             } else {
                 LogInService.estado=2;
-                String userName = rs.getString("User");
+                String email = rs.getString("email");
                 String passwordd = rs.getString("Password");
                 System.out.println(passwordd);
-                if (userName.equals(LogInService.email) && passwordd.equals(LogInService.password)) {
+                if (email.equals(LogInService.email) && passwordd.equals(LogInService.password)) {
                     String location = rs.getString("location");
-                    String emails = rs.getString("email");
+                    String username = rs.getString("User");
                     String phone = rs.getString("telefono");
                     System.out.println("Adentro del login");
                     //Agarrando imagen
@@ -132,11 +132,21 @@ public class LogIn extends AppCompatActivity {
                     byte[] blobAsBytes = blob.getBytes(1, blobLength);
                     Log.w("Activity", " Array setteado desde base de datos a variable principal en MAiActivity" + MainActivity.loggedImageInDatabaseArray);
 
-                    MainActivity.loggedEmail = emails;
+                    MainActivity.loggedEmail = email;
+                    LogInService.email=email;
+
                     MainActivity.loggedPhone = phone;
-                    MainActivity.loggedUsername = email;
+                    LogInService.phone=phone;
+
+                    MainActivity.loggedUsername = username;
+                   LogInService.name= username;
+
                     MainActivity.loggedLocation = location;
+                    LogInService.location=location;
+
+
                     MainActivity.loggedImageInDatabaseArray = blobAsBytes;
+                    LogInService.photo=blobAsBytes;
                     Bitmap bitmap = BitmapFactory.decodeByteArray(MainActivity.loggedImageInDatabaseArray, 0, MainActivity.loggedImageInDatabaseArray.length);
                     MainActivity.profileImage = bitmap;
 

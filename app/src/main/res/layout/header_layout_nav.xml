@@ -24,15 +24,15 @@
         android:layout_width="75dp"
         android:layout_height="67dp"
         android:layout_marginTop="32dp"
-        android:background="@drawable/usuariorandom"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/usuariorandom" />
 
     <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="►Gaston"
+        android:text="►Guest"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/textView21"
         app:layout_constraintStart_toStartOf="@+id/textView21"
@@ -60,7 +60,7 @@
         android:id="@+id/textView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="►1544036447"
+        android:text="►Phone number"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/textView22"
         app:layout_constraintStart_toStartOf="@+id/textView22" />
@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="16dp"
-        android:text="►Buenos Aires"
+        android:text="►Location"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView14"
         app:layout_constraintStart_toEndOf="@+id/imageView14" />
