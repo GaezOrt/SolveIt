@@ -27,6 +27,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -64,6 +65,7 @@ import java.util.Date;
 import static android.view.View.VISIBLE;
 import static gunner.gunner.R.id.CuentaNoCreada;
 import static gunner.gunner.R.id.Electricista;
+
 import static gunner.gunner.R.id.button2;
 import static gunner.gunner.R.id.button7;
 import static gunner.gunner.R.id.cuentaCreada;

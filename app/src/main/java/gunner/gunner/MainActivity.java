@@ -3,14 +3,20 @@ package gunner.gunner;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.StrictMode;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -28,7 +34,8 @@ import static gunner.gunner.R.id.imageView6;
 import static gunner.gunner.R.id.logIn;
 
 
-public class MainActivity extends AppCompatActivity  {
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
 
     static boolean loggedIn=false;
     static String loggedUsername;
@@ -108,7 +115,7 @@ public class MainActivity extends AppCompatActivity  {
         ImageView image=(ImageView)findViewById(imageView5);
         ImageView randomImage=(ImageView)findViewById(imageView6);
 
-        if(loggedIn){
+        if(loggedIn) {
 
             randomImage.setVisibility(INVISIBLE);
             image.setImageBitmap(profileImage);
@@ -126,16 +133,15 @@ public class MainActivity extends AppCompatActivity  {
                 }
             });
 
-            Button logOutButt=(Button) findViewById(R.id.logOutButt);
+            Button logOutButt = (Button) findViewById(R.id.logOutButt);
             logOutButt.setVisibility(View.VISIBLE);
-            logOutButt.setOnClickListener((v)-> {
-                loggedIn=false;
+            logOutButt.setOnClickListener((v) -> {
+                loggedIn = false;
                 login.setVisibility(View.VISIBLE);
                 signup.setVisibility(View.VISIBLE);
                 logOutButt.setVisibility(INVISIBLE);
                 profile.setVisibility(INVISIBLE);
                 image.setVisibility(INVISIBLE);
-
 
             });
 
@@ -145,10 +151,13 @@ public class MainActivity extends AppCompatActivity  {
             login.setVisibility(View.VISIBLE);
             signup.setVisibility(View.VISIBLE);
             image.setVisibility(INVISIBLE);
-
         }
 
 
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return false;
+    }
 }
