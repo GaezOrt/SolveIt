@@ -10,9 +10,7 @@
     android:fitsSystemWindows="true"
     android:background="@color/colorPrimary"
     android:id="@+id/navmenubar">
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
@@ -193,59 +191,6 @@
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1" />
 
-    <Button
-        android:id="@+id/logIn"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_width="72dp"
-        android:layout_height="38dp"
-        android:text="Log in"
-        android:textSize="8sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Profile" />
-
-    <Button
-        android:id="@+id/logOutButt"
-        style="@android:style/Widget.DeviceDefault.Button.Borderless"
-        android:layout_width="60dp"
-        android:layout_height="35dp"
-        android:text="Log out"
-        android:textSize="8sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logIn" />
-
-    <Button
-        android:id="@+id/createAccount"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_width="128dp"
-        android:layout_height="34dp"
-        android:text="Create account"
-        android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/Profile"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="68dp"
-        android:layout_height="39dp"
-        android:text="Carina"
-        android:textSize="12sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@+id/logIn"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="50dp"
-        android:layout_height="38dp"
-        android:background="@drawable/border"
-        android:cropToPadding="true"
-        android:visibility="visible"
-        app:layout_constraintEnd_toStartOf="@+id/logIn"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
         android:id="@+id/imageView6"
@@ -257,9 +202,20 @@
         android:scaleType="fitXY"
 
         android:visibility="visible"
-        app:layout_constraintEnd_toStartOf="@+id/logIn"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView5"
         app:srcCompat="@drawable/usuariorandom"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="50dp"
+        android:layout_height="38dp"
+        android:background="@drawable/border"
+        android:cropToPadding="true"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -360,6 +316,14 @@
         app:layout_constraintEnd_toEndOf="@+id/button10"
         app:layout_constraintStart_toStartOf="@+id/button10"
         app:layout_constraintTop_toBottomOf="@+id/button10" />
+
+    <ImageView
+        android:id="@+id/imageView16"
+        android:layout_width="61dp"
+        android:layout_height="35dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/threelines" />
 
 </android.support.constraint.ConstraintLayout>
     <android.support.design.widget.NavigationView

@@ -6,8 +6,10 @@ import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +20,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+
 import org.w3c.dom.Text;
 
 import java.io.IOException;
@@ -25,14 +30,18 @@ import java.sql.Blob;
 import java.sql.SQLException;
 
 import static android.view.View.INVISIBLE;
-import static gunner.gunner.R.id.Profile;
+import static android.view.View.VISIBLE;
+
 import static gunner.gunner.R.id.button;
-import static gunner.gunner.R.id.createAccount;
+
+import static gunner.gunner.R.id.imageView10;
+import static gunner.gunner.R.id.imageView16;
 import static gunner.gunner.R.id.imageView2;
 import static gunner.gunner.R.id.imageView5;
 import static gunner.gunner.R.id.imageView6;
-import static gunner.gunner.R.id.logIn;
 
+import static gunner.gunner.R.id.nav_viw;
+import static gunner.gunner.R.id.navmenubar;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
@@ -66,12 +75,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_viw);
+        navigationView.setNavigationItemSelectedListener(this);
+
 
         //Load electricistas list in background
         if(Electricidad.electricistas.isEmpty()) {
             Intent i = new Intent(this, DownloadStuffInBackground.class);
             startService(i);
         }
+
 
 
         //Boton para electricistas
@@ -86,32 +99,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        //Log in boton
-        final Button login= (Button)findViewById(logIn);
-        login.setOnClickListener(new View.OnClickListener() {
+
+        ImageView menuOpener= (ImageView)findViewById(imageView16);
+        menuOpener.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, LogIn.class));
-                setContentView(R.layout.login);
-
-            }
-        });
+            public void onClick(View view) {
+                DrawerLayout drawer= (DrawerLayout)findViewById(navmenubar);
+                drawer.openDrawer(Gravity.LEFT);
 
 
-
-        //Boton para signup
-        final Button signup= (Button)findViewById(createAccount);
-        signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SignUp.class));
-                setContentView(R.layout.register);
             }
         });
 
 
         //Cuenta loggeada
-        Button profile=(Button) findViewById(Profile) ;
+
         ImageView image=(ImageView)findViewById(imageView5);
         ImageView randomImage=(ImageView)findViewById(imageView6);
 
@@ -119,45 +121,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             randomImage.setVisibility(INVISIBLE);
             image.setImageBitmap(profileImage);
-            profile.setVisibility(View.VISIBLE);
-            login.setVisibility(INVISIBLE);
-            signup.setVisibility(INVISIBLE);
-
-            profile.setText(MainActivity.loggedUsername);
-            profile.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(MainActivity.this, ProfileUser.class));
-                    setContentView(R.layout.user_profile);
-
-                }
-            });
-
-            Button logOutButt = (Button) findViewById(R.id.logOutButt);
-            logOutButt.setVisibility(View.VISIBLE);
-            logOutButt.setOnClickListener((v) -> {
-                loggedIn = false;
-                login.setVisibility(View.VISIBLE);
-                signup.setVisibility(View.VISIBLE);
-                logOutButt.setVisibility(INVISIBLE);
-                profile.setVisibility(INVISIBLE);
-                image.setVisibility(INVISIBLE);
-
-            });
-
-
 
         }else{
-            login.setVisibility(View.VISIBLE);
-            signup.setVisibility(View.VISIBLE);
+
             image.setVisibility(INVISIBLE);
         }
 
 
     }
 
+    public boolean onCreateOptionMenu(Menu menu){
+
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+
+
+
+        switch (item.getItemId()){
+            case R.id.first:
+                startActivity(new Intent(this, LogIn.class));
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.first:
+                startActivity(new Intent(this, LogIn.class));
+                break;
+            case R.id.second:
+                startActivity(new Intent(this, SignUp.class));
+                break;
+        }
         return false;
     }
 }
