@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -75,6 +76,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setTheme(R.style.Theme_Design_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.black));
+        }
+
+
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
@@ -115,8 +122,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Cuenta loggeada
 
         NavigationView nav = (NavigationView) findViewById(nav_viw);
+        TextView welcome = (TextView)findViewById(R.id.textView20);
         if (loggedIn) {
 
+
+            welcome.setText("Welcome "+LogInService.name +" !");
+            welcome.setVisibility(VISIBLE);
             View hView =  navigationView.getHeaderView(0);
             TextView nav_user = (TextView)hView.findViewById(R.id.textView14);
             nav_user.setText("►"+ LogInService.name);
@@ -137,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             nav.getMenu().clear();
             navigationView.inflateMenu(R.menu.menu_loggedout);
+            welcome.setVisibility(INVISIBLE);
         }
     }
 

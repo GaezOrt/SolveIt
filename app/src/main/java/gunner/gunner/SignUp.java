@@ -25,6 +25,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
@@ -269,6 +270,7 @@ public class SignUp extends AppCompatActivity {
                         SignUpService.email=email;
                         EditText usernameText = (EditText) findViewById(editText);
                         username = usernameText.getText().toString();
+
                         SignUpService.username=username;
                         EditText passwordText = (EditText) findViewById(editText2);
                         password = passwordText.getText().toString();
