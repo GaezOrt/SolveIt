@@ -27,7 +27,7 @@ import static android.view.View.VISIBLE;
 import static gunner.gunner.R.id.all;
 import static gunner.gunner.R.id.button2;
 import static gunner.gunner.R.id.imageView10;
-import static gunner.gunner.R.id.imageView11;
+import static gunner.gunner.R.id.imageView5;
 import static gunner.gunner.R.id.lista;
 
 /**
@@ -46,24 +46,16 @@ public class Electricidad extends AppCompatActivity {
         setTheme(R.style.Theme_Design_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.electr);
-        ImageView imageView = (ImageView) findViewById(imageView11);
-            if(showLoad){
 
-            GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(imageView);
-            Glide.with(this).load(R.drawable.loading_animation_grey).into(imageViewTarget);
-            imageView.setVisibility(VISIBLE);
-        }else{
-                imageView.setVisibility(INVISIBLE);
-            }
         //Cargar datos electricidad
         //DownloadList download= new DownloadList();
-       // download.execute();
-       // FindInDatabase find= new FindInDatabase();
-       // find.findElectricistas();
+        // download.execute();
+        // FindInDatabase find= new FindInDatabase();
+        // find.findElectricistas();
         System.out.println(electricistas.size());
 
         //Ir para atras
-        final Button atrasBut=(Button) findViewById(button2) ;
+        final ImageView atrasBut=(ImageView) findViewById(imageView5) ;
         atrasBut.setOnClickListener((v)-> {
 
             finish();
@@ -71,7 +63,7 @@ public class Electricidad extends AppCompatActivity {
             setContentView(R.layout.activity_main);
         });
 
-         adapter = new MyListAdaptor(this,R.layout.list_view,electricistas);
+        adapter = new MyListAdaptor(this,R.layout.list_view,electricistas);
         final ListView listView= (ListView) findViewById(lista);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -79,6 +71,7 @@ public class Electricidad extends AppCompatActivity {
 
         //Realizar ampliacion cuando se clickea item de lista
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
                 FindInDatabase.namePassedViaParam=electricistas.get(position).email;
@@ -90,6 +83,11 @@ public class Electricidad extends AppCompatActivity {
             }
         });
 
+    }
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(Electricidad.this, MainActivity.class));
+        setContentView(R.layout.activity_main);
     }
 }
 

@@ -401,5 +401,9 @@ public class SignUp extends AppCompatActivity {
 
         }
     }
-
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(SignUp.this, MainActivity.class));
+        setContentView(R.layout.activity_main);
+    }
 }

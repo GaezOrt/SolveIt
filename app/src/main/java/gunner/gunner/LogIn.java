@@ -164,6 +164,10 @@ public class LogIn extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(LogIn.this, MainActivity.class));
+        setContentView(R.layout.activity_main);
+    }
 
 }

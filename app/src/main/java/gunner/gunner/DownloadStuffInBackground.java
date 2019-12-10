@@ -19,26 +19,26 @@ public class DownloadStuffInBackground extends IntentService {
     @Override
     protected void onHandleIntent( Intent intent) {
 
-            if(DatabaseConnection.conn==null){
-                DatabaseConnection database= new DatabaseConnection();
-                try {
-                    database.connect();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
+        if(DatabaseConnection.conn==null){
+            DatabaseConnection database= new DatabaseConnection();
+            try {
+                database.connect();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
-            find.findElectricistas();
+        }
+        find.findElectricistas();
 
-            if(Electricista.cantidadElectricistas==Electricidad.electricistas.size()){
-                stopSelf();
-            }
-            if(Electricista.cantidadElectricistas>Electricidad.electricistas.size()){
-                Electricidad.showLoad=true;
-            }else{
-                Electricidad.showLoad=false;
-            }
+        if(Electricista.cantidadElectricistas==Electricidad.electricistas.size()){
+            stopSelf();
+        }
+        if(Electricista.cantidadElectricistas>Electricidad.electricistas.size()){
+            Electricidad.showLoad=true;
+        }else{
+            Electricidad.showLoad=false;
+        }
 
     }
 }
