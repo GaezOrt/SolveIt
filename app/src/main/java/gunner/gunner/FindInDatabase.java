@@ -202,8 +202,6 @@ public class FindInDatabase extends AppCompatActivity {
         locatText.setText(location);
 
     }
-
-
     public void findElectricistas() {
         try {
             Log.w("","Eeee");
@@ -225,6 +223,8 @@ public class FindInDatabase extends AppCompatActivity {
             updN.setBoolean(1,true);
             updN.setFetchSize(1);
             ResultSet rs = updN.executeQuery();
+
+
 
             PreparedStatement profilePt= con.prepareStatement("SELECT * FROM Users WHERE email= ?");
 

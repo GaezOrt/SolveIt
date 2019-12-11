@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -88,11 +89,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_viw);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //Load electricistas list in background
-        if (Electricidad.electricistas.isEmpty()) {
-            Intent i = new Intent(this, DownloadStuffInBackground.class);
-            startService(i);
-        }
+
+
 
         //Boton para electricistas
         final Button electricidadBut = (Button) findViewById(button);
@@ -113,8 +111,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View view) {
                 DrawerLayout drawer = (DrawerLayout) findViewById(navDrawer);
                 drawer.openDrawer(Gravity.LEFT);
-
-
             }
         });
 
