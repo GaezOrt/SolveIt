@@ -2,6 +2,7 @@ package gunner.gunner;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.Rating;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
@@ -11,9 +12,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 
 import java.sql.PreparedStatement;
 
+import static gunner.gunner.R.id.MyRating;
 import static gunner.gunner.R.id.imageView17;
 import static gunner.gunner.R.id.imageView5;
 
@@ -56,6 +59,8 @@ public class addComment extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                RatingBar rating= (RatingBar)findViewById(MyRating);
+
                 EditText edit= (EditText)findViewById(R.id.editText8);
                 comment=edit.getText().toString();
                 if(LogInService.email==null){
@@ -65,11 +70,12 @@ public class addComment extends AppCompatActivity {
                 try {
                     DatabaseConnection database= new DatabaseConnection();
                     database.connect();
-                    String updateSQL = "INSERT INTO Comentarios VALUES (?,?,?)";
+                    String updateSQL = "INSERT INTO Comentarios VALUES (?,?,?,?)";
                     PreparedStatement pstmt = database.conn.prepareStatement(updateSQL);
                     pstmt.setString(1, email);
                     pstmt.setString(2,comment);
                     pstmt.setString(3, LogInService.email);
+                    pstmt.setFloat(4,rating.getRating());
                     pstmt.executeUpdate();
                     System.out.println("Doing update on data");
                 }catch ( Exception e){

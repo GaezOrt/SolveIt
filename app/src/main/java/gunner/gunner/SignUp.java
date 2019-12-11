@@ -191,6 +191,8 @@ public class SignUp extends AppCompatActivity {
 
         // si esta todo bien
         else if(SignUpService.estado==2 && !SignUpService.cuentaYaUtilizada){
+            Intent i = new Intent(this, DownloadStuffInBackground.class);
+            startService(i);
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this,R.style.MyDialogTheme);
             builder1.setTitle("Sign up correcto");
             builder1.setIcon(R.drawable.usercorrect);
@@ -208,6 +210,7 @@ public class SignUp extends AppCompatActivity {
             alert11.show();
 
             SignUpService.datosOk=true;
+
         }
 
         //Si el error esta en que el usuario no registro una foto

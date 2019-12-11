@@ -11,6 +11,7 @@ public class Electricista {
     public String location;
     String number;
 
+
     public Electricista(Bitmap photo, String name, String email, int rating,String location,String number){
         this.photo=photo;
         this.name=name;

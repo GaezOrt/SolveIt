@@ -28,10 +28,16 @@ public class LogInService extends IntentService {
         login.logIn();
 
         if(MainActivity.loggedIn){
-            startActivity(new Intent(LogInService.this, MainActivity.class));
+            Intent intentt = new Intent (this, MainActivity.class);
+            intentt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentt);
+
         }
         if(!logIn){
-            startActivity(new Intent(LogInService.this, LogIn.class));
+            Intent intentt = new Intent (this, LogIn.class);
+            intentt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentt);
+
         }
 
     }

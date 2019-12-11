@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.sql.Blob;
@@ -39,10 +40,13 @@ import static gunner.gunner.R.id.editText3;
 import static gunner.gunner.R.id.editText5;
 import static gunner.gunner.R.id.imageView15;
 import static gunner.gunner.R.id.imageView2;
+import static gunner.gunner.R.id.list;
+import static gunner.gunner.R.id.lista;
 
 
 public class FindInDatabase extends AppCompatActivity {
 
+    static ArrayList<Comentarios> comentarios =new ArrayList<Comentarios>();
     Connection con;
     static String nombre;
     static String numeroTelefono;
@@ -50,6 +54,7 @@ public class FindInDatabase extends AppCompatActivity {
     static String namePassedViaParam;
     static int ubicacionElectricista;
     public static int X;
+    static   CommentsListAdaptor adapter ;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +95,12 @@ public class FindInDatabase extends AppCompatActivity {
                 startActivity(new Intent(FindInDatabase.this, addComment.class));
             }
         });
+
+        findComments();
+        adapter = new CommentsListAdaptor(this,R.layout.list_view,comentarios);
+        final ListView listView= (ListView) findViewById(list);
+        listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     //Buscar en base de datos
@@ -246,8 +257,6 @@ public class FindInDatabase extends AppCompatActivity {
                     Bitmap bitmap = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes .length);
                     Electricista electricista = new Electricista(bitmap, name, email, 9,location,telefono);
                     Electricidad.electricistas.add(electricista);
-
-
                     break;
                 }
             }
@@ -260,6 +269,45 @@ public class FindInDatabase extends AppCompatActivity {
         }
 
 
+
+
+    }
+    public void findComments(){
+        try {
+
+            final String userName = "9QFW2Os9pV";
+            final String passwordDatabase = "dKObZerUnf";
+            final String url = "jdbc:mysql://remotemysql.com:3306/9QFW2Os9pV";
+            DatabaseConnection data= new DatabaseConnection();
+            //Conectar con base de datos
+            con = null;
+            try {
+                con = DriverManager.getConnection(url, userName, passwordDatabase);
+                data.connect();
+            } catch (Exception e) {
+
+            }
+
+            PreparedStatement updN = con.prepareStatement("SELECT * FROM Comentarios WHERE emailDelReceptor= ?");
+            updN.setString(1,namePassedViaParam);
+            updN.setFetchSize(1);
+            ResultSet rs = updN.executeQuery();
+
+            while (rs.next()) {
+
+                String comentario = rs.getString("Comentario");
+
+                comentarios =new ArrayList<Comentarios>();
+                Comentarios comentarioLista= new Comentarios(comentario,rs.getFloat("Puntaje"));
+                comentarios.add(comentarioLista);
+
+            }
+
+
+        }catch(SQLException e){
+            e.printStackTrace();
+            Log.e("Error", ""+e.getMessage()+"Tomatela loro");
+        }
     }
     @Override
     public void onBackPressed() {

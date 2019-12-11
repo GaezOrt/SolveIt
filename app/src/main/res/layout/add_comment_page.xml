@@ -82,7 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/editText4"
         android:layout_toEndOf="@+id/editText4"
-        android:isIndicator="true"
+        android:isIndicator="false"
         android:numStars="5"
         app:layout_constraintBottom_toBottomOf="@+id/textView25"
         app:layout_constraintStart_toEndOf="@+id/textView26"

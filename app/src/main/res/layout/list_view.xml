@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:descendantFocusability="blocksDescendants"
-  >
+    android:descendantFocusability="blocksDescendants">
 
     <RatingBar
         android:id="@+id/MyRating"
@@ -13,7 +12,7 @@
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/editText4"
-        android:layout_marginStart="160dp"
+        android:layout_marginStart="136dp"
         android:layout_toEndOf="@+id/editText4"
         android:isIndicator="true"
         android:numStars="5"
@@ -21,7 +20,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/editText4"
         app:layout_constraintStart_toEndOf="@+id/editText4"
         app:layout_constraintTop_toTopOf="@+id/editText4"
-        app:layout_constraintVertical_bias="0.428" />
+        app:layout_constraintVertical_bias="0.52" />
 
     <View
         android:id="@+id/view"
@@ -29,32 +28,31 @@
         android:layout_height="2dp"
         android:layout_alignParentTop="false"
         android:background="#000000"
-        app:layout_constraintBottom_toBottomOf="@+id/editText4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/editText4" />
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="36dp"
-        android:layout_height="18dp"
+        android:layout_width="40dp"
+        android:layout_height="29dp"
         android:layout_weight="1"
+        android:rotation="90"
         app:layout_constraintBottom_toBottomOf="@+id/editText4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2"
+        app:layout_constraintVertical_bias="0.625"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/editText4"
-        android:layout_width="134dp"
-        android:layout_height="23dp"
+        android:layout_width="148dp"
+        android:layout_height="50dp"
         android:layout_toEndOf="@+id/imageView7"
         android:background="@drawable/empty_background"
         android:inputType="textPersonName"
         android:text="Name"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textSize="12sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/imageView7"
         app:layout_constraintTop_toTopOf="parent" />
 
