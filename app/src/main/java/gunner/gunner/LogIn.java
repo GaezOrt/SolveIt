@@ -42,7 +42,7 @@ public class LogIn extends AppCompatActivity {
         atrasBut.setOnClickListener ((v)-> {
             finish();
             startActivity(new Intent(LogIn.this, MainActivity.class));
-            setContentView(R.layout.activity_main);
+
         });
 
 
@@ -167,7 +167,7 @@ public class LogIn extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         startActivity(new Intent(LogIn.this, MainActivity.class));
-        setContentView(R.layout.activity_main);
+
     }
 
 }

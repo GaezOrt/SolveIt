@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View v) {
                 electricidadBut.startAnimation(myAnim);
                 startActivity(new Intent(MainActivity.this, Electricidad.class));
-                setContentView(R.layout.electr);
+
 
             }
         });

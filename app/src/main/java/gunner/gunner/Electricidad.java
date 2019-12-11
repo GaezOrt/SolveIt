@@ -60,7 +60,7 @@ public class Electricidad extends AppCompatActivity {
 
             finish();
             startActivity(new Intent(Electricidad.this, MainActivity.class));
-            setContentView(R.layout.activity_main);
+
         });
 
         adapter = new MyListAdaptor(this,R.layout.list_view,electricistas);
@@ -87,7 +87,7 @@ public class Electricidad extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         startActivity(new Intent(Electricidad.this, MainActivity.class));
-        setContentView(R.layout.activity_main);
+
     }
 }
 
