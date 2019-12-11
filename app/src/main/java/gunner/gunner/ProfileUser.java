@@ -25,6 +25,7 @@ import static gunner.gunner.R.id.editText;
 import static gunner.gunner.R.id.editText2;
 import static gunner.gunner.R.id.editText3;
 import static gunner.gunner.R.id.editText5;
+import static gunner.gunner.R.id.imageView15;
 import static gunner.gunner.R.id.imageView2;
 import static gunner.gunner.R.id.location;
 
@@ -72,6 +73,10 @@ public class ProfileUser extends AppCompatActivity {
         Bitmap bitmap = BitmapFactory.decodeByteArray(MainActivity.loggedImageInDatabaseArray, 0, MainActivity.loggedImageInDatabaseArray .length);
         image.setImageBitmap(bitmap);
         MainActivity.profileImage=bitmap;
+        ImageView add=(ImageView)findViewById(imageView15);
+        add.setOnClickListener((v)-> {
+            startActivity(new Intent(ProfileUser.this, addComment.class));
+        });
     }
 
 }

@@ -29,8 +29,9 @@ import static gunner.gunner.R.id.editText;
 import static gunner.gunner.R.id.editText2;
 import static gunner.gunner.R.id.editText3;
 import static gunner.gunner.R.id.editText5;
+import static gunner.gunner.R.id.imageView15;
 import static gunner.gunner.R.id.imageView2;
-import static gunner.gunner.R.id.textView;
+
 
 public class FindInDatabase extends AppCompatActivity {
 
@@ -69,6 +70,13 @@ public class FindInDatabase extends AppCompatActivity {
         } catch (Exception e) {
             Log.e("Error", "Error en conexion a base de datos");
         }
+        ImageView image= (ImageView)findViewById(imageView15);
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(FindInDatabase.this, addComment.class));
+            }
+        });
     }
 
     //Buscar en base de datos
@@ -102,6 +110,7 @@ public class FindInDatabase extends AppCompatActivity {
                     nombre = userName;
                     email = emaill;
                     location = locationn;
+                    addComment.email=email;
                     MainActivity.electricista = electricista;
                     MainActivity.carpintero = carpintero;
                     MainActivity.pintor = pintor;
@@ -116,13 +125,10 @@ public class FindInDatabase extends AppCompatActivity {
                     image.setImageBitmap(bitmap);
 
                 } else {
-                    TextView locatText = (TextView) findViewById(textView);
-                    locatText.setVisibility(View.VISIBLE);
+
                 }
             }
         } catch (Exception e) {
-            TextView locatText = (TextView) findViewById(textView);
-            locatText.setVisibility(View.VISIBLE);
             Log.e("Error", "Error en subida");
         }
 
@@ -197,6 +203,11 @@ public class FindInDatabase extends AppCompatActivity {
             Log.e("Error", ""+e.getMessage()+"Tomatela loro");
         }
 
+
+    }
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(FindInDatabase.this, Electricidad.class));
 
     }
 }
