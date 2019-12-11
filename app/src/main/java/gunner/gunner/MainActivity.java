@@ -1,6 +1,7 @@
 package gunner.gunner;
 
 import android.content.ClipData;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
@@ -72,6 +74,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+
+        if(SignUpService.datosOk){
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this,R.style.MyDialogTheme);
+            builder1.setTitle("Sign up correcto");
+            builder1.setIcon(R.drawable.usercorrect);
+
+            builder1.setMessage("Se creo la cuenta correctamente");
+            builder1.setCancelable(true);
+            builder1.setPositiveButton(
+                    "Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+
+            SignUpService.datosOk=false;
+        }
         final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.button_animation);
 
         setTheme(R.style.Theme_Design_NoActionBar);
