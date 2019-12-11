@@ -8,9 +8,10 @@ import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class DownloadStuffInBackground extends IntentService {
-
+    static ArrayList<Electricista> electricistas =new ArrayList<Electricista>();
     FindInDatabase find = new FindInDatabase();
     public DownloadStuffInBackground() {
         super("Download");

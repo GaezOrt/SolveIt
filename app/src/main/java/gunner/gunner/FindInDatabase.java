@@ -23,6 +23,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import static gunner.gunner.MainActivity.albanil;
+import static gunner.gunner.MainActivity.carpintero;
+import static gunner.gunner.MainActivity.cerrajero;
+import static gunner.gunner.MainActivity.computacion;
+import static gunner.gunner.MainActivity.electricista;
+import static gunner.gunner.MainActivity.gasista;
+import static gunner.gunner.MainActivity.pintor;
+import static gunner.gunner.MainActivity.plomero;
 import static gunner.gunner.R.id.all;
 import static gunner.gunner.R.id.button2;
 import static gunner.gunner.R.id.editText;
@@ -40,7 +48,7 @@ public class FindInDatabase extends AppCompatActivity {
     static String numeroTelefono;
     static String location;
     static String namePassedViaParam;
-
+    static int ubicacionElectricista;
     public static int X;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,15 +69,20 @@ public class FindInDatabase extends AppCompatActivity {
             setContentView(R.layout.activity_main);
             finish();
         });
+
+
         //Conectar con base de datos
         con = null;
         try {
             con = DriverManager.getConnection(url, userName, passwordDatabase);
             data.connect();
-            findOnDatabase(namePassedViaParam);
+           // findOnDatabase(namePassedViaParam);
+            viewProfileFromList(namePassedViaParam);
         } catch (Exception e) {
             Log.e("Error", "Error en conexion a base de datos");
         }
+
+        //Boton agregar review
         ImageView image= (ImageView)findViewById(imageView15);
         image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,6 +161,48 @@ public class FindInDatabase extends AppCompatActivity {
         locatText.setText(location);
 
     }
+    public void viewProfileFromList(String email){
+        try {
+                    numeroTelefono = Electricidad.electricistas.get(ubicacionElectricista).number;
+                    nombre = Electricidad.electricistas.get(ubicacionElectricista).name;
+                    email = Electricidad.electricistas.get(ubicacionElectricista).email;
+                    location = Electricidad.electricistas.get(ubicacionElectricista).location;
+                    addComment.email=email;
+                    electricista = electricista;
+                    carpintero = carpintero;
+                    pintor = pintor;
+                    plomero = plomero;
+                    gasista = gasista;
+                    albanil = albanil;
+                    cerrajero = cerrajero;
+                    computacion = computacion;
+
+                   Bitmap bitmap=Electricidad.electricistas.get(ubicacionElectricista).photo;
+                    ImageView image = (ImageView) findViewById(imageView2);
+                    image.setImageBitmap(bitmap);
+
+
+        } catch (Exception e) {
+            Log.e("Error", "Error en subida");
+        }
+
+        final TextView emailButt = (TextView) findViewById(editText3);
+        emailButt.setText(email);
+
+        //Mostrar username
+        final TextView usernameButt = (TextView) findViewById(editText);
+        usernameButt.setText(nombre);
+
+        //Mostrar telefono
+        final TextView phoneButt = (TextView) findViewById(editText5);
+        phoneButt.setText(numeroTelefono);
+
+        //Mostrar ubicacion
+        TextView locatText = (TextView) findViewById(editText2);
+        locatText.setText(location);
+
+    }
+
 
     public void findElectricistas() {
         try {
@@ -181,14 +236,15 @@ public class FindInDatabase extends AppCompatActivity {
 
                 ResultSet rsProfile = profilePt.executeQuery();
                 while (rsProfile.next()) {
-
+                    String telefono=rsProfile.getString("telefono");
+                    String location= rsProfile.getString("location");
                     String name = rsProfile.getString("User");
                     X++;
                     Blob photo = rsProfile.getBlob("Foto");
                     int blobLength = (int) photo.length();
                     byte[] photoBytes = photo.getBytes(1, blobLength);
                     Bitmap bitmap = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes .length);
-                    Electricista electricista = new Electricista(bitmap, name, email, 9);
+                    Electricista electricista = new Electricista(bitmap, name, email, 9,location,telefono);
                     Electricidad.electricistas.add(electricista);
 
 

@@ -70,20 +70,22 @@ public class Electricidad extends AppCompatActivity {
 
 
         //Realizar ampliacion cuando se clickea item de lista
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                FindInDatabase.namePassedViaParam=electricistas.get(position).email;
-                Log.w("A","List object "+listView.getItemAtPosition(position).toString());
-                finish();
-                startActivity(new Intent(Electricidad.this, FindInDatabase.class));
-                setContentView(R.layout.find_user);
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    FindInDatabase.namePassedViaParam = electricistas.get(position).email;
+                    FindInDatabase.ubicacionElectricista=position;
+                    Log.w("A", "List object " + listView.getItemAtPosition(position).toString());
+                    finish();
+                    startActivity(new Intent(Electricidad.this, FindInDatabase.class));
 
-            }
-        });
 
-    }
+                }
+            });
+        }
+
     @Override
     public void onBackPressed() {
         startActivity(new Intent(Electricidad.this, MainActivity.class));
