@@ -32,7 +32,6 @@ import static gunner.gunner.R.id.location;
 
 public class ProfileUser extends AppCompatActivity {
 
-    String userName="9QFW2Os9pV",passwordDatabase="dKObZerUnf",url="jdbc:mysql://remotemysql.com:3306/9QFW2Os9pV",driver,driver1="com.mysql.jdbc.Driver";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

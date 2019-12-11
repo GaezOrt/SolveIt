@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.sql.Blob;
@@ -32,6 +33,7 @@ import static gunner.gunner.MainActivity.electricista;
 import static gunner.gunner.MainActivity.gasista;
 import static gunner.gunner.MainActivity.pintor;
 import static gunner.gunner.MainActivity.plomero;
+import static gunner.gunner.R.id.MyRating;
 import static gunner.gunner.R.id.all;
 import static gunner.gunner.R.id.button2;
 import static gunner.gunner.R.id.editText;
@@ -46,6 +48,8 @@ import static gunner.gunner.R.id.lista;
 
 public class FindInDatabase extends AppCompatActivity {
 
+    float total ;
+    float cantidadDeVeces;
     static ArrayList<Comentarios> comentarios =new ArrayList<Comentarios>();
     Connection con;
     static String nombre;
@@ -73,6 +77,7 @@ public class FindInDatabase extends AppCompatActivity {
             startActivity(new Intent(FindInDatabase.this, Electricidad.class));
             setContentView(R.layout.activity_main);
             finish();
+            comentarios.clear();
         });
 
 
@@ -100,11 +105,14 @@ public class FindInDatabase extends AppCompatActivity {
         });
 
         findComments();
-
+        RatingBar rating= (RatingBar)findViewById(MyRating);
+        rating.setRating(obtenerPromedio());
+        System.out.println("aaaa "+obtenerPromedio());
         adapter = new CommentsListAdaptor(this,R.layout.list_view,comentarios);
         final ListView listView= (ListView) findViewById(list);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
     }
 
     //Buscar en base de datos
@@ -278,19 +286,7 @@ public class FindInDatabase extends AppCompatActivity {
     }
     public void findComments(){
         try {
-            System.out.println("Comments");
-            final String userName = "9QFW2Os9pV";
-            final String passwordDatabase = "dKObZerUnf";
-            final String url = "jdbc:mysql://remotemysql.com:3306/9QFW2Os9pV";
-            DatabaseConnection data= new DatabaseConnection();
-            //Conectar con base de datos
-            con = null;
-            try {
-                con = DriverManager.getConnection(url, userName, passwordDatabase);
-                data.connect();
-            } catch (Exception e) {
 
-            }
 
             PreparedStatement updN = con.prepareStatement("SELECT * FROM Comentarios WHERE emailDelReceptor= ?");
             updN.setString(1,namePassedViaParam);
@@ -310,14 +306,34 @@ public class FindInDatabase extends AppCompatActivity {
             }
 
 
-        }catch(SQLException e){
+        }catch( Exception e){
             e.printStackTrace();
             Log.e("Error", ""+e.getMessage()+"Tomatela loro");
         }
     }
+    public float obtenerPromedio() {
+
+        try {
+            DatabaseConnection database= new DatabaseConnection();
+            database.connect();
+            PreparedStatement updN = con.prepareStatement("SELECT * FROM Comentarios WHERE emailDelReceptor =?");
+            updN.setString(1, namePassedViaParam);
+            updN.setFetchSize(1);
+            ResultSet rs = updN.executeQuery();
+
+            while (rs.next()) {
+                total = total + rs.getFloat("Puntaje");
+                cantidadDeVeces++;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return total/cantidadDeVeces;
+    }
     @Override
     public void onBackPressed() {
         startActivity(new Intent(FindInDatabase.this, Electricidad.class));
-
+        comentarios.clear();
     }
 }

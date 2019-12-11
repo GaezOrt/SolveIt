@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class MyListAdaptor extends ArrayAdapter<Electricista> {
    ArrayList<Electricista> electricistas;
    int resource;
    Context context;
+   FindInDatabase find= new FindInDatabase();
     public MyListAdaptor(Context context,int resource, ArrayList <Electricista> electricista){
         super(context, R.layout.list_view,electricista);
         this.resource=resource;
@@ -42,6 +44,8 @@ public class MyListAdaptor extends ArrayAdapter<Electricista> {
             viewHolder.name=(TextView)convertView.findViewById(R.id.editText4);
             viewHolder.image.setImageBitmap(electricista.photo);
             viewHolder.name.setText(electricista.name);
+            viewHolder.rating=(RatingBar)convertView.findViewById(R.id.MyRating);
+//            viewHolder.rating.setRating(find.obtenerPromedio());
             convertView.setTag(viewHolder);
         }else{
         mainViewHolder=(ViewHolder)convertView.getTag();
@@ -51,6 +55,7 @@ public class MyListAdaptor extends ArrayAdapter<Electricista> {
     public class ViewHolder{
         ImageView image;
         TextView name;
+        RatingBar rating;
 
     }
 }
