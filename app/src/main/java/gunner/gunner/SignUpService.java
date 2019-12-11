@@ -26,15 +26,25 @@ public class SignUpService extends IntentService {
     @Override
     protected void onHandleIntent( Intent intent) {
 
-
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         signUp.signUp();
         if(cuentaYaUtilizada){
-            startActivity(new Intent(SignUpService.this, SignUp.class));
+            Intent intentt = new Intent (this, SignUp.class);
+            intentt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentt);
+
+
         }
         if(datosOk){
-            startActivity(new Intent(SignUpService.this, SignUp.class));
+            Intent intentt = new Intent (this, SignUp.class);
+            intentt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentt);
+
+
         }else{
-            startActivity(new Intent(SignUpService.this, SignUp.class));
+            Intent intentt = new Intent (this, SignUp.class);
+            intentt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentt);
         }
 
     }

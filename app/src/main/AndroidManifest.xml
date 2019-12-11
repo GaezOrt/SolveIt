@@ -6,6 +6,7 @@
 
 
     <application
+
         android:launchMode = "singleTop"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,7 +25,10 @@
         <activity android:name=".addComment"></activity>
         <activity android:name=".FindInDatabase"></activity>
         <activity android:name=".ProfileUser"></activity>
-        <activity android:name=".SignUp"></activity>
+        <activity android:name=".SignUp"
+            android:taskAffinity="com.some.new" >
+
+        </activity>
         <activity android:name=".LogIn"></activity>
         <activity android:name=".Electricidad">
         </activity>
