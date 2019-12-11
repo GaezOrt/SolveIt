@@ -87,6 +87,9 @@ public class FindInDatabase extends AppCompatActivity {
             Log.e("Error", "Error en conexion a base de datos");
         }
 
+        //Intent i = new Intent(this, DownloadCommentsService.class);
+        //startService(i);
+
         //Boton agregar review
         ImageView image= (ImageView)findViewById(imageView15);
         image.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +100,7 @@ public class FindInDatabase extends AppCompatActivity {
         });
 
         findComments();
+
         adapter = new CommentsListAdaptor(this,R.layout.list_view,comentarios);
         final ListView listView= (ListView) findViewById(list);
         listView.setAdapter(adapter);
@@ -274,7 +278,7 @@ public class FindInDatabase extends AppCompatActivity {
     }
     public void findComments(){
         try {
-
+            System.out.println("Comments");
             final String userName = "9QFW2Os9pV";
             final String passwordDatabase = "dKObZerUnf";
             final String url = "jdbc:mysql://remotemysql.com:3306/9QFW2Os9pV";
@@ -297,9 +301,11 @@ public class FindInDatabase extends AppCompatActivity {
 
                 String comentario = rs.getString("Comentario");
 
-                comentarios =new ArrayList<Comentarios>();
+
                 Comentarios comentarioLista= new Comentarios(comentario,rs.getFloat("Puntaje"));
                 comentarios.add(comentarioLista);
+                System.out.println("Comentario:" + comentarioLista.comentario);
+                System.out.println(comentarios.size());
 
             }
 
