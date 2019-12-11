@@ -12,6 +12,7 @@ import java.sql.SQLException;
 public class DownloadStuffInBackground extends IntentService {
 
     FindInDatabase find = new FindInDatabase();
+
     public DownloadStuffInBackground() {
         super("Download");
     }

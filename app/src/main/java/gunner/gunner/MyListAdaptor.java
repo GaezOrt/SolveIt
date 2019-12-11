@@ -27,8 +27,6 @@ public class MyListAdaptor extends ArrayAdapter<Electricista> {
         this.context=context;
         this.electricistas=electricista;
 
-
-
         }
 
 
@@ -45,7 +43,7 @@ public class MyListAdaptor extends ArrayAdapter<Electricista> {
             viewHolder.image.setImageBitmap(electricista.photo);
             viewHolder.name.setText(electricista.name);
             viewHolder.rating=(RatingBar)convertView.findViewById(R.id.MyRating);
-//            viewHolder.rating.setRating(find.obtenerPromedio());
+            viewHolder.rating.setRating(electricista.promedio);
             convertView.setTag(viewHolder);
         }else{
         mainViewHolder=(ViewHolder)convertView.getTag();

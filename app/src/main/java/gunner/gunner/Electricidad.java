@@ -81,7 +81,6 @@ public class Electricidad extends AppCompatActivity {
                     finish();
                     startActivity(new Intent(Electricidad.this, FindInDatabase.class));
 
-
                 }
             });
         }
