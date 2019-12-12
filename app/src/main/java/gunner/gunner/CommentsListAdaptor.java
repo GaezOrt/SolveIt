@@ -32,13 +32,15 @@ public class CommentsListAdaptor extends ArrayAdapter<Comentarios> {
         Comentarios comentarios= this.comentarios.get(position);
         if(convertView==null){
             LayoutInflater inflater= LayoutInflater.from(getContext());
-            convertView=inflater.inflate(R.layout.list_view,null,false);
+            convertView=inflater.inflate(R.layout.comentarios,null,false);
             ViewHolder viewHolder=new ViewHolder();
             viewHolder.image=(ImageView)convertView.findViewById(R.id.imageView7);
             viewHolder.name=(TextView)convertView.findViewById(R.id.editText4);
             viewHolder.rating=(RatingBar)convertView.findViewById(R.id.MyRating);
             viewHolder.rating.setRating(comentarios.puntaje);
-            viewHolder.name.setText(comentarios.comentario);
+            viewHolder.name.setText(comentarios.deQuien);
+            viewHolder.comentario=(TextView)convertView.findViewById(R.id.textView28);
+            viewHolder.comentario.setText(comentarios.comentario);
             convertView.setTag(viewHolder);
         }else{
             mainViewHolder=(ViewHolder)convertView.getTag();
@@ -49,6 +51,7 @@ public class CommentsListAdaptor extends ArrayAdapter<Comentarios> {
         ImageView image;
         TextView name;
         RatingBar rating;
+        TextView comentario;
 
     }
 }

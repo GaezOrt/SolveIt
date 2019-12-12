@@ -107,7 +107,7 @@ public class FindInDatabase extends AppCompatActivity {
         RatingBar rating= (RatingBar)findViewById(MyRating);
         rating.setRating(obtenerPromedio(namePassedViaParam));
         System.out.println("aaaa "+obtenerPromedio(namePassedViaParam));
-        adapter = new CommentsListAdaptor(this,R.layout.list_view,comentarios);
+        adapter = new CommentsListAdaptor(this,R.layout.comentarios,comentarios);
         final ListView listView= (ListView) findViewById(list);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -320,7 +320,7 @@ public class FindInDatabase extends AppCompatActivity {
                 String comentario = rs.getString("Comentario");
 
 
-                Comentarios comentarioLista= new Comentarios(comentario,rs.getFloat("Puntaje"));
+                Comentarios comentarioLista= new Comentarios(comentario,rs.getFloat("Puntaje"),rs.getString("emailDelComentador"));
                 comentarios.add(comentarioLista);
                 System.out.println("Comentario:" + comentarioLista.comentario);
                 System.out.println(comentarios.size());

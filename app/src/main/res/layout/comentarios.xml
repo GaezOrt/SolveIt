@@ -1,6 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants">
+
+    <RatingBar
+        android:id="@+id/MyRating"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/editText4"
+        android:layout_marginStart="136dp"
+        android:layout_toEndOf="@+id/editText4"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:stepSize="0.1"
+        app:layout_constraintBottom_toBottomOf="@+id/editText4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/editText4"
+        app:layout_constraintTop_toTopOf="@+id/editText4"
+        app:layout_constraintVertical_bias="0.382" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="500dp"
+        android:layout_height="2dp"
+        android:layout_alignParentTop="false"
+        android:background="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+
+    <TextView
+        android:id="@+id/editText4"
+        android:layout_width="139dp"
+        android:layout_height="51dp"
+        android:layout_toEndOf="@+id/imageView7"
+        android:background="@drawable/empty_background"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/editText4"
+        app:layout_constraintEnd_toEndOf="@+id/MyRating"
+        app:layout_constraintStart_toStartOf="@+id/MyRating"
+        app:layout_constraintTop_toBottomOf="@+id/MyRating" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="126dp"
+        android:layout_height="54dp"
+        android:background="@drawable/border"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/MyRating"
+        app:layout_constraintStart_toEndOf="@+id/editText4"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
