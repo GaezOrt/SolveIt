@@ -20,20 +20,25 @@ public class DatabaseConnection {
     public static Connection conn;
 
     DatabaseConnection() {
-        conn = null;
+
+
     }
 
-    void connect() throws SQLException, ClassNotFoundException {
-        final String driver = "com.mysql.jdbc.Driver";
-        Class.forName(driver);
+    Connection connect() throws SQLException, ClassNotFoundException {
+        if(conn==null) {
+            System.out.println("Establishing connection");
+            final String driver = "com.mysql.jdbc.Driver";
+            Class.forName(driver);
 
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
 
-        final String userName = "9QFW2Os9pV";
+            final String userName = "9QFW2Os9pV";
             final String passwordDatabase = "dKObZerUnf";
-        final String url = "jdbc:mysql://remotemysql.com:3306/9QFW2Os9pV";
-        conn = DriverManager.getConnection(url, userName, passwordDatabase);
+            final String url = "jdbc:mysql://remotemysql.com:3306/9QFW2Os9pV";
+            conn = DriverManager.getConnection(url, userName, passwordDatabase);
+        }
+        return conn;
     }
 
     void createUser(

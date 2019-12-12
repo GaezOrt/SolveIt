@@ -21,16 +21,15 @@ public class WelcomeWindow  extends AppCompatActivity {
             getWindow().setNavigationBarColor(getResources().getColor(R.color.black));
         }
 
-
-            Intent i = new Intent(this, DataHolderService.class);
-            startService(i);
-
-
         //Load electricistas list in background
+        Intent u = new Intent(this, DownloadStuffInBackground.class);
         if (Electricidad.electricistas.isEmpty()) {
-            Intent u = new Intent(this, DownloadStuffInBackground.class);
+
             startService(u);
+        }else{
+            stopService(u);
         }
+
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {

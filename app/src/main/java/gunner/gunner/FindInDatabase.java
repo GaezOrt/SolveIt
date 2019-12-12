@@ -94,11 +94,9 @@ public class FindInDatabase extends AppCompatActivity {
         float x=obtenerPromedio(namePassedViaParam);
         rating.setRating(x);
 
-        System.out.println("aaaa "+obtenerPromedio(namePassedViaParam));
         adapter = new CommentsListAdaptor(this,R.layout.comentarios,comentarios);
         final ListView listView= (ListView) findViewById(list);
         listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
 
     }
 
@@ -206,24 +204,24 @@ public class FindInDatabase extends AppCompatActivity {
     }
     public void findElectricistas() {
         try {
+            System.out.println("Finding electricistas");
+            final DatabaseConnection data = new DatabaseConnection();
 
-            final DataHolderService data = new DataHolderService();
-
-            con=data.getCon();
+            con=data.connect();
 
             PreparedStatement updN = con.prepareStatement("SELECT * FROM Rubro WHERE electricista= ?");
             updN.setBoolean(1,true);
-            updN.setFetchSize(1);
+
             ResultSet rs = updN.executeQuery();
 
 
 
-            PreparedStatement profilePt= con.prepareStatement("SELECT * FROM Users WHERE email= ?");
+            PreparedStatement profilePt= con.prepareStatement("SELECT *  FROM Users WHERE email= ?");
 
             while (rs.next()) {
 
                 String email = rs.getString("email");
-                profilePt.setFetchSize(1);
+
                 profilePt.setString(1, email);
 
                 ResultSet rsProfile = profilePt.executeQuery();
@@ -258,9 +256,9 @@ public class FindInDatabase extends AppCompatActivity {
 
         float cantidadDeVeces=0;
         try {
-            final DataHolderService data = new DataHolderService();
+            final DatabaseConnection data = new DatabaseConnection();
 
-            con=data.getCon();
+            con=data.connect();
             PreparedStatement updN = con.prepareStatement(" SELECT * FROM Comentarios WHERE emailDelReceptor= ?");
             updN.setString(1, email);
             updN.setFetchSize(1);
@@ -278,9 +276,9 @@ public class FindInDatabase extends AppCompatActivity {
     public void findComments(String email, ArrayList<Comentarios> comentarios){
         try {
 
-            final DataHolderService data = new DataHolderService();
+            final DatabaseConnection data = new DatabaseConnection();
 
-            con=data.getCon();
+            con=data.connect();
             PreparedStatement updN = con.prepareStatement("SELECT * FROM Comentarios WHERE emailDelReceptor= ?");
             updN.setString(1,email);
             updN.setFetchSize(1);
@@ -307,9 +305,9 @@ public class FindInDatabase extends AppCompatActivity {
         float total=0;
         float cantidadDeVeces=0;
         try {
-            final DataHolderService data = new DataHolderService();
+            final DatabaseConnection data = new DatabaseConnection();
 
-            con=data.getCon();
+            con=data.connect();
             PreparedStatement updN = con.prepareStatement("SELECT * FROM Comentarios WHERE emailDelReceptor =?");
             updN.setString(1, email);
             updN.setFetchSize(1);

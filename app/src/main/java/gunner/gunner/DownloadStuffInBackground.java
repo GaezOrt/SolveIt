@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class DownloadStuffInBackground extends IntentService {
 
     FindInDatabase find = new FindInDatabase();
-
+    boolean keepLooking=true;
     public DownloadStuffInBackground() {
         super("Download");
     }
@@ -20,10 +20,12 @@ public class DownloadStuffInBackground extends IntentService {
     @Override
     protected void onHandleIntent( Intent intent) {
 
-        
 
-        find.findElectricistas();
-
+        if (keepLooking)
+        {
+            find.findElectricistas();
+                keepLooking=false;
+        }
         if(Electricista.cantidadElectricistas==Electricidad.electricistas.size()){
             stopSelf();
         }

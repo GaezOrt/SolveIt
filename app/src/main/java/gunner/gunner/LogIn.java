@@ -108,6 +108,7 @@ public class LogIn extends AppCompatActivity {
             pt.setString(1, LogInService.email);
             pt.setString(2, LogInService.password);
             pt.setFetchSize(1);
+
             Log.w("statement", "statement antes del query");
             ResultSet rs = pt.executeQuery();
             Log.w("statement", "statement despues del query");
