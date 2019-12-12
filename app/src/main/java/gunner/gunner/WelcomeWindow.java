@@ -37,6 +37,5 @@ public class WelcomeWindow  extends AppCompatActivity {
                 startActivity(intent);
             }
         }, 6000); // 4 seconds
-    //   startActivity(new Intent(WelcomeWindow.this, MainActivity.class));
     }
 }

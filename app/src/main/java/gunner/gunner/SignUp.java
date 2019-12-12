@@ -208,9 +208,7 @@ public class SignUp extends AppCompatActivity {
                     });
             AlertDialog alert11 = builder1.create();
             alert11.show();
-
             SignUpService.datosOk=true;
-
         }
 
         //Si el error esta en que el usuario no registro una foto
@@ -243,16 +241,6 @@ public class SignUp extends AppCompatActivity {
 
         }
 
-
-        //Ir para atras
-        final Button atrasBut = (Button) findViewById(button2);
-        atrasBut.setOnClickListener(
-                (View v) ->  {
-                    finish();
-                    startActivity(new Intent(SignUp.this, MainActivity.class));
-
-                }
-        );
 
         //Clicking on image
         imageView = (ImageView) findViewById(imageView2);
@@ -348,6 +336,16 @@ public class SignUp extends AppCompatActivity {
         }catch(Exception e){
             e.printStackTrace();
         }
+
+        //Ir para atras
+        final Button atrasBut = (Button) findViewById(button2);
+        atrasBut.setOnClickListener(
+                (View v) ->  {
+                    finish();
+                    startActivity(new Intent(SignUp.this, MainActivity.class));
+
+                }
+        );
     }
 
     public void signUp() {

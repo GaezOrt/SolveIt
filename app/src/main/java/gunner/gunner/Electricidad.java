@@ -45,30 +45,18 @@ public class Electricidad extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
 
+
         setTheme(R.style.Theme_Design_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.electr);
-        //Cargar datos electricidad
-        //DownloadList download= new DownloadList();
-        // download.execute();
-        // FindInDatabase find= new FindInDatabase();
-        // find.findElectricistas();
-        System.out.println(electricistas.size());
-
-        //Ir para atras
-        final ImageView atrasBut=(ImageView) findViewById(imageView5) ;
-        atrasBut.setOnClickListener((v)-> {
-
-            finish();
-            startActivity(new Intent(Electricidad.this, MainActivity.class));
-
-        });
 
         adapter = new MyListAdaptor(this,R.layout.list_view,electricistas);
         final ListView listView= (ListView) findViewById(lista);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-         listView.refreshDrawableState();
+         listView.invalidateViews();
+
+
 
 
         //Realizar ampliacion cuando se clickea item de lista
@@ -85,7 +73,17 @@ public class Electricidad extends AppCompatActivity {
 
                 }
             });
-        }
+
+
+        //Ir para atras
+        final ImageView atrasBut=(ImageView) findViewById(imageView5) ;
+        atrasBut.setOnClickListener((v)-> {
+
+            finish();
+            startActivity(new Intent(Electricidad.this, MainActivity.class));
+
+        });
+    }
 
     @Override
     public void onBackPressed() {

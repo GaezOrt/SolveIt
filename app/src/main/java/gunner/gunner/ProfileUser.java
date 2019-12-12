@@ -97,5 +97,9 @@ public class ProfileUser extends AppCompatActivity {
             startActivity(new Intent(ProfileUser.this, addComment.class));
         });
     }
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(ProfileUser.this, MainActivity.class));
 
+    }
 }

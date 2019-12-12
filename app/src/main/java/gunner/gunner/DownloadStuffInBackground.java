@@ -6,13 +6,14 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import java.sql.SQLException;
 
 public class DownloadStuffInBackground extends IntentService {
 
     FindInDatabase find = new FindInDatabase();
-    boolean keepLooking=true;
+    static boolean keepLooking=true;
     public DownloadStuffInBackground() {
         super("Download");
     }
@@ -23,12 +24,11 @@ public class DownloadStuffInBackground extends IntentService {
 
         if (keepLooking)
         {
+            Log.w("E","Downloading electricistas");
             find.findElectricistas();
-                keepLooking=false;
+            keepLooking=false;
         }
-        if(Electricista.cantidadElectricistas==Electricidad.electricistas.size()){
-            stopSelf();
-        }
+
         if(Electricista.cantidadElectricistas>Electricidad.electricistas.size()){
             Electricidad.showLoad=true;
         }else{

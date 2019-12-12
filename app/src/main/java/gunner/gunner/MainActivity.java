@@ -71,10 +71,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static boolean cerrajero;
     static boolean albanil;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
 
         if(SignUpService.datosOk){
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this,R.style.MyDialogTheme);
@@ -95,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             SignUpService.datosOk=false;
         }
+
         final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.button_animation);
 
         setTheme(R.style.Theme_Design_NoActionBar);
@@ -113,8 +112,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
 
-
-
         //Boton para electricistas
         final Button electricidadBut = (Button) findViewById(button);
         electricidadBut.setOnClickListener(new View.OnClickListener() {
@@ -122,8 +119,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View v) {
                 electricidadBut.startAnimation(myAnim);
                 startActivity(new Intent(MainActivity.this, Electricidad.class));
-
-
             }
         });
 

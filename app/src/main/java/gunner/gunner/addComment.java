@@ -59,29 +59,30 @@ public class addComment extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RatingBar rating= (RatingBar)findViewById(MyRating);
+                RatingBar rating = (RatingBar) findViewById(MyRating);
 
-                EditText edit= (EditText)findViewById(R.id.editText8);
-                comment=edit.getText().toString();
-                if(LogInService.email==null){
+                EditText edit = (EditText) findViewById(R.id.editText8);
+                comment = edit.getText().toString();
+                if (LogInService.email == null) {
                     AlertDialog alert11 = builder1.create();
                     alert11.show();
-                }
-                try {
-                    DatabaseConnection database= new DatabaseConnection();
-                    database.connect();
-                    String updateSQL = "INSERT INTO Comentarios VALUES (?,?,?,?)";
-                    PreparedStatement pstmt = database.conn.prepareStatement(updateSQL);
-                    pstmt.setString(1, email);
-                    pstmt.setString(2,comment);
-                    pstmt.setString(3, LogInService.email);
-                    pstmt.setFloat(4,rating.getRating());
-                    pstmt.executeUpdate();
-                    System.out.println("Doing update on data");
-                }catch ( Exception e){
-                    e.printStackTrace();
-                }
+                } else {
+                    try {
+                        DatabaseConnection database = new DatabaseConnection();
+                        database.connect();
+                        String updateSQL = "INSERT INTO Comentarios VALUES (?,?,?,?)";
+                        PreparedStatement pstmt = database.conn.prepareStatement(updateSQL);
+                        pstmt.setString(1, email);
+                        pstmt.setString(2, comment);
+                        pstmt.setString(3, LogInService.email);
+                        pstmt.setFloat(4, rating.getRating());
+                        pstmt.executeUpdate();
+                        System.out.println("Doing update on data");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
+                }
             }
         });
 
