@@ -48,8 +48,7 @@ import static gunner.gunner.R.id.lista;
 
 public class FindInDatabase extends AppCompatActivity {
 
-    float total ;
-    float cantidadDeVeces;
+
     static ArrayList<Comentarios> comentarios =new ArrayList<Comentarios>();
     Connection con;
     static String nombre;
@@ -317,7 +316,8 @@ public class FindInDatabase extends AppCompatActivity {
         }
     }
     public float obtenerPromedio(String email) {
-
+        float total=0;
+        float cantidadDeVeces=0;
         try {
 
 

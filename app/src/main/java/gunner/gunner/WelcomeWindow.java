@@ -22,6 +22,7 @@ public class WelcomeWindow  extends AppCompatActivity {
         }
 
         //Load electricistas list in background
+
         if (Electricidad.electricistas.isEmpty()) {
             Intent i = new Intent(this, DownloadStuffInBackground.class);
             startService(i);
