@@ -20,7 +20,6 @@ public class DownloadStuffInBackground extends IntentService {
     @Override
     protected void onHandleIntent( Intent intent) {
 
-        if(DatabaseConnection.conn==null){
             DatabaseConnection database= new DatabaseConnection();
             try {
                 database.connect();
@@ -29,7 +28,7 @@ public class DownloadStuffInBackground extends IntentService {
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-        }
+
 
         find.findElectricistas();
 

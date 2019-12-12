@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.io.InputStream;
@@ -19,7 +21,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import static gunner.gunner.R.id.MyRating;
 import static gunner.gunner.R.id.button2;
 import static gunner.gunner.R.id.editText;
 import static gunner.gunner.R.id.editText2;
@@ -27,17 +31,22 @@ import static gunner.gunner.R.id.editText3;
 import static gunner.gunner.R.id.editText5;
 import static gunner.gunner.R.id.imageView15;
 import static gunner.gunner.R.id.imageView2;
+import static gunner.gunner.R.id.list;
 import static gunner.gunner.R.id.location;
+import static gunner.gunner.R.id.rate;
 
 
 public class ProfileUser extends AppCompatActivity {
 
-
+    static ArrayList<Comentarios> comentarios =new ArrayList<Comentarios>();
+    static   CommentsListAdaptor adapter ;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_profile);
-
+        FindInDatabase find= new FindInDatabase();
+        find.findComments(MainActivity.loggedEmail,comentarios);
+        //find.findAmountOfCommentsEachProvider(MainActivity.loggedEmail);
         //Boton para atras
         final Button atrasBut=(Button) findViewById(button2) ;
         atrasBut.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +82,17 @@ public class ProfileUser extends AppCompatActivity {
         image.setImageBitmap(bitmap);
         MainActivity.profileImage=bitmap;
         ImageView add=(ImageView)findViewById(imageView15);
+
+
+        RatingBar rating= (RatingBar)findViewById(MyRating);
+        float x=find.obtenerPromedio(MainActivity.loggedEmail);
+        rating.setRating(x);
+        System.out.println("aaaa "+find.obtenerPromedio(MainActivity.loggedEmail));
+        adapter = new CommentsListAdaptor(this,R.layout.comentarios,comentarios);
+        final ListView listView= (ListView) findViewById(list);
+        listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
         add.setOnClickListener((v)-> {
             startActivity(new Intent(ProfileUser.this, addComment.class));
         });

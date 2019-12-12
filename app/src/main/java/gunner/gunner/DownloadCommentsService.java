@@ -13,7 +13,7 @@ public class DownloadCommentsService  extends IntentService {
 
     @Override
     protected void onHandleIntent( Intent intent) {
-        find.findComments();
+       // find.findComments();
 
     }
 

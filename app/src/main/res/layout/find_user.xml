@@ -123,6 +123,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:adjustViewBounds="false"
+        android:rotation="90"
         app:layout_constraintBottom_toTopOf="@+id/editText3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -217,7 +218,7 @@
         app:srcCompat="@drawable/customerreview" />
 
     <RatingBar
-        android:id="@+id/MyRating"
+        android:id="@+id/rate"
         style="?android:attr/ratingBarStyleSmall"
         android:layout_width="80dp"
         android:layout_height="wrap_content"

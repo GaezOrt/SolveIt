@@ -44,6 +44,7 @@ import static gunner.gunner.R.id.imageView15;
 import static gunner.gunner.R.id.imageView2;
 import static gunner.gunner.R.id.list;
 import static gunner.gunner.R.id.lista;
+import static gunner.gunner.R.id.rate;
 
 
 public class FindInDatabase extends AppCompatActivity {
@@ -69,7 +70,7 @@ public class FindInDatabase extends AppCompatActivity {
         final DatabaseConnection data = new DatabaseConnection();
 
         //Encontrar comentarios del usuario
-        findComments();
+        findComments(namePassedViaParam,comentarios);
 
         //Atras button
         final Button atrasBut = (Button) findViewById(button2);
@@ -81,17 +82,8 @@ public class FindInDatabase extends AppCompatActivity {
             comentarios.clear();
         });
 
-        //Conectar con base de datos
-
-        try {
-            DatabaseConnection databaseConnection=new DatabaseConnection();
-            databaseConnection.connect();
-
            //Perfil del usuario datos
             viewProfileFromList(namePassedViaParam);
-        } catch (Exception e) {
-            Log.e("Error", "Error en conexion a base de datos");
-        }
 
         //Boton agregar review
         ImageView image= (ImageView)findViewById(imageView15);
@@ -102,10 +94,10 @@ public class FindInDatabase extends AppCompatActivity {
             }
         });
 
+        RatingBar rating= (RatingBar)findViewById(rate);
+        float x=obtenerPromedio(namePassedViaParam);
+        rating.setRating(x);
 
-
-        RatingBar rating= (RatingBar)findViewById(MyRating);
-        rating.setRating(obtenerPromedio(namePassedViaParam));
         System.out.println("aaaa "+obtenerPromedio(namePassedViaParam));
         adapter = new CommentsListAdaptor(this,R.layout.comentarios,comentarios);
         final ListView listView= (ListView) findViewById(list);
@@ -190,14 +182,6 @@ public class FindInDatabase extends AppCompatActivity {
                     email = Electricidad.electricistas.get(ubicacionElectricista).email;
                     location = Electricidad.electricistas.get(ubicacionElectricista).location;
                     addComment.email=email;
-                    electricista = electricista;
-                    carpintero = carpintero;
-                    pintor = pintor;
-                    plomero = plomero;
-                    gasista = gasista;
-                    albanil = albanil;
-                    cerrajero = cerrajero;
-                    computacion = computacion;
 
                    Bitmap bitmap=Electricidad.electricistas.get(ubicacionElectricista).photo;
                     ImageView image = (ImageView) findViewById(imageView2);
@@ -284,6 +268,21 @@ public class FindInDatabase extends AppCompatActivity {
 
     }
     public float findAmountOfCommentsEachProvider(String email){
+        Log.w("","Eeee");
+        final String userName = "9QFW2Os9pV";
+        final String passwordDatabase = "dKObZerUnf";
+        final String url = "jdbc:mysql://remotemysql.com:3306/9QFW2Os9pV";
+        final DatabaseConnection data = new DatabaseConnection();
+
+        //Conectar con base de datos
+        con = null;
+        try {
+            con = DriverManager.getConnection(url, userName, passwordDatabase);
+            data.connect();
+        } catch (Exception e) {
+
+        }
+
         float cantidadDeVeces=0;
         try {
 
@@ -301,7 +300,7 @@ public class FindInDatabase extends AppCompatActivity {
 
         return cantidadDeVeces;
     }
-    public void findComments(){
+    public void findComments(String email, ArrayList<Comentarios> comentarios){
         try {
 
 
@@ -311,7 +310,7 @@ public class FindInDatabase extends AppCompatActivity {
             Connection conn;
             conn = DriverManager.getConnection(url, userName, passwordDatabase);
             PreparedStatement updN = conn.prepareStatement("SELECT * FROM Comentarios WHERE emailDelReceptor= ?");
-            updN.setString(1,namePassedViaParam);
+            updN.setString(1,email);
             updN.setFetchSize(1);
             ResultSet rs = updN.executeQuery();
 
@@ -332,13 +331,11 @@ public class FindInDatabase extends AppCompatActivity {
             Log.e("Error", ""+e.getMessage()+"Tomatela loro");
         }
     }
-    public float obtenerPromedio(String email) {
+    public float obtenerPromedio(String email)  {
         float total=0;
         float cantidadDeVeces=0;
         try {
-
-
-
+            con=DatabaseConnection.conn;
             PreparedStatement updN = con.prepareStatement("SELECT * FROM Comentarios WHERE emailDelReceptor =?");
             updN.setString(1, email);
             updN.setFetchSize(1);
@@ -351,7 +348,7 @@ public class FindInDatabase extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        System.out.println("total"+total+" cantidad "+cantidadDeVeces);
         return total/cantidadDeVeces;
     }
     @Override
