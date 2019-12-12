@@ -22,12 +22,14 @@ public class WelcomeWindow  extends AppCompatActivity {
         }
 
 
-        Intent r= new Intent(this,DataHolderService.class);
-        startService(r);
+            Intent i = new Intent(this, DataHolderService.class);
+            startService(i);
+
+
         //Load electricistas list in background
         if (Electricidad.electricistas.isEmpty()) {
-            Intent i = new Intent(this, DownloadStuffInBackground.class);
-            startService(i);
+            Intent u = new Intent(this, DownloadStuffInBackground.class);
+            startService(u);
         }
         mHandler.postDelayed(new Runnable() {
             @Override

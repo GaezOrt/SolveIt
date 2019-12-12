@@ -64,10 +64,6 @@ public class FindInDatabase extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTheme(R.style.Theme_Design_NoActionBar);
         setContentView(R.layout.find_user);
-        final String userName = "9QFW2Os9pV";
-        final String passwordDatabase = "dKObZerUnf";
-        final String url = "jdbc:mysql://remotemysql.com:3306/9QFW2Os9pV";
-        final DatabaseConnection data = new DatabaseConnection();
 
         //Encontrar comentarios del usuario
         findComments(namePassedViaParam,comentarios);
@@ -210,20 +206,10 @@ public class FindInDatabase extends AppCompatActivity {
     }
     public void findElectricistas() {
         try {
-            Log.w("","Eeee");
-            final String userName = "9QFW2Os9pV";
-            final String passwordDatabase = "dKObZerUnf";
-            final String url = "jdbc:mysql://remotemysql.com:3306/9QFW2Os9pV";
-            final DatabaseConnection data = new DatabaseConnection();
 
-            //Conectar con base de datos
-            con = null;
-            try {
-                con = DriverManager.getConnection(url, userName, passwordDatabase);
-                data.connect();
-            } catch (Exception e) {
+            final DataHolderService data = new DataHolderService();
 
-            }
+            con=data.getCon();
 
             PreparedStatement updN = con.prepareStatement("SELECT * FROM Rubro WHERE electricista= ?");
             updN.setBoolean(1,true);
@@ -258,7 +244,7 @@ public class FindInDatabase extends AppCompatActivity {
 
             rs.last();    // moves cursor to the last row
             Electricista.cantidadElectricistas = rs.getRow();
-        }catch(SQLException e){
+        }catch(Exception e){
             e.printStackTrace();
             Log.e("Error", ""+e.getMessage()+"Tomatela loro");
         }
@@ -268,24 +254,13 @@ public class FindInDatabase extends AppCompatActivity {
 
     }
     public float findAmountOfCommentsEachProvider(String email){
-        Log.w("","Eeee");
-        final String userName = "9QFW2Os9pV";
-        final String passwordDatabase = "dKObZerUnf";
-        final String url = "jdbc:mysql://remotemysql.com:3306/9QFW2Os9pV";
-        final DatabaseConnection data = new DatabaseConnection();
 
-        //Conectar con base de datos
-        con = null;
-        try {
-            con = DriverManager.getConnection(url, userName, passwordDatabase);
-            data.connect();
-        } catch (Exception e) {
-
-        }
 
         float cantidadDeVeces=0;
         try {
+            final DataHolderService data = new DataHolderService();
 
+            con=data.getCon();
             PreparedStatement updN = con.prepareStatement(" SELECT * FROM Comentarios WHERE emailDelReceptor= ?");
             updN.setString(1, email);
             updN.setFetchSize(1);
@@ -303,13 +278,10 @@ public class FindInDatabase extends AppCompatActivity {
     public void findComments(String email, ArrayList<Comentarios> comentarios){
         try {
 
+            final DataHolderService data = new DataHolderService();
 
-            final String userName = "9QFW2Os9pV";
-            final String passwordDatabase = "dKObZerUnf";
-            final String url = "jdbc:mysql://remotemysql.com:3306/9QFW2Os9pV";
-            Connection conn;
-            conn = DriverManager.getConnection(url, userName, passwordDatabase);
-            PreparedStatement updN = conn.prepareStatement("SELECT * FROM Comentarios WHERE emailDelReceptor= ?");
+            con=data.getCon();
+            PreparedStatement updN = con.prepareStatement("SELECT * FROM Comentarios WHERE emailDelReceptor= ?");
             updN.setString(1,email);
             updN.setFetchSize(1);
             ResultSet rs = updN.executeQuery();
@@ -335,7 +307,9 @@ public class FindInDatabase extends AppCompatActivity {
         float total=0;
         float cantidadDeVeces=0;
         try {
-            con=DatabaseConnection.conn;
+            final DataHolderService data = new DataHolderService();
+
+            con=data.getCon();
             PreparedStatement updN = con.prepareStatement("SELECT * FROM Comentarios WHERE emailDelReceptor =?");
             updN.setString(1, email);
             updN.setFetchSize(1);

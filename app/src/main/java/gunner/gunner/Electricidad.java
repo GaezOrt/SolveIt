@@ -68,7 +68,7 @@ public class Electricidad extends AppCompatActivity {
         final ListView listView= (ListView) findViewById(lista);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        TextView text= (TextView)findViewById(textView27);
+         listView.refreshDrawableState();
 
 
         //Realizar ampliacion cuando se clickea item de lista

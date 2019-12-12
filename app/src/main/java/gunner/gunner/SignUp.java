@@ -97,7 +97,7 @@ public class SignUp extends AppCompatActivity {
         selectedImage= data.getData();
         try {
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
-            bitmap=scaleDown(bitmap,205,true);
+            bitmap=scaleDown(bitmap,190,true);
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
