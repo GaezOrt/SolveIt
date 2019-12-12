@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
@@ -29,6 +30,7 @@ import static gunner.gunner.R.id.button2;
 import static gunner.gunner.R.id.imageView10;
 import static gunner.gunner.R.id.imageView5;
 import static gunner.gunner.R.id.lista;
+import static gunner.gunner.R.id.textView27;
 
 /**
  * Created by Gaston on 11/18/2019.
@@ -36,7 +38,7 @@ import static gunner.gunner.R.id.lista;
 
 public class Electricidad extends AppCompatActivity {
 
-
+    static int comentarios;
     static ArrayList<Electricista> electricistas =new ArrayList<Electricista>();
     static boolean showLoad;
     static   MyListAdaptor adapter ;
@@ -46,7 +48,6 @@ public class Electricidad extends AppCompatActivity {
         setTheme(R.style.Theme_Design_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.electr);
-
         //Cargar datos electricidad
         //DownloadList download= new DownloadList();
         // download.execute();
@@ -67,6 +68,7 @@ public class Electricidad extends AppCompatActivity {
         final ListView listView= (ListView) findViewById(lista);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        TextView text= (TextView)findViewById(textView27);
 
 
         //Realizar ampliacion cuando se clickea item de lista

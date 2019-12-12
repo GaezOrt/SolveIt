@@ -21,8 +21,10 @@ public class WelcomeWindow  extends AppCompatActivity {
             getWindow().setNavigationBarColor(getResources().getColor(R.color.black));
         }
 
-        //Load electricistas list in background
 
+        Intent r= new Intent(this,DataHolderService.class);
+        startService(r);
+        //Load electricistas list in background
         if (Electricidad.electricistas.isEmpty()) {
             Intent i = new Intent(this, DownloadStuffInBackground.class);
             startService(i);

@@ -59,4 +59,13 @@
         app:layout_constraintStart_toEndOf="@+id/imageView7"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/editText4"
+        app:layout_constraintEnd_toEndOf="@+id/MyRating"
+        app:layout_constraintStart_toStartOf="@+id/MyRating"
+        app:layout_constraintTop_toBottomOf="@+id/MyRating" />
+
 </android.support.constraint.ConstraintLayout>

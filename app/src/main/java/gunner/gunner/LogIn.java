@@ -62,9 +62,8 @@ public class LogIn extends AppCompatActivity {
             alert11.show();
             TextView passwordIncText=(TextView) findViewById(PasswordInc);
             passwordIncText.setVisibility(VISIBLE);
-
-
         }
+
 
         //Apretar boton para loggear
         final Button logInButt=(Button) findViewById(button7) ;

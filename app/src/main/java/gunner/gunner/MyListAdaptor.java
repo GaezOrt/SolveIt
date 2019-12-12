@@ -44,6 +44,9 @@ public class MyListAdaptor extends ArrayAdapter<Electricista> {
             viewHolder.name.setText(electricista.name);
             viewHolder.rating=(RatingBar)convertView.findViewById(R.id.MyRating);
             viewHolder.rating.setRating(electricista.promedio);
+            viewHolder.amount=(TextView)convertView.findViewById(R.id.textView27);
+            int x=(int)electricista.cantidadDeComentarios;
+            viewHolder.amount.setText("Reviews: "+(x));
             convertView.setTag(viewHolder);
         }else{
         mainViewHolder=(ViewHolder)convertView.getTag();
@@ -54,6 +57,7 @@ public class MyListAdaptor extends ArrayAdapter<Electricista> {
         ImageView image;
         TextView name;
         RatingBar rating;
+        TextView amount;
 
     }
 }

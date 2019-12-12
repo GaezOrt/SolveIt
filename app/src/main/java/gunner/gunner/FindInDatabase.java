@@ -266,7 +266,7 @@ public class FindInDatabase extends AppCompatActivity {
                     int blobLength = (int) photo.length();
                     byte[] photoBytes = photo.getBytes(1, blobLength);
                     Bitmap bitmap = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes .length);
-                    Electricista electricista = new Electricista(bitmap, name, email, 9,location,telefono,obtenerPromedio(email));
+                    Electricista electricista = new Electricista(bitmap, name, email, 9,location,telefono,obtenerPromedio(email),findAmountOfCommentsEachProvider(email));
                     Electricidad.electricistas.add(electricista);
                     break;
                 }
@@ -282,6 +282,24 @@ public class FindInDatabase extends AppCompatActivity {
 
 
 
+    }
+    public float findAmountOfCommentsEachProvider(String email){
+        float cantidadDeVeces=0;
+        try {
+
+            PreparedStatement updN = con.prepareStatement(" SELECT * FROM Comentarios WHERE emailDelReceptor= ?");
+            updN.setString(1, email);
+            updN.setFetchSize(1);
+            ResultSet rs = updN.executeQuery();
+
+            while (rs.next()) {
+                cantidadDeVeces++;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return cantidadDeVeces;
     }
     public void findComments(){
         try {
@@ -306,7 +324,6 @@ public class FindInDatabase extends AppCompatActivity {
                 comentarios.add(comentarioLista);
                 System.out.println("Comentario:" + comentarioLista.comentario);
                 System.out.println(comentarios.size());
-
             }
 
 

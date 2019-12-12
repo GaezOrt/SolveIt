@@ -11,9 +11,9 @@ public class Electricista {
     public String location;
     String number;
     float promedio;
+    float cantidadDeComentarios;
 
-
-    public Electricista(Bitmap photo, String name, String email, int rating,String location,String number,float promedio){
+    public Electricista(Bitmap photo, String name, String email, int rating,String location,String number,float promedio,float cantidadDeComentarios){
         this.photo=photo;
         this.name=name;
         this.email=email;
@@ -21,5 +21,6 @@ public class Electricista {
         this.location=location;
         this.number=number;
         this.promedio=promedio;
+        this.cantidadDeComentarios=cantidadDeComentarios;
     }
 }
