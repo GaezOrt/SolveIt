@@ -47,14 +47,14 @@
 
     <TextView
         android:id="@+id/editText4"
-        android:layout_width="148dp"
-        android:layout_height="50dp"
+        android:layout_width="134dp"
+        android:layout_height="38dp"
         android:layout_toEndOf="@+id/imageView7"
         android:background="@drawable/empty_background"
         android:inputType="textPersonName"
         android:text="Name"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView7"
         app:layout_constraintTop_toTopOf="parent" />
@@ -67,5 +67,16 @@
         app:layout_constraintEnd_toEndOf="@+id/MyRating"
         app:layout_constraintStart_toStartOf="@+id/MyRating"
         app:layout_constraintTop_toBottomOf="@+id/MyRating" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="122dp"
+        android:layout_height="43dp"
+        android:background="@drawable/border"
+        android:text="TextView"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/MyRating"
+        app:layout_constraintStart_toEndOf="@+id/editText4"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
