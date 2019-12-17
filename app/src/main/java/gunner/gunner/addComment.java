@@ -13,10 +13,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 import java.sql.PreparedStatement;
 
+import static android.view.View.VISIBLE;
 import static gunner.gunner.R.id.MyRating;
+import static gunner.gunner.R.id.PasswordInc;
 import static gunner.gunner.R.id.imageView17;
 import static gunner.gunner.R.id.imageView5;
 
@@ -32,13 +35,22 @@ public class addComment extends AppCompatActivity {
         setContentView(R.layout.add_comment_page);
 
 
-        final ImageView atrasBut=(ImageView) findViewById(imageView17) ;
-        atrasBut.setOnClickListener((v)-> {
 
-            finish();
-            startActivity(new Intent(addComment.this, FindInDatabase.class));
-            setContentView(R.layout.activity_main);
-        });
+
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this,R.style.MyDialogTheme);
+        builder.setMessage("Comment added.");
+        builder.setCancelable(true);
+        builder.setPositiveButton(
+                "Ok",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert12 = builder.create();
+
 
 
 
@@ -56,6 +68,8 @@ public class addComment extends AppCompatActivity {
                         dialog.cancel();
                     }
                 });
+
+
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,6 +82,10 @@ public class addComment extends AppCompatActivity {
                     alert11.show();
                 } else {
                     try {
+
+                        alert12.show();
+
+
                         DatabaseConnection database = new DatabaseConnection();
                         database.connect();
                         String updateSQL = "INSERT INTO Comentarios VALUES (?,?,?,?)";
@@ -87,10 +105,17 @@ public class addComment extends AppCompatActivity {
         });
 
 
+        final ImageView atrasBut=(ImageView) findViewById(imageView17) ;
+        atrasBut.setOnClickListener((v)-> {
+            FindInDatabase.comentarios.clear();
+            startActivity(new Intent(addComment.this, FindInDatabase.class));
+        });
     }
     @Override
     public void onBackPressed() {
+        FindInDatabase.comentarios.clear();
         startActivity(new Intent(addComment.this, FindInDatabase.class));
+
 
     }
 

@@ -61,7 +61,6 @@ public class Electricidad extends AppCompatActivity {
 
 
         //Realizar ampliacion cuando se clickea item de lista
-
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 
@@ -91,6 +90,8 @@ public class Electricidad extends AppCompatActivity {
         startActivity(new Intent(Electricidad.this, MainActivity.class));
 
     }
+
+
     public static Handler UIHandler;
 
     static {

@@ -32,12 +32,14 @@ public class MyListAdaptor extends ArrayAdapter<Electricista> {
 
     @Override
     public View getView(int position,  View convertView,  ViewGroup parent) {
-        ViewHolder mainViewHolder= null;
+        ViewHolder holder = new ViewHolder();
+        ViewHolder viewHolder=new ViewHolder();
+         convertView= null;
         Electricista electricista= electricistas.get(position);
         if(convertView==null){
             LayoutInflater inflater= LayoutInflater.from(getContext());
             convertView=inflater.inflate(R.layout.list_view,null,false);
-            ViewHolder viewHolder=new ViewHolder();
+
             viewHolder.image=(ImageView)convertView.findViewById(R.id.imageView7);
             viewHolder.name=(TextView)convertView.findViewById(R.id.editText4);
             viewHolder.image.setImageBitmap(electricista.photo);
@@ -51,7 +53,7 @@ public class MyListAdaptor extends ArrayAdapter<Electricista> {
             viewHolder.ubicacion.setText(electricista.location);
             convertView.setTag(viewHolder);
         }else{
-        mainViewHolder=(ViewHolder)convertView.getTag();
+        viewHolder  =(ViewHolder)convertView.getTag();
         }
         return convertView;
     }

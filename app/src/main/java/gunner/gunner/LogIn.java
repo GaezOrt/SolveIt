@@ -91,8 +91,6 @@ public class LogIn extends AppCompatActivity {
             Glide.with(this).load(R.drawable.loading_animation_grey).into(imageViewTarget);
             imageView.setVisibility(VISIBLE);
 
-
-
         });
     }
 

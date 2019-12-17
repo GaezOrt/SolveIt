@@ -53,15 +53,7 @@ public class FindInDatabase extends AppCompatActivity {
         //Encontrar comentarios del usuario
         findComments(namePassedViaParam,comentarios);
 
-        //Atras button
-        final Button atrasBut = (Button) findViewById(button2);
-        atrasBut.setOnClickListener((v) -> {
 
-            startActivity(new Intent(FindInDatabase.this, Electricidad.class));
-            setContentView(R.layout.activity_main);
-            finish();
-            comentarios.clear();
-        });
 
            //Perfil del usuario datos
             viewProfileFromList(namePassedViaParam);
@@ -82,6 +74,17 @@ public class FindInDatabase extends AppCompatActivity {
         adapter = new CommentsListAdaptor(this,R.layout.comentarios,comentarios);
         final ListView listView= (ListView) findViewById(list);
         listView.setAdapter(adapter);
+
+
+        //Atras button
+        final Button atrasBut = (Button) findViewById(button2);
+        atrasBut.setOnClickListener((v) -> {
+
+            startActivity(new Intent(FindInDatabase.this, Electricidad.class));
+            finish();
+            comentarios.clear();
+        });
+
     }
 
     //Buscar en base de datos
@@ -135,6 +138,7 @@ public class FindInDatabase extends AppCompatActivity {
 
             PreparedStatement profilePt= con.prepareStatement("SELECT *  FROM Users WHERE email= ?");
 
+            //Ir agregando usuarios mientras que haya mas para agregar
             while (rs.next()) {
 
                 String email = rs.getString("email");
@@ -175,13 +179,11 @@ public class FindInDatabase extends AppCompatActivity {
 
             rs.last();    // moves cursor to the last row
             Electricista.cantidadElectricistas = rs.getRow();
+
         }catch(Exception e){
             e.printStackTrace();
             Log.e("Error", ""+e.getMessage()+"Tomatela loro");
         }
-
-
-
 
     }
     public float findAmountOfCommentsEachProvider(String email){
@@ -208,7 +210,7 @@ public class FindInDatabase extends AppCompatActivity {
     }
     public void findComments(String email, ArrayList<Comentarios> comentarios){
         try {
-
+            comentarios.clear();
             final DatabaseConnection data = new DatabaseConnection();
 
             con=data.connect();

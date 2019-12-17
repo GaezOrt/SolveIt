@@ -19,10 +19,6 @@ public class DatabaseConnection {
 
     public static Connection conn;
 
-    DatabaseConnection() {
-
-
-    }
 
     Connection connect() throws SQLException, ClassNotFoundException {
         if(conn==null) {
