@@ -11,7 +11,7 @@
         style="@android:style/Widget.DeviceDefault.Light.TextView"
         android:layout_width="155dp"
         android:layout_height="37dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="44dp"
         android:background="@drawable/empty_background"
         android:text=" Electricistas"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -20,16 +20,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ListView
 
-        android:id="@+id/lista"
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefresh"
         android:layout_width="412dp"
-        android:layout_height="500dp"
-        android:layout_marginTop="76dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        android:layout_height="505dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ListView
+
+            android:id="@+id/lista"
+            android:layout_width="412dp"
+            android:layout_height="500dp"
+            android:layout_marginTop="76dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 
     <ImageView
         android:id="@+id/imageView5"
@@ -47,56 +58,50 @@
         android:inputType="textPersonName"
         android:text="Name"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/lista"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.163" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <ImageView
         android:id="@+id/imageView6"
         android:layout_width="31dp"
         android:layout_height="38dp"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/editText6"
         app:layout_constraintStart_toEndOf="@+id/editText6"
-        app:layout_constraintTop_toTopOf="@+id/editText6"
         app:srcCompat="@drawable/lupa" />
 
     <TextView
         android:id="@+id/textView29"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="96dp"
+        android:layout_marginBottom="8dp"
         android:text="Ubicacion"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/lista"
-        app:layout_constraintEnd_toEndOf="@+id/editText6"
-        app:layout_constraintHorizontal_bias="0.587"
-        app:layout_constraintStart_toEndOf="@+id/textView30"
-        app:layout_constraintTop_toBottomOf="@+id/editText6"
-        app:layout_constraintVertical_bias="0.571" />
+        app:layout_constraintBottom_toTopOf="@+id/swiperefresh"
+        app:layout_constraintEnd_toStartOf="@+id/textView31" />
 
     <TextView
         android:id="@+id/textView30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:text="Nombre"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/textView29"
-        app:layout_constraintEnd_toStartOf="@+id/editText6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText6" />
+        app:layout_constraintBottom_toTopOf="@+id/swiperefresh"
+        app:layout_constraintEnd_toStartOf="@+id/textView29"
+        app:layout_constraintHorizontal_bias="0.128"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView31"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:text="Puntuacion"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/textView29"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.727"
-        app:layout_constraintStart_toEndOf="@+id/textView29"
-        app:layout_constraintTop_toTopOf="@+id/textView29"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/textView29" />
 
 </android.support.constraint.ConstraintLayout>

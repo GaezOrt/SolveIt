@@ -11,7 +11,7 @@ import android.util.Log;
 import java.sql.SQLException;
 
 public class DownloadStuffInBackground extends IntentService {
-
+    public static boolean isRunning;
     FindInDatabase find = new FindInDatabase();
     static boolean keepLooking=true;
     public DownloadStuffInBackground() {
@@ -28,6 +28,7 @@ public class DownloadStuffInBackground extends IntentService {
 
             find.findElectricistas();
             keepLooking=false;
+            isRunning=false;
         }
 
         if(Electricista.cantidadElectricistas>Electricidad.electricistas.size()){

@@ -344,7 +344,6 @@ public class SignUp extends AppCompatActivity {
                 (View v) ->  {
                     finish();
                     startActivity(new Intent(SignUp.this, MainActivity.class));
-
                 }
         );
     }

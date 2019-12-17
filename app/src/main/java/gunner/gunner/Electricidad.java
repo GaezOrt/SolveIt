@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -30,6 +31,8 @@ import static gunner.gunner.R.id.button2;
 import static gunner.gunner.R.id.imageView10;
 import static gunner.gunner.R.id.imageView5;
 import static gunner.gunner.R.id.lista;
+
+import static gunner.gunner.R.id.swiperefresh;
 import static gunner.gunner.R.id.textView27;
 
 /**
@@ -56,8 +59,25 @@ public class Electricidad extends AppCompatActivity {
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
          listView.invalidateViews();
+        Intent u = new Intent(this, DownloadStuffInBackground.class);
 
+        SwipeRefreshLayout swipe= (SwipeRefreshLayout)findViewById(swiperefresh);
 
+        swipe.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        Electricidad.electricistas.clear();
+                        DownloadStuffInBackground.keepLooking=true;
+                        startService(u);
+                        adapter.notifyDataSetChanged();
+                        swipe.setRefreshing(true);
+                        if(!DownloadStuffInBackground.isRunning){
+                            swipe.setRefreshing(false);
+                        }
+                    }
+
+                });
 
 
         //Realizar ampliacion cuando se clickea item de lista
@@ -73,7 +93,6 @@ public class Electricidad extends AppCompatActivity {
 
                 }
             });
-
 
         //Ir para atras
         final ImageView atrasBut=(ImageView) findViewById(imageView5) ;

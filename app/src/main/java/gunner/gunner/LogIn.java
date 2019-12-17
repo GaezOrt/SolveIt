@@ -33,16 +33,12 @@ public class LogIn extends AppCompatActivity {
 
     String emailRetrieved;
     String password;
-    boolean ingresoCorrecto;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        //Apretar boton para ir para atras
-
-
-
+        //Error al loggear
         if(LogInService.estado==1){
 
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);

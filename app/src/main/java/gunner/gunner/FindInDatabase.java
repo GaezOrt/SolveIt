@@ -28,6 +28,7 @@ import static gunner.gunner.R.id.editText3;
 import static gunner.gunner.R.id.editText5;
 import static gunner.gunner.R.id.imageView15;
 import static gunner.gunner.R.id.imageView2;
+import static gunner.gunner.R.id.imageView20;
 import static gunner.gunner.R.id.list;
 import static gunner.gunner.R.id.rate;
 
@@ -60,13 +61,11 @@ public class FindInDatabase extends AppCompatActivity {
 
         //Boton agregar review
         ImageView image= (ImageView)findViewById(imageView15);
-        image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        image.setOnClickListener((v)-> {
                 startActivity(new Intent(FindInDatabase.this, addComment.class));
-            }
         });
 
+        //Dandole valor a rating bar
         RatingBar rating= (RatingBar)findViewById(rate);
         float x=obtenerPromedio(namePassedViaParam);
         rating.setRating(x);
@@ -77,9 +76,8 @@ public class FindInDatabase extends AppCompatActivity {
 
 
         //Atras button
-        final Button atrasBut = (Button) findViewById(button2);
+        final ImageView atrasBut = (ImageView) findViewById(imageView20);
         atrasBut.setOnClickListener((v) -> {
-
             startActivity(new Intent(FindInDatabase.this, Electricidad.class));
             finish();
             comentarios.clear();
