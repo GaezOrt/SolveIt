@@ -226,6 +226,7 @@ public class FindInDatabase extends AppCompatActivity {
 
                 Comentarios comentarioLista= new Comentarios(comentario,rs.getFloat("Puntaje"),rs.getString("emailDelComentador"));
                 comentarios.add(comentarioLista);
+
                 System.out.println("Comentario:" + comentarioLista.comentario);
                 System.out.println(comentarios.size());
             }
