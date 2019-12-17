@@ -25,6 +25,7 @@ public class DownloadStuffInBackground extends IntentService {
         if (keepLooking)
         {
             Log.w("E","Downloading electricistas");
+
             find.findElectricistas();
             keepLooking=false;
         }

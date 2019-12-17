@@ -50,6 +50,7 @@ public class Electricidad extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.electr);
 
+
         adapter = new MyListAdaptor(this,R.layout.list_view,electricistas);
         final ListView listView= (ListView) findViewById(lista);
         listView.setAdapter(adapter);
@@ -90,6 +91,16 @@ public class Electricidad extends AppCompatActivity {
         startActivity(new Intent(Electricidad.this, MainActivity.class));
 
     }
+    public static Handler UIHandler;
+
+    static {
+        UIHandler = new Handler(Looper.getMainLooper());
+    }
+
+    public static void runOnUI(Runnable runnable) {
+        UIHandler.post(runnable);
+    }
 }
+
 
 

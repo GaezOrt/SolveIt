@@ -2,15 +2,13 @@ package gunner.gunner;
 
 
 import android.content.Intent;
-import android.database.CursorJoiner;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -19,22 +17,10 @@ import android.widget.TextView;
 
 import java.sql.Blob;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static gunner.gunner.MainActivity.albanil;
-import static gunner.gunner.MainActivity.carpintero;
-import static gunner.gunner.MainActivity.cerrajero;
-import static gunner.gunner.MainActivity.computacion;
-import static gunner.gunner.MainActivity.electricista;
-import static gunner.gunner.MainActivity.gasista;
-import static gunner.gunner.MainActivity.pintor;
-import static gunner.gunner.MainActivity.plomero;
-import static gunner.gunner.R.id.MyRating;
-import static gunner.gunner.R.id.all;
 import static gunner.gunner.R.id.button2;
 import static gunner.gunner.R.id.editText;
 import static gunner.gunner.R.id.editText2;
@@ -43,7 +29,6 @@ import static gunner.gunner.R.id.editText5;
 import static gunner.gunner.R.id.imageView15;
 import static gunner.gunner.R.id.imageView2;
 import static gunner.gunner.R.id.list;
-import static gunner.gunner.R.id.lista;
 import static gunner.gunner.R.id.rate;
 
 
@@ -134,6 +119,7 @@ public class FindInDatabase extends AppCompatActivity {
 
     }
     public void findElectricistas() {
+
         try {
             System.out.println("Finding electricistas");
             final DatabaseConnection data = new DatabaseConnection();
@@ -166,7 +152,23 @@ public class FindInDatabase extends AppCompatActivity {
                     byte[] photoBytes = photo.getBytes(1, blobLength);
                     Bitmap bitmap = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes .length);
                     Electricista electricista = new Electricista(bitmap, name, email, 9,location,telefono,obtenerPromedio(email),findAmountOfCommentsEachProvider(email));
-                    Electricidad.electricistas.add(electricista);
+                    Electricidad.runOnUI(new Runnable()
+                    {
+                        public void run()
+                        {
+                            try
+                            {
+                                Electricidad.electricistas.add(electricista);
+                                Electricidad.adapter.notifyDataSetChanged();
+                            }
+                            catch (Exception e)
+                            {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
+
                     break;
                 }
             }
