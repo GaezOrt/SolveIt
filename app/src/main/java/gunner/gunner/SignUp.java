@@ -75,6 +75,7 @@ import static gunner.gunner.R.id.editText2;
 import static gunner.gunner.R.id.editText3;
 import static gunner.gunner.R.id.editText5;
 import static gunner.gunner.R.id.imageView10;
+import static gunner.gunner.R.id.imageView18;
 import static gunner.gunner.R.id.imageView2;
 import static gunner.gunner.R.id.imageView8;
 
@@ -338,7 +339,7 @@ public class SignUp extends AppCompatActivity {
         }
 
         //Ir para atras
-        final Button atrasBut = (Button) findViewById(button2);
+        final ImageView atrasBut = (ImageView) findViewById(imageView18);
         atrasBut.setOnClickListener(
                 (View v) ->  {
                     finish();

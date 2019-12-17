@@ -3,6 +3,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,7 @@ import static gunner.gunner.R.id.button2;
 import static gunner.gunner.R.id.button7;
 import static gunner.gunner.R.id.editText;
 import static gunner.gunner.R.id.editText2;
+import static gunner.gunner.R.id.imageView19;
 import static gunner.gunner.R.id.imageView8;
 
 public class LogIn extends AppCompatActivity {
@@ -38,12 +40,7 @@ public class LogIn extends AppCompatActivity {
         setContentView(R.layout.login);
 
         //Apretar boton para ir para atras
-        final Button atrasBut=(Button) findViewById(button2) ;
-        atrasBut.setOnClickListener ((v)-> {
-            finish();
-            startActivity(new Intent(LogIn.this, MainActivity.class));
 
-        });
 
 
         if(LogInService.estado==1){
@@ -90,6 +87,14 @@ public class LogIn extends AppCompatActivity {
             GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(imageView);
             Glide.with(this).load(R.drawable.loading_animation_grey).into(imageViewTarget);
             imageView.setVisibility(VISIBLE);
+
+        });
+
+
+        final ImageView atrasBut=(ImageView) findViewById(imageView19) ;
+        atrasBut.setOnClickListener ((v)-> {
+            finish();
+            startActivity(new Intent(LogIn.this, MainActivity.class));
 
         });
     }
