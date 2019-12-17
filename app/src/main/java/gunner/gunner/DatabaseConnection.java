@@ -53,7 +53,7 @@ public class DatabaseConnection {
             boolean cerrajero,
             boolean carpintero) throws SQLException, FileNotFoundException {
 
-        String updateSQL = "INSERT INTO Users VALUES (?,?,?,?,?,?)";
+        String updateSQL = "INSERT INTO Users VALUES (?,?,?,?,?,?,?)";
         String updateRubro= " INSERT INTO Rubro VALUES (?,?,?,?,?,?,?,?,?)";
 
 
@@ -66,6 +66,7 @@ public class DatabaseConnection {
         pstmt.setString(4, phoneNumber);
         pstmt.setString(5, location);
         pstmt.setBytes(6, pathForImage);
+        pstmt.setString(7,SignUp.dateString);
 
         pstmtRubro.setString(1,email );
         pstmtRubro.setBoolean(2,electricista);
@@ -79,5 +80,6 @@ public class DatabaseConnection {
 
         pstmt.executeUpdate();
         pstmtRubro.executeUpdate();
+        SignUp.dateString="";
     }
 }

@@ -9,6 +9,23 @@
     tools:context=".LogIn">
 
 
+    <EditText
+        android:id="@+id/location3"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/editText2"
+        android:layout_centerHorizontal="true"
+        android:background="#11000000"
+        android:ems="10"
+        android:hint="Date"
+        android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="@+id/location"
+        app:layout_constraintStart_toStartOf="@+id/location"
+        app:layout_constraintTop_toBottomOf="@+id/location" />
+
     <ImageView
         android:id="@+id/imageView18"
         android:layout_width="35dp"
@@ -21,42 +38,15 @@
         android:id="@+id/Electricista"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:text="Electricista"
         android:textColor="#FDF8F8F8"
         android:textColorHint="#FDF1E9E9"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.126"
+        app:layout_constraintHorizontal_bias="0.163"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/carpintero" />
-
-    <CheckBox
-        android:id="@+id/gasista"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Gasista"
-        android:textColor="#FDF8F8F8"
-        android:textColorHint="#FDF1E9E9"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.209"
-        app:layout_constraintStart_toEndOf="@+id/plomero"
-        app:layout_constraintTop_toBottomOf="@+id/carpintero" />
-
-    <CheckBox
-        android:id="@+id/carpintero"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Carpintero"
-        android:textColor="#FDF8F8F8"
-        android:textColorHint="#FDF1E9E9"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/cuentaCreada"
-        app:layout_constraintEnd_toStartOf="@+id/pintor"
-        app:layout_constraintHorizontal_bias="0.481"
-        app:layout_constraintStart_toEndOf="@+id/Electricista"
-        app:layout_constraintTop_toBottomOf="@+id/location"
-        app:layout_constraintVertical_bias="0.503" />
 
     <CheckBox
         android:id="@+id/albanil"
@@ -67,7 +57,7 @@
         android:textColorHint="#FDF1E9E9"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.141"
+        app:layout_constraintHorizontal_bias="0.147"
         app:layout_constraintStart_toEndOf="@+id/computacion"
         app:layout_constraintTop_toBottomOf="@+id/gasista" />
 
@@ -80,7 +70,7 @@
         android:textColorHint="#FDF1E9E9"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.122"
+        app:layout_constraintHorizontal_bias="0.157"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Electricista" />
 
@@ -93,7 +83,7 @@
         android:textColorHint="#FDF1E9E9"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.128"
+        app:layout_constraintHorizontal_bias="0.166"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/plomero" />
 
@@ -101,17 +91,15 @@
         android:id="@+id/cerrajero"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
+        android:layout_marginTop="4dp"
         android:text="Cerrajero"
         android:textColor="#FDF8F8F8"
         android:textColorHint="#FDF1E9E9"
         android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/cuentaCreada"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.419"
+        app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toEndOf="@+id/gasista"
-        app:layout_constraintTop_toBottomOf="@+id/carpintero"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/carpintero" />
 
     <CheckBox
         android:id="@+id/pintor"
@@ -124,32 +112,38 @@
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/cerrajero"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.63"
+        app:layout_constraintHorizontal_bias="0.665"
         app:layout_constraintStart_toEndOf="@+id/Electricista"
         app:layout_constraintTop_toTopOf="@+id/carpintero"
         app:layout_constraintVertical_bias="0.0" />
 
-    <EditText
-        android:id="@+id/location"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
-        android:layout_above="@+id/editText2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="#11000000"
-        android:ems="10"
-        android:hint="Location"
-        android:inputType="textPersonName"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="14dp"
-        app:layout_constraintBottom_toTopOf="@+id/button7"
+    <CheckBox
+        android:id="@+id/gasista"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Gasista"
+        android:textColor="#FDF8F8F8"
+        android:textColorHint="#FDF1E9E9"
+        android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText5"
-        app:layout_constraintVertical_bias="0.056" />
+        app:layout_constraintHorizontal_bias="0.219"
+        app:layout_constraintStart_toEndOf="@+id/plomero"
+        app:layout_constraintTop_toBottomOf="@+id/carpintero" />
+
+    <CheckBox
+        android:id="@+id/carpintero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+        android:text="Carpintero"
+        android:textColor="#FDF8F8F8"
+        android:textColorHint="#FDF1E9E9"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@+id/pintor"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toEndOf="@+id/Electricista"
+        app:layout_constraintTop_toBottomOf="@+id/location" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -161,28 +155,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView13"
         app:layout_constraintVertical_bias="0.576"
-        app:srcCompat="@android:drawable/stat_sys_speakerphone" />
-
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
-        android:layout_alignStart="@+id/editText"
-        android:layout_alignLeft="@+id/editText"
-        android:layout_alignBottom="@+id/cardView"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="256dp"
-        android:layout_marginEnd="8dp"
-        android:background="#11000000"
-        android:ems="10"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="14dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:srcCompat="@drawable/phone" />
 
     <Button
         android:id="@+id/button7"
@@ -197,24 +170,55 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
+        android:id="@+id/editText2"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_alignStart="@+id/editText"
+        android:layout_alignLeft="@+id/editText"
+        android:layout_alignBottom="@+id/cardView"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="#11000000"
+        android:ems="10"
+        android:hint="Password"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.558"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+    <EditText
         android:id="@+id/editText"
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_above="@+id/editText2"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:background="#11000000"
         android:ems="10"
         android:hint="Nombre"
+        android:inputType="textCapSentences"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        android:inputType="textCapSentences"
         android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.558"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText3" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(*)"
+        android:textColor="#D3CACA"
+        app:layout_constraintBottom_toBottomOf="@+id/editText"
+        app:layout_constraintStart_toEndOf="@+id/editText"
+        app:layout_constraintTop_toTopOf="@+id/editText"
+        app:layout_constraintVertical_bias="0.142" />
 
     <EditText
         android:id="@+id/editText5"
@@ -233,45 +237,59 @@
         android:textSize="14dp"
         app:layout_constraintBottom_toTopOf="@+id/button7"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintHorizontal_bias="0.565"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText2"
-        app:layout_constraintVertical_bias="0.034" />
-
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="(*)"
-        android:textColor="#D3CACA"
-        app:layout_constraintBottom_toBottomOf="@+id/editText"
-        app:layout_constraintStart_toEndOf="@+id/editText"
-        app:layout_constraintTop_toTopOf="@+id/editText" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/editText3"
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_alignStart="@+id/editText"
         android:layout_alignLeft="@+id/editText"
         android:layout_alignBottom="@+id/cardView"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="208dp"
         android:layout_marginEnd="8dp"
         android:background="#11000000"
         android:ems="10"
-        android:hint="Password"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.558"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/location"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/editText2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="#11000000"
+        android:ems="10"
+        android:hint="Location"
+        android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toTopOf="@+id/button7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.565"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText5"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="301dp"
-        android:layout_height="155dp"
+        android:layout_width="286dp"
+        android:layout_height="126dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="47dp"
         android:layout_marginEnd="8dp"
@@ -280,8 +298,10 @@
         android:scaleType="centerInside"
         app:layout_constraintBottom_toTopOf="@+id/editText3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.093"
         app:srcCompat="@drawable/imageselector" />
 
     <ImageView
@@ -293,31 +313,31 @@
         app:layout_constraintHorizontal_bias="0.828"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editText3"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:srcCompat="@drawable/emailnaranja" />
 
     <ImageView
         android:id="@+id/imageView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="34dp"
+        android:layout_height="25dp"
         app:layout_constraintBottom_toBottomOf="@+id/editText"
         app:layout_constraintEnd_toStartOf="@+id/editText"
         app:layout_constraintHorizontal_bias="0.828"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editText"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@android:drawable/ic_menu_myplaces" />
+        app:srcCompat="@drawable/user" />
 
     <ImageView
         android:id="@+id/imageView13"
-        android:layout_width="29dp"
-        android:layout_height="36dp"
+        android:layout_width="34dp"
+        android:layout_height="25dp"
         app:layout_constraintBottom_toBottomOf="@+id/editText2"
         app:layout_constraintEnd_toStartOf="@+id/editText2"
-        app:layout_constraintHorizontal_bias="0.841"
+        app:layout_constraintHorizontal_bias="0.836"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editText2"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@android:drawable/ic_lock_idle_lock" />
+        app:layout_constraintVertical_bias="0.333"
+        app:srcCompat="@drawable/candado" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -329,39 +349,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
         app:layout_constraintVertical_bias="0.676"
-        app:srcCompat="@android:drawable/ic_menu_mylocation" />
+        app:srcCompat="@drawable/location" />
 
-    <TextView
-        android:id="@+id/CuentaNoCreada"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="serif"
-        android:text="No se ha podido crear la cuenta."
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="#FFFFFF"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/button7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cuentaCreada"
-        app:layout_constraintVertical_bias="0.869" />
-
-    <TextView
-        android:id="@+id/cuentaCreada"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="serif"
-        android:text="Cuenta creada con exito!"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="#FFFFFF"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/button7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/location"
-        app:layout_constraintVertical_bias="0.867" />
+    <ImageView
+        android:id="@+id/imageView21"
+        android:layout_width="36dp"
+        android:layout_height="29dp"
+        app:layout_constraintBottom_toBottomOf="@+id/location3"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="@+id/location3"
+        app:srcCompat="@drawable/date" />
 
     <ImageView
         android:id="@+id/imageView10"
@@ -444,17 +442,19 @@
         android:background="#000000"
         app:layout_constraintBottom_toTopOf="@+id/carpintero"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/location" />
+        app:layout_constraintTop_toBottomOf="@+id/location"
+        app:layout_constraintVertical_bias="0.759" />
 
     <TextView
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:text="Rubro en el que te desempeñas"
         android:textColor="#F2F7F7F7"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view2" />
+
 </android.support.constraint.ConstraintLayout>

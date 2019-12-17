@@ -1,6 +1,7 @@
 package gunner.gunner;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,6 +11,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -32,6 +35,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -60,16 +64,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 
 import static android.view.View.VISIBLE;
-import static gunner.gunner.R.id.CuentaNoCreada;
 import static gunner.gunner.R.id.Electricista;
-
 import static gunner.gunner.R.id.button2;
 import static gunner.gunner.R.id.button7;
-import static gunner.gunner.R.id.cuentaCreada;
 import static gunner.gunner.R.id.editText;
 import static gunner.gunner.R.id.editText2;
 import static gunner.gunner.R.id.editText3;
@@ -78,6 +80,7 @@ import static gunner.gunner.R.id.imageView10;
 import static gunner.gunner.R.id.imageView18;
 import static gunner.gunner.R.id.imageView2;
 import static gunner.gunner.R.id.imageView8;
+import static gunner.gunner.R.id.location3;
 
 public class SignUp extends AppCompatActivity {
 
@@ -89,8 +92,8 @@ public class SignUp extends AppCompatActivity {
     Uri selectedImage;
     byte[] byteArray;
     private ImageView imageView;
-
-
+    private DatePickerDialog.OnDateSetListener mdate;
+    public static String dateString;
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.w("Activity", "Activity result");
@@ -124,6 +127,30 @@ public class SignUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
+
+
+        //Date of birth
+        EditText date= (EditText)findViewById(location3);
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal= Calendar.getInstance();
+                int year= cal.get(Calendar.YEAR);
+                int month= cal.get(Calendar.MONTH);
+                int day= cal.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog dialog= new DatePickerDialog(SignUp.this,R.style.MyDialogTheme,mdate,year,month,day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+        mdate= new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                    month=month+1;
+                     dateString=""+day+ "/"+ month+"/"+ year;
+                     date.setText(dateString);
+            }
+        };
 
         //Si el email ya ha sido utilizado
         if(SignUpService.cuentaYaUtilizada){
