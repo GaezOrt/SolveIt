@@ -1,5 +1,4 @@
 package gunner.gunner;
-
 import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
@@ -38,6 +37,7 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 
@@ -64,8 +64,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 
 import static android.view.View.VISIBLE;
@@ -82,7 +84,7 @@ import static gunner.gunner.R.id.imageView2;
 import static gunner.gunner.R.id.imageView8;
 import static gunner.gunner.R.id.location3;
 
-public class SignUp extends AppCompatActivity {
+public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpinnerListener {
 
     String email;
     String username;
@@ -128,6 +130,22 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
 
+        MultiSpinner ms = (MultiSpinner) findViewById(R.id.spinner);
+        List<String> list = new ArrayList<String>();
+        list.add("Palermo");
+        list.add("Recoleta");
+        list.add("Almagro");
+        list.add("Caballito");
+        list.add("Boedo");
+        list.add("Belgrano");
+        list.add("Villa Pueyrredon");
+        list.add("Villa Urquiza");
+        list.add("Flores");
+        list.add("Lugano");
+        ms.setItems(list, "select", this);
+
+
+
 
         //Date of birth
         EditText date= (EditText)findViewById(location3);
@@ -146,9 +164,9 @@ public class SignUp extends AppCompatActivity {
         mdate= new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                    month=month+1;
-                     dateString=""+day+ "/"+ month+"/"+ year;
-                     date.setText(dateString);
+                month=month+1;
+                dateString=""+day+ "/"+ month+"/"+ year;
+                date.setText(dateString);
             }
         };
 
@@ -178,8 +196,6 @@ public class SignUp extends AppCompatActivity {
             password.setText(SignUpService.password);
             EditText phone= (EditText)findViewById(editText2);
             phone.setText(SignUpService.phoneNumber);
-            EditText location= (EditText)findViewById(R.id.location);
-            location.setText(SignUpService.location);
 
         }
 
@@ -202,16 +218,15 @@ public class SignUp extends AppCompatActivity {
             AlertDialog alert11 = builder1.create();
             alert11.show();
 
-           EditText email= (EditText)findViewById(editText3);
-           email.setText(SignUpService.email);
+            EditText email= (EditText)findViewById(editText3);
+            email.setText(SignUpService.email);
             EditText username= (EditText)findViewById(editText);
             username.setText(SignUpService.username);
             EditText password= (EditText)findViewById(editText2);
             password.setText(SignUpService.password);
             EditText phone= (EditText)findViewById(editText2);
             phone.setText(SignUpService.phoneNumber);
-            EditText location= (EditText)findViewById(R.id.location);
-            location.setText(SignUpService.location);
+
 
             SignUpService.estado=0;
 
@@ -264,8 +279,6 @@ public class SignUp extends AppCompatActivity {
             password.setText(SignUpService.password);
             EditText phone= (EditText)findViewById(editText2);
             phone.setText(SignUpService.phoneNumber);
-            EditText location= (EditText)findViewById(R.id.location);
-            location.setText(SignUpService.location);
 
         }
 
@@ -299,9 +312,11 @@ public class SignUp extends AppCompatActivity {
                         EditText phoneNumberText = (EditText) findViewById(editText5);
                         number = phoneNumberText.getText().toString();
                         SignUpService.phoneNumber=number;
-                        EditText locationButt = (EditText) findViewById(R.id.location);
-                        location = locationButt.getText().toString();
+                        Spinner spinner=(Spinner)findViewById(R.id.spinner);
+                        location=spinner.getSelectedItem().toString();
                         SignUpService.location=location;
+
+
 
                         CheckBox electricista= (CheckBox) findViewById(Electricista);
                         if(electricista.isChecked()){
@@ -374,7 +389,6 @@ public class SignUp extends AppCompatActivity {
                 }
         );
     }
-
     public void signUp() {
         try {
             PreparedStatement pt = DatabaseConnection.conn.prepareStatement("SELECT * FROM Users WHERE email = ?");
@@ -382,7 +396,7 @@ public class SignUp extends AppCompatActivity {
             pt.setFetchSize(1);
             ResultSet rs = pt.executeQuery();
             if (rs.next()==false) {
-            SignUpService.cuentaYaUtilizada=false;
+                SignUpService.cuentaYaUtilizada=false;
             }else{
                 SignUpService.cuentaYaUtilizada=true;
             }
@@ -413,17 +427,17 @@ public class SignUp extends AppCompatActivity {
                 final DatabaseConnection databaseConnection = new DatabaseConnection();
                 databaseConnection.connect();
 
-                    databaseConnection.createUser(
-                            SignUpService.email, SignUpService.username, SignUpService.password,
-                            SignUpService.phoneNumber, SignUpService.location, SignUpService.pathForImage,
-                            MainActivity.electricista,
-                            MainActivity.carpintero,
-                            MainActivity.computacion,
-                            MainActivity.plomero,
-                            MainActivity.gasista,
-                            MainActivity.albanil,
-                            MainActivity.pintor,
-                            MainActivity.cerrajero);
+                databaseConnection.createUser(
+                        SignUpService.email, SignUpService.username, SignUpService.password,
+                        SignUpService.phoneNumber, SignUpService.location, SignUpService.pathForImage,
+                        MainActivity.electricista,
+                        MainActivity.carpintero,
+                        MainActivity.computacion,
+                        MainActivity.plomero,
+                        MainActivity.gasista,
+                        MainActivity.albanil,
+                        MainActivity.pintor,
+                        MainActivity.cerrajero);
 
             } catch (Exception e) {
                 SignUpService.datosOk=false;
@@ -448,6 +462,10 @@ public class SignUp extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         startActivity(new Intent(SignUp.this, MainActivity.class));
+    }
+
+    @Override
+    public void onItemsSelected(boolean[] selected) {
 
     }
 }

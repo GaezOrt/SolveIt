@@ -8,13 +8,13 @@
     android:background="@drawable/gradient"
     tools:context=".LogIn">
 
-
     <EditText
         android:id="@+id/location3"
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_above="@+id/editText2"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
         android:background="#11000000"
         android:ems="10"
         android:hint="Date"
@@ -22,9 +22,8 @@
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="14dp"
-        app:layout_constraintEnd_toEndOf="@+id/location"
-        app:layout_constraintStart_toStartOf="@+id/location"
-        app:layout_constraintTop_toBottomOf="@+id/location" />
+        app:layout_constraintEnd_toStartOf="@+id/textView18"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <ImageView
         android:id="@+id/imageView18"
@@ -35,10 +34,23 @@
         app:srcCompat="@drawable/back" />
 
     <CheckBox
+        android:id="@+id/plomero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Plomero"
+        android:textColor="#FDF8F8F8"
+        android:textColorHint="#FDF1E9E9"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.157"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Electricista" />
+
+    <CheckBox
         android:id="@+id/Electricista"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:text="Electricista"
         android:textColor="#FDF8F8F8"
         android:textColorHint="#FDF1E9E9"
@@ -62,36 +74,10 @@
         app:layout_constraintTop_toBottomOf="@+id/gasista" />
 
     <CheckBox
-        android:id="@+id/plomero"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Plomero"
-        android:textColor="#FDF8F8F8"
-        android:textColorHint="#FDF1E9E9"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.157"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Electricista" />
-
-    <CheckBox
-        android:id="@+id/computacion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Computacion"
-        android:textColor="#FDF8F8F8"
-        android:textColorHint="#FDF1E9E9"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.166"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plomero" />
-
-    <CheckBox
         android:id="@+id/cerrajero"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:text="Cerrajero"
         android:textColor="#FDF8F8F8"
         android:textColorHint="#FDF1E9E9"
@@ -112,7 +98,7 @@
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/cerrajero"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.665"
+        app:layout_constraintHorizontal_bias="0.669"
         app:layout_constraintStart_toEndOf="@+id/Electricista"
         app:layout_constraintTop_toTopOf="@+id/carpintero"
         app:layout_constraintVertical_bias="0.0" />
@@ -121,7 +107,7 @@
         android:id="@+id/gasista"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:text="Gasista"
         android:textColor="#FDF8F8F8"
         android:textColorHint="#FDF1E9E9"
@@ -135,15 +121,28 @@
         android:id="@+id/carpintero"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
+        android:layout_marginBottom="128dp"
         android:text="Carpintero"
         android:textColor="#FDF8F8F8"
         android:textColorHint="#FDF1E9E9"
         android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/pintor"
-        app:layout_constraintHorizontal_bias="0.47"
-        app:layout_constraintStart_toEndOf="@+id/Electricista"
-        app:layout_constraintTop_toBottomOf="@+id/location" />
+        app:layout_constraintHorizontal_bias="0.602"
+        app:layout_constraintStart_toEndOf="@+id/Electricista" />
+
+    <CheckBox
+        android:id="@+id/computacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Computacion"
+        android:textColor="#FDF8F8F8"
+        android:textColorHint="#FDF1E9E9"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.166"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plomero" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -264,28 +263,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/location"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
-        android:layout_above="@+id/editText2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="#11000000"
-        android:ems="10"
-        android:hint="Location"
-        android:inputType="textPersonName"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="14dp"
-        app:layout_constraintBottom_toTopOf="@+id/button7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.565"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText5"
-        app:layout_constraintVertical_bias="0.0" />
-
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="286dp"
@@ -343,12 +320,10 @@
         android:id="@+id/imageView3"
         android:layout_width="36dp"
         android:layout_height="29dp"
-        app:layout_constraintBottom_toBottomOf="@+id/location"
-        app:layout_constraintEnd_toStartOf="@+id/location"
-        app:layout_constraintHorizontal_bias="0.913"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:layout_constraintVertical_bias="0.676"
         app:srcCompat="@drawable/location" />
 
     <ImageView
@@ -357,8 +332,10 @@
         android:layout_height="29dp"
         app:layout_constraintBottom_toBottomOf="@+id/location3"
         app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="@+id/location3"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/date" />
 
     <ImageView
@@ -405,11 +382,11 @@
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:text="(*)"
         android:textColor="#F5F5F5"
-        app:layout_constraintBottom_toBottomOf="@+id/location"
-        app:layout_constraintStart_toEndOf="@+id/location"
-        app:layout_constraintTop_toTopOf="@+id/location" />
+        app:layout_constraintStart_toEndOf="@+id/editText5"
+        app:layout_constraintTop_toTopOf="@+id/textView16" />
 
     <TextView
         android:id="@+id/textView8"
@@ -439,11 +416,10 @@
         android:layout_width="500dp"
         android:layout_height="2dp"
         android:layout_alignParentTop="false"
+        android:layout_marginBottom="32dp"
         android:background="#000000"
         app:layout_constraintBottom_toTopOf="@+id/carpintero"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/location"
-        app:layout_constraintVertical_bias="0.759" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView19"
@@ -456,5 +432,14 @@
         app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+    <gunner.gunner.MultiSpinner
+        android:id="@+id/spinner"
+        android:layout_width="247dp"
+        android:layout_height="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/location3"
+        app:layout_constraintEnd_toStartOf="@+id/textView18"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/editText5" />
 
 </android.support.constraint.ConstraintLayout>

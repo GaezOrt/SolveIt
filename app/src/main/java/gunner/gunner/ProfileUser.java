@@ -32,8 +32,7 @@ import static gunner.gunner.R.id.editText5;
 import static gunner.gunner.R.id.imageView15;
 import static gunner.gunner.R.id.imageView2;
 import static gunner.gunner.R.id.list;
-import static gunner.gunner.R.id.location;
-import static gunner.gunner.R.id.rate;
+
 
 
 public class ProfileUser extends AppCompatActivity {
