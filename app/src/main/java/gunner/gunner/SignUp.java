@@ -142,13 +142,13 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
         list.add("Villa Urquiza");
         list.add("Flores");
         list.add("Lugano");
-        ms.setItems(list, "select", this);
+        ms.setItems(list, "Zonas de trabajo", this);
 
 
 
 
         //Date of birth
-        EditText date= (EditText)findViewById(location3);
+        TextView date= (TextView) findViewById(location3);
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
