@@ -1,24 +1,20 @@
 package gunner.gunner;
 
-import android.content.ClipData;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
 import android.os.Build;
-import android.os.Handler;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -26,31 +22,26 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
-
-import org.w3c.dom.Text;
-
-import java.io.IOException;
-import java.sql.Blob;
-import java.sql.SQLException;
-import java.util.ArrayList;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 
 import static gunner.gunner.R.id.button;
-
-import static gunner.gunner.R.id.imageView10;
 import static gunner.gunner.R.id.imageView14;
 import static gunner.gunner.R.id.imageView16;
-import static gunner.gunner.R.id.imageView2;
+
 
 
 import static gunner.gunner.R.id.nav_viw;
 import static gunner.gunner.R.id.navDrawer;
+import static gunner.gunner.R.id.textView10;
+import static gunner.gunner.R.id.textView11;
+import static gunner.gunner.R.id.textView12;
+import static gunner.gunner.R.id.textView13;
+import static gunner.gunner.R.id.textView3;
+import static gunner.gunner.R.id.textView5;
+import static gunner.gunner.R.id.textView7;
+import static gunner.gunner.R.id.textView9;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -94,11 +85,64 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             SignUpService.datosOk=false;
         }
 
-        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.button_animation);
+
 
         setTheme(R.style.Theme_Design_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+       MediaPlayer  mp=MediaPlayer.create(getApplicationContext(),R.raw.welcome);// the song is a filename which i have pasted inside a folder **raw** created under the **res** folder.//
+        mp.start();
+
+        Button electricidad= (Button)findViewById(R.id.button);
+        TextView electricidadT=(TextView)findViewById(textView12);
+        final Animation animRotate = AnimationUtils.loadAnimation(this, R.anim.translate_electricidad);
+        electricidad.startAnimation(animRotate);
+        electricidadT.startAnimation(animRotate);
+
+        Button computacion= (Button)findViewById(R.id.button4);
+        TextView computacionT=(TextView)findViewById(textView3);
+        final Animation computacionAnim = AnimationUtils.loadAnimation(this, R.anim.animation_computacion);
+        computacion.startAnimation(computacionAnim);
+        computacionT.startAnimation(computacionAnim);
+
+        Button plomeria= (Button)findViewById(R.id.button9);
+        TextView plomeriaT=(TextView)findViewById(textView9);
+        final Animation plomeriaAnim = AnimationUtils.loadAnimation(this, R.anim.translate_plomeria);
+        plomeria.startAnimation(plomeriaAnim);
+        plomeriaT.startAnimation(plomeriaAnim);
+
+        Button cerrajeria= (Button)findViewById(R.id.button5);
+        TextView cerrajeriaT=(TextView)findViewById(textView5);
+        final Animation cerrajeriaAnim = AnimationUtils.loadAnimation(this, R.anim.translate_cerrajeria);
+        cerrajeria.startAnimation(cerrajeriaAnim);
+        cerrajeriaT.startAnimation(cerrajeriaAnim);
+
+
+        Button albanileria= (Button)findViewById(R.id.button8);
+        TextView albanileriaT=(TextView)findViewById(textView11);
+        final Animation albanileriaAnim = AnimationUtils.loadAnimation(this, R.anim.translate_albanileria);
+        albanileria.startAnimation(albanileriaAnim);
+        albanileriaT.startAnimation(albanileriaAnim);
+
+        Button pintureria= (Button)findViewById(R.id.button6);
+        TextView pintureriaT=(TextView)findViewById(textView13);
+        final Animation pintureriaAnim = AnimationUtils.loadAnimation(this, R.anim.translate_pintureria);
+        pintureria.startAnimation(pintureriaAnim);
+        pintureriaT.startAnimation(pintureriaAnim);
+
+        Button gasista= (Button)findViewById(R.id.button10);
+        TextView gasistaT=(TextView)findViewById(textView10);
+        final Animation gasistaAnim = AnimationUtils.loadAnimation(this, R.anim.translate_gasista);
+        gasista.startAnimation(gasistaAnim);
+        gasistaT.startAnimation(gasistaAnim);
+
+        Button mecanico= (Button)findViewById(R.id.button11);
+        TextView mecanicoT=(TextView)findViewById(textView7);
+        final Animation mecanicoAnim = AnimationUtils.loadAnimation(this, R.anim.translate_mecanico);
+        mecanico.startAnimation(mecanicoAnim);
+        mecanicoT.startAnimation(mecanicoAnim);
+
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setNavigationBarColor(getResources().getColor(R.color.black));
@@ -113,6 +157,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         //Boton para electricistas
+        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.fadeout);
         final Button electricidadBut = (Button) findViewById(button);
         electricidadBut.setOnClickListener(new View.OnClickListener() {
             @Override
