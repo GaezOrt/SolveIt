@@ -2,6 +2,9 @@ package gunner.gunner;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.LayerDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -46,6 +49,8 @@ public class MyListAdaptor extends ArrayAdapter<Electricista> {
             viewHolder.name.setText(electricista.name);
             viewHolder.rating=(RatingBar)convertView.findViewById(R.id.MyRating);
             viewHolder.rating.setRating(electricista.promedio);
+            LayerDrawable stars = (LayerDrawable) viewHolder.rating.getProgressDrawable();
+            stars.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
             viewHolder.amount=(TextView)convertView.findViewById(R.id.textView27);
             int x=(int)electricista.cantidadDeComentarios;
             viewHolder.amount.setText("Reviews: "+(x));

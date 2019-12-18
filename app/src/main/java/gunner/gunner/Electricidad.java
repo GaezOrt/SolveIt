@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -52,7 +53,6 @@ public class Electricidad extends AppCompatActivity {
         setTheme(R.style.Theme_Design_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.electr);
-
 
         adapter = new MyListAdaptor(this,R.layout.list_view,electricistas);
         final ListView listView= (ListView) findViewById(lista);
