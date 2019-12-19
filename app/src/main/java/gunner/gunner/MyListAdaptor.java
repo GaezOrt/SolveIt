@@ -20,6 +20,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MyListAdaptor extends ArrayAdapter<Electricista> {
    ArrayList<Electricista> electricistas;
    int resource;
@@ -44,7 +46,7 @@ public class MyListAdaptor extends ArrayAdapter<Electricista> {
             LayoutInflater inflater= LayoutInflater.from(getContext());
             convertView=inflater.inflate(R.layout.list_view,null,false);
 
-            viewHolder.image=(ImageView)convertView.findViewById(R.id.imageView7);
+            viewHolder.image=(CircleImageView) convertView.findViewById(R.id.profile_image);
             viewHolder.name=(TextView)convertView.findViewById(R.id.editText4);
             viewHolder.image.setImageBitmap(electricista.photo);
             viewHolder.name.setText(electricista.name);
@@ -66,7 +68,7 @@ public class MyListAdaptor extends ArrayAdapter<Electricista> {
         return convertView;
     }
     public class ViewHolder{
-        ImageView image;
+        CircleImageView image;
         TextView name;
         RatingBar rating;
         TextView amount;

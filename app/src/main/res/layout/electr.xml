@@ -26,6 +26,7 @@
         android:layout_width="412dp"
         android:layout_height="505dp"
 
+        android:background="#031646"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -35,8 +36,9 @@
             android:layout_width="412dp"
             android:layout_height="500dp"
             android:layout_marginTop="76dp"
-            app:layout_constraintEnd_toEndOf="parent"
             android:dividerHeight="30.0sp"
+            android:divider="#031646"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2">
@@ -73,38 +75,5 @@
         app:layout_constraintBottom_toBottomOf="@+id/editText6"
         app:layout_constraintStart_toEndOf="@+id/editText6"
         app:srcCompat="@drawable/lupa" />
-
-    <TextView
-        android:id="@+id/textView29"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="72dp"
-        android:layout_marginBottom="8dp"
-        android:text="Ubicacion"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/swiperefresh"
-        app:layout_constraintEnd_toStartOf="@+id/textView31" />
-
-    <TextView
-        android:id="@+id/textView30"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nombre"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/swiperefresh"
-        app:layout_constraintEnd_toStartOf="@+id/textView29"
-        app:layout_constraintHorizontal_bias="0.116"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView29" />
-
-    <TextView
-        android:id="@+id/textView31"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="36dp"
-        android:text="Puntuacion"
-        android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView29" />
 
 </android.support.constraint.ConstraintLayout>
