@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
+import android.media.Rating;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -51,11 +52,13 @@ public class MyListAdaptor extends ArrayAdapter<Electricista> {
             viewHolder.rating.setRating(electricista.promedio);
             LayerDrawable stars = (LayerDrawable) viewHolder.rating.getProgressDrawable();
             stars.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
-            viewHolder.amount=(TextView)convertView.findViewById(R.id.textView27);
+            viewHolder.amount=(TextView)convertView.findViewById(R.id.textView42);
             int x=(int)electricista.cantidadDeComentarios;
             viewHolder.amount.setText("Reviews: "+(x));
-            viewHolder.ubicacion=(TextView)convertView.findViewById(R.id.textView28);
+            viewHolder.ubicacion=(TextView)convertView.findViewById(R.id.textView39);
             viewHolder.ubicacion.setText(electricista.location);
+            viewHolder.nacimiento=(TextView)convertView.findViewById(R.id.textView41);
+            viewHolder.nacimiento.setText(electricista.fechaDeNacimiento);
             convertView.setTag(viewHolder);
         }else{
         viewHolder  =(ViewHolder)convertView.getTag();
@@ -68,6 +71,7 @@ public class MyListAdaptor extends ArrayAdapter<Electricista> {
         RatingBar rating;
         TextView amount;
         TextView ubicacion;
+        TextView nacimiento;
 
     }
 }

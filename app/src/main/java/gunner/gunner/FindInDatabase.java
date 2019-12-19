@@ -148,12 +148,13 @@ public class FindInDatabase extends AppCompatActivity {
                     String telefono=rsProfile.getString("telefono");
                     String location= rsProfile.getString("location");
                     String name = rsProfile.getString("User");
+                    String fechaDeNacimiento=rsProfile.getString("date");
                     X++;
                     Blob photo = rsProfile.getBlob("Foto");
                     int blobLength = (int) photo.length();
                     byte[] photoBytes = photo.getBytes(1, blobLength);
                     Bitmap bitmap = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes .length);
-                    Electricista electricista = new Electricista(bitmap, name, email, 9,location,telefono,obtenerPromedio(email),findAmountOfCommentsEachProvider(email));
+                    Electricista electricista = new Electricista(bitmap, name, email, 9,location,telefono,obtenerPromedio(email),findAmountOfCommentsEachProvider(email),fechaDeNacimiento);
                     Electricidad.runOnUI(new Runnable()
                     {
                         public void run()
