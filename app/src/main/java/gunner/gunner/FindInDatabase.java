@@ -20,6 +20,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static gunner.gunner.R.id.button2;
 import static gunner.gunner.R.id.editText;
@@ -118,6 +120,78 @@ public class FindInDatabase extends AppCompatActivity {
         TextView locatText = (TextView) findViewById(editText2);
         locatText.setText(location);
 
+    }
+    public void findInDatabaseByLocation(String location){
+        try {
+            System.out.println("Finding electricistas by loc");
+            final DatabaseConnection data = new DatabaseConnection();
+            con=data.connect();
+            PreparedStatement profilePt= con.prepareStatement("SELECT * FROM Users");
+
+            //Ir agregando usuarios mientras que haya mas para agregar
+
+                ResultSet rsProfile = profilePt.executeQuery();
+                while (rsProfile.next()) {
+                    String telefono=rsProfile.getString("telefono");
+                    String location2= rsProfile.getString("location");
+                    String name = rsProfile.getString("User");
+                    String fechaDeNacimiento=rsProfile.getString("date");
+                    String email= rsProfile.getString("email");
+                    X++;
+                    Blob photo = rsProfile.getBlob("Foto");
+                    int blobLength = (int) photo.length();
+                    byte[] photoBytes = photo.getBytes(1, blobLength);
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes .length);
+                    Electricista electricista = new Electricista(bitmap, name, location2, 9,location2,telefono,obtenerPromedio(email),findAmountOfCommentsEachProvider(email),fechaDeNacimiento);
+                    Electricidad.runOnUI(new Runnable()
+                    {
+                        public void run()
+                        {
+                            try {
+
+                                List<String> locationFromSearch = Arrays.asList(location.split("\\s*,\\s*"));
+                                List<String> locationFromDatabase = Arrays.asList(location2.split("\\s*,\\s*"));
+                                System.out.println(locationFromSearch.size());
+                                System.out.println(locationFromDatabase.size());
+                                int i = 0;
+                                while (locationFromSearch.get(i) != null) {
+                                    int x=0;
+                                    boolean breakorNot=false;
+                                        while(locationFromDatabase.get(x)!=null) {
+
+                                            if (locationFromDatabase.get(x).contains(locationFromSearch.get(i))) {
+                                                Electricidad.electricistas.add(electricista);
+                                                Electricidad.adapter.notifyDataSetChanged();
+                                                System.out.println("Adding by location");
+                                                breakorNot=true;
+                                                Thread.currentThread().interrupt();
+                                            }
+                                            x++;
+                                            if(breakorNot) {
+                                                break;
+                                            }
+                                        }
+                                    i++;
+                                    if(breakorNot) {
+                                        break;
+                                    }
+
+
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
+                }
+
+        }catch(Exception e){
+            e.printStackTrace();
+            Log.e("Error", ""+e.getMessage()+"Tomatela loro");
+        }
     }
     public void findElectricistas() {
 

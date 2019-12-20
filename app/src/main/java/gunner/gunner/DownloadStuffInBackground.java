@@ -13,7 +13,9 @@ import java.sql.SQLException;
 public class DownloadStuffInBackground extends IntentService {
     public static boolean isRunning;
     FindInDatabase find = new FindInDatabase();
+   static String LookingAfterLocation;
     static boolean keepLooking=true;
+    static boolean lookForLocation=false;
     public DownloadStuffInBackground() {
         super("Download");
     }
@@ -22,12 +24,16 @@ public class DownloadStuffInBackground extends IntentService {
     protected void onHandleIntent( Intent intent) {
 
 
-        if (keepLooking)
+        if (keepLooking &&!lookForLocation)
         {
             Log.w("E","Downloading electricistas");
             find.findElectricistas();
             keepLooking=false;
             isRunning=false;
+        }
+        if(lookForLocation){
+            find.findInDatabaseByLocation(LookingAfterLocation);
+            lookForLocation=false;
         }
 
         if(Electricista.cantidadElectricistas>Electricidad.electricistas.size()){

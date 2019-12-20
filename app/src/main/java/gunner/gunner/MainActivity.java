@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static boolean gasista;
     static boolean cerrajero;
     static boolean albanil;
+    private View hiddenPanel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             builder1.setMessage("Se creo la cuenta correctamente");
             builder1.setCancelable(true);
+
             builder1.setPositiveButton(
                     "Ok",
                     new DialogInterface.OnClickListener() {
@@ -245,4 +248,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return false;
     }
+
 }

@@ -145,8 +145,6 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
         ms.setItems(list, "Zonas de trabajo", this);
 
 
-
-
         //Date of birth
         TextView date= (TextView) findViewById(location3);
         date.setOnClickListener(new View.OnClickListener() {
@@ -315,8 +313,6 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
                         Spinner spinner=(Spinner)findViewById(R.id.spinner);
                         location=spinner.getSelectedItem().toString();
                         SignUpService.location=location;
-
-
 
                         CheckBox electricista= (CheckBox) findViewById(Electricista);
                         if(electricista.isChecked()){
