@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 import static gunner.gunner.R.id.button2;
 import static gunner.gunner.R.id.editText;
 import static gunner.gunner.R.id.editText2;
@@ -97,7 +99,7 @@ public class FindInDatabase extends AppCompatActivity {
                     addComment.email=email;
 
                    Bitmap bitmap=Electricidad.electricistas.get(ubicacionElectricista).photo;
-                    ImageView image = (ImageView) findViewById(imageView2);
+                    CircleImageView image = (CircleImageView) findViewById(imageView2);
                     image.setImageBitmap(bitmap);
 
 

@@ -3,8 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="155dp"
+    android:background="@drawable/rounded_list"
     android:descendantFocusability="blocksDescendants">
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:autoSizeMaxTextSize="16sp"
+        android:autoSizeMinTextSize="8sp"
+        android:autoSizeTextType="uniform"
+        android:text="Comentario"
+        android:textColor="#F1EEEE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView30" />
 
     <RatingBar
         android:id="@+id/MyRating"
@@ -12,59 +26,104 @@
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/editText4"
-        android:layout_marginStart="136dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="16dp"
         android:layout_toEndOf="@+id/editText4"
         android:isIndicator="true"
         android:numStars="5"
         android:stepSize="0.1"
-        app:layout_constraintBottom_toBottomOf="@+id/editText4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/editText4"
-        app:layout_constraintTop_toTopOf="@+id/editText4"
-        app:layout_constraintVertical_bias="0.382" />
+        app:layout_constraintBottom_toTopOf="@+id/textView27"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="500dp"
-        android:layout_height="2dp"
-        android:layout_alignParentTop="false"
-        android:background="#000000"
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ExtraText">
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView36"
+        android:layout_width="80dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        android:text="Nombre :"
+        android:textColor="#F7F3F3F3"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/profile_image"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView37"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Email :"
+        android:textColor="#F7F3F3F3"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/textView36"
+        app:layout_constraintTop_toBottomOf="@+id/textView36" />
 
     <TextView
         android:id="@+id/editText4"
-        android:layout_width="139dp"
-        android:layout_height="51dp"
-        android:layout_toEndOf="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autoSizeMaxTextSize="16sp"
+        android:autoSizeMinTextSize="8sp"
+        android:autoSizeTextType="uniform"
         android:background="@drawable/empty_background"
         android:inputType="textPersonName"
         android:text="Name"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <TextView
-        android:id="@+id/textView27"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/editText4"
-        app:layout_constraintEnd_toEndOf="@+id/MyRating"
-        app:layout_constraintStart_toStartOf="@+id/MyRating"
-        app:layout_constraintTop_toBottomOf="@+id/MyRating" />
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView28"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView28"
+        app:layout_constraintTop_toTopOf="@+id/textView36" />
 
     <TextView
         android:id="@+id/textView28"
-        android:layout_width="126dp"
-        android:layout_height="54dp"
-        android:background="@drawable/border"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/MyRating"
-        app:layout_constraintStart_toEndOf="@+id/editText4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:autoSizeMaxTextSize="16sp"
+        android:autoSizeMinTextSize="8sp"
+        android:autoSizeTextType="uniform"
+        android:text="@string/email"
+        android:textColor="#F1EEEE"
+        app:layout_constraintBottom_toBottomOf="@+id/textView37"
+        app:layout_constraintStart_toEndOf="@+id/textView37"
+        app:layout_constraintTop_toTopOf="@+id/textView37"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/usuariorandom"
+        app:civ_border_color="#FF000000"
+        app:civ_border_width="2dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Comentario:"
+        android:textColor="#FCFFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/textView27"
+        app:layout_constraintStart_toStartOf="@+id/textView37"
+        app:layout_constraintTop_toBottomOf="@+id/textView37"
+        app:layout_constraintVertical_bias="1.0" />
 
 </android.support.constraint.ConstraintLayout>
