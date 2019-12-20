@@ -36,6 +36,7 @@ public class CommentsListAdaptor extends ArrayAdapter<Comentarios> {
             LayoutInflater inflater= LayoutInflater.from(getContext());
             convertView=inflater.inflate(R.layout.comentarios,null,false);
             viewHolder.image=(ImageView)convertView.findViewById(R.id.profile_image);
+
             viewHolder.name=(TextView)convertView.findViewById(R.id.editText4);
             viewHolder.rating=(RatingBar)convertView.findViewById(R.id.MyRating);
             viewHolder.rating.setRating(comentarios.puntaje);

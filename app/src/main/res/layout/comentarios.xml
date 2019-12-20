@@ -2,17 +2,18 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/comentarios"
     android:layout_width="match_parent"
-    android:layout_height="155dp"
+    android:layout_height="110dp"
     android:background="@drawable/rounded_list"
     android:descendantFocusability="blocksDescendants">
 
     <TextView
         android:id="@+id/textView27"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="16dp"
-        android:autoSizeMaxTextSize="16sp"
+        android:layout_width="249dp"
+        android:layout_height="33dp"
+        android:layout_marginBottom="6dp"
+        android:autoSizeMaxTextSize="12sp"
         android:autoSizeMinTextSize="8sp"
         android:autoSizeTextType="uniform"
         android:text="Comentario"
@@ -62,7 +63,7 @@
         android:id="@+id/textView37"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:text="Email :"
         android:textColor="#F7F3F3F3"
         android:textSize="14sp"
@@ -100,7 +101,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView37"
         app:layout_constraintStart_toEndOf="@+id/textView37"
         app:layout_constraintTop_toTopOf="@+id/textView37"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
@@ -118,7 +119,6 @@
         android:id="@+id/textView30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:text="Comentario:"
         android:textColor="#FCFFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/textView27"
