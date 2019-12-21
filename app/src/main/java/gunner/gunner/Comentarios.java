@@ -8,10 +8,13 @@ public class Comentarios {
     String deQuien;
     String emailDeQuien;
     Bitmap bmp;
+    String name;
 
-    public Comentarios(String comentario, float puntaje,String deQuien){
+    public Comentarios(String comentario, float puntaje,String deQuien,Bitmap bmp, String name){
         this.comentario=comentario;
         this.puntaje=puntaje;
         this.deQuien=deQuien;
+        this.bmp=bmp;
+        this.name=name;
     }
 }

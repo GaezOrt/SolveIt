@@ -207,9 +207,6 @@ public class FindInDatabase extends AppCompatActivity {
             updN.setBoolean(1,true);
 
             ResultSet rs = updN.executeQuery();
-
-
-
             PreparedStatement profilePt= con.prepareStatement("SELECT *  FROM Users WHERE email= ?");
 
             //Ir agregando usuarios mientras que haya mas para agregar
@@ -246,8 +243,6 @@ public class FindInDatabase extends AppCompatActivity {
                             }
                         }
                     });
-
-
                     break;
                 }
             }
@@ -299,7 +294,7 @@ public class FindInDatabase extends AppCompatActivity {
                 String comentario = rs.getString("Comentario");
 
 
-                Comentarios comentarioLista= new Comentarios(comentario,rs.getFloat("Puntaje"),rs.getString("emailDelComentador"));
+                Comentarios comentarioLista= new Comentarios(comentario,rs.getFloat("Puntaje"),rs.getString("emailDelComentador"),findPictureFromUser(rs.getString("emailDelComentador")),findNameFromuser(rs.getString("emailDelComentador")));
                 comentarios.add(comentarioLista);
 
                 System.out.println("Comentario:" + comentarioLista.comentario);
@@ -311,6 +306,45 @@ public class FindInDatabase extends AppCompatActivity {
             e.printStackTrace();
             Log.e("Error", ""+e.getMessage()+"Tomatela loro");
         }
+    }
+    public Bitmap findPictureFromUser(String email){
+        Bitmap bitmap;
+        try {
+            final DatabaseConnection data = new DatabaseConnection();
+            con = data.connect();
+
+            PreparedStatement profilePt = con.prepareStatement("SELECT *  FROM Users WHERE email= ?");
+            profilePt.setString(1,email);
+            ResultSet rs = profilePt.executeQuery();
+            while(rs.next()){
+                Blob photo = rs.getBlob("Foto");
+                int blobLength = (int) photo.length();
+                byte[] photoBytes = photo.getBytes(1, blobLength);
+              bitmap = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes .length);
+                return bitmap;
+            }
+        }catch (Exception e){
+
+        }
+        return null;
+    }
+    public String findNameFromuser(String email){
+
+            try {
+                final DatabaseConnection data = new DatabaseConnection();
+                con = data.connect();
+
+                PreparedStatement profilePt = con.prepareStatement("SELECT *  FROM Users WHERE email= ?");
+                profilePt.setString(1,email);
+                ResultSet rs = profilePt.executeQuery();
+                while(rs.next()){
+                    String name = rs.getString("User");
+                    return name;
+                }
+            }catch (Exception e){
+
+            }
+            return null;
     }
     public float obtenerPromedio(String email)  {
         float total=0;

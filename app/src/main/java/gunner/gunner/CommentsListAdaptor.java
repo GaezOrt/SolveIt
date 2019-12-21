@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -22,7 +23,6 @@ public class CommentsListAdaptor extends ArrayAdapter<Comentarios> {
         this.comentarios=comentarios;
 
 
-
     }
 
 
@@ -36,13 +36,17 @@ public class CommentsListAdaptor extends ArrayAdapter<Comentarios> {
             LayoutInflater inflater= LayoutInflater.from(getContext());
             convertView=inflater.inflate(R.layout.comentarios,null,false);
             viewHolder.image=(ImageView)convertView.findViewById(R.id.profile_image);
-
-            viewHolder.name=(TextView)convertView.findViewById(R.id.editText4);
+            viewHolder.image.setImageBitmap(comentarios.bmp);
+            viewHolder.email =(TextView)convertView.findViewById(R.id.textView28);
             viewHolder.rating=(RatingBar)convertView.findViewById(R.id.MyRating);
             viewHolder.rating.setRating(comentarios.puntaje);
-            viewHolder.name.setText(comentarios.deQuien);
+            viewHolder.email.setText(comentarios.deQuien);
             viewHolder.comentario=(TextView)convertView.findViewById(R.id.textView27);
             viewHolder.comentario.setText(comentarios.comentario);
+
+            viewHolder.name=(TextView) convertView.findViewById(R.id.editText4);
+            viewHolder.name.setText(comentarios.name);
+
             convertView.setTag(viewHolder);
         }else{
             viewHolder=(ViewHolder)convertView.getTag();
@@ -51,9 +55,10 @@ public class CommentsListAdaptor extends ArrayAdapter<Comentarios> {
     }
     public class ViewHolder{
         ImageView image;
-        TextView name;
+        TextView email;
         RatingBar rating;
         TextView comentario;
+        TextView name;
 
     }
 }
