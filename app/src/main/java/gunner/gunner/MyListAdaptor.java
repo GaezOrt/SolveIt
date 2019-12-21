@@ -53,7 +53,7 @@ public class MyListAdaptor extends ArrayAdapter<Electricista> {
             viewHolder.rating=(RatingBar)convertView.findViewById(R.id.MyRating);
             viewHolder.rating.setRating(electricista.promedio);
             LayerDrawable stars = (LayerDrawable) viewHolder.rating.getProgressDrawable();
-            stars.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
+            stars.getDrawable(2).setColorFilter(Color.MAGENTA, PorterDuff.Mode.SRC_ATOP);
             viewHolder.amount=(TextView)convertView.findViewById(R.id.textView42);
             int x=(int)electricista.cantidadDeComentarios;
             viewHolder.amount.setText("Reviews: "+(x));
