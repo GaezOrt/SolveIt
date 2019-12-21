@@ -153,7 +153,7 @@ public class FindInDatabase extends AppCompatActivity {
                     int blobLength = (int) photo.length();
                     byte[] photoBytes = photo.getBytes(1, blobLength);
                     Bitmap bitmap = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes .length);
-                    Electricista electricista = new Electricista(bitmap, name, location2, 9,location2,telefono,obtenerPromedio(email),findAmountOfCommentsEachProvider(email),fechaDeNacimiento);
+                    Electricista electricista = new Electricista(bitmap, name, email, 9,location2,telefono,obtenerPromedio(email),findAmountOfCommentsEachProvider(email),fechaDeNacimiento);
                     Electricidad.runOnUI(new Runnable()
                     {
                         public void run()

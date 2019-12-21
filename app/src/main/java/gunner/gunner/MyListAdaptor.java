@@ -61,6 +61,8 @@ public class MyListAdaptor extends ArrayAdapter<Electricista> {
             viewHolder.ubicacion.setText(electricista.location);
             viewHolder.nacimiento=(TextView)convertView.findViewById(R.id.textView41);
             viewHolder.nacimiento.setText(electricista.fechaDeNacimiento);
+            viewHolder.email=(TextView)convertView.findViewById(R.id.textView28);
+            viewHolder.email.setText(electricista.email);
             convertView.setTag(viewHolder);
         }else{
         viewHolder  =(ViewHolder)convertView.getTag();
@@ -74,6 +76,7 @@ public class MyListAdaptor extends ArrayAdapter<Electricista> {
         TextView amount;
         TextView ubicacion;
         TextView nacimiento;
+        TextView email;
 
     }
 }

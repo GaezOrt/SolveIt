@@ -121,7 +121,6 @@ public class Electricidad extends AppCompatActivity implements MultiSpinner.Mult
         //Realizar ampliacion cuando se clickea item de lista
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     startService(d);
                     FindInDatabase.namePassedViaParam = electricistas.get(position).email;
@@ -130,7 +129,6 @@ public class Electricidad extends AppCompatActivity implements MultiSpinner.Mult
                     mp.start();
                     finish();
                     startActivity(new Intent(Electricidad.this, FindInDatabase.class));
-
                 }
             });
 
@@ -142,7 +140,6 @@ public class Electricidad extends AppCompatActivity implements MultiSpinner.Mult
             mp.start();
             finish();
             startActivity(new Intent(Electricidad.this, MainActivity.class));
-
         });
     }
 
