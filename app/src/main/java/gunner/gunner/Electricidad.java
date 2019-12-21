@@ -115,12 +115,15 @@ public class Electricidad extends AppCompatActivity implements MultiSpinner.Mult
 
                 });
 
+        DownloadStuffInBackground.searchComments=true;
+        Intent d= new Intent(this,DownloadStuffInBackground.class);
 
         //Realizar ampliacion cuando se clickea item de lista
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    startService(d);
                     FindInDatabase.namePassedViaParam = electricistas.get(position).email;
                     FindInDatabase.ubicacionElectricista=position;
                     MediaPlayer mp=MediaPlayer.create(getApplicationContext(),R.raw.cli);
@@ -134,6 +137,7 @@ public class Electricidad extends AppCompatActivity implements MultiSpinner.Mult
         //Ir para atras
         final ImageView atrasBut=(ImageView) findViewById(imageView5) ;
         atrasBut.setOnClickListener((v)-> {
+
             MediaPlayer  mp=MediaPlayer.create(getApplicationContext(),R.raw.cli);
             mp.start();
             finish();

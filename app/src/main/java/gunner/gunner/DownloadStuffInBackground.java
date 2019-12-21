@@ -16,6 +16,8 @@ public class DownloadStuffInBackground extends IntentService {
    static String LookingAfterLocation;
     static boolean keepLooking=true;
     static boolean lookForLocation=false;
+    static boolean searchComments=false;
+
     public DownloadStuffInBackground() {
         super("Download");
     }
@@ -35,6 +37,11 @@ public class DownloadStuffInBackground extends IntentService {
             find.findInDatabaseByLocation(LookingAfterLocation);
             lookForLocation=false;
         }
+        if(searchComments){
+            find.findComments(FindInDatabase.namePassedViaParam,FindInDatabase.comentarios);
+            searchComments=false;
+        }
+
 
         if(Electricista.cantidadElectricistas>Electricidad.electricistas.size()){
             Electricidad.showLoad=true;

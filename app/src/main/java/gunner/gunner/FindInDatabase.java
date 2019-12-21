@@ -7,6 +7,8 @@ import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -57,7 +59,9 @@ public class FindInDatabase extends AppCompatActivity {
         setContentView(R.layout.find_user);
 
         //Encontrar comentarios del usuario
-        findComments(namePassedViaParam,comentarios);
+
+
+        //findComments(namePassedViaParam,comentarios);
 
 
 
@@ -298,12 +302,23 @@ public class FindInDatabase extends AppCompatActivity {
 
                 String comentario = rs.getString("Comentario");
 
-
                 Comentarios comentarioLista= new Comentarios(comentario,rs.getFloat("Puntaje"),rs.getString("emailDelComentador"),findPictureFromUser(rs.getString("emailDelComentador")),findNameFromuser(rs.getString("emailDelComentador")));
-                comentarios.add(comentarioLista);
 
-                System.out.println("Comentario:" + comentarioLista.comentario);
-                System.out.println(comentarios.size());
+                FindInDatabase.runOnUI(new Runnable()
+                {
+                    public void run()
+                    {
+                        try
+                        {
+                            comentarios.add(comentarioLista);
+                            FindInDatabase.adapter.notifyDataSetChanged();
+                        }
+                        catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                });
             }
 
 
@@ -380,4 +395,15 @@ public class FindInDatabase extends AppCompatActivity {
         startActivity(new Intent(FindInDatabase.this, Electricidad.class));
         comentarios.clear();
     }
+
+    public static Handler UIHandler;
+
+    static {
+        UIHandler = new Handler(Looper.getMainLooper());
+    }
+
+    public static void runOnUI(Runnable runnable) {
+        UIHandler.post(runnable);
+    }
 }
+
