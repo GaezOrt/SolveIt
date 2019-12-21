@@ -4,6 +4,7 @@ package gunner.gunner;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -66,6 +67,8 @@ public class FindInDatabase extends AppCompatActivity {
         //Boton agregar review
         ImageView image= (ImageView)findViewById(imageView15);
         image.setOnClickListener((v)-> {
+                    MediaPlayer  mp=MediaPlayer.create(getApplicationContext(),R.raw.cli);
+                    mp.start();
                 startActivity(new Intent(FindInDatabase.this, addComment.class));
         });
 
@@ -82,6 +85,8 @@ public class FindInDatabase extends AppCompatActivity {
         //Atras button
         final ImageView atrasBut = (ImageView) findViewById(imageView20);
         atrasBut.setOnClickListener((v) -> {
+            MediaPlayer  mp=MediaPlayer.create(getApplicationContext(),R.raw.cli);
+            mp.start();
             startActivity(new Intent(FindInDatabase.this, Electricidad.class));
             finish();
             comentarios.clear();
@@ -370,6 +375,8 @@ public class FindInDatabase extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
+        MediaPlayer mp=MediaPlayer.create(getApplicationContext(),R.raw.cli);
+        mp.start();
         startActivity(new Intent(FindInDatabase.this, Electricidad.class));
         comentarios.clear();
     }

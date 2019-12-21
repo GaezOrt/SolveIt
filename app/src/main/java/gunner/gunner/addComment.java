@@ -2,6 +2,7 @@ package gunner.gunner;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.media.Rating;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -33,10 +34,6 @@ public class addComment extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_comment_page);
-
-
-
-
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this,R.style.MyDialogTheme);
@@ -74,7 +71,8 @@ public class addComment extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 RatingBar rating = (RatingBar) findViewById(MyRating);
-
+                MediaPlayer mp=MediaPlayer.create(getApplicationContext(),R.raw.cli);
+                mp.start();
                 EditText edit = (EditText) findViewById(R.id.editText8);
                 comment = edit.getText().toString();
                 if (LogInService.email == null) {

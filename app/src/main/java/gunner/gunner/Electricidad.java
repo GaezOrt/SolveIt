@@ -2,6 +2,7 @@ package gunner.gunner;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -122,7 +123,8 @@ public class Electricidad extends AppCompatActivity implements MultiSpinner.Mult
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     FindInDatabase.namePassedViaParam = electricistas.get(position).email;
                     FindInDatabase.ubicacionElectricista=position;
-
+                    MediaPlayer mp=MediaPlayer.create(getApplicationContext(),R.raw.cli);
+                    mp.start();
                     finish();
                     startActivity(new Intent(Electricidad.this, FindInDatabase.class));
 
@@ -132,7 +134,8 @@ public class Electricidad extends AppCompatActivity implements MultiSpinner.Mult
         //Ir para atras
         final ImageView atrasBut=(ImageView) findViewById(imageView5) ;
         atrasBut.setOnClickListener((v)-> {
-
+            MediaPlayer  mp=MediaPlayer.create(getApplicationContext(),R.raw.cli);
+            mp.start();
             finish();
             startActivity(new Intent(Electricidad.this, MainActivity.class));
 
@@ -141,6 +144,8 @@ public class Electricidad extends AppCompatActivity implements MultiSpinner.Mult
 
     @Override
     public void onBackPressed() {
+        MediaPlayer  mp=MediaPlayer.create(getApplicationContext(),R.raw.cli);
+        mp.start();
         startActivity(new Intent(Electricidad.this, MainActivity.class));
 
     }

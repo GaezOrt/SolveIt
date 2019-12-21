@@ -165,7 +165,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         electricidadBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 electricidadBut.startAnimation(myAnim);
+                MediaPlayer  mp=MediaPlayer.create(getApplicationContext(),R.raw.cli);
+                mp.start();
                 startActivity(new Intent(MainActivity.this, Electricidad.class));
             }
         });
