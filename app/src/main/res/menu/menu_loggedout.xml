@@ -6,17 +6,17 @@
         <item
             android:id="@+id/first"
             android:icon="@drawable/access"
-            android:title="Log in" />
+            android:title="Entrar" />
 
         <item
             android:id="@+id/second"
             android:icon="@drawable/createaccs"
-            android:title="Create an account" />
+            android:title="Crear cuenta" />
 
         <item
             android:id="@+id/third"
             android:icon="@drawable/aboutus"
-            android:title="About us" />
+            android:title="Sobre nosotros" />
 
     </group>
 

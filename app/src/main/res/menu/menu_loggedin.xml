@@ -6,17 +6,17 @@
         <item
             android:id="@+id/first"
             android:icon="@drawable/access"
-            android:title="My profile" />
+            android:title="Mi perfil" />
 
         <item
             android:id="@+id/second"
             android:icon="@drawable/createaccs"
-            android:title="Log out" />
+            android:title="Salir de mi cuenta" />
 
         <item
             android:id="@+id/third"
             android:icon="@drawable/aboutus"
-            android:title="About us" />
+            android:title="Sobre nosotros" />
 
     </group>
 

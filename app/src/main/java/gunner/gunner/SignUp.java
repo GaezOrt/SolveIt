@@ -15,6 +15,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
@@ -32,6 +33,8 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -79,10 +82,17 @@ import static gunner.gunner.R.id.editText2;
 import static gunner.gunner.R.id.editText3;
 import static gunner.gunner.R.id.editText5;
 import static gunner.gunner.R.id.imageView10;
+import static gunner.gunner.R.id.imageView12;
+import static gunner.gunner.R.id.imageView13;
 import static gunner.gunner.R.id.imageView18;
 import static gunner.gunner.R.id.imageView2;
+import static gunner.gunner.R.id.imageView21;
+import static gunner.gunner.R.id.imageView3;
+import static gunner.gunner.R.id.imageView4;
 import static gunner.gunner.R.id.imageView8;
+import static gunner.gunner.R.id.imageView9;
 import static gunner.gunner.R.id.location3;
+import static gunner.gunner.R.id.spinner;
 
 public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpinnerListener {
 
@@ -129,6 +139,38 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
+
+        EditText emaila=(EditText)findViewById(editText3);
+        EditText usernamea=(EditText)findViewById(editText);
+        EditText passworda=(EditText)findViewById(editText2);
+        EditText phonea=(EditText)findViewById(editText5);
+        TextView datea=(TextView) findViewById(location3);
+        Spinner spinnera=(Spinner)findViewById(spinner);
+        final Animation animationFields = AnimationUtils.loadAnimation(this, R.anim.sign_up_fields);
+        emaila.startAnimation(animationFields);
+        usernamea.startAnimation(animationFields);
+        passworda.startAnimation(animationFields);
+        phonea.startAnimation(animationFields);
+        datea.startAnimation(animationFields);
+        spinnera.startAnimation(animationFields);
+
+        ImageView emailImage=(ImageView)findViewById(imageView9);
+        ImageView namee=(ImageView)findViewById(imageView12);
+        ImageView passwordd=(ImageView)findViewById(imageView13);
+        ImageView phonee=(ImageView)findViewById(imageView4);
+        ImageView datee=(ImageView)findViewById(imageView21);
+        ImageView locationImage=(ImageView)findViewById(imageView3);
+        emailImage.startAnimation(animationFields);
+        namee.startAnimation(animationFields);
+        passwordd.startAnimation(animationFields);
+        phonee.startAnimation(animationFields);
+        datee.startAnimation(animationFields);
+        locationImage.startAnimation(animationFields);
+
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.black));
+        }
 
         MultiSpinner ms = (MultiSpinner) findViewById(R.id.spinner);
         List<String> list = new ArrayList<String>();

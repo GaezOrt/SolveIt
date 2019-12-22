@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -50,6 +51,10 @@ public class Electricidad extends AppCompatActivity implements MultiSpinner.Mult
     static boolean showLoad;
     static   MyListAdaptor adapter ;
     protected void onCreate(Bundle savedInstanceState) {
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.black));
+        }
 
 
         setTheme(R.style.Theme_Design_NoActionBar);

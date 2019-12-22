@@ -271,6 +271,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     break;
                 case R.id.second:
                     loggedIn = false;
+                    firstTimeLoogedIn=true;
                     startActivity(new Intent(this, MainActivity.class));
                     break;
             }
