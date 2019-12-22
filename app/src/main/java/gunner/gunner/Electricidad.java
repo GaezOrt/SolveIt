@@ -11,6 +11,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,24 +27,16 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Iterator;
 import java.util.List;
 
-import static android.view.View.INVISIBLE;
-import static android.view.View.VISIBLE;
-import static gunner.gunner.R.id.all;
-import static gunner.gunner.R.id.button2;
-import static gunner.gunner.R.id.editText6;
-import static gunner.gunner.R.id.imageView10;
 import static gunner.gunner.R.id.imageView5;
 import static gunner.gunner.R.id.imageView6;
-import static gunner.gunner.R.id.lista;
-
 import static gunner.gunner.R.id.spinner2;
 import static gunner.gunner.R.id.swiperefresh;
-import static gunner.gunner.R.id.textView27;
+import static gunner.gunner.R.id.textView29;
 
 /**
  * Created by Gaston on 11/18/2019.
@@ -63,6 +57,24 @@ public class Electricidad extends AppCompatActivity implements MultiSpinner.Mult
         setContentView(R.layout.electr);
 
 
+        final Animation listaAnim = AnimationUtils.loadAnimation(this, R.anim.translate_electricidad);
+        ListView lista=(ListView)findViewById(R.id.lista);
+        lista.setAnimation(listaAnim);
+
+        final Animation locationAnim = AnimationUtils.loadAnimation(this, R.anim.translate_location_search);
+        ImageView imageLoc=(ImageView) findViewById(R.id.imageView22);
+        imageLoc.startAnimation(locationAnim);
+
+        Spinner spinner2= (Spinner)findViewById(R.id.spinner2);
+        spinner2.startAnimation(locationAnim);
+
+        ImageView searchImage=(ImageView) findViewById(imageView6);
+        searchImage.startAnimation(locationAnim);
+
+        TextView text2= (TextView)findViewById(textView29);
+        text2.startAnimation(locationAnim);
+
+
         MultiSpinner ms = (MultiSpinner) findViewById(R.id.spinner2);
         List<String> list = new ArrayList<String>();
         list.add("Palermo");
@@ -78,12 +90,12 @@ public class Electricidad extends AppCompatActivity implements MultiSpinner.Mult
         ms.setItems(list, "Zonas de trabajo", this);
 
         ImageView search=(ImageView)findViewById(imageView6);
-        EditText edit=(EditText)findViewById(editText6);
+
         Intent r = new Intent(this, DownloadStuffInBackground.class);
         search.setOnClickListener((v)->{
             Electricidad.electricistas.clear();
             DownloadStuffInBackground.lookForLocation=true;
-            Spinner spinner= (Spinner)findViewById(spinner2);
+            Spinner spinner= (Spinner)findViewById(R.id.spinner2);
             DownloadStuffInBackground.LookingAfterLocation=spinner.getSelectedItem().toString();
             startService(r);
             adapter.notifyDataSetChanged();
@@ -91,7 +103,7 @@ public class Electricidad extends AppCompatActivity implements MultiSpinner.Mult
         });
 
         adapter = new MyListAdaptor(this,R.layout.list_view,electricistas);
-        final ListView listView= (ListView) findViewById(lista);
+        final ListView listView= (ListView) findViewById(R.id.lista);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
          listView.invalidateViews();

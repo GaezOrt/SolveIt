@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -26,6 +28,7 @@ import static gunner.gunner.R.id.button2;
 import static gunner.gunner.R.id.button7;
 import static gunner.gunner.R.id.editText;
 import static gunner.gunner.R.id.editText2;
+import static gunner.gunner.R.id.imageView;
 import static gunner.gunner.R.id.imageView19;
 import static gunner.gunner.R.id.imageView8;
 
@@ -37,6 +40,28 @@ public class LogIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+
+
+        //Animations
+        final Animation emailID = AnimationUtils.loadAnimation(this, R.anim.translate_email_login);
+        EditText email=(EditText)findViewById(editText);
+        email.setAnimation(emailID);
+
+        final Animation passwordAnim = AnimationUtils.loadAnimation(this, R.anim.translate_password_login);
+        EditText passwordID=(EditText)findViewById(editText2);
+        passwordID.setAnimation(passwordAnim);
+
+        final Animation loginbutton = AnimationUtils.loadAnimation(this, R.anim.translate_login_button);
+        Button loginButton=(Button)findViewById(button7);
+        loginButton.setAnimation(loginbutton);
+
+
+        final Animation logInImageAnim = AnimationUtils.loadAnimation(this, R.anim.translate_image_login);
+        ImageView logInImage=(ImageView) findViewById(imageView);
+        logInImage.setAnimation(logInImageAnim);
+
+
+
 
         //Error al loggear
         if(LogInService.estado==1){
