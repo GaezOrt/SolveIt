@@ -7,9 +7,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.Build;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -40,9 +44,11 @@ import static gunner.gunner.R.id.textView11;
 import static gunner.gunner.R.id.textView12;
 import static gunner.gunner.R.id.textView13;
 import static gunner.gunner.R.id.textView3;
+import static gunner.gunner.R.id.textView31;
 import static gunner.gunner.R.id.textView5;
 import static gunner.gunner.R.id.textView7;
 import static gunner.gunner.R.id.textView9;
+import static gunner.gunner.R.id.welcomeMessage;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -63,6 +69,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static boolean cerrajero;
     static boolean albanil;
     private View hiddenPanel;
+    static boolean firstTimeLoogedIn=true;
+    CoordinatorLayout coord;
+    private Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -187,12 +196,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Cuenta loggeada
 
         NavigationView nav = (NavigationView) findViewById(nav_viw);
-        TextView welcome = (TextView)findViewById(R.id.textView20);
+
         if (loggedIn) {
 
+            if(firstTimeLoogedIn) {
+                ConstraintLayout con= (ConstraintLayout)findViewById(welcomeMessage);
+                //con.setVisibility(VISIBLE);
+                TextView text= (TextView)findViewById(textView31);
+                text.setText("Bienvenido "+ MainActivity.loggedUsername+ "!");
+                final Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fadein);
+                final Animation fadeout = AnimationUtils.loadAnimation(this, R.anim.fadeout);
+                con.startAnimation(fadeIn);
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
 
-            welcome.setText("Welcome "+LogInService.name +" !");
-            welcome.setVisibility(VISIBLE);
+                      con.startAnimation(fadeout);
+                    }
+                }, 4000);
+
+
+               firstTimeLoogedIn=false;
+            }
+
+
             View hView =  navigationView.getHeaderView(0);
             TextView nav_user = (TextView)hView.findViewById(R.id.textView14);
             nav_user.setText("►"+ LogInService.name);
@@ -213,7 +240,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             nav.getMenu().clear();
             navigationView.inflateMenu(R.menu.menu_loggedout);
-            welcome.setVisibility(INVISIBLE);
+
         }
     }
 
