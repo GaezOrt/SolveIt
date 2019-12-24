@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.LocationManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Handler;
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static boolean firstTimeLoogedIn=true;
     CoordinatorLayout coord;
     private Handler mHandler = new Handler();
-
+    static LocationManager locationManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
