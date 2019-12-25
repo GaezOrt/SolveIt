@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 
 public class SignUpService extends IntentService {
-
+    static int verificationNumber;
     static String username;
     static String password;
     static String email;

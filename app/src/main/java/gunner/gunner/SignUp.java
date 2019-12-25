@@ -479,12 +479,14 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
 
         } else {
             try {
+                Random random= new Random();
+                SignUpService.verificationNumber=random.nextInt(5000);
 
                 final DatabaseConnection databaseConnection = new DatabaseConnection();
                 databaseConnection.connect();
                 databaseConnection.createUser(
                         SignUpService.email, SignUpService.username, SignUpService.password,
-                        SignUpService.phoneNumber, SignUpService.location, SignUpService.pathForImage,
+                        SignUpService.phoneNumber, SignUpService.location, SignUpService.pathForImage,SignUpService.verificationNumber,
                         MainActivity.electricista,
                         MainActivity.carpintero,
                         MainActivity.computacion,
@@ -496,9 +498,11 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
                 try {
                     GMailSender sender = new GMailSender("servyargentina@gmail.com",
                             "servy2019");
-                    Random random= new Random();
 
-                    sender.sendMail("Verification code", "Verification code: "+ random.nextInt(5000),
+
+                    sender.sendMail("Servy Argentina (Codigo de verificacion)", "Querido "+SignUpService.username+" bienvenido a Servy! Este es su codigo de verificacion" +
+                                    " "
+                                    +SignUpService.verificationNumber,
                             "servyargentina@gmail.com", SignUpService.email);
                     System.out.println("Holaa");
                 } catch (Exception e) {
