@@ -155,8 +155,6 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
 
 
 
-
-
         EditText emaila=(EditText)findViewById(editText3);
         EditText usernamea=(EditText)findViewById(editText);
         EditText passworda=(EditText)findViewById(editText2);

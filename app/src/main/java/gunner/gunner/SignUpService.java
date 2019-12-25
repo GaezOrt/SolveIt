@@ -36,7 +36,7 @@ public class SignUpService extends IntentService {
 
         }
         if(datosOk){
-            Intent intentt = new Intent (this, MainActivity.class);
+            Intent intentt = new Intent (this, ConfirmationCode.class);
             intentt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentt);
             stopSelf();
