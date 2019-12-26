@@ -97,6 +97,7 @@ public class LogIn extends AppCompatActivity {
             alert11.show();
             TextView passwordIncText=(TextView) findViewById(PasswordInc);
             passwordIncText.setVisibility(VISIBLE);
+            LogInService.estado=0;
         }
 
 
@@ -194,17 +195,12 @@ public class LogIn extends AppCompatActivity {
                     MainActivity.loggedIn = true;
                     LogInService.logIn=true;
 
-
-
                     finish();
                     return;
                 }
-
-
             }
         }catch (Exception e){
             e.printStackTrace();
-
         }
     }
 

@@ -60,7 +60,7 @@ public class ConfirmationCode extends AppCompatActivity {
 
                         pt.setString(1, confirmationCodeOnApp);
                         ResultSet rs = pt.executeQuery();
-                        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(this,R.style.MyDialogTheme);
                         if(rs.next()==false){
                                     try
                                     {
@@ -92,6 +92,7 @@ public class ConfirmationCode extends AppCompatActivity {
                                         new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
                                                 dialog.cancel();
+                                                startActivity(new Intent(ConfirmationCode.this, MainActivity.class));
                                             }
                                         });
                                 AlertDialog alert11 = builder1.create();
@@ -106,7 +107,7 @@ public class ConfirmationCode extends AppCompatActivity {
                                     pstmt.setBoolean(1,true);
                                     pstmt.setString(2,SignUpService.email);
                                 }
-                                startActivity(new Intent(ConfirmationCode.this, MainActivity.class));
+
                                 pstmt.executeUpdate();
                             }
                         }

@@ -50,7 +50,7 @@ public class MyListAdaptor extends ArrayAdapter<Electricista> {
             viewHolder.name=(TextView)convertView.findViewById(R.id.editText4);
             viewHolder.image.setImageBitmap(electricista.photo);
             viewHolder.name.setText(electricista.name);
-            viewHolder.rating=(RatingBar)convertView.findViewById(R.id.MyRating);
+            viewHolder.rating=(RatingBar)convertView.findViewById(R.id.myRating);
             viewHolder.rating.setRating(electricista.promedio);
             LayerDrawable stars = (LayerDrawable) viewHolder.rating.getProgressDrawable();
             stars.getDrawable(2).setColorFilter(Color.MAGENTA, PorterDuff.Mode.SRC_ATOP);
@@ -64,6 +64,38 @@ public class MyListAdaptor extends ArrayAdapter<Electricista> {
             viewHolder.email=(TextView)convertView.findViewById(R.id.textView28);
             viewHolder.email.setText(electricista.email);
             convertView.setTag(viewHolder);
+            if(x<5){
+                viewHolder.rango=(TextView)convertView.findViewById(R.id.textView43);
+                viewHolder.rango.setText("Servy nuevo");
+                viewHolder.rangoRating=(RatingBar)convertView.findViewById(R.id.MyRating);
+                viewHolder.rangoRating.setRating(1);
+                LayerDrawable stars2 = (LayerDrawable) viewHolder.rangoRating.getProgressDrawable();
+                stars2.getDrawable(2).setColorFilter(Color.TRANSPARENT, PorterDuff.Mode.SRC_ATOP);
+            }
+            if(x>=5 && x<25){
+                viewHolder.rango=(TextView)convertView.findViewById(R.id.textView43);
+                viewHolder.rango.setText("Servy plata");
+                viewHolder.rangoRating=(RatingBar)convertView.findViewById(R.id.MyRating);
+                viewHolder.rangoRating.setRating(1);
+                LayerDrawable stars2 = (LayerDrawable) viewHolder.rangoRating.getProgressDrawable();
+                stars2.getDrawable(2).setColorFilter(Color.LTGRAY, PorterDuff.Mode.SRC_ATOP);
+            }
+            if(x>=25 && x<50){
+                viewHolder.rango=(TextView)convertView.findViewById(R.id.textView43);
+                viewHolder.rango.setText("Servy oro");
+                viewHolder.rangoRating=(RatingBar)convertView.findViewById(R.id.MyRating);
+                viewHolder.rangoRating.setRating(1);
+                LayerDrawable stars2 = (LayerDrawable) viewHolder.rangoRating.getProgressDrawable();
+                stars2.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
+            }
+            if(x>=50){
+                viewHolder.rango=(TextView)convertView.findViewById(R.id.textView43);
+                viewHolder.rango.setText("Servy Platinium");
+                viewHolder.rangoRating=(RatingBar)convertView.findViewById(R.id.MyRating);
+                viewHolder.rangoRating.setRating(1);
+                LayerDrawable stars2 = (LayerDrawable) viewHolder.rating.getProgressDrawable();
+                stars.getDrawable(2).setColorFilter(Color.MAGENTA, PorterDuff.Mode.SRC_ATOP);
+            }
         }else{
         viewHolder  =(ViewHolder)convertView.getTag();
         }
@@ -73,10 +105,12 @@ public class MyListAdaptor extends ArrayAdapter<Electricista> {
         CircleImageView image;
         TextView name;
         RatingBar rating;
+        RatingBar rangoRating;
         TextView amount;
         TextView ubicacion;
         TextView nacimiento;
         TextView email;
+        TextView rango;
 
     }
 }
