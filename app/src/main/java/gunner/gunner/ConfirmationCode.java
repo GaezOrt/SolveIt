@@ -25,6 +25,31 @@ public class ConfirmationCode extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.confirmation_layout);
 
+
+        if(SignUpService.datosOk){
+            android.support.v7.app.AlertDialog.Builder builder1 = new android.support.v7.app.AlertDialog.Builder(this,R.style.MyDialogTheme);
+            builder1.setTitle("Sign up correcto");
+            builder1.setIcon(R.drawable.usercorrect);
+
+            builder1.setMessage("Se creo la cuenta correctamente");
+            builder1.setCancelable(true);
+
+            builder1.setPositiveButton(
+                    "Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            android.support.v7.app.AlertDialog alert11 = builder1.create();
+            alert11.show();
+
+            SignUpService.datosOk=false;
+        }
+
+
+
+
         Button confirmation= (Button)findViewById(R.id.button7);
         confirmation.setOnClickListener(
                 (View v) ->  {
@@ -37,8 +62,6 @@ public class ConfirmationCode extends AppCompatActivity {
                         ResultSet rs = pt.executeQuery();
                         AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
                         if(rs.next()==false){
-
-
                                     try
                                     {
 
@@ -83,13 +106,14 @@ public class ConfirmationCode extends AppCompatActivity {
                                     pstmt.setBoolean(1,true);
                                     pstmt.setString(2,SignUpService.email);
                                 }
+                                startActivity(new Intent(ConfirmationCode.this, MainActivity.class));
                                 pstmt.executeUpdate();
                             }
                         }
                     }catch (Exception e){
                         e.printStackTrace();
                     }
-                    startActivity(new Intent(ConfirmationCode.this, MainActivity.class));
+
                 }
         );
     }

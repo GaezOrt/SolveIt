@@ -262,7 +262,7 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
             builder1.setTitle("Sign up error");
             builder1.setIcon(R.drawable.errorlogin);
 
-            builder1.setMessage("No se pudo crear la cuenta.");
+            builder1.setMessage("No se pudo crear la cuenta. Chequee que ningun campo este vacio");
             builder1.setCancelable(true);
             builder1.setPositiveButton(
                     "Ok",
@@ -284,7 +284,7 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
             phone.setText(SignUpService.phoneNumber);
 
 
-            SignUpService.estado=0;
+
 
         }
 

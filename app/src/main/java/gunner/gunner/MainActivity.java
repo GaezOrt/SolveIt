@@ -77,26 +77,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        if(SignUpService.datosOk){
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(this,R.style.MyDialogTheme);
-            builder1.setTitle("Sign up correcto");
-            builder1.setIcon(R.drawable.usercorrect);
-
-            builder1.setMessage("Se creo la cuenta correctamente");
-            builder1.setCancelable(true);
-
-            builder1.setPositiveButton(
-                    "Ok",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
-            AlertDialog alert11 = builder1.create();
-            alert11.show();
-
-            SignUpService.datosOk=false;
-        }
 
 
 
