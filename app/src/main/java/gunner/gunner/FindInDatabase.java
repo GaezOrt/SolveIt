@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -18,8 +17,6 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.sun.mail.imap.protocol.Item;
-
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -30,8 +27,6 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static gunner.gunner.Chat.messageAdapter;
-import static gunner.gunner.R.id.button2;
 import static gunner.gunner.R.id.editText;
 import static gunner.gunner.R.id.editText2;
 import static gunner.gunner.R.id.editText3;
@@ -51,7 +46,7 @@ public class FindInDatabase extends AppCompatActivity {
     static String nombre;
     static String numeroTelefono;
     static String location;
-    static String namePassedViaParam;
+    static String emailPassed;
     static int ubicacionElectricista;
     public static int X;
     static   CommentsListAdaptor adapter ;
@@ -61,8 +56,7 @@ public class FindInDatabase extends AppCompatActivity {
         setContentView(R.layout.find_user);
 
 
-        Intent u = new Intent(this, ChatInteraction.class);
-        startService(u);
+
 
         //Contactar
         Button button12= (Button)findViewById(R.id.button12);
@@ -75,7 +69,7 @@ public class FindInDatabase extends AppCompatActivity {
 
 
            //Perfil del usuario datos
-            viewProfileFromList(namePassedViaParam);
+            viewProfileFromList(emailPassed);
 
         //Boton agregar review
         ImageView image= (ImageView)findViewById(imageView15);
@@ -87,7 +81,7 @@ public class FindInDatabase extends AppCompatActivity {
 
         //Dandole valor a rating bar
         RatingBar rating= (RatingBar)findViewById(rate);
-        float x=obtenerPromedio(namePassedViaParam);
+        float x=obtenerPromedio(emailPassed);
         rating.setRating(x);
 
         adapter = new CommentsListAdaptor(this,R.layout.comentarios,comentarios);
@@ -108,10 +102,48 @@ public class FindInDatabase extends AppCompatActivity {
     }
 
     //Buscar en base de datos
+    public void findConversationOfUserInDatabase2(String email){
+        try {
+            System.out.println("finding messages");
+
+            final DatabaseConnection data = new DatabaseConnection();
+
+            con = data.connect();
+            PreparedStatement updN = con.prepareStatement("SELECT * FROM Conversaciones where segundoIntegrante=? ");
+            updN.setString(1,email);
+            updN.setFetchSize(1);
+            ResultSet rs = updN.executeQuery();
+
+            while (rs.next()) {
+
+                ConversacionesUsuarioListaTipo conversacion=new ConversacionesUsuarioListaTipo(rs.getString("mensaje"),rs.getString("primerIntegrante"));
+                ConversacionesUsuario.runOnUI(new Runnable() {
+                    public void run() {
+                        try {
+                            if(ConversacionesUsuario.conversaciones.contains(conversacion.nombre)) {
+                            }else{
+                                insertUniqueItem(conversacion);
+                                ConversacionesUsuario.adapter.notifyDataSetChanged();
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("Error", "" + e.getMessage() + "Tomatela loro");
+
+
+        }
+    }
     public void findConversationsOfUserInDatabase(String email){
         try {
             System.out.println("finding messages");
-            Chat.mensajes.clear();
+          ConversacionesUsuario.conversaciones.clear();
             final DatabaseConnection data = new DatabaseConnection();
 
             con = data.connect();

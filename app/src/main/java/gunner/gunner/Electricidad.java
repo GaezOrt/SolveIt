@@ -1,57 +1,28 @@
 package gunner.gunner;
 
-import android.Manifest;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationManager;
 import android.media.MediaPlayer;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
-
-
-
 
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-import static gunner.gunner.MainActivity.locationManager;
 import static gunner.gunner.R.id.imageView5;
 import static gunner.gunner.R.id.imageView6;
-import static gunner.gunner.R.id.spinner2;
 import static gunner.gunner.R.id.swiperefresh;
 import static gunner.gunner.R.id.textView29;
 
@@ -161,7 +132,7 @@ public class Electricidad extends AppCompatActivity implements MultiSpinner.Mult
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 startService(d);
-                FindInDatabase.namePassedViaParam = electricistas.get(position).email;
+                FindInDatabase.emailPassed = electricistas.get(position).email;
                 FindInDatabase.ubicacionElectricista = position;
                 MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.cli);
                 mp.start();

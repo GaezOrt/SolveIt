@@ -1,11 +1,14 @@
 package gunner.gunner;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -29,6 +32,19 @@ public class ConversacionesUsuario extends AppCompatActivity {
         listView.setAdapter(adapter);
         Intent u = new Intent(this, DescargarConversacionesDeUsuario.class);
         startService(u);
+
+        //Realizar ampliacion cuando se clickea item de lista
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.cli);
+                mp.start();
+                finish();
+                DescargarConversacionesDeUsuario.email= ConversacionesUsuario.conversaciones.get(position).nombre;
+                startActivity(new Intent(ConversacionesUsuario.this, Chat.class));
+            }
+        });
     }
 
     public static Handler UIHandler;

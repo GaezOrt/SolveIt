@@ -1,14 +1,8 @@
 package gunner.gunner;
 
 import android.app.IntentService;
-import android.app.Service;
 import android.content.Intent;
-import android.os.IBinder;
-import android.provider.ContactsContract;
-import android.support.annotation.Nullable;
 import android.util.Log;
-
-import java.sql.SQLException;
 
 public class DownloadStuffInBackground extends IntentService {
     public static boolean isRunning;
@@ -38,7 +32,7 @@ public class DownloadStuffInBackground extends IntentService {
             lookForLocation=false;
         }
         if(searchComments){
-            find.findComments(FindInDatabase.namePassedViaParam,FindInDatabase.comentarios);
+            find.findComments(FindInDatabase.emailPassed,FindInDatabase.comentarios);
             searchComments=false;
         }
 
