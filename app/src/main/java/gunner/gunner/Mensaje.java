@@ -1,10 +1,11 @@
 package gunner.gunner;
 
 public class Mensaje {
-    static String nombre1;
+    public String nombre;
     static String nombre2;
-    static String mensaje;
-    public Mensaje( String mensaje){
+    public String mensaje;
+    public Mensaje( String mensaje, String nombre){
         this.mensaje=mensaje;
+        this.nombre=nombre;
     }
 }

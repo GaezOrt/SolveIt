@@ -310,13 +310,14 @@ public class FindInDatabase extends AppCompatActivity {
             ResultSet rs = updN.executeQuery();
 
             while (rs.next()) {
-                if (rs.getString("primerIntegrante").equals(persona1) && rs.getString("segundoIntegrante").equals(persona2)) {
+                if ((rs.getString("primerIntegrante").equals(persona1) && rs.getString("segundoIntegrante").equals(persona2))|| (rs.getString("primerIntegrante").equals(persona2) && rs.getString("segundoIntegrante").equals(persona1))) {
                    String g=rs.getString("mensaje");
                     System.out.println(rs.getString("mensaje"));
+                    Mensaje mensaje= new Mensaje(g,rs.getString("primerIntegrante"));
                     Chat.runOnUI(new Runnable() {
                         public void run() {
                             try {
-                                Chat.mensajes.add(g);
+                                Chat.mensajes.add(mensaje);
                                 Chat.messageAdapter.notifyDataSetChanged();
                                 System.out.println(" MENSAJE" + g);
                             } catch (Exception e) {

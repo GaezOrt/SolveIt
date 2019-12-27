@@ -21,7 +21,7 @@ public class Chat extends AppCompatActivity {
     private EditText editText;
     static MessageAdapter messageAdapter;
     private ListView messagesView;
-    static ArrayList<String> mensajes =new ArrayList<String>();
+    static ArrayList<Mensaje> mensajes =new ArrayList<Mensaje>();
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate  (savedInstanceState);
@@ -63,6 +63,12 @@ public class Chat extends AppCompatActivity {
                                                              pstmt.executeUpdate();
                                                              editText.setText("");
                                                              messagesView.invalidateViews();
+                                                             if(FindInDatabase.emailPassed !=null) {
+                                                                 find.findMensajesBetween2Persons(LogInService.email, FindInDatabase.emailPassed);
+                                                             }else{
+                                                                 find.findMensajesBetween2Persons(LogInService.email, DescargarConversacionesDeUsuario.email);
+
+                                                             }
                                                          } catch (Exception e) {
                                                              e.printStackTrace();
                                                          }

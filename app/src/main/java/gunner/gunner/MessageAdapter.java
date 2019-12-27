@@ -17,12 +17,12 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MessageAdapter extends ArrayAdapter<String> {
+public class MessageAdapter extends ArrayAdapter<Mensaje> {
 
-    ArrayList<String> mensajes;
+    ArrayList<Mensaje> mensajes;
     int resource;
     Context context;
-    public MessageAdapter(Context context,int resource, ArrayList <String> mensajes){
+    public MessageAdapter(Context context,int resource, ArrayList <Mensaje> mensajes){
         super(context, R.layout.my_message,mensajes);
         this.resource=resource;
         this.context=context;
@@ -38,10 +38,15 @@ public class MessageAdapter extends ArrayAdapter<String> {
 
         if(convertView==null){
             LayoutInflater inflater= LayoutInflater.from(getContext());
-            convertView=inflater.inflate(R.layout.my_message,null,false);
-
+            if(!mensajes.get(position).nombre.equals(LogInService.email)) {
+                convertView = inflater.inflate(R.layout.their_message, null, false);
+                viewHolder.mensajeAgeno=(TextView)convertView.findViewById(R.id.name);
+                viewHolder.mensajeAgeno.setText(mensajes.get(position).nombre);
+            }else{
+                convertView = inflater.inflate(R.layout.my_message, null, false);
+            }
             viewHolder.mensaje =(TextView)convertView.findViewById(R.id.message);
-            viewHolder.mensaje.setText(mensajes.get(position));
+            viewHolder.mensaje.setText(mensajes.get(position).mensaje);
 
             convertView.setTag(viewHolder);
 
@@ -52,6 +57,7 @@ public class MessageAdapter extends ArrayAdapter<String> {
     }
     public class ViewHolder{
       TextView mensaje;
+      TextView mensajeAgeno;
 
     }
 }
