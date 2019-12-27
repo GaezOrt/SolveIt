@@ -22,11 +22,12 @@ public class Chat extends AppCompatActivity {
     static MessageAdapter messageAdapter;
     private ListView messagesView;
     static ArrayList<Mensaje> mensajes =new ArrayList<Mensaje>();
+    static boolean vieneDeBusqueda=false;
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate  (savedInstanceState);
         setContentView(R.layout.message_layour);
-
+        mensajes.clear();
         Intent u = new Intent(this, ChatInteraction.class);
 
         startService(u);
@@ -56,9 +57,13 @@ public class Chat extends AppCompatActivity {
                                                              pstmt.setString(1, LogInService.email);
                                                              pstmt.setString(2, editText.getText().toString());
                                                              if(FindInDatabase.emailPassed !=null) {
+                                                                 Chat.mensajes.clear();
                                                                  pstmt.setString(3, FindInDatabase.emailPassed);
-                                                             }else{
-                                                                 pstmt.setString(3, DescargarConversacionesDeUsuario.email);
+                                                             }else {
+                                                                 if (!vieneDeBusqueda) {
+                                                                        Chat.mensajes.clear();
+                                                                     pstmt.setString(3, DescargarConversacionesDeUsuario.email);
+                                                                 }
                                                              }
                                                              pstmt.executeUpdate();
                                                              editText.setText("");
@@ -66,6 +71,7 @@ public class Chat extends AppCompatActivity {
                                                              if(FindInDatabase.emailPassed !=null) {
                                                                  find.findMensajesBetween2Persons(LogInService.email, FindInDatabase.emailPassed);
                                                              }else{
+                                                                 if(!vieneDeBusqueda)
                                                                  find.findMensajesBetween2Persons(LogInService.email, DescargarConversacionesDeUsuario.email);
 
                                                              }

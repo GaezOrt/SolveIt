@@ -63,6 +63,7 @@ public class FindInDatabase extends AppCompatActivity {
         button12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Chat.vieneDeBusqueda=true;
                 startActivity(new Intent(FindInDatabase.this, Chat.class));
             }
         });

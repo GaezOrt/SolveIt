@@ -18,7 +18,7 @@ public class ChatInteraction extends IntentService {
     @Override
     protected void onHandleIntent( Intent intent) {
         if(seguirDescargandoChat){
-
+            Chat.mensajes.clear();
             find.findMensajesBetween2Persons(LogInService.email,FindInDatabase.emailPassed);
 
             seguirDescargandoChat=false;
@@ -26,6 +26,7 @@ public class ChatInteraction extends IntentService {
         }
 
         if(descargarDeLaListaDeChats){
+            Chat.mensajes.clear();
             find.findMensajesBetween2Persons(LogInService.email,DescargarConversacionesDeUsuario.email);
             descargarDeLaListaDeChats=false;
         }
