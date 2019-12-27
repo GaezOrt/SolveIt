@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.LocationManager;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Handler;
@@ -33,11 +34,13 @@ import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 
 import static gunner.gunner.R.id.button;
+import static gunner.gunner.R.id.image;
 import static gunner.gunner.R.id.imageView14;
 import static gunner.gunner.R.id.imageView16;
 
 
-
+import static gunner.gunner.R.id.imageView23;
+import static gunner.gunner.R.id.imageView7;
 import static gunner.gunner.R.id.nav_viw;
 import static gunner.gunner.R.id.navDrawer;
 import static gunner.gunner.R.id.textView10;
@@ -164,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
-        ImageView menuOpener = (ImageView) findViewById(imageView16);
+        ImageView menuOpener = (ImageView) findViewById(imageView7);
         menuOpener.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -200,6 +203,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                firstTimeLoogedIn=false;
             }
 
+            ImageView notifcaciones= (ImageView)findViewById(imageView16);
+            notifcaciones.setVisibility(VISIBLE);
+            ImageView mensajes= (ImageView)findViewById(imageView23);
+            mensajes.setVisibility(VISIBLE);
+
+            mensajes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(MainActivity.this, ConversacionesUsuario.class));
+                }
+            });
 
             View hView =  navigationView.getHeaderView(0);
             TextView nav_user = (TextView)hView.findViewById(R.id.textView14);

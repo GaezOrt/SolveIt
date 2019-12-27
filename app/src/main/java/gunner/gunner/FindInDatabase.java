@@ -18,6 +18,8 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.sun.mail.imap.protocol.Item;
+
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -106,6 +108,59 @@ public class FindInDatabase extends AppCompatActivity {
     }
 
     //Buscar en base de datos
+    public void findConversationsOfUserInDatabase(String email){
+        try {
+            System.out.println("finding messages");
+            Chat.mensajes.clear();
+            final DatabaseConnection data = new DatabaseConnection();
+
+            con = data.connect();
+            PreparedStatement updN = con.prepareStatement("SELECT * FROM Conversaciones where primerIntegrante=? ");
+            updN.setString(1,email);
+            updN.setFetchSize(1);
+            ResultSet rs = updN.executeQuery();
+
+            while (rs.next()) {
+                    FindInDatabase find= new FindInDatabase();
+                    ConversacionesUsuarioListaTipo conversacion=new ConversacionesUsuarioListaTipo(rs.getString("mensaje"),rs.getString("segundoIntegrante"));
+                    ConversacionesUsuario.runOnUI(new Runnable() {
+                        public void run() {
+                            try {
+                                if(ConversacionesUsuario.conversaciones.contains(conversacion.nombre)) {
+                                }else{
+                                    insertUniqueItem(conversacion);
+                                    ConversacionesUsuario.adapter.notifyDataSetChanged();
+                                }
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("Error", "" + e.getMessage() + "Tomatela loro");
+
+
+        }
+    }
+
+    public void insertUniqueItem(ConversacionesUsuarioListaTipo item) {
+        if(!contains(item)) {
+            ConversacionesUsuario.conversaciones.add(item);
+        }
+    }
+
+    private boolean contains(ConversacionesUsuarioListaTipo item) {
+        for(ConversacionesUsuarioListaTipo i : ConversacionesUsuario.conversaciones) {
+            if(i.nombre.equals(item.nombre)) {
+                return true;
+            }
+        }
+        return false;
+    }
     public void viewProfileFromList(String email){
         try {
                     numeroTelefono = Electricidad.electricistas.get(ubicacionElectricista).number;

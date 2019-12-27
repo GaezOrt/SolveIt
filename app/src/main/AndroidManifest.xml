@@ -27,6 +27,7 @@
             </intent-filter>
 
         </activity>
+        <activity android:name=".ConversacionesUsuario"></activity>
         <activity android:name=".addComment"></activity>
         <activity android:name=".FindInDatabase"></activity>
         <activity android:name=".ProfileUser"></activity>
@@ -40,6 +41,7 @@
         <activity android:name=".MainActivity">
 
         </activity>
+        <service android:name=".DescargarConversacionesDeUsuario"></service>
         <service android:name=".LogInService"></service>
         <service android:name=".ChatInteraction"></service>
         <service

@@ -58,7 +58,27 @@
                 app:layout_constraintStart_toEndOf="@+id/imageView2"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.523" />
+
         </android.support.constraint.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/imageView23"
+            android:layout_width="39dp"
+            android:layout_height="26dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/messageblack" />
+
+        <ImageView
+            android:id="@+id/imageView16"
+            android:layout_width="39dp"
+            android:layout_height="26dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toStartOf="@+id/imageView23"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/bellblack" />
+
         <Button
             android:id="@+id/button6"
             style="@style/Widget.AppCompat.Button.Borderless"
@@ -333,7 +353,7 @@
             app:layout_constraintTop_toBottomOf="@+id/button10" />
 
         <ImageView
-            android:id="@+id/imageView16"
+            android:id="@+id/imageView7"
             android:layout_width="61dp"
             android:layout_height="38dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -355,7 +375,6 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
 
     </android.support.constraint.ConstraintLayout>
