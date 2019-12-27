@@ -28,6 +28,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static gunner.gunner.Chat.messageAdapter;
 import static gunner.gunner.R.id.button2;
 import static gunner.gunner.R.id.editText;
 import static gunner.gunner.R.id.editText2;
@@ -52,17 +53,23 @@ public class FindInDatabase extends AppCompatActivity {
     static int ubicacionElectricista;
     public static int X;
     static   CommentsListAdaptor adapter ;
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.Theme_Design_NoActionBar);
         setContentView(R.layout.find_user);
 
-        //Encontrar comentarios del usuario
 
+        Intent u = new Intent(this, ChatInteraction.class);
+        startService(u);
 
-        //findComments(namePassedViaParam,comentarios);
-
+        //Contactar
+        Button button12= (Button)findViewById(R.id.button12);
+        button12.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(FindInDatabase.this, Chat.class));
+            }
+        });
 
 
            //Perfil del usuario datos
@@ -202,6 +209,41 @@ public class FindInDatabase extends AppCompatActivity {
         }catch(Exception e){
             e.printStackTrace();
             Log.e("Error", ""+e.getMessage()+"Tomatela loro");
+        }
+    }
+    public void findMensajesBetween2Persons(String persona1, String persona2) {
+        try {
+            System.out.println("finding messages");
+            Chat.mensajes.clear();
+            final DatabaseConnection data = new DatabaseConnection();
+
+            con = data.connect();
+            PreparedStatement updN = con.prepareStatement("SELECT * FROM Conversaciones ");
+            updN.setFetchSize(1);
+            ResultSet rs = updN.executeQuery();
+
+            while (rs.next()) {
+                if (rs.getString("primerIntegrante").equals(persona1) && rs.getString("segundoIntegrante").equals(persona2)) {
+                   String g=rs.getString("mensaje");
+                    System.out.println(rs.getString("mensaje"));
+                    Chat.runOnUI(new Runnable() {
+                        public void run() {
+                            try {
+                                Chat.mensajes.add(g);
+                                Chat.messageAdapter.notifyDataSetChanged();
+                                System.out.println(" MENSAJE" + g);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("Error", "" + e.getMessage() + "Tomatela loro");
+
+
         }
     }
     public void findElectricistas() {
