@@ -35,13 +35,13 @@ public class MessageAdapter extends ArrayAdapter<String> {
          ViewHolder holder = new ViewHolder();
         ViewHolder viewHolder=new ViewHolder();
         convertView= null;
-        String mensaje= this.mensajes.get(position);
+
         if(convertView==null){
             LayoutInflater inflater= LayoutInflater.from(getContext());
             convertView=inflater.inflate(R.layout.my_message,null,false);
 
             viewHolder.mensaje =(TextView)convertView.findViewById(R.id.message);
-            viewHolder.mensaje.setText(mensaje);
+            viewHolder.mensaje.setText(mensajes.get(position));
 
             convertView.setTag(viewHolder);
 

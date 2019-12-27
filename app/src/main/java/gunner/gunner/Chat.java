@@ -58,9 +58,11 @@ public class Chat extends AppCompatActivity {
                                                              pstmt.setString(2, editText.getText().toString());
                                                              pstmt.setString(3, FindInDatabase.namePassedViaParam);
                                                              pstmt.executeUpdate();
+                                                             editText.setText("");
                                                              FindInDatabase find= new FindInDatabase();
-                                                             messagesView.invalidateViews();
+
                                                              find.findMensajesBetween2Persons(LogInService.email,FindInDatabase.namePassedViaParam);
+                                                             messagesView.invalidateViews();
                                                          } catch (Exception e) {
                                                              e.printStackTrace();
                                                          }
