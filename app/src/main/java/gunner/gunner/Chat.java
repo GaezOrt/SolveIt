@@ -20,7 +20,7 @@ public class Chat extends AppCompatActivity {
 
     private EditText editText;
     static MessageAdapter messageAdapter;
-    private ListView messagesView;
+    public ListView listView;
     static ArrayList<Mensaje> mensajes =new ArrayList<Mensaje>();
     static boolean vieneDeBusqueda=false;
     @Override
@@ -29,69 +29,71 @@ public class Chat extends AppCompatActivity {
         setContentView(R.layout.message_layour);
         mensajes.clear();
         Intent u = new Intent(this, ChatInteraction.class);
-
+        DescargarConversacionesDeUsuario descargar= new DescargarConversacionesDeUsuario();
+        descargar.seguirDescargandoChat=true;
         startService(u);
 
         editText = (EditText) findViewById(R.id.editText);
-            ImageButton image= (ImageButton)findViewById(R.id.sender);
-            image.setOnClickListener(new View.OnClickListener() {
+        ImageButton image= (ImageButton)findViewById(R.id.sender);
+        image.setOnClickListener(new View.OnClickListener() {
 
-                                         @Override
-                                         public void onClick(View view) {
-                                             Chat.runOnUI(new Runnable() {
-                                                 public void run() {
-                                                     try {
-                                                         FindInDatabase find= new FindInDatabase();
-                                                         if(FindInDatabase.emailPassed !=null) {
-                                                             find.findMensajesBetween2Persons(LogInService.email, FindInDatabase.emailPassed);
-                                                         }else{
-                                                             find.findMensajesBetween2Persons(LogInService.email, DescargarConversacionesDeUsuario.email);
+            @Override
+            public void onClick(View view) {
+                Chat.runOnUI(new Runnable() {
+                    public void run() {
+                        try {
+                            FindInDatabase find= new FindInDatabase();
+                            if(FindInDatabase.emailPassed !=null) {
+                                //find.findMensajesBetween2Persons(LogInService.email, FindInDatabase.emailPassed);
+                            }else{
+                               // find.findMensajesBetween2Persons(LogInService.email, DescargarConversacionesDeUsuario.email);
 
-                                                         }
-                                                         System.out.println("Image clicked");
-                                                         String updateSQL = "INSERT INTO Conversaciones VALUES (?,?,?)";
-                                                         final DatabaseConnection data = new DatabaseConnection();
-                                                         try {
-                                                             con = data.connect();
-                                                             PreparedStatement pstmt = con.prepareStatement(updateSQL);
-                                                             pstmt.setString(1, LogInService.email);
-                                                             pstmt.setString(2, editText.getText().toString());
-                                                             if(FindInDatabase.emailPassed !=null) {
-                                                                 Chat.mensajes.clear();
-                                                                 pstmt.setString(3, FindInDatabase.emailPassed);
-                                                             }else {
-                                                                 if (!vieneDeBusqueda) {
-                                                                        Chat.mensajes.clear();
-                                                                     pstmt.setString(3, DescargarConversacionesDeUsuario.email);
-                                                                 }
-                                                             }
-                                                             pstmt.executeUpdate();
-                                                             editText.setText("");
-                                                             messagesView.invalidateViews();
-                                                             if(FindInDatabase.emailPassed !=null) {
-                                                                 find.findMensajesBetween2Persons(LogInService.email, FindInDatabase.emailPassed);
-                                                             }else{
-                                                                 if(!vieneDeBusqueda)
-                                                                 find.findMensajesBetween2Persons(LogInService.email, DescargarConversacionesDeUsuario.email);
+                            }
+                            System.out.println("Image clicked");
+                            String updateSQL = "INSERT INTO Conversaciones VALUES (?,?,?)";
+                            final DatabaseConnection data = new DatabaseConnection();
+                            try {
+                                con = data.connect();
+                                PreparedStatement pstmt = con.prepareStatement(updateSQL);
+                                pstmt.setString(1, LogInService.email);
+                                pstmt.setString(2, editText.getText().toString());
+                                if(FindInDatabase.emailPassed !=null) {
 
-                                                             }
-                                                         } catch (Exception e) {
-                                                             e.printStackTrace();
-                                                         }
-                                                     } catch (Exception e) {
-                                                         e.printStackTrace();
-                                                     }
-                                                 }
-                                             });
-                                         }
-                                     });
+                                    pstmt.setString(3, FindInDatabase.emailPassed);
+                                }else {
+                                    if (!vieneDeBusqueda) {
+
+                                        pstmt.setString(3, DescargarConversacionesDeUsuario.email);
+                                    }
+                                }
+                                pstmt.executeUpdate();
+                                editText.setText("");
+
+                                Chat.messageAdapter.notifyDataSetChanged();
+                                if(FindInDatabase.emailPassed !=null) {
+                                  //  find.findMensajesBetween2Persons(LogInService.email, FindInDatabase.emailPassed);
+                                }else{
+                                    if(!vieneDeBusqueda) {
+                                        // find.findMensajesBetween2Persons(LogInService.email, DescargarConversacionesDeUsuario.email);
+                                    }
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
 
 
         messageAdapter = new MessageAdapter(this, R.layout.my_message, mensajes);
-        final ListView listView = (ListView) findViewById(R.id.messages_view);
+        listView = (ListView) findViewById(R.id.messages_view);
         listView.setAdapter(messageAdapter);
         messageAdapter.notifyDataSetChanged();
-        listView.invalidateViews();
+
     }
     public static Handler UIHandler;
 
@@ -104,4 +106,5 @@ public class Chat extends AppCompatActivity {
     }
 
 }
+
 

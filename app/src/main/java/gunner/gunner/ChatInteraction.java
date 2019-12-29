@@ -17,21 +17,16 @@ public class ChatInteraction extends IntentService {
 
     @Override
     protected void onHandleIntent( Intent intent) {
-        if(seguirDescargandoChat){
-            Chat.mensajes.clear();
-            find.findMensajesBetween2Persons(LogInService.email,FindInDatabase.emailPassed);
 
-            seguirDescargandoChat=false;
+        while(true) {
+            //find.insertAllTheTime(LogInService.email, DescargarConversacionesDeUsuario.email);
+            find.findMensajesBetween2Persons(LogInService.email, DescargarConversacionesDeUsuario.email);
+            descargarDeLaListaDeChats = false;
+                }
 
-        }
-
-        if(descargarDeLaListaDeChats){
-            Chat.mensajes.clear();
-            find.findMensajesBetween2Persons(LogInService.email,DescargarConversacionesDeUsuario.email);
-            descargarDeLaListaDeChats=false;
         }
 
 
 
-    }
+
 }

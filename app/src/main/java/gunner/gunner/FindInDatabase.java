@@ -69,15 +69,15 @@ public class FindInDatabase extends AppCompatActivity {
         });
 
 
-           //Perfil del usuario datos
-            viewProfileFromList(emailPassed);
+        //Perfil del usuario datos
+        viewProfileFromList(emailPassed);
 
         //Boton agregar review
         ImageView image= (ImageView)findViewById(imageView15);
         image.setOnClickListener((v)-> {
-                    MediaPlayer  mp=MediaPlayer.create(getApplicationContext(),R.raw.cli);
-                    mp.start();
-                startActivity(new Intent(FindInDatabase.this, addComment.class));
+            MediaPlayer  mp=MediaPlayer.create(getApplicationContext(),R.raw.cli);
+            mp.start();
+            startActivity(new Intent(FindInDatabase.this, addComment.class));
         });
 
         //Dandole valor a rating bar
@@ -144,7 +144,7 @@ public class FindInDatabase extends AppCompatActivity {
     public void findConversationsOfUserInDatabase(String email){
         try {
             System.out.println("finding messages");
-          ConversacionesUsuario.conversaciones.clear();
+            ConversacionesUsuario.conversaciones.clear();
             final DatabaseConnection data = new DatabaseConnection();
 
             con = data.connect();
@@ -154,22 +154,22 @@ public class FindInDatabase extends AppCompatActivity {
             ResultSet rs = updN.executeQuery();
 
             while (rs.next()) {
-                    FindInDatabase find= new FindInDatabase();
-                    ConversacionesUsuarioListaTipo conversacion=new ConversacionesUsuarioListaTipo(rs.getString("mensaje"),rs.getString("segundoIntegrante"));
-                    ConversacionesUsuario.runOnUI(new Runnable() {
-                        public void run() {
-                            try {
-                                if(ConversacionesUsuario.conversaciones.contains(conversacion.nombre)) {
-                                }else{
-                                    insertUniqueItem(conversacion);
-                                    ConversacionesUsuario.adapter.notifyDataSetChanged();
-                                }
-
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                FindInDatabase find= new FindInDatabase();
+                ConversacionesUsuarioListaTipo conversacion=new ConversacionesUsuarioListaTipo(rs.getString("mensaje"),rs.getString("segundoIntegrante"));
+                ConversacionesUsuario.runOnUI(new Runnable() {
+                    public void run() {
+                        try {
+                            if(ConversacionesUsuario.conversaciones.contains(conversacion.nombre)) {
+                            }else{
+                                insertUniqueItem(conversacion);
+                                ConversacionesUsuario.adapter.notifyDataSetChanged();
                             }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                    });
+                    }
+                });
 
             }
         } catch (Exception e) {
@@ -196,15 +196,15 @@ public class FindInDatabase extends AppCompatActivity {
     }
     public void viewProfileFromList(String email){
         try {
-                    numeroTelefono = Electricidad.electricistas.get(ubicacionElectricista).number;
-                    nombre = Electricidad.electricistas.get(ubicacionElectricista).name;
-                    email = Electricidad.electricistas.get(ubicacionElectricista).email;
-                    location = Electricidad.electricistas.get(ubicacionElectricista).location;
-                    addComment.email=email;
+            numeroTelefono = Electricidad.electricistas.get(ubicacionElectricista).number;
+            nombre = Electricidad.electricistas.get(ubicacionElectricista).name;
+            email = Electricidad.electricistas.get(ubicacionElectricista).email;
+            location = Electricidad.electricistas.get(ubicacionElectricista).location;
+            addComment.email=email;
 
-                   Bitmap bitmap=Electricidad.electricistas.get(ubicacionElectricista).photo;
-                    CircleImageView image = (CircleImageView) findViewById(imageView2);
-                    image.setImageBitmap(bitmap);
+            Bitmap bitmap=Electricidad.electricistas.get(ubicacionElectricista).photo;
+            CircleImageView image = (CircleImageView) findViewById(imageView2);
+            image.setImageBitmap(bitmap);
 
 
         } catch (Exception e) {
@@ -236,91 +236,143 @@ public class FindInDatabase extends AppCompatActivity {
 
             //Ir agregando usuarios mientras que haya mas para agregar
 
-                ResultSet rsProfile = profilePt.executeQuery();
-                while (rsProfile.next()) {
-                    String telefono=rsProfile.getString("telefono");
-                    String location2= rsProfile.getString("location");
-                    String name = rsProfile.getString("User");
-                    String fechaDeNacimiento=rsProfile.getString("date");
-                    String email= rsProfile.getString("email");
-                    X++;
-                    Blob photo = rsProfile.getBlob("Foto");
-                    int blobLength = (int) photo.length();
-                    byte[] photoBytes = photo.getBytes(1, blobLength);
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes .length);
-                    Electricista electricista = new Electricista(bitmap, name, email, 9,location2,telefono,obtenerPromedio(email),findAmountOfCommentsEachProvider(email),fechaDeNacimiento);
-                    Electricidad.runOnUI(new Runnable()
+            ResultSet rsProfile = profilePt.executeQuery();
+            while (rsProfile.next()) {
+                String telefono=rsProfile.getString("telefono");
+                String location2= rsProfile.getString("location");
+                String name = rsProfile.getString("User");
+                String fechaDeNacimiento=rsProfile.getString("date");
+                String email= rsProfile.getString("email");
+                X++;
+                Blob photo = rsProfile.getBlob("Foto");
+                int blobLength = (int) photo.length();
+                byte[] photoBytes = photo.getBytes(1, blobLength);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes .length);
+                Electricista electricista = new Electricista(bitmap, name, email, 9,location2,telefono,obtenerPromedio(email),findAmountOfCommentsEachProvider(email),fechaDeNacimiento);
+                Electricidad.runOnUI(new Runnable()
+                {
+                    public void run()
                     {
-                        public void run()
-                        {
-                            try {
+                        try {
 
-                                List<String> locationFromSearch = Arrays.asList(location.split("\\s*,\\s*"));
-                                List<String> locationFromDatabase = Arrays.asList(location2.split("\\s*,\\s*"));
-                                System.out.println(locationFromSearch.size());
-                                System.out.println(locationFromDatabase.size());
-                                int i = 0;
-                                while (locationFromSearch.get(i) != null) {
-                                    int x=0;
-                                    boolean breakorNot=false;
-                                        while(locationFromDatabase.get(x)!=null) {
+                            List<String> locationFromSearch = Arrays.asList(location.split("\\s*,\\s*"));
+                            List<String> locationFromDatabase = Arrays.asList(location2.split("\\s*,\\s*"));
+                            System.out.println(locationFromSearch.size());
+                            System.out.println(locationFromDatabase.size());
+                            int i = 0;
+                            while (locationFromSearch.get(i) != null) {
+                                int x=0;
+                                boolean breakorNot=false;
+                                while(locationFromDatabase.get(x)!=null) {
 
-                                            if (locationFromDatabase.get(x).contains(locationFromSearch.get(i))) {
-                                                Electricidad.electricistas.add(electricista);
-                                                Electricidad.adapter.notifyDataSetChanged();
-                                                System.out.println("Adding by location");
-                                                breakorNot=true;
-                                                Thread.currentThread().interrupt();
-                                            }
-                                            x++;
-                                            if(breakorNot) {
-                                                break;
-                                            }
-                                        }
-                                    i++;
+                                    if (locationFromDatabase.get(x).contains(locationFromSearch.get(i))) {
+                                        Electricidad.electricistas.add(electricista);
+                                        Electricidad.adapter.notifyDataSetChanged();
+                                        System.out.println("Adding by location");
+                                        breakorNot=true;
+                                        Thread.currentThread().interrupt();
+                                    }
+                                    x++;
                                     if(breakorNot) {
                                         break;
                                     }
-
-
                                 }
-                            }
-                            catch (Exception e)
-                            {
-                                e.printStackTrace();
+                                i++;
+                                if(breakorNot) {
+                                    break;
+                                }
+
+
                             }
                         }
-                    });
+                        catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                });
 
-                }
+            }
 
         }catch(Exception e){
             e.printStackTrace();
             Log.e("Error", ""+e.getMessage()+"Tomatela loro");
         }
     }
-    public void findMensajesBetween2Persons(String persona1, String persona2) {
+    public void insertAllTheTime(String persona1,String persona2){
         try {
             System.out.println("finding messages");
-            Chat.mensajes.clear();
+
             final DatabaseConnection data = new DatabaseConnection();
 
             con = data.connect();
-            PreparedStatement updN = con.prepareStatement("SELECT * FROM Conversaciones ");
+            PreparedStatement updN = con.prepareStatement("SELECT * FROM Conversaciones ",
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
             updN.setFetchSize(1);
             ResultSet rs = updN.executeQuery();
 
             while (rs.next()) {
                 if ((rs.getString("primerIntegrante").equals(persona1) && rs.getString("segundoIntegrante").equals(persona2))|| (rs.getString("primerIntegrante").equals(persona2) && rs.getString("segundoIntegrante").equals(persona1))) {
-                   String g=rs.getString("mensaje");
+                    String g=rs.getString("mensaje");
                     System.out.println(rs.getString("mensaje"));
-                    Mensaje mensaje= new Mensaje(g,rs.getString("primerIntegrante"));
+                    Mensaje mensaje;
+                    if(!rs.getString("segundoIntegrante").equals(LogInService.email)) {
+                        mensaje = new Mensaje(g, rs.getString("segundoIntegrante"));
+                    }else{
+                        mensaje = new Mensaje(g, rs.getString("primerIntegrante"));
+                    }
                     Chat.runOnUI(new Runnable() {
                         public void run() {
                             try {
-                                Chat.mensajes.add(mensaje);
-                                Chat.messageAdapter.notifyDataSetChanged();
+                                    System.out.println("ROWW"+ rs.getRow());
+                                if(Chat.mensajes.size()<rs.getRow()) {
+                                    Chat.mensajes.add(mensaje);
+                                    Chat.messageAdapter.notifyDataSetChanged();
+                                }
                                 System.out.println(" MENSAJE" + g);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("Error", "" + e.getMessage() + "Tomatela loro");
+
+
+        }
+    }
+    public void findMensajesBetween2Persons(String persona1, String persona2) {
+        try {
+            System.out.println("finding messages");
+
+            final DatabaseConnection data = new DatabaseConnection();
+
+            con = data.connect();
+            PreparedStatement updN = con.prepareStatement("SELECT * FROM Conversaciones ",
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+            updN.setFetchSize(1);
+            ResultSet rs = updN.executeQuery();
+
+            while (rs.next()) {
+                if ((rs.getString("primerIntegrante").equals(persona1) && rs.getString("segundoIntegrante").equals(persona2))|| (rs.getString("primerIntegrante").equals(persona2) && rs.getString("segundoIntegrante").equals(persona1))) {
+                    String g=rs.getString("mensaje");
+                    System.out.println(rs.getString("mensaje"));
+                    Mensaje mensaje= new Mensaje(g,rs.getString("primerIntegrante"));
+
+                    Chat.runOnUI(new Runnable() {
+                        public void run() {
+                            try {
+                                    if(Chat.mensajes.size()<rs.getRow()) {
+                                        Chat.mensajes.add(mensaje);
+                                        Chat.messageAdapter.notifyDataSetChanged();
+                                        System.out.println(" MENSAJE" + g);
+                                    }
+
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -471,7 +523,7 @@ public class FindInDatabase extends AppCompatActivity {
                 Blob photo = rs.getBlob("Foto");
                 int blobLength = (int) photo.length();
                 byte[] photoBytes = photo.getBytes(1, blobLength);
-              bitmap = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes .length);
+                bitmap = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes .length);
                 return bitmap;
             }
         }catch (Exception e){
@@ -481,21 +533,21 @@ public class FindInDatabase extends AppCompatActivity {
     }
     public String findNameFromuser(String email){
 
-            try {
-                final DatabaseConnection data = new DatabaseConnection();
-                con = data.connect();
+        try {
+            final DatabaseConnection data = new DatabaseConnection();
+            con = data.connect();
 
-                PreparedStatement profilePt = con.prepareStatement("SELECT *  FROM Users WHERE email= ?");
-                profilePt.setString(1,email);
-                ResultSet rs = profilePt.executeQuery();
-                while(rs.next()){
-                    String name = rs.getString("User");
-                    return name;
-                }
-            }catch (Exception e){
-
+            PreparedStatement profilePt = con.prepareStatement("SELECT *  FROM Users WHERE email= ?");
+            profilePt.setString(1,email);
+            ResultSet rs = profilePt.executeQuery();
+            while(rs.next()){
+                String name = rs.getString("User");
+                return name;
             }
-            return null;
+        }catch (Exception e){
+
+        }
+        return null;
     }
     public float obtenerPromedio(String email)  {
         float total=0;
@@ -537,4 +589,3 @@ public class FindInDatabase extends AppCompatActivity {
         UIHandler.post(runnable);
     }
 }
-

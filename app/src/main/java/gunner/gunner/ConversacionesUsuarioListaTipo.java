@@ -2,8 +2,8 @@ package gunner.gunner;
 
 public class ConversacionesUsuarioListaTipo {
 
-    static String nombre;
-    static String mensaje;
+     String nombre;
+     String mensaje;
     public ConversacionesUsuarioListaTipo( String mensaje, String nombre){
         this.mensaje=mensaje;
         this.nombre=nombre;

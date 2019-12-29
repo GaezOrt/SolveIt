@@ -133,6 +133,7 @@ public class Electricidad extends AppCompatActivity implements MultiSpinner.Mult
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 startService(d);
                 FindInDatabase.emailPassed = electricistas.get(position).email;
+                DescargarConversacionesDeUsuario.email=electricistas.get(position).email;
                 FindInDatabase.ubicacionElectricista = position;
                 MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.cli);
                 mp.start();

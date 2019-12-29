@@ -26,7 +26,7 @@ public class ConversacionesUsuario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTheme(R.style.Theme_Design_NoActionBar);
         setContentView(R.layout.conversaciones_usuario);
-
+        conversaciones.clear();
         adapter = new ConversacionesUsuarioAdapter(this,R.layout.list_conversaciones_usuario_view,conversaciones);
         final ListView listView= (ListView) findViewById(messages_view);
         listView.setAdapter(adapter);

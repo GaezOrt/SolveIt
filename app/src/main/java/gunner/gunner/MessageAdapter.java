@@ -38,6 +38,7 @@ public class MessageAdapter extends ArrayAdapter<Mensaje> {
 
         if(convertView==null){
             LayoutInflater inflater= LayoutInflater.from(getContext());
+
             if(!mensajes.get(position).nombre.equals(LogInService.email)) {
                 convertView = inflater.inflate(R.layout.their_message, null, false);
                 viewHolder.mensajeAgeno=(TextView)convertView.findViewById(R.id.name);
