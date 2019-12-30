@@ -11,8 +11,10 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Chat extends AppCompatActivity {
 
@@ -32,7 +34,7 @@ public class Chat extends AppCompatActivity {
         DescargarConversacionesDeUsuario descargar= new DescargarConversacionesDeUsuario();
         descargar.seguirDescargandoChat=true;
         startService(u);
-
+        ChatInteraction.descargarDeLaListaDeChats=true;
         editText = (EditText) findViewById(R.id.editText);
         ImageButton image= (ImageButton)findViewById(R.id.sender);
         image.setOnClickListener(new View.OnClickListener() {
@@ -43,7 +45,10 @@ public class Chat extends AppCompatActivity {
                     public void run() {
                         try {
                             System.out.println("Image clicked");
-                            String updateSQL = "INSERT INTO Conversaciones VALUES (?,?,?)";
+                            String updateSQL = "INSERT INTO Conversaciones VALUES (?,?,?,?)";
+                             java.util.Date utilStartDate = Calendar.getInstance().getTime();
+                            java.sql.Time sqlStartDate = new java.sql.Time(utilStartDate.getTime());
+
                             final DatabaseConnection data = new DatabaseConnection();
                             try {
                                 con = data.connect();
@@ -51,7 +56,8 @@ public class Chat extends AppCompatActivity {
                                 pstmt.setString(1, LogInService.email);
                                 pstmt.setString(2, editText.getText().toString());
                                 pstmt.setString(3, DescargarConversacionesDeUsuario.email);
-
+                                pstmt.setTime(4,sqlStartDate);
+                                messageAdapter.notifyDataSetChanged();
                                 pstmt.executeUpdate();
                                 editText.setText("");
                             } catch (Exception e) {
@@ -67,7 +73,7 @@ public class Chat extends AppCompatActivity {
         messageAdapter = new MessageAdapter(this, R.layout.my_message, mensajes);
         listView = (ListView) findViewById(R.id.messages_view);
         listView.setAdapter(messageAdapter);
-        messageAdapter.notifyDataSetChanged();
+        Chat.messageAdapter.notifyDataSetChanged();
 
     }
     public static Handler UIHandler;

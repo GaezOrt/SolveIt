@@ -294,6 +294,7 @@ public class FindInDatabase extends AppCompatActivity {
 
             }
 
+
         }catch(Exception e){
             e.printStackTrace();
             Log.e("Error", ""+e.getMessage()+"Tomatela loro");
@@ -318,14 +319,14 @@ public class FindInDatabase extends AppCompatActivity {
                     System.out.println(rs.getString("mensaje"));
                     Mensaje mensaje;
                     if(!rs.getString("segundoIntegrante").equals(LogInService.email)) {
-                        mensaje = new Mensaje(g, rs.getString("segundoIntegrante"));
+                        mensaje = new Mensaje(g, rs.getString("segundoIntegrante"),rs.getTime("horario"));
                     }else{
-                        mensaje = new Mensaje(g, rs.getString("primerIntegrante"));
+                        mensaje = new Mensaje(g, rs.getString("primerIntegrante"),rs.getTime("horario"));
                     }
                     Chat.runOnUI(new Runnable() {
                         public void run() {
                             try {
-                                    System.out.println("ROWW"+ rs.getRow());
+                                System.out.println("ROWW"+ rs.getRow());
                                 if(Chat.mensajes.size()<rs.getRow()) {
                                     Chat.mensajes.add(mensaje);
                                     Chat.messageAdapter.notifyDataSetChanged();
@@ -338,12 +339,42 @@ public class FindInDatabase extends AppCompatActivity {
                     });
                 }
             }
+
         } catch (Exception e) {
             e.printStackTrace();
             Log.e("Error", "" + e.getMessage() + "Tomatela loro");
 
 
         }
+    }
+    public int chequearConstantemente(String persona1,String persona2){
+        int x=0;
+        try {
+
+
+            final DatabaseConnection data = new DatabaseConnection();
+
+            con = data.connect();
+            PreparedStatement updN = con.prepareStatement("SELECT * FROM Conversaciones WHERE (primerIntegrante=? AND segundoIntegrante=?) OR (primerIntegrante=? AND segundoIntegrante=?)",
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+            updN.setFetchSize(1);
+            updN.setString(1, persona1);
+            updN.setString(2, persona2);
+            updN.setString(3, persona2);
+            updN.setString(4, persona1);
+            ResultSet rs = updN.executeQuery();
+
+            rs.last();
+        x=rs.getRow();
+            } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("Error", "" + e.getMessage() + "Tomatela loro");
+
+        System.out.println("Base de datos"+x);
+        System.out.println("Chat del telefono"+Chat.mensajes.size());
+        }
+        return x;
     }
     public void findMensajesBetween2Persons(String persona1, String persona2) {
         try {
@@ -364,17 +395,19 @@ public class FindInDatabase extends AppCompatActivity {
 
 
             while (rs.next()) {
-                 String g=rs.getString("mensaje");
-
-                    Mensaje mensaje= new Mensaje(g,rs.getString("primerIntegrante"));
+                String g = rs.getString("mensaje");
+                if (Chat.mensajes.size() + 1 < rs.getRow()) {
+                    Mensaje mensaje = new Mensaje(g, rs.getString("primerIntegrante"), rs.getTime("horario"));
 
                     Chat.runOnUI(new Runnable() {
                         public void run() {
                             try {
-                                    if(Chat.mensajes.size()<rs.getRow()) {
-                                        Chat.mensajes.add(mensaje);
-                                        Chat.messageAdapter.notifyDataSetChanged();
-                                    }
+
+                                System.out.println("Mensaje" + mensaje.mensaje);
+                                Chat.mensajes.add(mensaje);
+                                Chat.messageAdapter.notifyDataSetChanged();
+                                ChatInteraction.numeroDeRS = rs.getRow() - 1;
+
 
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -382,8 +415,12 @@ public class FindInDatabase extends AppCompatActivity {
                         }
                     });
                 }
-            ChatInteraction.numeroDeRS=rs.getRow();
+            }
+            System.out.println("Base de datos cantidad "+chequearConstantemente(LogInService.email,DescargarConversacionesDeUsuario.email));
+            System.out.println("Numero de mensajes"+Chat.mensajes.size());
 
+
+            System.out.println("Ultimo registro "+ChatInteraction.numeroDeRS);
         } catch (Exception e) {
             e.printStackTrace();
             Log.e("Error", "" + e.getMessage() + "Tomatela loro");

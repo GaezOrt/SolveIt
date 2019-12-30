@@ -6,27 +6,31 @@ import android.content.Intent;
 import java.util.ArrayList;
 
 public class ChatInteraction extends IntentService {
-    static ArrayList<Mensaje> mensajes =new ArrayList<Mensaje>();
-    FindInDatabase find= new FindInDatabase();
+
+    FindInDatabase find = new FindInDatabase();
     String emailFromList;
-    boolean seguirDescargandoChat=true;
-    boolean descargarDeLaListaDeChats=true;
+    boolean seguirDescargandoChat = true;
+    static boolean descargarDeLaListaDeChats = true;
     static int numeroDeRS;
+
     public ChatInteraction() {
         super("");
     }
 
     @Override
-    protected void onHandleIntent( Intent intent) {
+    protected void onHandleIntent(Intent intent) {
 
-        while(true) {
+        while (find.chequearConstantemente(LogInService.email,DescargarConversacionesDeUsuario.email)+1>Chat.mensajes.size()) {
             //find.insertAllTheTime(LogInService.email, DescargarConversacionesDeUsuario.email);
+
             find.findMensajesBetween2Persons(LogInService.email, DescargarConversacionesDeUsuario.email);
-            descargarDeLaListaDeChats = false;
-                }
+
+
         }
-
-
-
-
+    }
 }
+
+
+
+
+
