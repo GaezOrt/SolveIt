@@ -42,13 +42,6 @@ public class Chat extends AppCompatActivity {
                 Chat.runOnUI(new Runnable() {
                     public void run() {
                         try {
-                            FindInDatabase find= new FindInDatabase();
-                            if(FindInDatabase.emailPassed !=null) {
-                                //find.findMensajesBetween2Persons(LogInService.email, FindInDatabase.emailPassed);
-                            }else{
-                               // find.findMensajesBetween2Persons(LogInService.email, DescargarConversacionesDeUsuario.email);
-
-                            }
                             System.out.println("Image clicked");
                             String updateSQL = "INSERT INTO Conversaciones VALUES (?,?,?)";
                             final DatabaseConnection data = new DatabaseConnection();
@@ -57,26 +50,10 @@ public class Chat extends AppCompatActivity {
                                 PreparedStatement pstmt = con.prepareStatement(updateSQL);
                                 pstmt.setString(1, LogInService.email);
                                 pstmt.setString(2, editText.getText().toString());
-                                if(FindInDatabase.emailPassed !=null) {
+                                pstmt.setString(3, DescargarConversacionesDeUsuario.email);
 
-                                    pstmt.setString(3, FindInDatabase.emailPassed);
-                                }else {
-                                    if (!vieneDeBusqueda) {
-
-                                        pstmt.setString(3, DescargarConversacionesDeUsuario.email);
-                                    }
-                                }
                                 pstmt.executeUpdate();
                                 editText.setText("");
-
-                                Chat.messageAdapter.notifyDataSetChanged();
-                                if(FindInDatabase.emailPassed !=null) {
-                                  //  find.findMensajesBetween2Persons(LogInService.email, FindInDatabase.emailPassed);
-                                }else{
-                                    if(!vieneDeBusqueda) {
-                                        // find.findMensajesBetween2Persons(LogInService.email, DescargarConversacionesDeUsuario.email);
-                                    }
-                                }
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -87,8 +64,6 @@ public class Chat extends AppCompatActivity {
                 });
             }
         });
-
-
         messageAdapter = new MessageAdapter(this, R.layout.my_message, mensajes);
         listView = (ListView) findViewById(R.id.messages_view);
         listView.setAdapter(messageAdapter);

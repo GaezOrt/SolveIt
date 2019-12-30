@@ -347,21 +347,25 @@ public class FindInDatabase extends AppCompatActivity {
     }
     public void findMensajesBetween2Persons(String persona1, String persona2) {
         try {
-            System.out.println("finding messages");
+
 
             final DatabaseConnection data = new DatabaseConnection();
 
             con = data.connect();
-            PreparedStatement updN = con.prepareStatement("SELECT * FROM Conversaciones ",
+            PreparedStatement updN = con.prepareStatement("SELECT * FROM Conversaciones WHERE (primerIntegrante=? AND segundoIntegrante=?) OR (primerIntegrante=? AND segundoIntegrante=?)",
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
             updN.setFetchSize(1);
+            updN.setString(1,persona1);
+            updN.setString(2,persona2);
+            updN.setString(3,persona2);
+            updN.setString(4,persona1);
             ResultSet rs = updN.executeQuery();
 
+
             while (rs.next()) {
-                if ((rs.getString("primerIntegrante").equals(persona1) && rs.getString("segundoIntegrante").equals(persona2))|| (rs.getString("primerIntegrante").equals(persona2) && rs.getString("segundoIntegrante").equals(persona1))) {
-                    String g=rs.getString("mensaje");
-                    System.out.println(rs.getString("mensaje"));
+                 String g=rs.getString("mensaje");
+
                     Mensaje mensaje= new Mensaje(g,rs.getString("primerIntegrante"));
 
                     Chat.runOnUI(new Runnable() {
@@ -370,7 +374,6 @@ public class FindInDatabase extends AppCompatActivity {
                                     if(Chat.mensajes.size()<rs.getRow()) {
                                         Chat.mensajes.add(mensaje);
                                         Chat.messageAdapter.notifyDataSetChanged();
-                                        System.out.println(" MENSAJE" + g);
                                     }
 
                             } catch (Exception e) {
@@ -379,7 +382,8 @@ public class FindInDatabase extends AppCompatActivity {
                         }
                     });
                 }
-            }
+            ChatInteraction.numeroDeRS=rs.getRow();
+
         } catch (Exception e) {
             e.printStackTrace();
             Log.e("Error", "" + e.getMessage() + "Tomatela loro");

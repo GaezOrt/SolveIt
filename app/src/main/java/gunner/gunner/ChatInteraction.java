@@ -11,6 +11,7 @@ public class ChatInteraction extends IntentService {
     String emailFromList;
     boolean seguirDescargandoChat=true;
     boolean descargarDeLaListaDeChats=true;
+    static int numeroDeRS;
     public ChatInteraction() {
         super("");
     }
@@ -23,7 +24,6 @@ public class ChatInteraction extends IntentService {
             find.findMensajesBetween2Persons(LogInService.email, DescargarConversacionesDeUsuario.email);
             descargarDeLaListaDeChats = false;
                 }
-
         }
 
 
