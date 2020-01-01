@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 
 public class SignUpService extends IntentService {
     static int verificationNumber;
+    static String dni;
     static String username;
     static String password;
     static String email;
@@ -18,7 +19,8 @@ public class SignUpService extends IntentService {
     SignUp signUp= new SignUp();
     static boolean imagenUsada=false;
     static boolean cuentaYaUtilizada;
-
+    static boolean signUpClient;
+    static boolean signUpProveedor;
     public SignUpService() {
         super("Log in service");
     }
@@ -27,7 +29,14 @@ public class SignUpService extends IntentService {
     protected void onHandleIntent( Intent intent) {
 
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        signUp.signUp();
+        if(signUpClient) {
+            signUp.signUp();
+            signUpClient=false;
+        }
+        if(signUpProveedor){
+            signUp.signUpProveedor();
+            signUpProveedor=false;
+        }
         if(cuentaYaUtilizada){
             Intent intentt = new Intent (this, SignUp.class);
             intentt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

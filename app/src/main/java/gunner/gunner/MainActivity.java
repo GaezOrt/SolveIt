@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static boolean albanil;
     private View hiddenPanel;
     static boolean firstTimeLoogedIn=true;
+    static boolean esProveedor;
     CoordinatorLayout coord;
     private Handler mHandler = new Handler();
     static LocationManager locationManager;

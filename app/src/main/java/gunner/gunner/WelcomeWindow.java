@@ -66,7 +66,7 @@ public class WelcomeWindow extends AppCompatActivity {
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(WelcomeWindow.this, MainActivity.class);
+                Intent intent = new Intent(WelcomeWindow.this, LogIn.class);
                 startActivity(intent);
             }
         }, 6000); // 4 seconds

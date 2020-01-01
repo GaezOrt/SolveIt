@@ -87,7 +87,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import static android.view.View.VISIBLE;
-import static gunner.gunner.R.id.Electricista;
+
 import static gunner.gunner.R.id.button2;
 import static gunner.gunner.R.id.button7;
 import static gunner.gunner.R.id.editText;
@@ -107,13 +107,14 @@ import static gunner.gunner.R.id.imageView9;
 import static gunner.gunner.R.id.location3;
 import static gunner.gunner.R.id.spinner;
 
-public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpinnerListener {
+public class SignUpProveedor extends AppCompatActivity  implements MultiSpinner.MultiSpinnerListener {
 
     String email;
     String username;
     String password;
     String number;
     String location;
+    String dni;
     Uri selectedImage;
     byte[] byteArray;
     private ImageView imageView;
@@ -151,8 +152,8 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.register);
-        SignUpService.signUpClient=true;
+        setContentView(R.layout.register_proveedores);
+        SignUpService.signUpProveedor=true;
 
 
         EditText emaila=(EditText)findViewById(editText3);
@@ -212,7 +213,7 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
                 int year= cal.get(Calendar.YEAR);
                 int month= cal.get(Calendar.MONTH);
                 int day= cal.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog dialog= new DatePickerDialog(SignUp.this,R.style.MyDialogTheme,mdate,year,month,day);
+                DatePickerDialog dialog= new DatePickerDialog(SignUpProveedor.this,R.style.MyDialogTheme,mdate,year,month,day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
@@ -354,13 +355,17 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
                         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                         StrictMode.setThreadPolicy(policy);
 
+                        TextView fecha=(TextView)findViewById(location3);
+                        SignUp.dateString=fecha.getText().toString();
+                        TextView dniT= (TextView)findViewById(R.id.location);
+                        dni=dniT.getText().toString();
+                        SignUpService.dni=dni;
 
                         EditText emailText = (EditText) findViewById(editText3);
                         email = emailText.getText().toString();
                         SignUpService.email=email;
                         EditText usernameText = (EditText) findViewById(editText);
                         username = usernameText.getText().toString();
-
                         SignUpService.username=username;
                         EditText passwordText = (EditText) findViewById(editText2);
                         password = passwordText.getText().toString();
@@ -371,6 +376,56 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
                         Spinner spinner=(Spinner)findViewById(R.id.spinner);
                         location=spinner.getSelectedItem().toString();
                         SignUpService.location=location;
+
+                        CheckBox electricista= (CheckBox) findViewById(R.id.Electricista);
+                        if(electricista.isChecked()){
+                            MainActivity.electricista=true;
+                        }else{
+                            MainActivity.electricista=false;
+                        }
+                        CheckBox gasista= (CheckBox) findViewById(R.id.gasista);
+                        if(gasista.isChecked()){
+                            MainActivity.gasista=true;
+                        }else{
+                            MainActivity.gasista=false;
+                        }
+                        CheckBox plomero= (CheckBox) findViewById(R.id.plomero);
+                        if(plomero.isChecked()){
+                            MainActivity.plomero=true;
+                        }else{
+                            MainActivity.plomero=false;
+                        }
+                        CheckBox computacion= (CheckBox) findViewById(R.id.computacion);
+                        if(computacion.isChecked()){
+                            MainActivity.computacion=true;
+                        }else{
+                            MainActivity.computacion=false;
+                        }
+                        CheckBox pintor= (CheckBox) findViewById(R.id.pintor);
+                        if(pintor.isChecked())
+                        {
+                            MainActivity.pintor = true;
+                        }else{
+                            MainActivity.pintor=false;
+                        }
+                        CheckBox carpintero = (CheckBox) findViewById(R.id.carpintero);
+                        if (carpintero.isChecked()) {
+                            MainActivity.carpintero = true;
+                        }else{
+                            MainActivity.carpintero=false;
+                        }
+                        CheckBox cerrajero = (CheckBox) findViewById(R.id.cerrajero);
+                        if (cerrajero.isChecked()) {
+                            MainActivity.cerrajero = true;
+                        }else{
+                            MainActivity.cerrajero=false;
+                        }
+                        CheckBox albanil = (CheckBox) findViewById(R.id.albanil);
+                        if (albanil.isChecked()) {
+                            MainActivity.albanil = true;
+                        }else{
+                            MainActivity.albanil=false;
+                        }
 
                         Intent i = new Intent(this, SignUpService.class);
                         startService(i);
@@ -389,11 +444,11 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
         atrasBut.setOnClickListener(
                 (View v) ->  {
                     finish();
-                    startActivity(new Intent(SignUp.this, MainActivity.class));
+                    startActivity(new Intent(SignUpProveedor.this, LogIn.class));
                 }
         );
     }
-    public void signUpProveedor() {
+    public void signUp() {
         try {
             PreparedStatement pt = DatabaseConnection.conn.prepareStatement("SELECT * FROM Users WHERE email = ?");
             pt.setString(1, SignUpService.email);
@@ -448,81 +503,7 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
                             "servy2019");
 
 
-                    sender.sendMail("Servy Argentina (Codigo de verificacion)", "Querido "+SignUpService.username+" bienvenido a Servy! Este es su codigo de verificacion" +
-                                    " "
-                                    +SignUpService.verificationNumber,
-                            "servyargentina@gmail.com", SignUpService.email);
-                    System.out.println("Holaa");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-
-            } catch (Exception e) {
-                SignUpService.datosOk=false;
-                e.printStackTrace();
-                SignUpService.estado=1;
-            }
-
-        }
-    }
-    public void signUp() {
-        try {
-            PreparedStatement pt = DatabaseConnection.conn.prepareStatement("SELECT * FROM Users WHERE email = ?");
-            pt.setString(1, SignUpService.email);
-            pt.setFetchSize(1);
-            ResultSet rs = pt.executeQuery();
-            if (rs.next()==false) {
-                SignUpService.cuentaYaUtilizada=false;
-            }else{
-                SignUpService.cuentaYaUtilizada=true;
-            }
-
-        }catch (Exception e){
-
-        }
-        if (SignUpService.email.length() == 0 || SignUpService.username.length() == 0 ||
-                SignUpService.password.length() == 0 ||
-                SignUpService.phoneNumber.length() == 0|| SignUpService.imagenUsada==false || SignUpService.cuentaYaUtilizada) {
-            SignUpService.datosOk = false;
-            SignUpService.estado=1;
-            if(SignUpService.imagenUsada==false){
-                SignUpService.imagenUsada=false;
-
-            }
-        }else{
-            SignUpService.datosOk=true;
-            SignUpService.estado=2;
-        }
-
-        if (!SignUpService.datosOk) {
-            Log.e("", "errores en los datos");
-
-        } else {
-            try {
-                Random random= new Random();
-                SignUpService.verificationNumber=random.nextInt(5000);
-                MainActivity.esProveedor=false;
-                final DatabaseConnection databaseConnection = new DatabaseConnection();
-                databaseConnection.connect();
-                SignUpService.dni="";
-                databaseConnection.createUser(
-                        SignUpService.email, SignUpService.username, SignUpService.password,
-                        SignUpService.phoneNumber, SignUpService.location, SignUpService.pathForImage,SignUpService.verificationNumber,
-                        MainActivity.electricista,
-                        MainActivity.carpintero,
-                        MainActivity.computacion,
-                        MainActivity.plomero,
-                        MainActivity.gasista,
-                        MainActivity.albanil,
-                        MainActivity.pintor,
-                        MainActivity.cerrajero,MainActivity.esProveedor,SignUpService.dni);
-                try {
-                    GMailSender sender = new GMailSender("servyargentina@gmail.com",
-                            "servy2019");
-
-
-                    sender.sendMail("Servy Argentina (Codigo de verificacion)", "Querido "+SignUpService.username+" bienvenido a Servy! Este es su codigo de verificacion" +
+                    sender.sendMail("Servy Argentina (Codigo de verificacion) para proveedores", "Querido "+SignUpService.username+" bienvenido a Servy! Este es su codigo de verificacion" +
                                     " "
                                     +SignUpService.verificationNumber,
                             "servyargentina@gmail.com", SignUpService.email);
@@ -554,7 +535,7 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
     }
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(SignUp.this, MainActivity.class));
+        startActivity(new Intent(SignUpProveedor.this, LogIn.class));
     }
 
     @Override

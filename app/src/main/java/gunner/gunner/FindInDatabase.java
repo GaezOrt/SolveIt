@@ -408,7 +408,6 @@ public class FindInDatabase extends AppCompatActivity {
                                 Chat.messageAdapter.notifyDataSetChanged();
                                 ChatInteraction.numeroDeRS = rs.getRow() - 1;
 
-
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }

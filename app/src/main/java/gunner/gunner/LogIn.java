@@ -17,6 +17,7 @@ import android.support.v4.app.ActivityCompat;
 
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -33,8 +34,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import static android.view.View.VISIBLE;
-import static gunner.gunner.R.id.PasswordInc;
-import static gunner.gunner.R.id.button2;
+
+import static gunner.gunner.R.id.button14;
+import static gunner.gunner.R.id.button15;
 import static gunner.gunner.R.id.button7;
 import static gunner.gunner.R.id.editText;
 import static gunner.gunner.R.id.editText2;
@@ -77,7 +79,20 @@ public class LogIn extends AppCompatActivity {
         ImageView logInImage=(ImageView) findViewById(imageView);
         logInImage.setAnimation(logInImageAnim);
 
-
+        Button signUpProveedor=(Button)findViewById(button15);
+        signUpProveedor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LogIn.this, SignUpProveedor.class));
+            }
+        });
+        Button button= (Button) findViewById(button14);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LogIn.this, SignUp.class));
+            }
+        });
 
 
         //Error al loggear
@@ -95,8 +110,7 @@ public class LogIn extends AppCompatActivity {
                     });
             AlertDialog alert11 = builder1.create();
             alert11.show();
-            TextView passwordIncText=(TextView) findViewById(PasswordInc);
-            passwordIncText.setVisibility(VISIBLE);
+
             LogInService.estado=0;
         }
 

@@ -16,7 +16,7 @@ import android.widget.TextView;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import static gunner.gunner.R.id.PasswordInc;
+
 
 public class ConfirmationCode extends AppCompatActivity {
 
@@ -76,7 +76,7 @@ public class ConfirmationCode extends AppCompatActivity {
                                                 });
                                         AlertDialog alert11 = builder1.create();
                                         alert11.show();
-                                        TextView passwordIncText=(TextView) findViewById(PasswordInc);
+
                                     }
                                     catch (Exception e)
                                     {

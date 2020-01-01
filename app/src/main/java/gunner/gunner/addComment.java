@@ -20,7 +20,6 @@ import java.sql.PreparedStatement;
 
 import static android.view.View.VISIBLE;
 import static gunner.gunner.R.id.MyRating;
-import static gunner.gunner.R.id.PasswordInc;
 import static gunner.gunner.R.id.imageView17;
 import static gunner.gunner.R.id.imageView5;
 

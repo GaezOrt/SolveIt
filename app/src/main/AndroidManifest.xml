@@ -41,6 +41,7 @@
         <activity android:name=".MainActivity">
 
         </activity>
+        <activity android:name=".SignUpProveedor"></activity>
         <service android:name=".DescargarConversacionesDeUsuario"></service>
         <service android:name=".LogInService"></service>
         <service android:name=".ChatInteraction"></service>
