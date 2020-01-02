@@ -62,6 +62,7 @@ public class ChatInteraction extends IntentService {
                         .setContentText(msg).setSmallIcon(R.drawable.wechat_icon);
         mBuilder.setContentIntent(contentIntent);
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+
     }
     public void findMensajesBetween2Persons(String persona1, String persona2) {
         try {

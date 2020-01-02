@@ -285,7 +285,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 case R.id.second:
                     loggedIn = false;
                     firstTimeLoogedIn=true;
-                    startActivity(new Intent(this, MainActivity.class));
+                    startActivity(new Intent(this, LogIn.class));
                     break;
             }
             return false;
