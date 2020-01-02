@@ -1,6 +1,10 @@
 package gunner.gunner;
 
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,7 +12,9 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -376,57 +382,7 @@ public class FindInDatabase extends AppCompatActivity {
         }
         return x;
     }
-    public void findMensajesBetween2Persons(String persona1, String persona2) {
-        try {
 
-
-            final DatabaseConnection data = new DatabaseConnection();
-
-            con = data.connect();
-            PreparedStatement updN = con.prepareStatement("SELECT * FROM Conversaciones WHERE (primerIntegrante=? AND segundoIntegrante=?) OR (primerIntegrante=? AND segundoIntegrante=?)",
-                    ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
-            updN.setFetchSize(1);
-            updN.setString(1,persona1);
-            updN.setString(2,persona2);
-            updN.setString(3,persona2);
-            updN.setString(4,persona1);
-            ResultSet rs = updN.executeQuery();
-
-
-            while (rs.next()) {
-                String g = rs.getString("mensaje");
-                if (Chat.mensajes.size() + 1 < rs.getRow()) {
-                    Mensaje mensaje = new Mensaje(g, rs.getString("primerIntegrante"), rs.getTime("horario"));
-
-                    Chat.runOnUI(new Runnable() {
-                        public void run() {
-                            try {
-
-                                System.out.println("Mensaje" + mensaje.mensaje);
-                                Chat.mensajes.add(mensaje);
-                                Chat.messageAdapter.notifyDataSetChanged();
-                                ChatInteraction.numeroDeRS = rs.getRow() - 1;
-
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-                }
-            }
-            System.out.println("Base de datos cantidad "+chequearConstantemente(LogInService.email,DescargarConversacionesDeUsuario.email));
-            System.out.println("Numero de mensajes"+Chat.mensajes.size());
-
-
-            System.out.println("Ultimo registro "+ChatInteraction.numeroDeRS);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("Error", "" + e.getMessage() + "Tomatela loro");
-
-
-        }
-    }
     public void findElectricistas() {
 
         try {

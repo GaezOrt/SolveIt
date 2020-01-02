@@ -31,10 +31,10 @@ public class MessageAdapter extends ArrayAdapter<Mensaje> {
         if(convertView==null ){
             LayoutInflater inflater= LayoutInflater.from(getContext());
 
-            if(!mensajes.get(position).nombre.equals(LogInService.email)) {
+            if(!mensajes.get(position).email.equals(LogInService.email)) {
                 convertView = inflater.inflate(R.layout.their_message, null, false);
                 viewHolder.nombreAgeno =(TextView)convertView.findViewById(R.id.name);
-                viewHolder.nombreAgeno.setText(mensajes.get(position).nombre);
+                viewHolder.nombreAgeno.setText(mensajes.get(position).email);
                 viewHolder.mensajeAgeno=(TextView)convertView.findViewById(R.id.message);
                 viewHolder.mensajeAgeno.setText(mensajes.get(position).mensaje);
                     }else{

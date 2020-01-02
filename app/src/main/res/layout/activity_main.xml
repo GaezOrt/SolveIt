@@ -9,14 +9,13 @@
     tools:context=".MainActivity"
     android:gravity="center"
     android:fitsSystemWindows="true"
-    android:background="@color/colorPrimary"
     android:id="@+id/navDrawer">
 
     <android.support.constraint.ConstraintLayout
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/gradient"
+        android:background="@drawable/black_with_rounded_border"
         android:visibility="visible"
         tools:context="gunner.gunner.MainActivity"
         tools:layout_editor_absoluteX="0dp"
@@ -259,7 +258,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/anton"
             android:text="Computación"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/button4"
             app:layout_constraintStart_toStartOf="@+id/button4"
             app:layout_constraintTop_toBottomOf="@+id/button4" />
@@ -270,7 +269,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/anton"
             android:text="Albañilería"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/button8"
             app:layout_constraintStart_toStartOf="@+id/button8"
             app:layout_constraintTop_toBottomOf="@+id/button8" />
@@ -281,7 +280,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/anton"
             android:text="Electricidad"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/button"
             app:layout_constraintStart_toStartOf="@+id/button"
             app:layout_constraintTop_toBottomOf="@+id/button" />
@@ -292,7 +291,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/anton"
             android:text="Pinturería"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/button6"
             app:layout_constraintStart_toStartOf="@+id/button6"
             app:layout_constraintTop_toBottomOf="@+id/button6" />
@@ -303,7 +302,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/anton"
             android:text="Carpintería"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/button3"
             app:layout_constraintStart_toStartOf="@+id/button3"
             app:layout_constraintTop_toBottomOf="@+id/button3" />
@@ -314,7 +313,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/anton"
             android:text="Cerrajería"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/button5"
             app:layout_constraintStart_toStartOf="@+id/button5"
             app:layout_constraintTop_toBottomOf="@+id/button5" />
@@ -325,7 +324,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/anton"
             android:text="Mecánico"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/button11"
             app:layout_constraintStart_toStartOf="@+id/button11"
             app:layout_constraintTop_toBottomOf="@+id/button11" />
@@ -336,7 +335,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/anton"
             android:text="Plomería"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/button9"
             app:layout_constraintStart_toStartOf="@+id/button9"
             app:layout_constraintTop_toBottomOf="@+id/button9" />
@@ -347,7 +346,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/anton"
             android:text="Gasista"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/button10"
             app:layout_constraintStart_toStartOf="@+id/button10"
             app:layout_constraintTop_toBottomOf="@+id/button10" />
