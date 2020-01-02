@@ -61,9 +61,6 @@ public class FindInDatabase extends AppCompatActivity {
         setTheme(R.style.Theme_Design_NoActionBar);
         setContentView(R.layout.find_user);
 
-
-
-
         //Contactar
         Button button12= (Button)findViewById(R.id.button12);
         button12.setOnClickListener(new View.OnClickListener() {
@@ -357,7 +354,6 @@ public class FindInDatabase extends AppCompatActivity {
         int x=0;
         try {
 
-
             final DatabaseConnection data = new DatabaseConnection();
 
             con = data.connect();
@@ -372,7 +368,7 @@ public class FindInDatabase extends AppCompatActivity {
             ResultSet rs = updN.executeQuery();
 
             rs.last();
-        x=rs.getRow();
+            x=rs.getRow();
             } catch (Exception e) {
             e.printStackTrace();
             Log.e("Error", "" + e.getMessage() + "Tomatela loro");

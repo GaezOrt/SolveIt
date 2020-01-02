@@ -67,7 +67,7 @@ public class Chat extends AppCompatActivity {
 
                             System.out.println("Image clicked");
                             String updateSQL = "INSERT INTO Conversaciones VALUES (?,?,?,?)";
-                             java.util.Date utilStartDate = Calendar.getInstance().getTime();
+                            java.util.Date utilStartDate = Calendar.getInstance().getTime();
                             java.sql.Time sqlStartDate = new java.sql.Time(utilStartDate.getTime());
 
                             final DatabaseConnection data = new DatabaseConnection();
@@ -149,5 +149,3 @@ public class Chat extends AppCompatActivity {
 
 
 }
-
-

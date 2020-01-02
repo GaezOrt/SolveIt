@@ -38,13 +38,14 @@ public class ChatInteraction extends IntentService {
 
         while (find.chequearConstantemente(LogInService.email,DescargarConversacionesDeUsuario.email)+1>Chat.mensajes.size()) {
             //find.insertAllTheTime(LogInService.email, DescargarConversacionesDeUsuario.email);
-
+            System.out.println("Hola gil");
             findMensajesBetween2Persons(LogInService.email, DescargarConversacionesDeUsuario.email);
+            if(addNotification){
+                sendNotification("Hola");
+                addNotification=false;
+            }
         }
-        if(addNotification){
-            sendNotification("Hola");
-            addNotification=false;
-        }
+
     }
     private void sendNotification(String msg) {
         mNotificationManager = (NotificationManager)
@@ -82,6 +83,7 @@ public class ChatInteraction extends IntentService {
 
             while (rs.next()) {
                 String g = rs.getString("mensaje");
+
                 if (Chat.mensajes.size() + 1 < rs.getRow()) {
                     Mensaje mensaje = new Mensaje(g, rs.getString("primerIntegrante"), rs.getTime("horario"));
                     if(lookForEmail2){
