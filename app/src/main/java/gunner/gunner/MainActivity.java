@@ -16,12 +16,14 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -44,8 +46,8 @@ import static gunner.gunner.R.id.textView31;
 import static gunner.gunner.R.id.welcomeMessage;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnTouchListener {
-
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private boolean requestedFocus = false;
     static boolean loggedIn = false;
     static String loggedUsername;
     static String loggedEmail;
@@ -62,15 +64,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static boolean cerrajero;
     static boolean albanil;
     private View hiddenPanel;
-    static boolean firstTimeLoogedIn=true;
+    static boolean firstTimeLoogedIn = true;
     static boolean esProveedor;
     CoordinatorLayout coord;
     private Handler mHandler = new Handler();
     static LocationManager locationManager;
     static RubrosListAdapter adapter;
     static RubrosListAdapter adapter2;
-    ArrayList<Rubro> rubros= new ArrayList<Rubro>();
-    ArrayList<Rubro> rubros2= new ArrayList<Rubro>();
+    ArrayList<Rubro> rubros = new ArrayList<Rubro>();
+    ArrayList<Rubro> rubros2 = new ArrayList<Rubro>();
+    ListView listView;
+    ListView listView2;
+    boolean isLeftListEnabled = true;
+    boolean isRightListEnabled = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -79,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       MediaPlayer  mp=MediaPlayer.create(getApplicationContext(),R.raw.welcome);// the song is a filename which i have pasted inside a folder **raw** created under the **res** folder.//
+        MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.welcome);// the song is a filename which i have pasted inside a folder **raw** created under the **res** folder.//
         mp.start();
 
 
@@ -95,37 +101,87 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         adapter = new RubrosListAdapter(this, R.layout.rubross, rubros);
-        final ListView listView = (ListView) findViewById(R.id.listita);
+        listView = (ListView) findViewById(R.id.listita);
         listView.setAdapter(adapter);
-        Rubro electricidad= new Rubro("Electricidad",getApplicationContext().getResources().getDrawable(R.drawable.electricimage));
+        Rubro electricidad = new Rubro("Electricidad", getApplicationContext().getResources().getDrawable(R.drawable.electricimage));
         rubros.add(electricidad);
-        Rubro plomeria= new Rubro("Plomería",getApplicationContext().getResources().getDrawable(R.drawable.plomeriaa));
+        Rubro plomeria = new Rubro("Plomería", getApplicationContext().getResources().getDrawable(R.drawable.plomeriaa));
         rubros.add(plomeria);
 
-        Rubro computacion= new Rubro("Computacion",getApplicationContext().getResources().getDrawable(R.drawable.computacion));
+        Rubro computacion = new Rubro("Computacion", getApplicationContext().getResources().getDrawable(R.drawable.computacion));
         rubros.add(computacion);
-        Rubro carpinteria= new Rubro("Carpintería",getApplicationContext().getResources().getDrawable(R.drawable.carpintero));
+        Rubro carpinteria = new Rubro("Carpintería", getApplicationContext().getResources().getDrawable(R.drawable.carpintero));
         rubros.add(carpinteria);
-        Rubro gasista= new Rubro("Gasista",getApplicationContext().getResources().getDrawable(R.drawable.gasista));
+        Rubro gasista = new Rubro("Gasista", getApplicationContext().getResources().getDrawable(R.drawable.gasista));
         rubros.add(gasista);
-        Rubro construccion= new Rubro("Construccion",getApplicationContext().getResources().getDrawable(R.drawable.construccion));
-        rubros.add(construccion);
 
 
-        adapter2 = new RubrosListAdapter(this, R.layout.rubross, rubros2);
-        final ListView listView2 = (ListView) findViewById(R.id.lista2);
 
-        Rubro maestraParticular= new Rubro("Profesor part.",getApplicationContext().getResources().getDrawable(R.drawable.profesor));
+        adapter = new RubrosListAdapter(this, R.layout.rubross, rubros2);
+    listView2 = (ListView) findViewById(R.id.lista2);
+
+
+        Rubro maestraParticular = new Rubro("Profesor part.", getApplicationContext().getResources().getDrawable(R.drawable.profesor));
         rubros2.add(maestraParticular);
-        Rubro mecanico= new Rubro("Mecanico",getApplicationContext().getResources().getDrawable(R.drawable.mecanico));
+        Rubro mecanico = new Rubro("Mecanico", getApplicationContext().getResources().getDrawable(R.drawable.mecanico));
         rubros2.add(mecanico);
-        Rubro cerrajeria= new Rubro("Cerrajería",getApplicationContext().getResources().getDrawable(R.drawable.cerrajeria));
+        Rubro cerrajeria = new Rubro("Cerrajería", getApplicationContext().getResources().getDrawable(R.drawable.cerrajeria));
         rubros2.add(cerrajeria);
-        Rubro pintor= new Rubro("Pintor",getApplicationContext().getResources().getDrawable(R.drawable.pintor));
+        Rubro pintor = new Rubro("Pintor", getApplicationContext().getResources().getDrawable(R.drawable.pintor));
         rubros2.add(pintor);
-        listView2.setAdapter(adapter2);
-        adapter2.notifyDataSetChanged();
+        Rubro construccion = new Rubro("Construccion", getApplicationContext().getResources().getDrawable(R.drawable.construccion));
+        rubros2.add(construccion);
+        listView2.setAdapter(adapter);
+        //adapter.notifyDataSetChanged();
         listView2.invalidateViews();
+
+
+        listView.setOverScrollMode(ListView.OVER_SCROLL_NEVER);
+        listView2.setOverScrollMode(ListView.OVER_SCROLL_NEVER);
+
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                // onScroll will be called and there will be an infinite loop.
+                // That's why i set a boolean value
+                if (scrollState == SCROLL_STATE_TOUCH_SCROLL) {
+                    isRightListEnabled = false;
+                } else if (scrollState == SCROLL_STATE_IDLE) {
+                    isRightListEnabled = true;
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount,
+                                 int totalItemCount) {
+                View c = view.getChildAt(0);
+                if (c != null && isLeftListEnabled) {
+                    listView2.setSelectionFromTop(firstVisibleItem, c.getTop());
+                }
+            }
+        });
+
+        listView2.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                if (scrollState == SCROLL_STATE_TOUCH_SCROLL) {
+                    isLeftListEnabled = false;
+                } else if (scrollState == SCROLL_STATE_IDLE) {
+                    isLeftListEnabled = true;
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount,
+                                 int totalItemCount) {
+                View c = view.getChildAt(0);
+                if (c != null && isRightListEnabled) {
+                    listView.setSelectionFromTop(firstVisibleItem, c.getTop());
+                }
+            }
+        });
+
 
 
 
@@ -145,11 +201,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (loggedIn) {
 
-            if(firstTimeLoogedIn) {
-                ConstraintLayout con= (ConstraintLayout)findViewById(welcomeMessage);
+            if (firstTimeLoogedIn) {
+                ConstraintLayout con = (ConstraintLayout) findViewById(welcomeMessage);
                 //con.setVisibility(VISIBLE);
-                TextView text= (TextView)findViewById(textView31);
-                text.setText("Bienvenido "+ MainActivity.loggedUsername+ "!");
+                TextView text = (TextView) findViewById(textView31);
+                text.setText("Bienvenido " + MainActivity.loggedUsername + "!");
                 final Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fadein);
                 final Animation fadeout = AnimationUtils.loadAnimation(this, R.anim.fadeout);
                 con.startAnimation(fadeIn);
@@ -157,17 +213,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     @Override
                     public void run() {
 
-                      con.startAnimation(fadeout);
+                        con.startAnimation(fadeout);
                     }
                 }, 4000);
 
 
-               firstTimeLoogedIn=false;
+                firstTimeLoogedIn = false;
             }
 
-            ImageView notifcaciones= (ImageView)findViewById(imageView16);
+            ImageView notifcaciones = (ImageView) findViewById(imageView16);
             notifcaciones.setVisibility(VISIBLE);
-            ImageView mensajes= (ImageView)findViewById(imageView23);
+            ImageView mensajes = (ImageView) findViewById(imageView23);
             mensajes.setVisibility(VISIBLE);
 
             mensajes.setOnClickListener(new View.OnClickListener() {
@@ -177,17 +233,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             });
 
-            View hView =  navigationView.getHeaderView(0);
-            TextView nav_user = (TextView)hView.findViewById(R.id.textView14);
-            nav_user.setText("►"+ LogInService.name);
+            View hView = navigationView.getHeaderView(0);
+            TextView nav_user = (TextView) hView.findViewById(R.id.textView14);
+            nav_user.setText("►" + LogInService.name);
 
-            TextView phone = (TextView)hView.findViewById(R.id.textView21);
-            phone.setText("►"+ LogInService.phone);
+            TextView phone = (TextView) hView.findViewById(R.id.textView21);
+            phone.setText("►" + LogInService.phone);
 
-            TextView location = (TextView)hView.findViewById(R.id.textView22);
-            location.setText("►"+ LogInService.location);
+            TextView location = (TextView) hView.findViewById(R.id.textView22);
+            location.setText("►" + LogInService.location);
 
-            ImageView profileImage=(ImageView)hView.findViewById(imageView14);
+            ImageView profileImage = (ImageView) hView.findViewById(imageView14);
             Bitmap bitmap = BitmapFactory.decodeByteArray(LogInService.photo, 0, LogInService.photo.length);
             profileImage.setImageBitmap(bitmap);
             //image.setImageBitmap(profileImage);
@@ -208,7 +264,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.cli);
                 mp.start();
                 finish();
-                if(rubros.get(position).rubro=="Electricidad") {
+                if (rubros.get(position).rubro == "Electricidad") {
                     startActivity(new Intent(MainActivity.this, Electricidad.class));
                 }
             }
@@ -243,7 +299,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     break;
                 case R.id.second:
                     loggedIn = false;
-                    firstTimeLoogedIn=true;
+                    firstTimeLoogedIn = true;
                     startActivity(new Intent(this, LogIn.class));
                     break;
             }
@@ -252,9 +308,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return false;
     }
 
-
-    @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-        return false;
-    }
 }
