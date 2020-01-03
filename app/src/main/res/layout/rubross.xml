@@ -5,13 +5,13 @@
     android:id="@+id/comentarioss"
     android:layout_width="match_parent"
     android:layout_height="150dp"
-    android:background="@drawable/rounded_list"
+    android:background="@drawable/whitebackground_rounded"
     android:descendantFocusability="blocksDescendants">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/borde"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="140dp"
         android:descendantFocusability="blocksDescendants"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

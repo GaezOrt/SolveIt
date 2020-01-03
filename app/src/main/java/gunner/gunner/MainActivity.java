@@ -108,11 +108,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Rubro plomeria = new Rubro("Plomería", getApplicationContext().getResources().getDrawable(R.drawable.plomeriaa));
         rubros.add(plomeria);
 
-        Rubro computacion = new Rubro("Computacion", getApplicationContext().getResources().getDrawable(R.drawable.computacion));
+        Rubro computacion = new Rubro("Computacion", getApplicationContext().getResources().getDrawable(R.drawable.computaciion));
+
         rubros.add(computacion);
         Rubro carpinteria = new Rubro("Carpintería", getApplicationContext().getResources().getDrawable(R.drawable.carpintero));
         rubros.add(carpinteria);
-        Rubro gasista = new Rubro("Gasista", getApplicationContext().getResources().getDrawable(R.drawable.gasista));
+        Rubro gasista = new Rubro("Gasista", getApplicationContext().getResources().getDrawable(R.drawable.gasissta));
         rubros.add(gasista);
 
 
@@ -240,8 +241,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             TextView phone = (TextView) hView.findViewById(R.id.textView21);
             phone.setText("►" + LogInService.phone);
 
-            TextView location = (TextView) hView.findViewById(R.id.textView22);
-            location.setText("►" + LogInService.location);
 
             ImageView profileImage = (ImageView) hView.findViewById(imageView14);
             Bitmap bitmap = BitmapFactory.decodeByteArray(LogInService.photo, 0, LogInService.photo.length);

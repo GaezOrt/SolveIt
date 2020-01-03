@@ -34,7 +34,7 @@ public class RubrosListAdapter extends ArrayAdapter<Rubro> {
             LayoutInflater inflater= LayoutInflater.from(getContext());
             convertView=inflater.inflate(R.layout.rubross,null,false);
 
-            viewHolder.image=(ConstraintLayout) convertView.findViewById(R.id.comentarioss);
+            viewHolder.image=(ConstraintLayout) convertView.findViewById(R.id.borde);
             viewHolder.image.setBackground(rubro.drawableImg);
             viewHolder.name=(TextView)convertView.findViewById(R.id.textView3);
             viewHolder.name.setText(rubro.rubro);
