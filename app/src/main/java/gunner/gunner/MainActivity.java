@@ -1,19 +1,10 @@
 package gunner.gunner;
 
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.location.LocationManager;
-import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Handler;
@@ -22,32 +13,24 @@ import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.util.ArrayList;
 
-import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 
-import static gunner.gunner.R.id.button;
-import static gunner.gunner.R.id.image;
 import static gunner.gunner.R.id.imageView14;
 import static gunner.gunner.R.id.imageView16;
 
@@ -56,19 +39,12 @@ import static gunner.gunner.R.id.imageView23;
 import static gunner.gunner.R.id.imageView7;
 import static gunner.gunner.R.id.nav_viw;
 import static gunner.gunner.R.id.navDrawer;
-import static gunner.gunner.R.id.textView10;
-import static gunner.gunner.R.id.textView11;
-import static gunner.gunner.R.id.textView12;
-import static gunner.gunner.R.id.textView13;
-import static gunner.gunner.R.id.textView3;
 import static gunner.gunner.R.id.textView31;
-import static gunner.gunner.R.id.textView5;
-import static gunner.gunner.R.id.textView7;
-import static gunner.gunner.R.id.textView9;
+
 import static gunner.gunner.R.id.welcomeMessage;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnTouchListener {
 
     static boolean loggedIn = false;
     static String loggedUsername;
@@ -91,70 +67,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     CoordinatorLayout coord;
     private Handler mHandler = new Handler();
     static LocationManager locationManager;
+    static RubrosListAdapter adapter;
+    static RubrosListAdapter adapter2;
+    ArrayList<Rubro> rubros= new ArrayList<Rubro>();
+    ArrayList<Rubro> rubros2= new ArrayList<Rubro>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
 
 
         setTheme(R.style.Theme_Design_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-
        MediaPlayer  mp=MediaPlayer.create(getApplicationContext(),R.raw.welcome);// the song is a filename which i have pasted inside a folder **raw** created under the **res** folder.//
         mp.start();
-
-        Button electricidad= (Button)findViewById(R.id.button);
-        TextView electricidadT=(TextView)findViewById(textView12);
-        final Animation animRotate = AnimationUtils.loadAnimation(this, R.anim.translate_electricidad);
-        electricidad.startAnimation(animRotate);
-        electricidadT.startAnimation(animRotate);
-
-        Button computacion= (Button)findViewById(R.id.button4);
-        TextView computacionT=(TextView)findViewById(textView3);
-        final Animation computacionAnim = AnimationUtils.loadAnimation(this, R.anim.animation_computacion);
-        computacion.startAnimation(computacionAnim);
-        computacionT.startAnimation(computacionAnim);
-
-        Button plomeria= (Button)findViewById(R.id.button9);
-        TextView plomeriaT=(TextView)findViewById(textView9);
-        final Animation plomeriaAnim = AnimationUtils.loadAnimation(this, R.anim.translate_plomeria);
-        plomeria.startAnimation(plomeriaAnim);
-        plomeriaT.startAnimation(plomeriaAnim);
-
-        Button cerrajeria= (Button)findViewById(R.id.button5);
-        TextView cerrajeriaT=(TextView)findViewById(textView5);
-        final Animation cerrajeriaAnim = AnimationUtils.loadAnimation(this, R.anim.translate_cerrajeria);
-        cerrajeria.startAnimation(cerrajeriaAnim);
-        cerrajeriaT.startAnimation(cerrajeriaAnim);
-
-
-        Button albanileria= (Button)findViewById(R.id.button8);
-        TextView albanileriaT=(TextView)findViewById(textView11);
-        final Animation albanileriaAnim = AnimationUtils.loadAnimation(this, R.anim.translate_albanileria);
-        albanileria.startAnimation(albanileriaAnim);
-        albanileriaT.startAnimation(albanileriaAnim);
-
-        Button pintureria= (Button)findViewById(R.id.button6);
-        TextView pintureriaT=(TextView)findViewById(textView13);
-        final Animation pintureriaAnim = AnimationUtils.loadAnimation(this, R.anim.translate_pintureria);
-        pintureria.startAnimation(pintureriaAnim);
-        pintureriaT.startAnimation(pintureriaAnim);
-
-        Button gasista= (Button)findViewById(R.id.button10);
-        TextView gasistaT=(TextView)findViewById(textView10);
-        final Animation gasistaAnim = AnimationUtils.loadAnimation(this, R.anim.translate_gasista);
-        gasista.startAnimation(gasistaAnim);
-        gasistaT.startAnimation(gasistaAnim);
-
-        Button mecanico= (Button)findViewById(R.id.button11);
-        TextView mecanicoT=(TextView)findViewById(textView7);
-        final Animation mecanicoAnim = AnimationUtils.loadAnimation(this, R.anim.translate_mecanico);
-        mecanico.startAnimation(mecanicoAnim);
-        mecanicoT.startAnimation(mecanicoAnim);
 
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -168,20 +94,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_viw);
         navigationView.setNavigationItemSelectedListener(this);
 
+        adapter = new RubrosListAdapter(this, R.layout.rubross, rubros);
+        final ListView listView = (ListView) findViewById(R.id.listita);
+        listView.setAdapter(adapter);
+        Rubro electricidad= new Rubro("Electricidad",getApplicationContext().getResources().getDrawable(R.drawable.electricimage));
+        rubros.add(electricidad);
+        Rubro plomeria= new Rubro("Plomería",getApplicationContext().getResources().getDrawable(R.drawable.plomeriaa));
+        rubros.add(plomeria);
 
-        //Boton para electricistas
-        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.fadeout);
-        final Button electricidadBut = (Button) findViewById(button);
-        electricidadBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        Rubro computacion= new Rubro("Computacion",getApplicationContext().getResources().getDrawable(R.drawable.computacion));
+        rubros.add(computacion);
+        Rubro carpinteria= new Rubro("Carpintería",getApplicationContext().getResources().getDrawable(R.drawable.carpintero));
+        rubros.add(carpinteria);
+        Rubro gasista= new Rubro("Gasista",getApplicationContext().getResources().getDrawable(R.drawable.gasista));
+        rubros.add(gasista);
+        Rubro construccion= new Rubro("Construccion",getApplicationContext().getResources().getDrawable(R.drawable.construccion));
+        rubros.add(construccion);
 
-                electricidadBut.startAnimation(myAnim);
-                MediaPlayer  mp=MediaPlayer.create(getApplicationContext(),R.raw.cli);
-                mp.start();
-                startActivity(new Intent(MainActivity.this, Electricidad.class));
-            }
-        });
+
+        adapter2 = new RubrosListAdapter(this, R.layout.rubross, rubros2);
+        final ListView listView2 = (ListView) findViewById(R.id.lista2);
+
+        Rubro maestraParticular= new Rubro("Profesor part.",getApplicationContext().getResources().getDrawable(R.drawable.profesor));
+        rubros2.add(maestraParticular);
+        Rubro mecanico= new Rubro("Mecanico",getApplicationContext().getResources().getDrawable(R.drawable.mecanico));
+        rubros2.add(mecanico);
+        Rubro cerrajeria= new Rubro("Cerrajería",getApplicationContext().getResources().getDrawable(R.drawable.cerrajeria));
+        rubros2.add(cerrajeria);
+        Rubro pintor= new Rubro("Pintor",getApplicationContext().getResources().getDrawable(R.drawable.pintor));
+        rubros2.add(pintor);
+        listView2.setAdapter(adapter2);
+        adapter2.notifyDataSetChanged();
+        listView2.invalidateViews();
+
+
 
 
         ImageView menuOpener = (ImageView) findViewById(imageView7);
@@ -192,7 +138,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 drawer.openDrawer(Gravity.LEFT);
             }
         });
-
 
         //Cuenta loggeada
 
@@ -254,6 +199,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.inflateMenu(R.menu.menu_loggedout);
 
         }
+
+        //Realizar ampliacion cuando se clickea item de lista
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.cli);
+                mp.start();
+                finish();
+                if(rubros.get(position).rubro=="Electricidad") {
+                    startActivity(new Intent(MainActivity.this, Electricidad.class));
+                }
+            }
+        });
     }
 
 
@@ -294,5 +253,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        return false;
+    }
 }
