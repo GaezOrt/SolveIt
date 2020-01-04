@@ -103,17 +103,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         adapter = new RubrosListAdapter(this, R.layout.rubross, rubros);
         listView = (ListView) findViewById(R.id.listita);
         listView.setAdapter(adapter);
-        Rubro electricidad = new Rubro("Electricidad", getApplicationContext().getResources().getDrawable(R.drawable.electricimage));
+        Rubro electricidad = new Rubro("Electricidad", getApplicationContext().getResources().getDrawable(R.drawable.elec));
         rubros.add(electricidad);
-        Rubro plomeria = new Rubro("Plomería", getApplicationContext().getResources().getDrawable(R.drawable.plomeriaa));
+        Rubro plomeria = new Rubro("Plomería", getApplicationContext().getResources().getDrawable(R.drawable.plomeria));
         rubros.add(plomeria);
 
-        Rubro computacion = new Rubro("Computacion", getApplicationContext().getResources().getDrawable(R.drawable.computaciion));
+        Rubro computacion = new Rubro("Computacion", getApplicationContext().getResources().getDrawable(R.drawable.computacion));
 
         rubros.add(computacion);
-        Rubro carpinteria = new Rubro("Carpintería", getApplicationContext().getResources().getDrawable(R.drawable.carpintero));
+        Rubro carpinteria = new Rubro("Carpintería", getApplicationContext().getResources().getDrawable(R.drawable.carpinteria));
         rubros.add(carpinteria);
-        Rubro gasista = new Rubro("Gasista", getApplicationContext().getResources().getDrawable(R.drawable.gasissta));
+        Rubro gasista = new Rubro("Gasista", getApplicationContext().getResources().getDrawable(R.drawable.gasista));
         rubros.add(gasista);
 
 
@@ -122,15 +122,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     listView2 = (ListView) findViewById(R.id.lista2);
 
 
-        Rubro maestraParticular = new Rubro("Profesor part.", getApplicationContext().getResources().getDrawable(R.drawable.profesor));
+        Rubro maestraParticular = new Rubro("Profesor part.", getApplicationContext().getResources().getDrawable(R.drawable.iconoprof));
         rubros2.add(maestraParticular);
-        Rubro mecanico = new Rubro("Mecanico", getApplicationContext().getResources().getDrawable(R.drawable.mecanico));
+        Rubro mecanico = new Rubro("Mecanico", getApplicationContext().getResources().getDrawable(R.drawable.iconoauto));
         rubros2.add(mecanico);
-        Rubro cerrajeria = new Rubro("Cerrajería", getApplicationContext().getResources().getDrawable(R.drawable.cerrajeria));
+        Rubro cerrajeria = new Rubro("Cerrajería", getApplicationContext().getResources().getDrawable(R.drawable.icono_cerrajero));
         rubros2.add(cerrajeria);
-        Rubro pintor = new Rubro("Pintor", getApplicationContext().getResources().getDrawable(R.drawable.pintor));
+        Rubro pintor = new Rubro("Pintor", getApplicationContext().getResources().getDrawable(R.drawable.icono_pintor));
         rubros2.add(pintor);
-        Rubro construccion = new Rubro("Construccion", getApplicationContext().getResources().getDrawable(R.drawable.construccion));
+        Rubro construccion = new Rubro("Construccion", getApplicationContext().getResources().getDrawable(R.drawable.icono_albanil));
         rubros2.add(construccion);
         listView2.setAdapter(adapter);
         //adapter.notifyDataSetChanged();

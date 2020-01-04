@@ -17,5 +17,7 @@
         <item name="android:background">@color/coloralerta</item>
         <item name="android:textColorPrimary">#FFFFFF</item>
     </style>
-
+    <style name="fondo" parent="android:style/Theme.Black">
+        <item name="android:background">@drawable/fondos</item>
+    </style>
 </resources>

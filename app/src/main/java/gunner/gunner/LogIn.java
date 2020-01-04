@@ -40,7 +40,6 @@ import static gunner.gunner.R.id.button15;
 import static gunner.gunner.R.id.button7;
 import static gunner.gunner.R.id.editText;
 import static gunner.gunner.R.id.editText2;
-import static gunner.gunner.R.id.imageView;
 import static gunner.gunner.R.id.imageView19;
 import static gunner.gunner.R.id.imageView8;
 
@@ -75,9 +74,6 @@ public class LogIn extends AppCompatActivity {
         loginButton.setAnimation(loginbutton);
 
 
-        final Animation logInImageAnim = AnimationUtils.loadAnimation(this, R.anim.translate_image_login);
-        ImageView logInImage=(ImageView) findViewById(imageView);
-        logInImage.setAnimation(logInImageAnim);
 
         Button signUpProveedor=(Button)findViewById(button15);
         signUpProveedor.setOnClickListener(new View.OnClickListener() {

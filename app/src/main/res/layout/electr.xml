@@ -8,11 +8,60 @@
     >
 
 
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/green"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/gradient"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView23"
+            android:layout_width="42dp"
+            android:layout_height="47dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/volando" />
+
+        <ImageView
+            android:id="@+id/imageView16"
+            android:layout_width="42dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="4dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageView23"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/bellbl" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/threeline" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="56dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/serv"
+            android:visibility="visible"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
     <gunner.gunner.MultiSpinner
         android:id="@+id/spinner2"
         android:layout_width="247dp"
         android:layout_height="25dp"
-        android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toTopOf="@+id/swiperefresh"
         app:layout_constraintStart_toEndOf="@+id/imageView22" />
 
@@ -26,24 +75,24 @@
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/location" />
 
-    <TextView
-        android:id="@+id/textView2"
-        style="@android:style/Widget.DeviceDefault.Light.TextView"
-        android:layout_width="155dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/empty_background"
-        android:text=" Electricistas"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="24sp"
+    <ImageView
+        android:id="@+id/imageView29"
+        android:layout_width="411dp"
+        android:layout_height="175dp"
+        android:layout_marginBottom="24dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/spinner2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/green"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/electt" />
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swiperefresh"
-        android:layout_width="match_parent"
-        android:layout_height="550dp"
+        android:layout_width="411dp"
+        android:layout_height="461dp"
 
         android:background="#031646"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -87,7 +136,6 @@
         android:id="@+id/textView29"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:text="Buscar por ubicacion"
         app:layout_constraintBottom_toTopOf="@+id/spinner2"
         app:layout_constraintStart_toStartOf="@+id/spinner2" />

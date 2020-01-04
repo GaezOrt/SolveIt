@@ -22,6 +22,65 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="81dp">
 
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/green_circle"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:src="@android:color/holo_green_dark"
+            app:civ_border_color="@android:color/transparent"
+            app:civ_border_width="2dp"
+            tools:layout_editor_absoluteX="174dp"
+            tools:layout_editor_absoluteY="11dp" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/green"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/holo_green_dark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                app:srcCompat="@drawable/logo"
+                tools:layout_editor_absoluteX="170dp" />
+
+            <ImageView
+                android:id="@+id/imageView23"
+                android:layout_width="42dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/icono_chat" />
+
+            <ImageView
+                android:id="@+id/imageView16"
+                android:layout_width="42dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="4dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageView23"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/campana" />
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="6dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/lineasfinas" />
+
+        </android.support.constraint.ConstraintLayout>
+
         <android.support.constraint.ConstraintLayout
             android:id="@+id/welcomeMessage"
             android:layout_width="match_parent"
@@ -61,56 +120,6 @@
 
         </android.support.constraint.ConstraintLayout>
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/green"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/gradient"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/imageView23"
-                android:layout_width="42dp"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/volando" />
-
-            <ImageView
-                android:id="@+id/imageView16"
-                android:layout_width="42dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="4dp"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageView23"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/bellbl" />
-
-            <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/threeline" />
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_image"
-                android:layout_width="56dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/serv"
-                android:visibility="visible"
-                app:civ_border_color="#FF000000"
-                app:civ_border_width="2dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </android.support.constraint.ConstraintLayout>
-
 
         <TextView
             android:id="@+id/textView20"
@@ -137,10 +146,10 @@
 
         <ListView
             android:id="@+id/listita"
-            android:layout_width="186dp"
-            android:layout_height="597dp"
+            android:layout_width="182dp"
+            android:layout_height="682dp"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="128dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="4dp"
             android:divider="#FFFFFF"
             android:dividerHeight="30.0sp"
@@ -154,10 +163,10 @@
 
         <ListView
             android:id="@+id/lista2"
-            android:layout_width="186dp"
-            android:layout_height="597dp"
+            android:layout_width="179dp"
+            android:layout_height="680dp"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="128dp"
+            android:layout_marginTop="50dp"
             android:divider="#FFFFFF"
             android:dividerHeight="30.0sp"
             app:layout_constrainedWidth="true"

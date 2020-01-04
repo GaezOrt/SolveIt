@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class RubrosListAdapter extends ArrayAdapter<Rubro> {
     ArrayList<Rubro> rubros= new ArrayList<Rubro>();
     int resource;
@@ -34,8 +36,8 @@ public class RubrosListAdapter extends ArrayAdapter<Rubro> {
             LayoutInflater inflater= LayoutInflater.from(getContext());
             convertView=inflater.inflate(R.layout.rubross,null,false);
 
-            viewHolder.image=(ConstraintLayout) convertView.findViewById(R.id.borde);
-            viewHolder.image.setBackground(rubro.drawableImg);
+            viewHolder.image=(CircleImageView) convertView.findViewById(R.id.image);
+            viewHolder.image.setImageDrawable(rubro.drawableImg);
             viewHolder.name=(TextView)convertView.findViewById(R.id.textView3);
             viewHolder.name.setText(rubro.rubro);
 
@@ -46,7 +48,7 @@ public class RubrosListAdapter extends ArrayAdapter<Rubro> {
         return convertView;
     }
     public class ViewHolder{
-        ConstraintLayout image;
+        CircleImageView image;
         TextView name;
         RatingBar rating;
 
