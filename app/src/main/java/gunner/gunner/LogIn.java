@@ -62,27 +62,26 @@ public class LogIn extends AppCompatActivity {
 
         //Animations
         final Animation emailID = AnimationUtils.loadAnimation(this, R.anim.translate_email_login);
-        EditText email=(EditText)findViewById(editText);
+        EditText email = (EditText) findViewById(editText);
         email.setAnimation(emailID);
 
         final Animation passwordAnim = AnimationUtils.loadAnimation(this, R.anim.translate_password_login);
-        EditText passwordID=(EditText)findViewById(editText2);
+        EditText passwordID = (EditText) findViewById(editText2);
         passwordID.setAnimation(passwordAnim);
 
         final Animation loginbutton = AnimationUtils.loadAnimation(this, R.anim.translate_login_button);
-        Button loginButton=(Button)findViewById(button7);
+        Button loginButton = (Button) findViewById(button7);
         loginButton.setAnimation(loginbutton);
 
 
-
-        Button signUpProveedor=(Button)findViewById(button15);
+        Button signUpProveedor = (Button) findViewById(button15);
         signUpProveedor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LogIn.this, SignUpProveedor.class));
             }
         });
-        Button button= (Button) findViewById(button14);
+        Button button = (Button) findViewById(button14);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,7 +91,7 @@ public class LogIn extends AppCompatActivity {
 
 
         //Error al loggear
-        if(LogInService.estado==1){
+        if (LogInService.estado == 1) {
 
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
             builder1.setMessage("Incorrect log in or password.");
@@ -107,24 +106,24 @@ public class LogIn extends AppCompatActivity {
             AlertDialog alert11 = builder1.create();
             alert11.show();
 
-            LogInService.estado=0;
+            LogInService.estado = 0;
         }
 
 
         //Apretar boton para loggear
-        final Button logInButt=(Button) findViewById(button7) ;
-        logInButt.setOnClickListener((v)-> {
+        final Button logInButt = (Button) findViewById(button7);
+        logInButt.setOnClickListener((v) -> {
             System.out.println("Hey hey");
 
-            EditText usernameText=(EditText) findViewById(editText);
-            emailRetrieved=usernameText.getText().toString();
-            LogInService.email=emailRetrieved;
+            EditText usernameText = (EditText) findViewById(editText);
+            emailRetrieved = usernameText.getText().toString();
+            LogInService.email = emailRetrieved;
 
 
-            EditText passwordText=(EditText) findViewById(editText2);
+            EditText passwordText = (EditText) findViewById(editText2);
 
-            password=passwordText.getText().toString();
-            LogInService.password=password;
+            password = passwordText.getText().toString();
+            LogInService.password = password;
 
 
             Intent i = new Intent(this, LogInService.class);
@@ -140,12 +139,6 @@ public class LogIn extends AppCompatActivity {
         });
 
 
-        final ImageView atrasBut=(ImageView) findViewById(imageView19) ;
-        atrasBut.setOnClickListener ((v)-> {
-            finish();
-            startActivity(new Intent(LogIn.this, MainActivity.class));
-
-        });
     }
 
 

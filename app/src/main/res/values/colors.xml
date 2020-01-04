@@ -6,7 +6,7 @@
     <color name="background_color">#009688</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
-    <color name="white_greyish">#EEEEEE</color>
+    <color name="white_greyish">#000000</color>
     <color name="buttonselectorcolor">#009E9E9E</color>
     <color name="coloralerta">#0D0D20</color>
     <color name="naranja">#E4680A</color>

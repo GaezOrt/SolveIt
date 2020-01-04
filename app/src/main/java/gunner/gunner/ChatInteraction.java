@@ -88,8 +88,10 @@ public class ChatInteraction extends IntentService {
                 if (Chat.mensajes.size() + 1 < rs.getRow()) {
                     Mensaje mensaje = new Mensaje(g, rs.getString("primerIntegrante"), rs.getTime("horario"));
                     if(lookForEmail2){
-                        emailFromOtherUser=find.findNameFromuser(mensaje.email);
-                        lookForEmail2=false;
+                        if(!mensaje.email.equals(LogInService.email)) {
+                            emailFromOtherUser = find.findNameFromuser(mensaje.email);
+                            lookForEmail2 = false;
+                        }
                     }
                     Chat.runOnUI(new Runnable() {
                         public void run() {
