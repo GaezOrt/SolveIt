@@ -32,11 +32,11 @@
         android:id="@+id/textView43"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="16dp"
         android:text="TextView"
         android:textColor="#FDE4E1E1"
-        app:layout_constraintStart_toEndOf="@+id/profile_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/greenCircle"
         app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

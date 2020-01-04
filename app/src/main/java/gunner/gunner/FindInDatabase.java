@@ -61,6 +61,7 @@ public class FindInDatabase extends AppCompatActivity {
         setTheme(R.style.Theme_Design_NoActionBar);
         setContentView(R.layout.find_user);
 
+
         //Contactar
         Button button12= (Button)findViewById(R.id.button12);
         button12.setOnClickListener(new View.OnClickListener() {
@@ -188,7 +189,26 @@ public class FindInDatabase extends AppCompatActivity {
             ConversacionesUsuario.conversaciones.add(item);
         }
     }
+    public  String findBasedOnUuid(String uiid){
+                System.out.println("Based on uui");
+        String email="asa";
+            try {
+                final DatabaseConnection data = new DatabaseConnection();
+                con = data.connect();
 
+                PreparedStatement profilePt = con.prepareStatement("SELECT *  FROM androidID WHERE androidID= ?");
+                profilePt.setString(1,uiid);
+                ResultSet rs = profilePt.executeQuery();
+                while(rs.next()){
+
+
+                    email= rs.getString("email");
+                }
+            }catch (Exception e){
+
+            }
+            return email;
+    }
     private boolean contains(ConversacionesUsuarioListaTipo item) {
         for(ConversacionesUsuarioListaTipo i : ConversacionesUsuario.conversaciones) {
             if(i.nombre.equals(item.nombre)) {

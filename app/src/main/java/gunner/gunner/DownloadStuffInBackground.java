@@ -31,6 +31,7 @@ public class DownloadStuffInBackground extends IntentService {
             find.findInDatabaseByLocation(LookingAfterLocation);
             lookForLocation=false;
         }
+
         if(searchComments){
             find.findComments(FindInDatabase.emailPassed,FindInDatabase.comentarios);
             searchComments=false;

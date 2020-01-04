@@ -46,7 +46,7 @@ public class MyListAdaptor extends ArrayAdapter<Electricista> {
             LayoutInflater inflater= LayoutInflater.from(getContext());
             convertView=inflater.inflate(R.layout.list_view,null,false);
 
-            viewHolder.image=(CircleImageView) convertView.findViewById(R.id.profile_image);
+            viewHolder.image=(CircleImageView) convertView.findViewById(R.id.greenCircle);
             viewHolder.name=(TextView)convertView.findViewById(R.id.editText4);
             viewHolder.image.setImageBitmap(electricista.photo);
             viewHolder.name.setText(electricista.name);

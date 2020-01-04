@@ -1,4 +1,5 @@
 package gunner.gunner;
+
 import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
@@ -23,11 +24,13 @@ import android.os.StrictMode;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.TelephonyManager;
 import android.text.InputType;
 import android.util.Base64;
 import android.util.Log;
@@ -107,7 +110,7 @@ import static gunner.gunner.R.id.imageView9;
 import static gunner.gunner.R.id.location3;
 import static gunner.gunner.R.id.spinner;
 
-public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpinnerListener {
+public class SignUp extends AppCompatActivity implements MultiSpinner.MultiSpinnerListener {
 
     String email;
     String username;
@@ -123,17 +126,17 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.w("Activity", "Activity result");
         super.onActivityResult(requestCode, resultCode, data);
-        selectedImage= data.getData();
+        selectedImage = data.getData();
         try {
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
-            bitmap=scaleDown(bitmap,190,true);
+            bitmap = scaleDown(bitmap, 190, true);
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byteArray= stream.toByteArray();
-            SignUpService.pathForImage=byteArray;
-            SignUpService.imagenUsada=true;
-            ImageView image= (ImageView)findViewById(imageView2);
+            byteArray = stream.toByteArray();
+            SignUpService.pathForImage = byteArray;
+            SignUpService.imagenUsada = true;
+            ImageView image = (ImageView) findViewById(imageView2);
             image.setImageResource(R.drawable.usercorrect);
         } catch (IOException e) {
             e.printStackTrace();
@@ -152,15 +155,15 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
-        SignUpService.signUpClient=true;
+        SignUpService.signUpClient = true;
 
 
-        EditText emaila=(EditText)findViewById(editText3);
-        EditText usernamea=(EditText)findViewById(editText);
-        EditText passworda=(EditText)findViewById(editText2);
-        EditText phonea=(EditText)findViewById(editText5);
-        TextView datea=(TextView) findViewById(location3);
-        Spinner spinnera=(Spinner)findViewById(spinner);
+        EditText emaila = (EditText) findViewById(editText3);
+        EditText usernamea = (EditText) findViewById(editText);
+        EditText passworda = (EditText) findViewById(editText2);
+        EditText phonea = (EditText) findViewById(editText5);
+        TextView datea = (TextView) findViewById(location3);
+        Spinner spinnera = (Spinner) findViewById(spinner);
         final Animation animationFields = AnimationUtils.loadAnimation(this, R.anim.sign_up_fields);
         emaila.startAnimation(animationFields);
         usernamea.startAnimation(animationFields);
@@ -169,19 +172,18 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
         datea.startAnimation(animationFields);
         spinnera.startAnimation(animationFields);
 
-        ImageView emailImage=(ImageView)findViewById(imageView9);
-        ImageView namee=(ImageView)findViewById(imageView12);
-        ImageView passwordd=(ImageView)findViewById(imageView13);
-        ImageView phonee=(ImageView)findViewById(imageView4);
-        ImageView datee=(ImageView)findViewById(imageView21);
-        ImageView locationImage=(ImageView)findViewById(imageView3);
+        ImageView emailImage = (ImageView) findViewById(imageView9);
+        ImageView namee = (ImageView) findViewById(imageView12);
+        ImageView passwordd = (ImageView) findViewById(imageView13);
+        ImageView phonee = (ImageView) findViewById(imageView4);
+        ImageView datee = (ImageView) findViewById(imageView21);
+        ImageView locationImage = (ImageView) findViewById(imageView3);
         emailImage.startAnimation(animationFields);
         namee.startAnimation(animationFields);
         passwordd.startAnimation(animationFields);
         phonee.startAnimation(animationFields);
         datee.startAnimation(animationFields);
         locationImage.startAnimation(animationFields);
-
 
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -204,31 +206,31 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
 
 
         //Date of birth
-        TextView date= (TextView) findViewById(location3);
+        TextView date = (TextView) findViewById(location3);
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Calendar cal= Calendar.getInstance();
-                int year= cal.get(Calendar.YEAR);
-                int month= cal.get(Calendar.MONTH);
-                int day= cal.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog dialog= new DatePickerDialog(SignUp.this,R.style.MyDialogTheme,mdate,year,month,day);
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog dialog = new DatePickerDialog(SignUp.this, R.style.MyDialogTheme, mdate, year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
         });
-        mdate= new DatePickerDialog.OnDateSetListener() {
+        mdate = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month=month+1;
-                dateString=""+day+ "/"+ month+"/"+ year;
+                month = month + 1;
+                dateString = "" + day + "/" + month + "/" + year;
                 date.setText(dateString);
             }
         };
 
         //Si el email ya ha sido utilizado
-        if(SignUpService.cuentaYaUtilizada){
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(this,R.style.MyDialogTheme);
+        if (SignUpService.cuentaYaUtilizada) {
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this, R.style.MyDialogTheme);
             builder1.setTitle("Sign up incorrecto");
             builder1.setIcon(R.drawable.usercorrect);
 
@@ -244,21 +246,21 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
             AlertDialog alert11 = builder1.create();
             alert11.show();
 
-            EditText email= (EditText)findViewById(editText3);
+            EditText email = (EditText) findViewById(editText3);
             email.setText(SignUpService.email);
-            EditText username= (EditText)findViewById(editText);
+            EditText username = (EditText) findViewById(editText);
             username.setText(SignUpService.username);
-            EditText password= (EditText)findViewById(editText2);
+            EditText password = (EditText) findViewById(editText2);
             password.setText(SignUpService.password);
-            EditText phone= (EditText)findViewById(editText2);
+            EditText phone = (EditText) findViewById(editText2);
             phone.setText(SignUpService.phoneNumber);
 
         }
 
         //Si el error esta en algun campo vacío
-        if(SignUpService.estado==1 && SignUpService.imagenUsada){
+        if (SignUpService.estado == 1 && SignUpService.imagenUsada) {
 
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(this,R.style.MyDialogTheme);
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this, R.style.MyDialogTheme);
             builder1.setTitle("Sign up error");
             builder1.setIcon(R.drawable.errorlogin);
 
@@ -274,25 +276,23 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
             AlertDialog alert11 = builder1.create();
             alert11.show();
 
-            EditText email= (EditText)findViewById(editText3);
+            EditText email = (EditText) findViewById(editText3);
             email.setText(SignUpService.email);
-            EditText username= (EditText)findViewById(editText);
+            EditText username = (EditText) findViewById(editText);
             username.setText(SignUpService.username);
-            EditText password= (EditText)findViewById(editText2);
+            EditText password = (EditText) findViewById(editText2);
             password.setText(SignUpService.password);
-            EditText phone= (EditText)findViewById(editText2);
+            EditText phone = (EditText) findViewById(editText2);
             phone.setText(SignUpService.phoneNumber);
-
-
 
 
         }
 
         // si esta todo bien
-        else if(SignUpService.estado==2 && !SignUpService.cuentaYaUtilizada){
+        else if (SignUpService.estado == 2 && !SignUpService.cuentaYaUtilizada) {
             Intent i = new Intent(this, DownloadStuffInBackground.class);
             startService(i);
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(this,R.style.MyDialogTheme);
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this, R.style.MyDialogTheme);
             builder1.setTitle("Sign up correcto");
             builder1.setIcon(R.drawable.usercorrect);
 
@@ -307,12 +307,12 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
                     });
             AlertDialog alert11 = builder1.create();
             alert11.show();
-            SignUpService.datosOk=true;
+            SignUpService.datosOk = true;
         }
 
         //Si el error esta en que el usuario no registro una foto
-        else if(SignUpService.imagenUsada==false && SignUpService.estado==1){
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(this,R.style.MyDialogTheme);
+        else if (SignUpService.imagenUsada == false && SignUpService.estado == 1) {
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this, R.style.MyDialogTheme);
             builder1.setTitle("Sign up error");
             builder1.setIcon(R.drawable.errorlogin);
 
@@ -327,13 +327,13 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
                     });
             AlertDialog alert11 = builder1.create();
             alert11.show();
-            EditText email= (EditText)findViewById(editText3);
+            EditText email = (EditText) findViewById(editText3);
             email.setText(SignUpService.email);
-            EditText username= (EditText)findViewById(editText);
+            EditText username = (EditText) findViewById(editText);
             username.setText(SignUpService.username);
-            EditText password= (EditText)findViewById(editText2);
+            EditText password = (EditText) findViewById(editText2);
             password.setText(SignUpService.password);
-            EditText phone= (EditText)findViewById(editText2);
+            EditText phone = (EditText) findViewById(editText2);
             phone.setText(SignUpService.phoneNumber);
 
         }
@@ -341,7 +341,7 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
 
         //Clicking on image
         imageView = (ImageView) findViewById(imageView2);
-        imageView.setOnClickListener( e -> selectImage( ));
+        imageView.setOnClickListener(e -> selectImage());
 
         //Registrar usuario en tabla base de datos
         try {
@@ -357,20 +357,20 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
 
                         EditText emailText = (EditText) findViewById(editText3);
                         email = emailText.getText().toString();
-                        SignUpService.email=email;
+                        SignUpService.email = email;
                         EditText usernameText = (EditText) findViewById(editText);
                         username = usernameText.getText().toString();
 
-                        SignUpService.username=username;
+                        SignUpService.username = username;
                         EditText passwordText = (EditText) findViewById(editText2);
                         password = passwordText.getText().toString();
-                        SignUpService.password=password;
+                        SignUpService.password = password;
                         EditText phoneNumberText = (EditText) findViewById(editText5);
                         number = phoneNumberText.getText().toString();
-                        SignUpService.phoneNumber=number;
-                        Spinner spinner=(Spinner)findViewById(R.id.spinner);
-                        location=spinner.getSelectedItem().toString();
-                        SignUpService.location=location;
+                        SignUpService.phoneNumber = number;
+                        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+                        location = spinner.getSelectedItem().toString();
+                        SignUpService.location = location;
 
                         Intent i = new Intent(this, SignUpService.class);
                         startService(i);
@@ -380,46 +380,47 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
                         imageView.setVisibility(VISIBLE);
 
                     });
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         //Ir para atras
         final ImageView atrasBut = (ImageView) findViewById(imageView18);
         atrasBut.setOnClickListener(
-                (View v) ->  {
+                (View v) -> {
                     finish();
                     startActivity(new Intent(SignUp.this, MainActivity.class));
                 }
         );
     }
+
     public void signUpProveedor() {
         try {
             PreparedStatement pt = DatabaseConnection.conn.prepareStatement("SELECT * FROM Users WHERE email = ?");
             pt.setString(1, SignUpService.email);
             pt.setFetchSize(1);
             ResultSet rs = pt.executeQuery();
-            if (rs.next()==false) {
-                SignUpService.cuentaYaUtilizada=false;
-            }else{
-                SignUpService.cuentaYaUtilizada=true;
+            if (rs.next() == false) {
+                SignUpService.cuentaYaUtilizada = false;
+            } else {
+                SignUpService.cuentaYaUtilizada = true;
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         if (SignUpService.email.length() == 0 || SignUpService.username.length() == 0 ||
                 SignUpService.password.length() == 0 ||
-                SignUpService.phoneNumber.length() == 0|| SignUpService.imagenUsada==false || SignUpService.cuentaYaUtilizada) {
+                SignUpService.phoneNumber.length() == 0 || SignUpService.imagenUsada == false || SignUpService.cuentaYaUtilizada) {
             SignUpService.datosOk = false;
-            SignUpService.estado=1;
-            if(SignUpService.imagenUsada==false){
-                SignUpService.imagenUsada=false;
+            SignUpService.estado = 1;
+            if (SignUpService.imagenUsada == false) {
+                SignUpService.imagenUsada = false;
 
             }
-        }else{
-            SignUpService.datosOk=true;
-            SignUpService.estado=2;
+        } else {
+            SignUpService.datosOk = true;
+            SignUpService.estado = 2;
         }
 
         if (!SignUpService.datosOk) {
@@ -427,14 +428,16 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
 
         } else {
             try {
-                Random random= new Random();
-                SignUpService.verificationNumber=random.nextInt(5000);
-                MainActivity.esProveedor=true;
+
+                Random random = new Random();
+                SignUpService.verificationNumber = random.nextInt(5000);
+                MainActivity.esProveedor = true;
                 final DatabaseConnection databaseConnection = new DatabaseConnection();
                 databaseConnection.connect();
+                SignUpService sign=new SignUpService();
                 databaseConnection.createUser(
                         SignUpService.email, SignUpService.username, SignUpService.password,
-                        SignUpService.phoneNumber, SignUpService.location, SignUpService.pathForImage,SignUpService.verificationNumber,
+                        SignUpService.phoneNumber, SignUpService.location, SignUpService.pathForImage, SignUpService.verificationNumber,
                         MainActivity.electricista,
                         MainActivity.carpintero,
                         MainActivity.computacion,
@@ -442,15 +445,15 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
                         MainActivity.gasista,
                         MainActivity.albanil,
                         MainActivity.pintor,
-                        MainActivity.cerrajero,MainActivity.esProveedor,SignUpService.dni);
+                        MainActivity.cerrajero, MainActivity.esProveedor, SignUpService.dni,WelcomeWindow.uuid );
                 try {
                     GMailSender sender = new GMailSender("servyargentina@gmail.com",
                             "servy2019");
 
 
-                    sender.sendMail("Servy Argentina (Codigo de verificacion)", "Querido "+SignUpService.username+" bienvenido a Servy! Este es su codigo de verificacion" +
+                    sender.sendMail("Servy Argentina (Codigo de verificacion)", "Querido " + SignUpService.username + " bienvenido a Servy! Este es su codigo de verificacion" +
                                     " "
-                                    +SignUpService.verificationNumber,
+                                    + SignUpService.verificationNumber,
                             "servyargentina@gmail.com", SignUpService.email);
                     System.out.println("Holaa");
                 } catch (Exception e) {
@@ -459,87 +462,15 @@ public class SignUp extends AppCompatActivity  implements MultiSpinner.MultiSpin
 
 
             } catch (Exception e) {
-                SignUpService.datosOk=false;
+                SignUpService.datosOk = false;
                 e.printStackTrace();
-                SignUpService.estado=1;
+                SignUpService.estado = 1;
             }
 
         }
     }
-    public void signUp() {
-        try {
-            PreparedStatement pt = DatabaseConnection.conn.prepareStatement("SELECT * FROM Users WHERE email = ?");
-            pt.setString(1, SignUpService.email);
-            pt.setFetchSize(1);
-            ResultSet rs = pt.executeQuery();
-            if (rs.next()==false) {
-                SignUpService.cuentaYaUtilizada=false;
-            }else{
-                SignUpService.cuentaYaUtilizada=true;
-            }
-
-        }catch (Exception e){
-
-        }
-        if (SignUpService.email.length() == 0 || SignUpService.username.length() == 0 ||
-                SignUpService.password.length() == 0 ||
-                SignUpService.phoneNumber.length() == 0|| SignUpService.imagenUsada==false || SignUpService.cuentaYaUtilizada) {
-            SignUpService.datosOk = false;
-            SignUpService.estado=1;
-            if(SignUpService.imagenUsada==false){
-                SignUpService.imagenUsada=false;
-
-            }
-        }else{
-            SignUpService.datosOk=true;
-            SignUpService.estado=2;
-        }
-
-        if (!SignUpService.datosOk) {
-            Log.e("", "errores en los datos");
-
-        } else {
-            try {
-                Random random= new Random();
-                SignUpService.verificationNumber=random.nextInt(5000);
-                MainActivity.esProveedor=false;
-                final DatabaseConnection databaseConnection = new DatabaseConnection();
-                databaseConnection.connect();
-                SignUpService.dni="";
-                databaseConnection.createUser(
-                        SignUpService.email, SignUpService.username, SignUpService.password,
-                        SignUpService.phoneNumber, SignUpService.location, SignUpService.pathForImage,SignUpService.verificationNumber,
-                        MainActivity.electricista,
-                        MainActivity.carpintero,
-                        MainActivity.computacion,
-                        MainActivity.plomero,
-                        MainActivity.gasista,
-                        MainActivity.albanil,
-                        MainActivity.pintor,
-                        MainActivity.cerrajero,MainActivity.esProveedor,SignUpService.dni);
-                try {
-                    GMailSender sender = new GMailSender("servyargentina@gmail.com",
-                            "servy2019");
 
 
-                    sender.sendMail("Servy Argentina (Codigo de verificacion)", "Querido "+SignUpService.username+" bienvenido a Servy! Este es su codigo de verificacion" +
-                                    " "
-                                    +SignUpService.verificationNumber,
-                            "servyargentina@gmail.com", SignUpService.email);
-                    System.out.println("Holaa");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-
-            } catch (Exception e) {
-                SignUpService.datosOk=false;
-                e.printStackTrace();
-                SignUpService.estado=1;
-            }
-
-        }
-    }
     public static Bitmap scaleDown(Bitmap realImage, float maxImageSize,
                                    boolean filter) {
         float ratio = Math.min(

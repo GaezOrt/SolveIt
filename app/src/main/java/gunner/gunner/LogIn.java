@@ -44,11 +44,10 @@ import static gunner.gunner.R.id.imageView19;
 import static gunner.gunner.R.id.imageView8;
 
 public class LogIn extends AppCompatActivity {
-
+   static String emailHint;
     String emailRetrieved;
     String password;
-    double longitude;
-    double latitude;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +63,10 @@ public class LogIn extends AppCompatActivity {
         final Animation emailID = AnimationUtils.loadAnimation(this, R.anim.translate_email_login);
         EditText email = (EditText) findViewById(editText);
         email.setAnimation(emailID);
+       FindInDatabase find= new FindInDatabase();
+       System.out.println(""+find.findBasedOnUuid(WelcomeWindow.uuid));
+       email.setText(emailHint);
+
 
         final Animation passwordAnim = AnimationUtils.loadAnimation(this, R.anim.translate_password_login);
         EditText passwordID = (EditText) findViewById(editText2);

@@ -23,6 +23,7 @@ import android.os.StrictMode;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -482,6 +483,8 @@ public class SignUpProveedor extends AppCompatActivity  implements MultiSpinner.
 
         } else {
             try {
+                String android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(),
+                        Settings.Secure.ANDROID_ID);
                 Random random= new Random();
                 SignUpService.verificationNumber=random.nextInt(5000);
                 MainActivity.esProveedor=true;
@@ -497,7 +500,7 @@ public class SignUpProveedor extends AppCompatActivity  implements MultiSpinner.
                         MainActivity.gasista,
                         MainActivity.albanil,
                         MainActivity.pintor,
-                        MainActivity.cerrajero,MainActivity.esProveedor,SignUpService.dni);
+                        MainActivity.cerrajero,MainActivity.esProveedor,SignUpService.dni,android_id);
                 try {
                     GMailSender sender = new GMailSender("servyargentina@gmail.com",
                             "servy2019");

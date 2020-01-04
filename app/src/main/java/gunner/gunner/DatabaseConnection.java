@@ -52,15 +52,16 @@ public class DatabaseConnection {
             boolean pintor,
             boolean albanil,
             boolean cerrajero,
-            boolean carpintero,boolean esProveedor,String dni) throws SQLException, FileNotFoundException {
+            boolean carpintero,boolean esProveedor,String dni, String androidID) throws SQLException, FileNotFoundException {
 
-        String updateSQL = "INSERT INTO Users VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        String updateSQL = "INSERT INTO Users VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         String updateRubro= " INSERT INTO Rubro VALUES (?,?,?,?,?,?,?,?,?)";
-
+        String androidUuid=" INSERT INTO androidID VALUES(?,?,?)";
 
 
         PreparedStatement pstmt = conn.prepareStatement(updateSQL);
         PreparedStatement pstmtRubro= conn.prepareStatement(updateRubro);
+        PreparedStatement pstmtAndroidUID=conn.prepareStatement(androidUuid);
         pstmt.setString(1, email);
         pstmt.setString(2, username);
         pstmt.setString(3, password);
@@ -72,6 +73,7 @@ public class DatabaseConnection {
         pstmt.setInt(9,verificationNumber);
         pstmt.setBoolean(10,false);
         pstmt.setBoolean(11,esProveedor);
+        pstmt.setString(12,androidID);
         pstmtRubro.setString(1,email );
         pstmtRubro.setBoolean(2,electricista);
         pstmtRubro.setBoolean(3,plomero );
@@ -82,8 +84,13 @@ public class DatabaseConnection {
         pstmtRubro.setBoolean(8,cerrajero);
         pstmtRubro.setBoolean(9,carpintero);
 
+        pstmtAndroidUID.setString(1,email);
+        pstmtAndroidUID.setString(2,password);
+        pstmtAndroidUID.setString(3,androidID);
+
         pstmt.executeUpdate();
         pstmtRubro.executeUpdate();
+        pstmtAndroidUID.executeUpdate();
         SignUp.dateString="";
     }
 }
