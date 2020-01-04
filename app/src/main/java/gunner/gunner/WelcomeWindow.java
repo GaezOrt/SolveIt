@@ -21,6 +21,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -51,16 +52,15 @@ public class WelcomeWindow extends AppCompatActivity {
         } else {
             stopService(u);
         }
-        TextView text = (TextView) findViewById(R.id.textView);
-        TextView r = (TextView) findViewById(R.id.textView32);
-        final Animation fadeout = AnimationUtils.loadAnimation(this, R.anim.fadeout);
 
+        final Animation fadeout = AnimationUtils.loadAnimation(this, R.anim.fadeout);
+        ImageView image= (ImageView)findViewById(R.id.imageView28);
 
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                text.startAnimation(fadeout);
-                r.startAnimation(fadeout);
+                image.startAnimation(fadeout);
+
             }
         }, 5000);
         mHandler.postDelayed(new Runnable() {

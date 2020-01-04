@@ -6,52 +6,51 @@
     android:layout_height="match_parent"
     tools:context=".LogIn">
 
-    <ImageView
-        android:id="@+id/imageView19"
-        android:layout_width="35dp"
-        android:layout_height="31dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back" />
 
     <Button
         android:id="@+id/button7"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:layout_weight="1"
-        android:text="Entrar"
+        android:text="Iniciar sesión"
+        android:textAllCaps="false"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText2" />
 
     <Button
         android:id="@+id/button14"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="80dp"
         android:layout_weight="1"
+        android:background="@drawable/border"
         android:text="Crear cuenta como usuario"
+        android:textColor="#090808"
         android:textSize="10sp"
-        app:layout_constraintEnd_toStartOf="@+id/button15"
-        app:layout_constraintHorizontal_bias="0.842"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button7" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button15"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
         android:layout_weight="1"
+        android:background="@drawable/border"
         android:text="Crear cuenta como proveedor"
+        android:textColor="#090808"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/button14" />
-
 
     <EditText
         android:id="@+id/editText"
@@ -59,13 +58,13 @@
         android:layout_height="40dp"
         android:layout_above="@+id/editText2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="92dp"
-        android:background="@drawable/gray_background"
+        android:layout_marginTop="312dp"
+        android:background="@drawable/black_with_rounded_border"
         android:ems="10"
         android:hint="@string/email"
         android:inputType="textPersonName"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
+        android:textColor="@color/black"
+        android:textColorHint="#0E0D0D"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -79,14 +78,15 @@
         android:layout_alignStart="@+id/editText"
         android:layout_alignLeft="@+id/editText"
         android:layout_alignBottom="@+id/cardView"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/gray_background"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/black_with_rounded_border"
         android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPassword"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
+        android:textColor="@color/black"
+        android:textColorHint="#0E0D0D"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText" />
 
@@ -103,6 +103,17 @@
         app:layout_constraintTop_toTopOf="@+id/button7"
         app:layout_constraintVertical_bias="0.0"
         tools:srcCompat="@drawable/loading" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="424dp"
+        android:layout_height="286dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
 
 
 </android.support.constraint.ConstraintLayout>
