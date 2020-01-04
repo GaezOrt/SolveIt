@@ -45,7 +45,7 @@
             app:srcCompat="@drawable/threeline" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
+            android:id="@+id/greenCircle"
             android:layout_width="56dp"
             android:layout_height="match_parent"
             android:src="@drawable/serv"

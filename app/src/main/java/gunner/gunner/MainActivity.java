@@ -124,13 +124,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Rubro maestraParticular = new Rubro("Profesor part.", getApplicationContext().getResources().getDrawable(R.drawable.iconoprof));
         rubros2.add(maestraParticular);
-        Rubro mecanico = new Rubro("Mecanico", getApplicationContext().getResources().getDrawable(R.drawable.iconoauto));
+        Rubro mecanico = new Rubro("Mecánica", getApplicationContext().getResources().getDrawable(R.drawable.iconoauto));
         rubros2.add(mecanico);
         Rubro cerrajeria = new Rubro("Cerrajería", getApplicationContext().getResources().getDrawable(R.drawable.icono_cerrajero));
         rubros2.add(cerrajeria);
         Rubro pintor = new Rubro("Pintor", getApplicationContext().getResources().getDrawable(R.drawable.icono_pintor));
         rubros2.add(pintor);
-        Rubro construccion = new Rubro("Construccion", getApplicationContext().getResources().getDrawable(R.drawable.icono_albanil));
+        Rubro construccion = new Rubro("Construcción", getApplicationContext().getResources().getDrawable(R.drawable.icono_albanil));
         rubros2.add(construccion);
         listView2.setAdapter(adapter);
         //adapter.notifyDataSetChanged();
