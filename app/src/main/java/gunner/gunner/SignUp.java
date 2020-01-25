@@ -169,6 +169,7 @@ public class SignUp extends AppCompatActivity implements MultiSpinner.MultiSpinn
         if(acct!=null){
             emaila.setText(acct.getEmail());
             usernamea.setText(acct.getDisplayName());
+            MainActivity.uniqueGoogleId=acct.getId();
 
         }
         final Animation animationFields = AnimationUtils.loadAnimation(this, R.anim.sign_up_fields);
@@ -440,6 +441,10 @@ public class SignUp extends AppCompatActivity implements MultiSpinner.MultiSpinn
                 SignUpService.verificationNumber = random.nextInt(5000);
                 MainActivity.esProveedor = true;
                 final DatabaseConnection databaseConnection = new DatabaseConnection();
+
+                if(MainActivity.uniqueGoogleId==null){
+                    MainActivity.uniqueGoogleId="0";
+                }
                 databaseConnection.connect();
 
                 databaseConnection.createUser(
@@ -452,7 +457,7 @@ public class SignUp extends AppCompatActivity implements MultiSpinner.MultiSpinn
                         MainActivity.gasista,
                         MainActivity.albanil,
                         MainActivity.pintor,
-                        MainActivity.cerrajero, MainActivity.esProveedor, SignUpService.dni,WelcomeWindow.uuid );
+                        MainActivity.cerrajero, MainActivity.esProveedor, SignUpService.dni,WelcomeWindow.uuid,MainActivity.uniqueGoogleId );
                 try {
                     GMailSender sender = new GMailSender("servyargentina@gmail.com",
                             "servy2019");

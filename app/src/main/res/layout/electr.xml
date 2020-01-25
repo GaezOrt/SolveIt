@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,7 +7,7 @@
     android:background="@color/white">
 
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/green"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -37,7 +37,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/campana" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <gunner.gunner.MultiSpinner
         android:id="@+id/spinner2"
@@ -70,7 +70,7 @@
         app:layout_constraintTop_toBottomOf="@+id/green"
         app:srcCompat="@drawable/electt" />
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swiperefresh"
         android:layout_width="414dp"
         android:layout_height="402dp"
@@ -94,7 +94,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         </ListView>
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
     <ImageView
@@ -135,13 +135,9 @@
 
     <ImageView
         android:id="@+id/logo2"
-        android:layout_width="60dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+        android:layout_width="117dp"
+        android:layout_height="68dp"
+        app:srcCompat="@drawable/idease"
+        tools:layout_editor_absoluteX="152dp" />
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

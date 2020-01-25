@@ -109,7 +109,9 @@ public class SignUpService extends IntentService {
                 databaseConnection.connect();
                 SignUpService.dni="";
                 SignUpService sign=new SignUpService();
-
+                if(MainActivity.uniqueGoogleId==null){
+                    MainActivity.uniqueGoogleId="0";
+                }
                 databaseConnection.createUser(
                         SignUpService.email, SignUpService.username, SignUpService.password,
                         SignUpService.phoneNumber, SignUpService.location, SignUpService.pathForImage,SignUpService.verificationNumber,
@@ -120,7 +122,7 @@ public class SignUpService extends IntentService {
                         MainActivity.gasista,
                         MainActivity.albanil,
                         MainActivity.pintor,
-                        MainActivity.cerrajero,MainActivity.esProveedor,SignUpService.dni,WelcomeWindow.uuid);
+                        MainActivity.cerrajero,MainActivity.esProveedor,SignUpService.dni,WelcomeWindow.uuid,MainActivity.uniqueGoogleId);
                 try {
                     GMailSender sender = new GMailSender("servyargentina@gmail.com",
                             "servy2019");

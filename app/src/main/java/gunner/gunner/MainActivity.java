@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static boolean gasista;
     static boolean cerrajero;
     static boolean albanil;
+    static String uniqueGoogleId;
     private View hiddenPanel;
     static boolean firstTimeLoogedIn = true;
     static boolean esProveedor;

@@ -486,6 +486,9 @@ public class SignUpProveedor extends AppCompatActivity implements MultiSpinner.M
                 Random random= new Random();
                 SignUpService.verificationNumber=random.nextInt(5000);
                 MainActivity.esProveedor=true;
+                if(MainActivity.uniqueGoogleId==null){
+                    MainActivity.uniqueGoogleId="0";
+                }
                 final DatabaseConnection databaseConnection = new DatabaseConnection();
                 databaseConnection.connect();
                 databaseConnection.createUser(
@@ -498,7 +501,7 @@ public class SignUpProveedor extends AppCompatActivity implements MultiSpinner.M
                         MainActivity.gasista,
                         MainActivity.albanil,
                         MainActivity.pintor,
-                        MainActivity.cerrajero,MainActivity.esProveedor,SignUpService.dni,android_id);
+                        MainActivity.cerrajero,MainActivity.esProveedor,SignUpService.dni,android_id,MainActivity.uniqueGoogleId);
                 try {
                     GMailSender sender = new GMailSender("servyargentina@gmail.com",
                             "servy2019");

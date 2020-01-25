@@ -52,9 +52,9 @@ public class DatabaseConnection {
             boolean pintor,
             boolean albanil,
             boolean cerrajero,
-            boolean carpintero,boolean esProveedor,String dni, String androidID) throws SQLException, FileNotFoundException {
+            boolean carpintero,boolean esProveedor,String dni, String androidID,String uniqueGoogleID) throws SQLException, FileNotFoundException {
 
-        String updateSQL = "INSERT INTO Users VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        String updateSQL = "INSERT INTO Users VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
         String updateRubro= " INSERT INTO Rubro VALUES (?,?,?,?,?,?,?,?,?)";
         String androidUuid=" INSERT INTO androidID VALUES(?,?,?)";
 
@@ -74,6 +74,7 @@ public class DatabaseConnection {
         pstmt.setBoolean(10,false);
         pstmt.setBoolean(11,esProveedor);
         pstmt.setString(12,androidID);
+        pstmt.setString(13,uniqueGoogleID);
         pstmtRubro.setString(1,email );
         pstmtRubro.setBoolean(2,electricista);
         pstmtRubro.setBoolean(3,plomero );
