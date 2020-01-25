@@ -10,10 +10,12 @@ import android.util.AttributeSet;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import androidx.appcompat.widget.AppCompatSpinner;
+
 import java.util.List;
 
 
-public class MultiSpinner extends android.support.v7.widget.AppCompatSpinner implements OnMultiChoiceClickListener, OnCancelListener
+public class MultiSpinner extends AppCompatSpinner implements OnMultiChoiceClickListener, OnCancelListener
 {    private List<String> items;
     private boolean[] selected;
     private String defaultText;

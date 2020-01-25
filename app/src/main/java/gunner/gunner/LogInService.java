@@ -4,7 +4,7 @@ import android.app.IntentService;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
+
 import android.util.Log;
 
 public class LogInService extends IntentService {

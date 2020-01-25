@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ConversacionesUsuarioAdapter extends ArrayAdapter<ConversacionesUsuarioListaTipo> {
     ArrayList<ConversacionesUsuarioListaTipo> conversaciones;
     int resource;
@@ -42,6 +44,8 @@ public class ConversacionesUsuarioAdapter extends ArrayAdapter<ConversacionesUsu
             viewHolder.name=(TextView) convertView.findViewById(R.id.textView43);
             viewHolder.name.setText(comentarios.nombre);
 
+            viewHolder.image=(CircleImageView)convertView.findViewById(R.id.greenCircle);
+            viewHolder.image.setImageBitmap(comentarios.bitmap);
             convertView.setTag(viewHolder);
         }else{
             viewHolder=(ViewHolder)convertView.getTag();
@@ -50,6 +54,6 @@ public class ConversacionesUsuarioAdapter extends ArrayAdapter<ConversacionesUsu
     }
     public class ViewHolder{
      TextView name;
-
+     CircleImageView image;
     }
 }

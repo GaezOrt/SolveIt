@@ -24,11 +24,6 @@ import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.Base64;
 import android.util.Log;
@@ -44,6 +39,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
@@ -108,7 +106,7 @@ import static gunner.gunner.R.id.imageView9;
 import static gunner.gunner.R.id.location3;
 import static gunner.gunner.R.id.spinner;
 
-public class SignUpProveedor extends AppCompatActivity  implements MultiSpinner.MultiSpinnerListener {
+public class SignUpProveedor extends AppCompatActivity implements MultiSpinner.MultiSpinnerListener {
 
     String email;
     String username;

@@ -12,9 +12,6 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.v4.app.NotificationManagerCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.sql.Blob;
 import java.sql.Connection;
@@ -120,8 +119,8 @@ public class FindInDatabase extends AppCompatActivity {
             ResultSet rs = updN.executeQuery();
 
             while (rs.next()) {
-
-                ConversacionesUsuarioListaTipo conversacion=new ConversacionesUsuarioListaTipo(rs.getString("mensaje"),rs.getString("primerIntegrante"));
+                FindInDatabase find= new FindInDatabase();
+                ConversacionesUsuarioListaTipo conversacion=new ConversacionesUsuarioListaTipo(rs.getString("mensaje"),rs.getString("primerIntegrante"),find.findPictureFromUser("primerIntegrante"));
                 ConversacionesUsuario.runOnUI(new Runnable() {
                     public void run() {
                         try {
@@ -159,7 +158,7 @@ public class FindInDatabase extends AppCompatActivity {
 
             while (rs.next()) {
                 FindInDatabase find= new FindInDatabase();
-                ConversacionesUsuarioListaTipo conversacion=new ConversacionesUsuarioListaTipo(rs.getString("mensaje"),rs.getString("segundoIntegrante"));
+                ConversacionesUsuarioListaTipo conversacion=new ConversacionesUsuarioListaTipo(rs.getString("mensaje"),rs.getString("segundoIntegrante"),find.findPictureFromUser(rs.getString(rs.getString("segundoIntegrante"))));
                 ConversacionesUsuario.runOnUI(new Runnable() {
                     public void run() {
                         try {

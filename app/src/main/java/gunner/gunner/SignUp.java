@@ -25,11 +25,6 @@ import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.text.InputType;
 import android.util.Base64;
@@ -47,8 +42,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -164,6 +165,12 @@ public class SignUp extends AppCompatActivity implements MultiSpinner.MultiSpinn
         EditText phonea = (EditText) findViewById(editText5);
         TextView datea = (TextView) findViewById(location3);
         Spinner spinnera = (Spinner) findViewById(spinner);
+        GoogleSignInAccount acct= GoogleSignIn.getLastSignedInAccount(SignUp.this);
+        if(acct!=null){
+            emaila.setText(acct.getEmail());
+            usernamea.setText(acct.getDisplayName());
+
+        }
         final Animation animationFields = AnimationUtils.loadAnimation(this, R.anim.sign_up_fields);
         emaila.startAnimation(animationFields);
         usernamea.startAnimation(animationFields);
@@ -434,7 +441,7 @@ public class SignUp extends AppCompatActivity implements MultiSpinner.MultiSpinn
                 MainActivity.esProveedor = true;
                 final DatabaseConnection databaseConnection = new DatabaseConnection();
                 databaseConnection.connect();
-                SignUpService sign=new SignUpService();
+
                 databaseConnection.createUser(
                         SignUpService.email, SignUpService.username, SignUpService.password,
                         SignUpService.phoneNumber, SignUpService.location, SignUpService.pathForImage, SignUpService.verificationNumber,
@@ -485,7 +492,7 @@ public class SignUp extends AppCompatActivity implements MultiSpinner.MultiSpinn
     }
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(SignUp.this, MainActivity.class));
+        startActivity(new Intent(SignUp.this, LogIn.class));
     }
 
     @Override

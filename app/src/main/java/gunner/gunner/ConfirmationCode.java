@@ -6,12 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,7 +28,7 @@ public class ConfirmationCode extends AppCompatActivity {
 
 
         if(SignUpService.datosOk){
-            android.support.v7.app.AlertDialog.Builder builder1 = new android.support.v7.app.AlertDialog.Builder(this,R.style.MyDialogTheme);
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this,R.style.MyDialogTheme);
             builder1.setTitle("Sign up correcto");
             builder1.setIcon(R.drawable.usercorrect);
 
@@ -41,7 +42,7 @@ public class ConfirmationCode extends AppCompatActivity {
                             dialog.cancel();
                         }
                     });
-            android.support.v7.app.AlertDialog alert11 = builder1.create();
+           AlertDialog alert11 = builder1.create();
             alert11.show();
 
             SignUpService.datosOk=false;

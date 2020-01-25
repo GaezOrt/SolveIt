@@ -13,9 +13,6 @@ import android.location.LocationManager;
 import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -26,8 +23,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 
 import java.sql.Blob;
 import java.sql.PreparedStatement;
@@ -47,7 +52,7 @@ public class LogIn extends AppCompatActivity {
    static String emailHint;
     String emailRetrieved;
     String password;
-
+    GoogleSignInClient googleClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +63,20 @@ public class LogIn extends AppCompatActivity {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setNavigationBarColor(getResources().getColor(R.color.black));
         }
+
+
+        ImageView google= (ImageView)findViewById(R.id.imageView31);
+        GoogleSignInOptions gso= new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+
+        googleClient= GoogleSignIn.getClient(this,gso);
+        google.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent signInIntent=googleClient.getSignInIntent();
+                startActivityForResult(signInIntent,0);
+            }
+        });
+
 
         //Animations
         final Animation emailID = AnimationUtils.loadAnimation(this, R.anim.translate_email_login);
@@ -144,7 +163,24 @@ public class LogIn extends AppCompatActivity {
 
     }
 
+    public void onActivityResult(int requestCode,int resultCode, Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
 
+        if(requestCode==0){
+            Task<GoogleSignInAccount> task=GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+
+    }
+
+    private void handleSignInResult(Task<GoogleSignInAccount>completedTask){
+        try{
+            GoogleSignInAccount account=completedTask.getResult(ApiException.class);
+            startActivity(new Intent(LogIn.this,SignUp.class));
+        }catch(ApiException e){
+
+        }
+    }
     public void logIn(){
 
 

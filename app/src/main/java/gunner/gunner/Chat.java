@@ -12,14 +12,17 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.NotificationCompat;
+
+
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -124,7 +127,7 @@ public class Chat extends AppCompatActivity {
             notificationManager.createNotificationChannel(mChannel);
         }
 
-        android.support.v4.app.NotificationCompat.Builder mBuilder = new android.support.v4.app.NotificationCompat.Builder(context, channelId)
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, channelId)
                 .setSmallIcon(R.drawable.wechat_icon)//R.mipmap.ic_launcher
                 .setContentTitle(nombre+"("+email+")")
                 .setContentText(message)
