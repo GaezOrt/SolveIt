@@ -49,6 +49,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 
 
 import java.io.BufferedInputStream;
@@ -113,6 +117,9 @@ import static gunner.gunner.R.id.spinner;
 
 public class SignUp extends AppCompatActivity implements MultiSpinner.MultiSpinnerListener {
 
+
+    GoogleSignInClient googleClient;
+
     String email;
     String username;
     String password;
@@ -127,20 +134,27 @@ public class SignUp extends AppCompatActivity implements MultiSpinner.MultiSpinn
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.w("Activity", "Activity result");
         super.onActivityResult(requestCode, resultCode, data);
-        selectedImage = data.getData();
-        try {
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
-            bitmap = scaleDown(bitmap, 190, true);
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        if(requestCode==9000) {
+            selectedImage = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                bitmap = scaleDown(bitmap, 190, true);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byteArray = stream.toByteArray();
-            SignUpService.pathForImage = byteArray;
-            SignUpService.imagenUsada = true;
-            ImageView image = (ImageView) findViewById(imageView2);
-            image.setImageResource(R.drawable.usercorrect);
-        } catch (IOException e) {
-            e.printStackTrace();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byteArray = stream.toByteArray();
+                SignUpService.pathForImage = byteArray;
+                SignUpService.imagenUsada = true;
+                ImageView image = (ImageView) findViewById(imageView2);
+                image.setImageResource(R.drawable.usercorrect);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if(requestCode==3){
+            Task<GoogleSignInAccount> task=GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
         }
     }
 
@@ -152,13 +166,24 @@ public class SignUp extends AppCompatActivity implements MultiSpinner.MultiSpinn
         startActivityForResult(Intent.createChooser(intent, "Complete action using"), 9000);
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
         SignUpService.signUpClient = true;
 
+        ImageView google= (ImageView)findViewById(R.id.imageView31);
+        GoogleSignInOptions gso= new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
 
+        googleClient= GoogleSignIn.getClient(this,gso);
+        google.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent signInIntent=googleClient.getSignInIntent();
+                startActivityForResult(signInIntent,3);
+            }
+        });
         EditText emaila = (EditText) findViewById(editText3);
         EditText usernamea = (EditText) findViewById(editText);
         EditText passworda = (EditText) findViewById(editText2);
@@ -402,6 +427,15 @@ public class SignUp extends AppCompatActivity implements MultiSpinner.MultiSpinn
         );
     }
 
+
+    private void handleSignInResult(Task<GoogleSignInAccount>completedTask){
+        try{
+            GoogleSignInAccount account=completedTask.getResult(ApiException.class);
+
+        }catch(ApiException e){
+
+        }
+    }
     public void signUpProveedor() {
         try {
             PreparedStatement pt = DatabaseConnection.conn.prepareStatement("SELECT * FROM Users WHERE email = ?");
@@ -469,6 +503,7 @@ public class SignUp extends AppCompatActivity implements MultiSpinner.MultiSpinn
                             "servyargentina@gmail.com", SignUpService.email);
                     System.out.println("Holaa");
                 } catch (Exception e) {
+                    System.out.println("Problemas con el envio de mail");
                     e.printStackTrace();
                 }
 

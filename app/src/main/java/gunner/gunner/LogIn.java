@@ -52,7 +52,7 @@ public class LogIn extends AppCompatActivity {
    static String emailHint;
     String emailRetrieved;
     String password;
-    GoogleSignInClient googleClient;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,17 +65,7 @@ public class LogIn extends AppCompatActivity {
         }
 
 
-        ImageView google= (ImageView)findViewById(R.id.imageView31);
-        GoogleSignInOptions gso= new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
 
-        googleClient= GoogleSignIn.getClient(this,gso);
-        google.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent signInIntent=googleClient.getSignInIntent();
-                startActivityForResult(signInIntent,0);
-            }
-        });
 
 
         //Animations
@@ -159,28 +149,8 @@ public class LogIn extends AppCompatActivity {
             imageView.setVisibility(VISIBLE);
 
         });
-
-
     }
 
-    public void onActivityResult(int requestCode,int resultCode, Intent data){
-        super.onActivityResult(requestCode,resultCode,data);
-
-        if(requestCode==0){
-            Task<GoogleSignInAccount> task=GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
-        }
-
-    }
-
-    private void handleSignInResult(Task<GoogleSignInAccount>completedTask){
-        try{
-            GoogleSignInAccount account=completedTask.getResult(ApiException.class);
-            startActivity(new Intent(LogIn.this,SignUp.class));
-        }catch(ApiException e){
-
-        }
-    }
     public void logIn(){
 
 
@@ -248,8 +218,10 @@ public class LogIn extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(LogIn.this, MainActivity.class));
-
+        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+        homeIntent.addCategory( Intent.CATEGORY_HOME );
+        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(homeIntent);
     }
 
 }

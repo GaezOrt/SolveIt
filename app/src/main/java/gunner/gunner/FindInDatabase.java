@@ -397,7 +397,6 @@ public class FindInDatabase extends AppCompatActivity {
         }
         return x;
     }
-
     public void findElectricistas() {
 
         try {

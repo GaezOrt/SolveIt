@@ -513,6 +513,7 @@ public class SignUpProveedor extends AppCompatActivity implements MultiSpinner.M
                             "servyargentina@gmail.com", SignUpService.email);
                     System.out.println("Holaa");
                 } catch (Exception e) {
+                    System.out.println("Problemas con el envio de mail");
                     e.printStackTrace();
                 }
 
