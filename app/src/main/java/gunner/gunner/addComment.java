@@ -47,13 +47,13 @@ public class addComment extends AppCompatActivity {
                         dialog.cancel();
                     }
                 });
-        AlertDialog alert12 = builder.create();
+        final AlertDialog alert12 = builder.create();
 
 
 
 
         Button add= (Button)findViewById(R.id.comment);
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(this,R.style.MyDialogTheme);
+        final AlertDialog.Builder builder1 = new AlertDialog.Builder(this,R.style.MyDialogTheme);
         builder1.setTitle("Error en comentario");
         //builder1.setIcon(R.drawable.usercorrect);
 
@@ -105,9 +105,12 @@ public class addComment extends AppCompatActivity {
 
 
         final ImageView atrasBut=(ImageView) findViewById(imageView17) ;
-        atrasBut.setOnClickListener((v)-> {
-            FindInDatabase.comentarios.clear();
-            startActivity(new Intent(addComment.this, FindInDatabase.class));
+        atrasBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FindInDatabase.comentarios.clear();
+                addComment.this.startActivity(new Intent(addComment.this, FindInDatabase.class));
+            }
         });
     }
     @Override

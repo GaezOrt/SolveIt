@@ -47,8 +47,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInApi;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
@@ -175,28 +177,33 @@ public class SignUp extends AppCompatActivity implements MultiSpinner.MultiSpinn
 
         ImageView google= (ImageView)findViewById(R.id.imageView31);
         GoogleSignInOptions gso= new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-
-        googleClient= GoogleSignIn.getClient(this,gso);
-        google.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent signInIntent=googleClient.getSignInIntent();
-                startActivityForResult(signInIntent,3);
-            }
-        });
         EditText emaila = (EditText) findViewById(editText3);
         EditText usernamea = (EditText) findViewById(editText);
         EditText passworda = (EditText) findViewById(editText2);
         EditText phonea = (EditText) findViewById(editText5);
         TextView datea = (TextView) findViewById(location3);
         Spinner spinnera = (Spinner) findViewById(spinner);
-        GoogleSignInAccount acct= GoogleSignIn.getLastSignedInAccount(SignUp.this);
-        if(acct!=null){
-            emaila.setText(acct.getEmail());
-            usernamea.setText(acct.getDisplayName());
-            MainActivity.uniqueGoogleId=acct.getId();
 
-        }
+        googleClient= GoogleSignIn.getClient(this,gso);
+        google.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                googleClient.revokeAccess();
+                Intent signInIntent=googleClient.getSignInIntent();
+                startActivityForResult(signInIntent,3);
+
+                    GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(SignUp.this);
+                    if (acct != null) {
+                        emaila.setText(acct.getEmail());
+                        usernamea.setText(acct.getDisplayName());
+                        MainActivity.uniqueGoogleId = acct.getId();
+
+                    }
+                }
+
+        });
+
+
         final Animation animationFields = AnimationUtils.loadAnimation(this, R.anim.sign_up_fields);
         emaila.startAnimation(animationFields);
         usernamea.startAnimation(animationFields);
@@ -239,7 +246,7 @@ public class SignUp extends AppCompatActivity implements MultiSpinner.MultiSpinn
 
 
         //Date of birth
-        TextView date = (TextView) findViewById(location3);
+        final TextView date = (TextView) findViewById(location3);
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -374,7 +381,12 @@ public class SignUp extends AppCompatActivity implements MultiSpinner.MultiSpinn
 
         //Clicking on image
         imageView = (ImageView) findViewById(imageView2);
-        imageView.setOnClickListener(e -> selectImage());
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View e) {
+                SignUp.this.selectImage();
+            }
+        });
 
         //Registrar usuario en tabla base de datos
         try {
@@ -382,36 +394,39 @@ public class SignUp extends AppCompatActivity implements MultiSpinner.MultiSpinn
 
             final Button registerBut = (Button) findViewById(button7);
             registerBut.setOnClickListener(
-                    (view) -> {
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
 
-                        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-                        StrictMode.setThreadPolicy(policy);
+                            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                            StrictMode.setThreadPolicy(policy);
 
 
-                        EditText emailText = (EditText) findViewById(editText3);
-                        email = emailText.getText().toString();
-                        SignUpService.email = email;
-                        EditText usernameText = (EditText) findViewById(editText);
-                        username = usernameText.getText().toString();
+                            EditText emailText = (EditText) SignUp.this.findViewById(editText3);
+                            email = emailText.getText().toString();
+                            SignUpService.email = email;
+                            EditText usernameText = (EditText) SignUp.this.findViewById(editText);
+                            username = usernameText.getText().toString();
 
-                        SignUpService.username = username;
-                        EditText passwordText = (EditText) findViewById(editText2);
-                        password = passwordText.getText().toString();
-                        SignUpService.password = password;
-                        EditText phoneNumberText = (EditText) findViewById(editText5);
-                        number = phoneNumberText.getText().toString();
-                        SignUpService.phoneNumber = number;
-                        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-                        location = spinner.getSelectedItem().toString();
-                        SignUpService.location = location;
+                            SignUpService.username = username;
+                            EditText passwordText = (EditText) SignUp.this.findViewById(editText2);
+                            password = passwordText.getText().toString();
+                            SignUpService.password = password;
+                            EditText phoneNumberText = (EditText) SignUp.this.findViewById(editText5);
+                            number = phoneNumberText.getText().toString();
+                            SignUpService.phoneNumber = number;
+                            Spinner spinner = (Spinner) SignUp.this.findViewById(R.id.spinner);
+                            location = spinner.getSelectedItem().toString();
+                            SignUpService.location = location;
 
-                        Intent i = new Intent(this, SignUpService.class);
-                        startService(i);
-                        ImageView imageView = (ImageView) findViewById(imageView10);
-                        GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(imageView);
-                        Glide.with(this).load(R.drawable.loading_animation_grey).into(imageViewTarget);
-                        imageView.setVisibility(VISIBLE);
+                            Intent i = new Intent(SignUp.this, SignUpService.class);
+                            SignUp.this.startService(i);
+                            ImageView imageView = (ImageView) SignUp.this.findViewById(imageView10);
+                            GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(imageView);
+                            Glide.with(SignUp.this).load(R.drawable.loading_animation_grey).into(imageViewTarget);
+                            imageView.setVisibility(VISIBLE);
 
+                        }
                     });
         } catch (Exception e) {
             e.printStackTrace();

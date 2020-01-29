@@ -89,15 +89,18 @@ public class Electricidad extends AppCompatActivity implements MultiSpinner.Mult
 
         ImageView search = (ImageView) findViewById(imageView6);
 
-        Intent r = new Intent(this, DownloadStuffInBackground.class);
-        search.setOnClickListener((v) -> {
-            Electricidad.electricistas.clear();
-            DownloadStuffInBackground.lookForLocation = true;
-            Spinner spinner = (Spinner) findViewById(R.id.spinner2);
-            DownloadStuffInBackground.LookingAfterLocation = spinner.getSelectedItem().toString();
-            startService(r);
-            adapter.notifyDataSetChanged();
+        final Intent r = new Intent(this, DownloadStuffInBackground.class);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Electricidad.electricistas.clear();
+                DownloadStuffInBackground.lookForLocation = true;
+                Spinner spinner = (Spinner) Electricidad.this.findViewById(R.id.spinner2);
+                DownloadStuffInBackground.LookingAfterLocation = spinner.getSelectedItem().toString();
+                Electricidad.this.startService(r);
+                adapter.notifyDataSetChanged();
 
+            }
         });
 
         adapter = new MyListAdaptor(this, R.layout.list_view, electricistas);
@@ -105,9 +108,9 @@ public class Electricidad extends AppCompatActivity implements MultiSpinner.Mult
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         listView.invalidateViews();
-        Intent u = new Intent(this, DownloadStuffInBackground.class);
+        final Intent u = new Intent(this, DownloadStuffInBackground.class);
 
-        SwipeRefreshLayout swipe = (SwipeRefreshLayout) findViewById(swiperefresh);
+        final SwipeRefreshLayout swipe = (SwipeRefreshLayout) findViewById(swiperefresh);
 
         swipe.setOnRefreshListener(
                 new SwipeRefreshLayout.OnRefreshListener() {
@@ -126,7 +129,7 @@ public class Electricidad extends AppCompatActivity implements MultiSpinner.Mult
                 });
 
         DownloadStuffInBackground.searchComments = true;
-        Intent d = new Intent(this, DownloadStuffInBackground.class);
+        final Intent d = new Intent(this, DownloadStuffInBackground.class);
 
         //Realizar ampliacion cuando se clickea item de lista
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -145,12 +148,15 @@ public class Electricidad extends AppCompatActivity implements MultiSpinner.Mult
 
         //Ir para atras
         final ImageView atrasBut = (ImageView) findViewById(imageView5);
-        atrasBut.setOnClickListener((v) -> {
+        atrasBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-            MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.cli);
-            mp.start();
-            finish();
-            startActivity(new Intent(Electricidad.this, MainActivity.class));
+                MediaPlayer mp = MediaPlayer.create(Electricidad.this.getApplicationContext(), R.raw.cli);
+                mp.start();
+                Electricidad.this.finish();
+                Electricidad.this.startActivity(new Intent(Electricidad.this, MainActivity.class));
+            }
         });
     }
 

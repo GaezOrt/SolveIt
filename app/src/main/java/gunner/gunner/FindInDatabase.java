@@ -77,10 +77,13 @@ public class FindInDatabase extends AppCompatActivity {
 
         //Boton agregar review
         ImageView image= (ImageView)findViewById(imageView15);
-        image.setOnClickListener((v)-> {
-            MediaPlayer  mp=MediaPlayer.create(getApplicationContext(),R.raw.cli);
-            mp.start();
-            startActivity(new Intent(FindInDatabase.this, addComment.class));
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MediaPlayer mp = MediaPlayer.create(FindInDatabase.this.getApplicationContext(), R.raw.cli);
+                mp.start();
+                FindInDatabase.this.startActivity(new Intent(FindInDatabase.this, addComment.class));
+            }
         });
 
         //Dandole valor a rating bar
@@ -95,12 +98,15 @@ public class FindInDatabase extends AppCompatActivity {
 
         //Atras button
         final ImageView atrasBut = (ImageView) findViewById(imageView20);
-        atrasBut.setOnClickListener((v) -> {
-            MediaPlayer  mp=MediaPlayer.create(getApplicationContext(),R.raw.cli);
-            mp.start();
-            startActivity(new Intent(FindInDatabase.this, Electricidad.class));
-            finish();
-            comentarios.clear();
+        atrasBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MediaPlayer mp = MediaPlayer.create(FindInDatabase.this.getApplicationContext(), R.raw.cli);
+                mp.start();
+                FindInDatabase.this.startActivity(new Intent(FindInDatabase.this, Electricidad.class));
+                FindInDatabase.this.finish();
+                comentarios.clear();
+            }
         });
 
     }
@@ -120,7 +126,7 @@ public class FindInDatabase extends AppCompatActivity {
 
             while (rs.next()) {
                 FindInDatabase find= new FindInDatabase();
-                ConversacionesUsuarioListaTipo conversacion=new ConversacionesUsuarioListaTipo(rs.getString("mensaje"),rs.getString("primerIntegrante"),find.findPictureFromUser("primerIntegrante"));
+                final ConversacionesUsuarioListaTipo conversacion=new ConversacionesUsuarioListaTipo(rs.getString("mensaje"),rs.getString("primerIntegrante"),find.findPictureFromUser("primerIntegrante"));
                 ConversacionesUsuario.runOnUI(new Runnable() {
                     public void run() {
                         try {
@@ -158,7 +164,7 @@ public class FindInDatabase extends AppCompatActivity {
 
             while (rs.next()) {
                 FindInDatabase find= new FindInDatabase();
-                ConversacionesUsuarioListaTipo conversacion=new ConversacionesUsuarioListaTipo(rs.getString("mensaje"),rs.getString("segundoIntegrante"),find.findPictureFromUser(rs.getString(rs.getString("segundoIntegrante"))));
+                final ConversacionesUsuarioListaTipo conversacion=new ConversacionesUsuarioListaTipo(rs.getString("mensaje"),rs.getString("segundoIntegrante"),find.findPictureFromUser(rs.getString(rs.getString("segundoIntegrante"))));
                 ConversacionesUsuario.runOnUI(new Runnable() {
                     public void run() {
                         try {
@@ -249,7 +255,7 @@ public class FindInDatabase extends AppCompatActivity {
         locatText.setText(location);
 
     }
-    public void findInDatabaseByLocation(String location){
+    public void findInDatabaseByLocation(final String location){
         try {
             System.out.println("Finding electricistas by loc");
             final DatabaseConnection data = new DatabaseConnection();
@@ -261,7 +267,7 @@ public class FindInDatabase extends AppCompatActivity {
             ResultSet rsProfile = profilePt.executeQuery();
             while (rsProfile.next()) {
                 String telefono=rsProfile.getString("telefono");
-                String location2= rsProfile.getString("location");
+                final String location2= rsProfile.getString("location");
                 String name = rsProfile.getString("User");
                 String fechaDeNacimiento=rsProfile.getString("date");
                 String email= rsProfile.getString("email");
@@ -270,7 +276,7 @@ public class FindInDatabase extends AppCompatActivity {
                 int blobLength = (int) photo.length();
                 byte[] photoBytes = photo.getBytes(1, blobLength);
                 Bitmap bitmap = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes .length);
-                Electricista electricista = new Electricista(bitmap, name, email, 9,location2,telefono,obtenerPromedio(email),findAmountOfCommentsEachProvider(email),fechaDeNacimiento);
+                final Electricista electricista = new Electricista(bitmap, name, email, 9,location2,telefono,obtenerPromedio(email),findAmountOfCommentsEachProvider(email),fechaDeNacimiento);
                 Electricidad.runOnUI(new Runnable()
                 {
                     public void run()
@@ -333,13 +339,13 @@ public class FindInDatabase extends AppCompatActivity {
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
             updN.setFetchSize(1);
-            ResultSet rs = updN.executeQuery();
+            final ResultSet rs = updN.executeQuery();
 
             while (rs.next()) {
                 if ((rs.getString("primerIntegrante").equals(persona1) && rs.getString("segundoIntegrante").equals(persona2))|| (rs.getString("primerIntegrante").equals(persona2) && rs.getString("segundoIntegrante").equals(persona1))) {
-                    String g=rs.getString("mensaje");
+                    final String g=rs.getString("mensaje");
                     System.out.println(rs.getString("mensaje"));
-                    Mensaje mensaje;
+                    final Mensaje mensaje;
                     if(!rs.getString("segundoIntegrante").equals(LogInService.email)) {
                         mensaje = new Mensaje(g, rs.getString("segundoIntegrante"),rs.getTime("horario"));
                     }else{
@@ -429,7 +435,7 @@ public class FindInDatabase extends AppCompatActivity {
                     int blobLength = (int) photo.length();
                     byte[] photoBytes = photo.getBytes(1, blobLength);
                     Bitmap bitmap = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes .length);
-                    Electricista electricista = new Electricista(bitmap, name, email, 9,location,telefono,obtenerPromedio(email),findAmountOfCommentsEachProvider(email),fechaDeNacimiento);
+                    final Electricista electricista = new Electricista(bitmap, name, email, 9,location,telefono,obtenerPromedio(email),findAmountOfCommentsEachProvider(email),fechaDeNacimiento);
                     Electricidad.runOnUI(new Runnable()
                     {
                         public void run()
@@ -480,7 +486,7 @@ public class FindInDatabase extends AppCompatActivity {
 
         return cantidadDeVeces;
     }
-    public void findComments(String email, ArrayList<Comentarios> comentarios){
+    public void findComments(String email, final ArrayList<Comentarios> comentarios){
         try {
             comentarios.clear();
             final DatabaseConnection data = new DatabaseConnection();
@@ -495,7 +501,7 @@ public class FindInDatabase extends AppCompatActivity {
 
                 String comentario = rs.getString("Comentario");
 
-                Comentarios comentarioLista= new Comentarios(comentario,rs.getFloat("Puntaje"),rs.getString("emailDelComentador"),findPictureFromUser(rs.getString("emailDelComentador")),findNameFromuser(rs.getString("emailDelComentador")));
+                final Comentarios comentarioLista= new Comentarios(comentario,rs.getFloat("Puntaje"),rs.getString("emailDelComentador"),findPictureFromUser(rs.getString("emailDelComentador")),findNameFromuser(rs.getString("emailDelComentador")));
 
                 FindInDatabase.runOnUI(new Runnable()
                 {

@@ -93,8 +93,11 @@ public class ProfileUser extends AppCompatActivity {
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
-        add.setOnClickListener((v)-> {
-            startActivity(new Intent(ProfileUser.this, addComment.class));
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProfileUser.this.startActivity(new Intent(ProfileUser.this, addComment.class));
+            }
         });
     }
     @Override

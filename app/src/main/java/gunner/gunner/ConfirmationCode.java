@@ -53,69 +53,69 @@ public class ConfirmationCode extends AppCompatActivity {
 
         Button confirmation= (Button)findViewById(R.id.button7);
         confirmation.setOnClickListener(
-                (View v) ->  {
-                    EditText edit= (EditText)findViewById(R.id.editText2);
-                    String confirmationCodeOnApp=edit.getText().toString();
-                    try {
-                        PreparedStatement pt = DatabaseConnection.conn.prepareStatement("SELECT * FROM Users WHERE verificationNumber= ?");
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        EditText edit = (EditText) ConfirmationCode.this.findViewById(R.id.editText2);
+                        String confirmationCodeOnApp = edit.getText().toString();
+                        try {
+                            PreparedStatement pt = DatabaseConnection.conn.prepareStatement("SELECT * FROM Users WHERE verificationNumber= ?");
 
-                        pt.setString(1, confirmationCodeOnApp);
-                        ResultSet rs = pt.executeQuery();
-                        AlertDialog.Builder builder1 = new AlertDialog.Builder(this,R.style.MyDialogTheme);
-                        if(rs.next()==false){
-                                    try
-                                    {
+                            pt.setString(1, confirmationCodeOnApp);
+                            ResultSet rs = pt.executeQuery();
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(ConfirmationCode.this, R.style.MyDialogTheme);
+                            if (rs.next() == false) {
+                                try {
 
-                                        builder1.setMessage("Codigo de verficicación incorrecto");
-                                        builder1.setCancelable(true);
-                                        builder1.setPositiveButton(
-                                                "Ok",
-                                                new DialogInterface.OnClickListener() {
-                                                    public void onClick(DialogInterface dialog, int id) {
-                                                        dialog.cancel();
-                                                    }
-                                                });
-                                        AlertDialog alert11 = builder1.create();
-                                        alert11.show();
+                                    builder1.setMessage("Codigo de verficicación incorrecto");
+                                    builder1.setCancelable(true);
+                                    builder1.setPositiveButton(
+                                            "Ok",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    dialog.cancel();
+                                                }
+                                            });
+                                    AlertDialog alert11 = builder1.create();
+                                    alert11.show();
 
-                                    }
-                                    catch (Exception e)
-                                    {
-                                        e.printStackTrace();
-                                    }
-
-                        }else{
-                            if(SignUpService.email.equals(rs.getString("email"))|| LogInService.email.equals(rs.getString("email"))){
-                                builder1.setMessage("Verificacion de cuenta correcta.");
-                                builder1.setCancelable(true);
-                                builder1.setPositiveButton(
-                                        "Ok",
-                                        new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int id) {
-                                                dialog.cancel();
-                                                startActivity(new Intent(ConfirmationCode.this, MainActivity.class));
-                                            }
-                                        });
-                                AlertDialog alert11 = builder1.create();
-                                alert11.show();
-                                String updateSQL = "UPDATE Users SET cuentaVerificada = ? WHERE email= ? ";
-                                PreparedStatement pstmt = DatabaseConnection.conn.prepareStatement(updateSQL);
-                                if(LogInService.email!=null) {
-                                    pstmt.setBoolean(1,true);
-                                    pstmt.setString(2, LogInService.email);
-
-                                }else{
-                                    pstmt.setBoolean(1,true);
-                                    pstmt.setString(2,SignUpService.email);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
                                 }
 
-                                pstmt.executeUpdate();
-                            }
-                        }
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
+                            } else {
+                                if (SignUpService.email.equals(rs.getString("email")) || LogInService.email.equals(rs.getString("email"))) {
+                                    builder1.setMessage("Verificacion de cuenta correcta.");
+                                    builder1.setCancelable(true);
+                                    builder1.setPositiveButton(
+                                            "Ok",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    dialog.cancel();
+                                                    startActivity(new Intent(ConfirmationCode.this, MainActivity.class));
+                                                }
+                                            });
+                                    AlertDialog alert11 = builder1.create();
+                                    alert11.show();
+                                    String updateSQL = "UPDATE Users SET cuentaVerificada = ? WHERE email= ? ";
+                                    PreparedStatement pstmt = DatabaseConnection.conn.prepareStatement(updateSQL);
+                                    if (LogInService.email != null) {
+                                        pstmt.setBoolean(1, true);
+                                        pstmt.setString(2, LogInService.email);
 
+                                    } else {
+                                        pstmt.setBoolean(1, true);
+                                        pstmt.setString(2, SignUpService.email);
+                                    }
+
+                                    pstmt.executeUpdate();
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    }
                 }
         );
     }

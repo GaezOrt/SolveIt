@@ -521,6 +521,7 @@ public class SignUpProveedor extends AppCompatActivity implements MultiSpinner.M
             } catch (Exception e) {
                 SignUpService.datosOk=false;
                 e.printStackTrace();
+
                 SignUpService.estado=1;
             }
 

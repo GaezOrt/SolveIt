@@ -124,30 +124,33 @@ public class LogIn extends AppCompatActivity {
 
         //Apretar boton para loggear
         final Button logInButt = (Button) findViewById(button7);
-        logInButt.setOnClickListener((v) -> {
-            System.out.println("Hey hey");
+        logInButt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Hey hey");
 
-            EditText usernameText = (EditText) findViewById(editText);
-            emailRetrieved = usernameText.getText().toString();
-            LogInService.email = emailRetrieved;
-
-
-            EditText passwordText = (EditText) findViewById(editText2);
-
-            password = passwordText.getText().toString();
-            LogInService.password = password;
+                EditText usernameText = (EditText) LogIn.this.findViewById(editText);
+                emailRetrieved = usernameText.getText().toString();
+                LogInService.email = emailRetrieved;
 
 
-            Intent i = new Intent(this, LogInService.class);
-            // Add extras to the bundle
-            i.putExtra("foo", "bar");
-            // Start the service
-            startService(i);
-            ImageView imageView = (ImageView) findViewById(imageView8);
-            GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(imageView);
-            Glide.with(this).load(R.drawable.loading_animation_grey).into(imageViewTarget);
-            imageView.setVisibility(VISIBLE);
+                EditText passwordText = (EditText) LogIn.this.findViewById(editText2);
 
+                password = passwordText.getText().toString();
+                LogInService.password = password;
+
+
+                Intent i = new Intent(LogIn.this, LogInService.class);
+                // Add extras to the bundle
+                i.putExtra("foo", "bar");
+                // Start the service
+                LogIn.this.startService(i);
+                ImageView imageView = (ImageView) LogIn.this.findViewById(imageView8);
+                GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(imageView);
+                Glide.with(LogIn.this).load(R.drawable.loading_animation_grey).into(imageViewTarget);
+                imageView.setVisibility(VISIBLE);
+
+            }
         });
     }
 
