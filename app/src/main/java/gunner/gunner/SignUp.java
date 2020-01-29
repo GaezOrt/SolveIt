@@ -425,7 +425,9 @@ GoogleApiClient mGoogleApiClient;
 
                             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                             StrictMode.setThreadPolicy(policy);
-
+                            if(MainActivity.uniqueGoogleId==null){
+                                MainActivity.uniqueGoogleId="0";
+                            }
 
                             EditText emailText = (EditText) SignUp.this.findViewById(editText3);
                             email = emailText.getText().toString();
@@ -516,9 +518,7 @@ GoogleApiClient mGoogleApiClient;
                 MainActivity.esProveedor = true;
                 final DatabaseConnection databaseConnection = new DatabaseConnection();
 
-                if(MainActivity.uniqueGoogleId==null){
-                    MainActivity.uniqueGoogleId="0";
-                }
+
                 databaseConnection.connect();
 
                 databaseConnection.createUser(
