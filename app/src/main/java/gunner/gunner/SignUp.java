@@ -102,6 +102,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 import static android.view.View.VISIBLE;
 import static gunner.gunner.R.id.Electricista;
 import static gunner.gunner.R.id.button2;
@@ -110,6 +112,7 @@ import static gunner.gunner.R.id.editText;
 import static gunner.gunner.R.id.editText2;
 import static gunner.gunner.R.id.editText3;
 import static gunner.gunner.R.id.editText5;
+import static gunner.gunner.R.id.greenCircle;
 import static gunner.gunner.R.id.imageView10;
 import static gunner.gunner.R.id.imageView12;
 import static gunner.gunner.R.id.imageView13;
@@ -133,7 +136,7 @@ GoogleApiClient mGoogleApiClient;
     String location;
     Uri selectedImage;
     byte[] byteArray;
-    private ImageView imageView;
+    private CircleImageView imageView;
     private DatePickerDialog.OnDateSetListener mdate;
     public static String dateString;
 
@@ -151,8 +154,9 @@ GoogleApiClient mGoogleApiClient;
                 byteArray = stream.toByteArray();
                 SignUpService.pathForImage = byteArray;
                 SignUpService.imagenUsada = true;
-                ImageView image = (ImageView) findViewById(imageView2);
-                image.setImageResource(R.drawable.usercorrect);
+                CircleImageView image = (CircleImageView) findViewById(greenCircle);
+                image.setImageBitmap(bitmap);
+                image.setRotation(90);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -405,7 +409,7 @@ GoogleApiClient mGoogleApiClient;
 
 
         //Clicking on image
-        imageView = (ImageView) findViewById(imageView2);
+        imageView = (CircleImageView) findViewById(greenCircle);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View e) {

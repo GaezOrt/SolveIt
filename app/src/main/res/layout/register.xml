@@ -16,7 +16,7 @@
         android:layout_above="@+id/editText2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="12dp"
-        android:background="@drawable/dark_green_circle"
+        android:background="@color/originalGreen"
         android:editable="false"
         android:ems="10"
         android:hint="Fecha de nacimiento"
@@ -54,7 +54,7 @@
         android:layout_height="37dp"
         android:layout_marginBottom="184dp"
         android:layout_weight="1"
-        android:background="@drawable/dark_green_circle"
+        android:background="@color/originalGreen"
         android:text="Registrar"
         android:textColorLink="@color/dark_green"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -72,7 +72,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/dark_green_circle"
+        android:background="@color/originalGreen"
         android:ems="10"
         android:hint="Contraseña"
         android:textColor="@color/white"
@@ -92,7 +92,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/dark_green_circle"
+        android:background="@color/originalGreen"
         android:ems="10"
         android:hint="Nombre"
         android:inputType="textCapSentences"
@@ -123,7 +123,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/dark_green_circle"
+        android:background="@color/originalGreen"
         android:ems="10"
         android:hint="Telefono"
         android:inputType="textPersonName"
@@ -147,7 +147,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="208dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/dark_green_circle"
+        android:background="@color/originalGreen"
         android:ems="10"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
@@ -159,23 +159,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="286dp"
-        android:layout_height="126dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="47dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/greenCircle"
+        android:layout_width="410dp"
+        android:layout_height="121dp"
+        android:layout_marginTop="36dp"
         android:adjustViewBounds="false"
-        android:scaleType="centerInside"
-        app:layout_constraintBottom_toTopOf="@+id/editText3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        android:cropToPadding="false"
+        android:src="@drawable/avatar"
+        app:civ_border_color="@android:color/darker_gray"
+        app:civ_border_width="2dp"
+        app:layout_constraintEnd_toStartOf="@+id/textView37"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.093"
-        app:srcCompat="@drawable/imageselector" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView9"
@@ -289,23 +287,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
         android:text="Clickea la imagen para agregar foto de perfil"
-        android:textColor="#F5F5F5"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/editText3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="500dp"
-        android:layout_height="2dp"
-        android:layout_alignParentTop="false"
-        android:layout_marginTop="52dp"
-        android:background="#000000"
-        app:layout_constraintBottom_toBottomOf="@+id/editText4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
 
     <gunner.gunner.MultiSpinner
         android:id="@+id/spinner"
