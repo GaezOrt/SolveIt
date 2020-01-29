@@ -170,7 +170,7 @@ public class LogIn extends AppCompatActivity implements GoogleApiClient.OnConnec
             @Override
             public void onClick(View v) {
                 System.out.println("Hey hey");
-
+                LogInService.loggedFromGoogle=false;
                 EditText usernameText = (EditText) LogIn.this.findViewById(editText);
                 emailRetrieved = usernameText.getText().toString();
                 LogInService.email = emailRetrieved;
@@ -209,6 +209,21 @@ public class LogIn extends AppCompatActivity implements GoogleApiClient.OnConnec
                 LogInService.logIn=false;
                 LogInService.estado=1;
                 System.out.println("ERROR");
+                androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(this, R.style.MyDialogTheme);
+                builder1.setTitle("Error de inicio de sesion con Google");
+                builder1.setIcon(R.drawable.errorlogin);
+
+                builder1.setMessage("La cuenta no existe o no esta conectada con Google.");
+                builder1.setCancelable(true);
+                builder1.setPositiveButton(
+                        "Ok",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                androidx.appcompat.app.AlertDialog alert11 = builder1.create();
+                alert11.show();
 
             } else {
                 PreparedStatement ptGeneral=DatabaseConnection.conn.prepareStatement("SELECT * FROM Users WHERE email=? AND Password=?");

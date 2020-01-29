@@ -462,7 +462,7 @@ GoogleApiClient mGoogleApiClient;
         atrasBut.setOnClickListener(
                 (View v) -> {
                     finish();
-                    startActivity(new Intent(SignUp.this, MainActivity.class));
+                    startActivity(new Intent(SignUp.this, LogIn.class));
                 }
         );
     }
