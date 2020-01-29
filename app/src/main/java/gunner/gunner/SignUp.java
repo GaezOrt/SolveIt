@@ -19,6 +19,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.ParcelFileDescriptor;
 import android.os.StrictMode;
 import android.provider.ContactsContract;
@@ -42,6 +44,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -53,7 +56,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInApi;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.Task;
 
 
@@ -117,11 +123,9 @@ import static gunner.gunner.R.id.imageView9;
 import static gunner.gunner.R.id.location3;
 import static gunner.gunner.R.id.spinner;
 
-public class SignUp extends AppCompatActivity implements MultiSpinner.MultiSpinnerListener {
+public class SignUp extends AppCompatActivity implements MultiSpinner.MultiSpinnerListener, GoogleApiClient.OnConnectionFailedListener {
 
-
-    GoogleSignInClient googleClient;
-
+GoogleApiClient mGoogleApiClient;
     String email;
     String username;
     String password;
@@ -155,9 +159,30 @@ public class SignUp extends AppCompatActivity implements MultiSpinner.MultiSpinn
         }
 
         if(requestCode==3){
-            Task<GoogleSignInAccount> task=GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            if (result.isSuccess()) {
+                GoogleSignInAccount acct = result.getSignInAccount();
+                if(acct!=null) {
+                    //Take all data You Want
+                    SignUp.runOnUI(new Runnable() {
+                        @Override
+                        public void run() {
+                            EditText emaila = (EditText) findViewById(editText3);
+                            emaila.setText(acct.getEmail());
+
+                            EditText usernamea = (EditText) findViewById(editText);
+                            usernamea.setText(acct.getDisplayName());
+
+                            MainActivity.uniqueGoogleId = acct.getId();
+                        }
+                    });
+
+                    mGoogleApiClient.clearDefaultAccountAndReconnect();
+
+                }
+            }else Log.e("handleSignInResult","Failed ; "+result.getStatus());
         }
+
     }
 
     private void selectImage() {
@@ -184,25 +209,25 @@ public class SignUp extends AppCompatActivity implements MultiSpinner.MultiSpinn
         TextView datea = (TextView) findViewById(location3);
         Spinner spinnera = (Spinner) findViewById(spinner);
 
-        googleClient= GoogleSignIn.getClient(this,gso);
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
         google.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                googleClient.revokeAccess();
-                Intent signInIntent=googleClient.getSignInIntent();
-                startActivityForResult(signInIntent,3);
 
-                    GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(SignUp.this);
-                    if (acct != null) {
-                        emaila.setText(acct.getEmail());
-                        usernamea.setText(acct.getDisplayName());
-                        MainActivity.uniqueGoogleId = acct.getId();
+                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+                startActivityForResult(signInIntent, 3);
 
                     }
-                }
 
         });
 
+
+
+
+            System.out.println("Getting info");
 
         final Animation animationFields = AnimationUtils.loadAnimation(this, R.anim.sign_up_fields);
         emaila.startAnimation(animationFields);
@@ -604,4 +629,19 @@ public class SignUp extends AppCompatActivity implements MultiSpinner.MultiSpinn
         Log.i("check", "sent");
 
     }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+    public static Handler UIHandler;
+
+    static {
+        UIHandler = new Handler(Looper.getMainLooper());
+    }
+
+    public static void runOnUI(Runnable runnable) {
+        UIHandler.post(runnable);
+    }
+
 }
