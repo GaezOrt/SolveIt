@@ -17,15 +17,16 @@ public class LogInService extends IntentService {
     static boolean logIn;
     static byte[] photo;
     static int estado;
-
+    static boolean loggedFromGoogle;
     public LogInService() {
         super("Log in service");
     }
 
     @Override
     protected void onHandleIntent( Intent intent) {
-
-        login.logIn();
+        if(!loggedFromGoogle) {
+            login.logIn();
+        }
 
         if(MainActivity.loggedIn){
             Intent intentt = new Intent (this, MainActivity.class);

@@ -56,7 +56,7 @@ public class DatabaseConnection {
 
         String updateSQL = "INSERT INTO Users VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
         String updateRubro= " INSERT INTO Rubro VALUES (?,?,?,?,?,?,?,?,?)";
-        String androidUuid=" INSERT INTO androidID VALUES(?,?,?)";
+        String androidUuid=" INSERT INTO androidID VALUES(?,?,?,?)";
 
 
         PreparedStatement pstmt = conn.prepareStatement(updateSQL);
@@ -88,6 +88,7 @@ public class DatabaseConnection {
         pstmtAndroidUID.setString(1,email);
         pstmtAndroidUID.setString(2,password);
         pstmtAndroidUID.setString(3,androidID);
+        pstmtAndroidUID.setString(4,uniqueGoogleID);
 
         pstmt.executeUpdate();
         pstmtRubro.executeUpdate();

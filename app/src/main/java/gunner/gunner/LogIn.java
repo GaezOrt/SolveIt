@@ -13,6 +13,10 @@ import android.location.LocationManager;
 import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.provider.ContactsContract;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -23,17 +27,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.Task;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -45,15 +56,36 @@ import static gunner.gunner.R.id.button15;
 import static gunner.gunner.R.id.button7;
 import static gunner.gunner.R.id.editText;
 import static gunner.gunner.R.id.editText2;
+import static gunner.gunner.R.id.editText3;
 import static gunner.gunner.R.id.imageView19;
+import static gunner.gunner.R.id.imageView2;
 import static gunner.gunner.R.id.imageView8;
 
-public class LogIn extends AppCompatActivity {
+public class LogIn extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
    static String emailHint;
     String emailRetrieved;
     String password;
 
+    GoogleApiClient mGoogleApiClient;
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.w("Activity", "Activity result");
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode==3){
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            if (result.isSuccess()) {
+                GoogleSignInAccount acct = result.getSignInAccount();
+                if(acct!=null) {
+                    System.out.println(acct.getDisplayName()+acct.getEmail());
+                    logInWithGoogle(acct.getId());
+
+                    mGoogleApiClient.clearDefaultAccountAndReconnect();
+                }
+            }else Log.e("handleSignInResult","Failed ; "+result.getStatus());
+        }
+
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,10 +95,20 @@ public class LogIn extends AppCompatActivity {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setNavigationBarColor(getResources().getColor(R.color.black));
         }
+        GoogleSignInOptions gso= new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
 
-
-
-
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
+                .build();
+        ImageView google= (ImageView)findViewById(R.id.imageView32);
+        google.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+                startActivityForResult(signInIntent, 3);
+            }
+        });
 
         //Animations
         final Animation emailID = AnimationUtils.loadAnimation(this, R.anim.translate_email_login);
@@ -153,7 +195,76 @@ public class LogIn extends AppCompatActivity {
             }
         });
     }
+    public void logInWithGoogle(String googleID){
 
+        try {
+            System.out.println("Connection is successful");
+            DatabaseConnection database = new DatabaseConnection();
+            database.connect();
+            PreparedStatement pt = DatabaseConnection.conn.prepareStatement("SELECT * FROM androidID WHERE GoogleID = ?");
+            pt.setString(1, googleID);
+            pt.setFetchSize(1);
+            ResultSet rs = pt.executeQuery();
+            if (rs.next()==false) {
+                LogInService.logIn=false;
+                LogInService.estado=1;
+                System.out.println("ERROR");
+
+            } else {
+                PreparedStatement ptGeneral=DatabaseConnection.conn.prepareStatement("SELECT * FROM Users WHERE email=? AND Password=?");
+                ptGeneral.setString(1,rs.getString("email"));
+                ptGeneral.setString(2,rs.getString("password"));
+                ResultSet rsGeneral=ptGeneral.executeQuery();
+                LogInService.estado=2;
+                rsGeneral.next();
+                String email = rsGeneral.getString("email");
+                String passwordd = rsGeneral.getString("Password");
+                System.out.println(passwordd);
+
+                    String location = rsGeneral.getString("location");
+                    String username = rsGeneral.getString("User");
+                    String phone = rsGeneral.getString("telefono");
+                    System.out.println("Adentro del login");
+                    //Agarrando imagen
+                    Blob blob = rsGeneral.getBlob("Foto");
+                    int blobLength = (int) blob.length();
+                    byte[] blobAsBytes = blob.getBytes(1, blobLength);
+                    Log.w("Activity", " Array setteado desde base de datos a variable principal en MAiActivity" + MainActivity.loggedImageInDatabaseArray);
+
+                    MainActivity.loggedEmail = email;
+                    LogInService.email=email;
+
+                    MainActivity.loggedPhone = phone;
+                    LogInService.phone=phone;
+
+                    MainActivity.loggedUsername = username;
+                    LogInService.name= username;
+
+                    MainActivity.loggedLocation = location;
+                    LogInService.location=location;
+
+
+                    MainActivity.loggedImageInDatabaseArray = blobAsBytes;
+                    LogInService.photo=blobAsBytes;
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(MainActivity.loggedImageInDatabaseArray, 0, MainActivity.loggedImageInDatabaseArray.length);
+                    MainActivity.profileImage = bitmap;
+
+                    MainActivity.loggedIn = true;
+                    LogInService.logIn=true;
+                    LogInService.loggedFromGoogle=true;
+                Intent i = new Intent(LogIn.this, LogInService.class);
+                // Add extras to the bundle
+                i.putExtra("foo", "bar");
+                // Start the service
+                LogIn.this.startService(i);
+                    finish();
+                    return;
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     public void logIn(){
 
 
@@ -225,6 +336,20 @@ public class LogIn extends AppCompatActivity {
         homeIntent.addCategory( Intent.CATEGORY_HOME );
         homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(homeIntent);
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+    public static Handler UIHandler;
+
+    static {
+        UIHandler = new Handler(Looper.getMainLooper());
+    }
+
+    public static void runOnUI(Runnable runnable) {
+        UIHandler.post(runnable);
     }
 
 }

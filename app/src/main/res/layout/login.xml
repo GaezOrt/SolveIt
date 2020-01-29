@@ -9,6 +9,17 @@
     tools:context=".LogIn">
 
 
+    <ImageView
+        android:id="@+id/imageView32"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.187"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button7"
+        app:srcCompat="@drawable/gmail" />
+
     <Button
         android:id="@+id/button7"
         style="@style/Widget.AppCompat.Button.Colored"
