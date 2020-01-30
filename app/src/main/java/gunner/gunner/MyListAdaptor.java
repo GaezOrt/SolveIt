@@ -44,22 +44,16 @@ public class MyListAdaptor extends ArrayAdapter<Electricista> {
             convertView=inflater.inflate(R.layout.list_view,null,false);
 
             viewHolder.image=(CircleImageView) convertView.findViewById(R.id.greenCircle);
-            viewHolder.name=(TextView)convertView.findViewById(R.id.editText4);
+            viewHolder.name=(TextView)convertView.findViewById(R.id.textView);
             viewHolder.image.setImageBitmap(electricista.photo);
             viewHolder.name.setText(electricista.name);
             viewHolder.rating=(RatingBar)convertView.findViewById(R.id.myRating);
             viewHolder.rating.setRating(electricista.promedio);
             LayerDrawable stars = (LayerDrawable) viewHolder.rating.getProgressDrawable();
             stars.getDrawable(2).setColorFilter(Color.MAGENTA, PorterDuff.Mode.SRC_ATOP);
-            viewHolder.amount=(TextView)convertView.findViewById(R.id.textView42);
+
             int x=(int)electricista.cantidadDeComentarios;
-            viewHolder.amount.setText("Reviews: "+(x));
-            viewHolder.ubicacion=(TextView)convertView.findViewById(R.id.textView39);
-            viewHolder.ubicacion.setText(electricista.location);
-            viewHolder.nacimiento=(TextView)convertView.findViewById(R.id.textView41);
-            viewHolder.nacimiento.setText(electricista.fechaDeNacimiento);
-            viewHolder.email=(TextView)convertView.findViewById(R.id.textView28);
-            viewHolder.email.setText(electricista.email);
+
             convertView.setTag(viewHolder);
             if(x<5){
                 viewHolder.rango=(TextView)convertView.findViewById(R.id.textView43);

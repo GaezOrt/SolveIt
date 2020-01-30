@@ -85,6 +85,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 import static android.view.View.VISIBLE;
 
 import static gunner.gunner.R.id.button2;
@@ -93,6 +95,7 @@ import static gunner.gunner.R.id.editText;
 import static gunner.gunner.R.id.editText2;
 import static gunner.gunner.R.id.editText3;
 import static gunner.gunner.R.id.editText5;
+import static gunner.gunner.R.id.greenCircle;
 import static gunner.gunner.R.id.imageView10;
 import static gunner.gunner.R.id.imageView12;
 import static gunner.gunner.R.id.imageView13;
@@ -133,8 +136,9 @@ public class SignUpProveedor extends AppCompatActivity implements MultiSpinner.M
             byteArray= stream.toByteArray();
             SignUpService.pathForImage=byteArray;
             SignUpService.imagenUsada=true;
-            ImageView image= (ImageView)findViewById(imageView2);
-            image.setImageResource(R.drawable.usercorrect);
+            CircleImageView image = (CircleImageView) findViewById(imageView2);
+            image.setImageBitmap(bitmap);
+            image.setRotation(90);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -350,7 +354,9 @@ public class SignUpProveedor extends AppCompatActivity implements MultiSpinner.M
             final Button registerBut = (Button) findViewById(button7);
             registerBut.setOnClickListener(
                     (view) -> {
-
+                        if(MainActivity.uniqueGoogleId==null){
+                            MainActivity.uniqueGoogleId="0";
+                        }
                         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                         StrictMode.setThreadPolicy(policy);
 
@@ -486,9 +492,7 @@ public class SignUpProveedor extends AppCompatActivity implements MultiSpinner.M
                 Random random= new Random();
                 SignUpService.verificationNumber=random.nextInt(5000);
                 MainActivity.esProveedor=true;
-                if(MainActivity.uniqueGoogleId==null){
-                    MainActivity.uniqueGoogleId="0";
-                }
+
                 final DatabaseConnection databaseConnection = new DatabaseConnection();
                 databaseConnection.connect();
                 databaseConnection.createUser(

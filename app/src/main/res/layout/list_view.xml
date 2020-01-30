@@ -3,65 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="155dp"
-    android:background="@drawable/rounded_list"
+    android:layout_height="80dp"
+    android:background="@drawable/dark_green_circle"
     android:descendantFocusability="blocksDescendants">
-
-    <ImageView
-        android:id="@+id/imageView26"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:layout_marginBottom="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView40"
-        app:srcCompat="@drawable/location" />
-
-    <ImageView
-        android:id="@+id/imageView24"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:layout_marginTop="38dp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView27"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/imageView27"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/user" />
-
-    <ImageView
-        android:id="@+id/imageView25"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView26"
-        app:layout_constraintEnd_toEndOf="@+id/imageView26"
-        app:layout_constraintStart_toStartOf="@+id/imageView26"
-        app:layout_constraintTop_toBottomOf="@+id/imageView27"
-        app:srcCompat="@drawable/date" />
-
-    <ImageView
-        android:id="@+id/imageView27"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView37"
-        app:layout_constraintEnd_toEndOf="@+id/imageView25"
-        app:layout_constraintStart_toStartOf="@+id/imageView25"
-        app:layout_constraintTop_toBottomOf="@+id/imageView24"
-        app:srcCompat="@drawable/emailnaranja" />
-
-    <RatingBar
-        android:id="@+id/MyRating"
-        style="?android:attr/ratingBarStyleSmall"
-        android:layout_width="15dp"
-        android:layout_height="18dp"
-        android:layout_alignBottom="@+id/editText4"
-        android:layout_marginEnd="4dp"
-        android:layout_toEndOf="@+id/editText4"
-        android:isIndicator="true"
-        android:numStars="1"
-        android:stepSize="0.1"
-        app:layout_constraintBottom_toBottomOf="@+id/textView43"
-        app:layout_constraintEnd_toStartOf="@+id/textView43"
-        app:layout_constraintTop_toTopOf="@+id/textView43"
-        app:layout_constraintVertical_bias="1.0" />
 
     <RatingBar
         android:id="@+id/myRating"
@@ -69,13 +13,29 @@
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/editText4"
-        android:layout_marginTop="4dp"
+        android:layout_marginEnd="36dp"
         android:layout_toEndOf="@+id/editText4"
         android:isIndicator="true"
         android:numStars="5"
         android:stepSize="0.1"
-        app:layout_constraintStart_toStartOf="@+id/textView42"
-        app:layout_constraintTop_toBottomOf="@+id/textView42" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.488" />
+
+    <RatingBar
+        android:id="@+id/MyRating"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_alignBottom="@+id/editText4"
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@+id/editText4"
+        android:isIndicator="false"
+        android:numStars="5"
+        android:stepSize="0.1"
+        app:layout_constraintBottom_toBottomOf="@+id/textView43"
+        app:layout_constraintStart_toEndOf="@+id/textView43" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -88,145 +48,40 @@
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/textView36"
-        android:layout_width="80dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="16dp"
-        android:text="Nombre :"
-        android:textColor="#F7F3F3F3"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@+id/editText4"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
-
-    <TextView
-        android:id="@+id/textView28"
-        android:layout_width="140dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="16dp"
-        android:autoSizeMaxTextSize="16sp"
-        android:autoSizeMinTextSize="8sp"
-        android:autoSizeTextType="uniform"
-        android:text="@string/email"
-        android:textColor="#F1EEEE"
-        app:layout_constraintBottom_toBottomOf="@+id/textView37"
-        app:layout_constraintStart_toEndOf="@+id/textView37"
-        app:layout_constraintTop_toTopOf="@+id/textView37"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/textView41"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autoSizeMaxTextSize="16sp"
-        android:autoSizeMinTextSize="8sp"
-        android:autoSizeTextType="uniform"
-        android:text="nacimiento"
-        android:textColor="#F1EEEE"
-        app:layout_constraintBottom_toBottomOf="@+id/textView38"
-        app:layout_constraintStart_toStartOf="@+id/textView28"
-        app:layout_constraintTop_toBottomOf="@+id/textView37"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/textView37"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:text="Email :"
-        android:textColor="#F7F3F3F3"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView36" />
-
-    <TextView
-        android:id="@+id/textView39"
-        android:layout_width="137dp"
-        android:layout_height="50dp"
-        android:autoSizeMaxTextSize="16sp"
-        android:autoSizeMinTextSize="8sp"
-        android:autoSizeTextType="uniform"
-        android:text="nacimiento"
-        android:textColor="#F1EEEE"
-        app:layout_constraintStart_toStartOf="@+id/textView41"
-        app:layout_constraintTop_toTopOf="@+id/textView40" />
-
-    <TextView
-        android:id="@+id/editText4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autoSizeMaxTextSize="16sp"
-        android:autoSizeMinTextSize="8sp"
-        android:autoSizeTextType="uniform"
-        android:background="@drawable/empty_background"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView28"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView28"
-        app:layout_constraintTop_toTopOf="@+id/textView36" />
-
-    <TextView
-        android:id="@+id/textView40"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:text="Trabaja en:"
-        android:textColor="#F7F3F3F3"
-        android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView38" />
-
-    <TextView
-        android:id="@+id/textView38"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:text="Nac :"
-        android:textColor="#F7F3F3F3"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView37" />
-
-    <TextView
-        android:id="@+id/textView42"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="16dp"
-        android:text="Reviews:"
-        android:textColor="#F7F3F3F3"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/greenCircle"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="87dp"
+        android:layout_height="68dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:src="@drawable/usuariorandom"
         app:civ_border_color="#FF000000"
         app:civ_border_width="2dp"
-        app:layout_constraintEnd_toStartOf="@+id/textView37"
-        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="TextView"
+        android:textColor="#FDE4E1E1"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/greenCircle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.493" />
 
     <TextView
         android:id="@+id/textView43"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:text="TextView"
         android:textColor="#FDE4E1E1"
-        app:layout_constraintEnd_toEndOf="@+id/textView42"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView42"
+        app:layout_constraintStart_toStartOf="@+id/myRating"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

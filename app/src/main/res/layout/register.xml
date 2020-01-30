@@ -9,14 +9,35 @@
     android:background="@color/white"
     tools:context=".LogIn">
 
+    <EditText
+        android:id="@+id/editText6"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/editText2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/dark_green_circle"
+        android:ems="10"
+        android:hint="Apellido"
+        android:inputType="textCapSentences"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toTopOf="@+id/editText2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.565"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
+
     <TextView
         android:id="@+id/location3"
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_above="@+id/editText2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp"
-        android:background="@color/originalGreen"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/dark_green_circle"
         android:editable="false"
         android:ems="10"
         android:hint="Fecha de nacimiento"
@@ -50,11 +71,11 @@
     <Button
         android:id="@+id/button7"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="110dp"
+        android:layout_width="wrap_content"
         android:layout_height="37dp"
-        android:layout_marginBottom="184dp"
+        android:layout_marginBottom="156dp"
         android:layout_weight="1"
-        android:background="@color/originalGreen"
+        android:background="@drawable/dark_green_circle"
         android:text="Registrar"
         android:textColorLink="@color/dark_green"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -70,9 +91,9 @@
         android:layout_alignLeft="@+id/editText"
         android:layout_alignBottom="@+id/cardView"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="72dp"
         android:layout_marginEnd="8dp"
-        android:background="@color/originalGreen"
+        android:background="@drawable/dark_green_circle"
         android:ems="10"
         android:hint="Contraseña"
         android:textColor="@color/white"
@@ -92,7 +113,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:background="@color/originalGreen"
+        android:background="@drawable/dark_green_circle"
         android:ems="10"
         android:hint="Nombre"
         android:inputType="textCapSentences"
@@ -122,8 +143,9 @@
         android:layout_above="@+id/editText2"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@color/originalGreen"
+        android:background="@drawable/dark_green_circle"
         android:ems="10"
         android:hint="Telefono"
         android:inputType="textPersonName"
@@ -135,7 +157,7 @@
         app:layout_constraintHorizontal_bias="0.565"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText2"
-        app:layout_constraintVertical_bias="0.135" />
+        app:layout_constraintVertical_bias="0.084" />
 
     <EditText
         android:id="@+id/editText3"
@@ -147,7 +169,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="208dp"
         android:layout_marginEnd="8dp"
-        android:background="@color/originalGreen"
+        android:background="@drawable/dark_green_circle"
         android:ems="10"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
@@ -162,7 +184,7 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/greenCircle"
-        android:layout_width="410dp"
+        android:layout_width="match_parent"
         android:layout_height="121dp"
         android:layout_marginTop="36dp"
         android:adjustViewBounds="false"
@@ -192,10 +214,19 @@
         android:layout_height="25dp"
         app:layout_constraintBottom_toBottomOf="@+id/editText"
         app:layout_constraintEnd_toStartOf="@+id/editText"
-        app:layout_constraintHorizontal_bias="0.828"
+        app:layout_constraintHorizontal_bias="0.821"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editText"
         app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/user" />
+
+    <ImageView
+        android:id="@+id/imageView25"
+        android:layout_width="34dp"
+        android:layout_height="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editText6"
+        app:layout_constraintStart_toStartOf="@+id/imageView12"
+        app:layout_constraintTop_toTopOf="@+id/editText6"
         app:srcCompat="@drawable/user" />
 
     <ImageView
@@ -287,7 +318,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
         android:text="Clickea la imagen para agregar foto de perfil"
-        android:textColor="@color/black"
+        android:textColor="@android:color/darker_gray"
         app:layout_constraintBottom_toTopOf="@+id/editText3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.473"
@@ -295,18 +326,21 @@
 
     <gunner.gunner.MultiSpinner
         android:id="@+id/spinner"
-        android:layout_width="247dp"
-        android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/button7"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/location3"
-        app:layout_constraintVertical_bias="0.777" />
+        app:layout_constraintVertical_bias="0.086" />
 
     <ImageView
         android:id="@+id/imageView31"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.187"
         app:layout_constraintStart_toStartOf="parent"

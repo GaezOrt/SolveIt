@@ -7,17 +7,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="@drawable/gradient"
+    android:background="@android:color/white"
     tools:context=".LogIn">
 
     <TextView
         android:id="@+id/location3"
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_above="@+id/editText2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_corner"
+        android:background="@drawable/dark_green_circle"
         android:editable="false"
         android:ems="10"
         android:hint="Fecha de nacimiento"
@@ -31,11 +31,11 @@
     <EditText
         android:id="@+id/location"
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_above="@+id/editText2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_corner"
+        android:background="@drawable/dark_green_circle"
         android:ems="10"
         android:hint="DNI"
         android:inputType="textPersonName"
@@ -55,14 +55,14 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="36dp"
-        android:layout_height="29dp"
+        android:layout_width="30dp"
+        android:layout_height="34dp"
         app:layout_constraintBottom_toBottomOf="@+id/editText5"
         app:layout_constraintEnd_toStartOf="@+id/editText5"
-        app:layout_constraintHorizontal_bias="0.909"
+        app:layout_constraintHorizontal_bias="0.883"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView13"
-        app:layout_constraintVertical_bias="0.576"
+        app:layout_constraintVertical_bias="0.714"
         app:srcCompat="@drawable/phone" />
 
     <Button
@@ -81,14 +81,14 @@
     <EditText
         android:id="@+id/editText2"
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_alignStart="@+id/editText"
         android:layout_alignLeft="@+id/editText"
         android:layout_alignBottom="@+id/cardView"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/rounded_corner"
+        android:background="@drawable/dark_green_circle"
         android:ems="10"
         android:hint="Contraseña"
         android:textColor="@color/white"
@@ -102,13 +102,13 @@
     <EditText
         android:id="@+id/editText"
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_above="@+id/editText2"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/rounded_corner"
+        android:background="@drawable/dark_green_circle"
         android:ems="10"
         android:hint="Nombre"
         android:inputType="textCapSentences"
@@ -134,12 +134,12 @@
     <EditText
         android:id="@+id/editText5"
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_above="@+id/editText2"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/rounded_corner"
+        android:background="@drawable/dark_green_circle"
         android:ems="10"
         android:hint="Telefono"
         android:inputType="textPersonName"
@@ -156,14 +156,14 @@
     <EditText
         android:id="@+id/editText3"
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_alignStart="@+id/editText"
         android:layout_alignLeft="@+id/editText"
         android:layout_alignBottom="@+id/cardView"
         android:layout_marginStart="8dp"
         android:layout_marginTop="208dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/rounded_corner"
+        android:background="@drawable/dark_green_circle"
         android:ems="10"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
@@ -175,28 +175,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageView2"
-        android:layout_width="286dp"
-        android:layout_height="126dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="47dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="121dp"
+        android:layout_marginTop="52dp"
         android:adjustViewBounds="false"
-        android:scaleType="centerInside"
-        app:layout_constraintBottom_toTopOf="@+id/editText3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        android:cropToPadding="false"
+        android:src="@drawable/avatar"
+        app:civ_border_color="@android:color/darker_gray"
+        app:civ_border_width="2dp"
+        app:layout_constraintEnd_toStartOf="@+id/textView37"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.093"
-        app:srcCompat="@drawable/imageselector" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView9"
-        android:layout_width="34dp"
-        android:layout_height="25dp"
+        android:layout_width="30dp"
+        android:layout_height="34dp"
         app:layout_constraintBottom_toBottomOf="@+id/editText3"
         app:layout_constraintEnd_toStartOf="@+id/editText3"
         app:layout_constraintHorizontal_bias="0.828"
@@ -206,11 +204,11 @@
 
     <ImageView
         android:id="@+id/imageView12"
-        android:layout_width="34dp"
-        android:layout_height="25dp"
+        android:layout_width="30dp"
+        android:layout_height="34dp"
         app:layout_constraintBottom_toBottomOf="@+id/editText"
         app:layout_constraintEnd_toStartOf="@+id/editText"
-        app:layout_constraintHorizontal_bias="0.828"
+        app:layout_constraintHorizontal_bias="0.89"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editText"
         app:layout_constraintVertical_bias="1.0"
@@ -218,8 +216,8 @@
 
     <ImageView
         android:id="@+id/imageView13"
-        android:layout_width="34dp"
-        android:layout_height="25dp"
+        android:layout_width="30dp"
+        android:layout_height="34dp"
         app:layout_constraintBottom_toBottomOf="@+id/editText2"
         app:layout_constraintEnd_toStartOf="@+id/editText2"
         app:layout_constraintHorizontal_bias="0.836"
@@ -230,18 +228,19 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="36dp"
-        android:layout_height="29dp"
-        android:layout_marginTop="80dp"
+        android:layout_width="37dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="120dp"
         app:layout_constraintEnd_toStartOf="@+id/location3"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/imageView21"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
         app:srcCompat="@drawable/location" />
 
     <ImageView
         android:id="@+id/imageView21"
-        android:layout_width="36dp"
-        android:layout_height="29dp"
+        android:layout_width="30dp"
+        android:layout_height="34dp"
         app:layout_constraintBottom_toBottomOf="@+id/location3"
         app:layout_constraintEnd_toEndOf="@+id/imageView4"
         app:layout_constraintStart_toStartOf="@+id/imageView4"
@@ -304,32 +303,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Clickea la imagen para agregar foto de perfil"
-        android:textColor="#F5F5F5"
+        android:textColor="@android:color/darker_gray"
         app:layout_constraintBottom_toTopOf="@+id/editText3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="500dp"
-        android:layout_height="2dp"
-        android:layout_alignParentTop="false"
-        android:layout_marginTop="52dp"
-        android:background="#000000"
-        app:layout_constraintBottom_toBottomOf="@+id/editText4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
     <gunner.gunner.MultiSpinner
         android:id="@+id/spinner"
         android:layout_width="247dp"
         android:layout_height="25dp"
+        android:layout_marginStart="4dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/location3"
         app:layout_constraintVertical_bias="1.0" />
+
+    <CheckBox
+        android:id="@+id/carpintero"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Carpintero"
+        android:textColor="@color/black"
+        android:textColorHint="#FDF1E9E9"
+        android:textSize="10sp"
+        app:layout_constraintStart_toEndOf="@+id/Electricista"
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
     <CheckBox
         android:id="@+id/Electricista"
@@ -337,7 +337,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:text="Electricista"
-        android:textColor="#FDF8F8F8"
+        android:textColor="@color/black"
         android:textColorHint="#FDF1E9E9"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -349,41 +349,18 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:text="Plomero"
-        android:textColor="#FDF8F8F8"
+        android:textColor="@color/black"
         android:textColorHint="#FDF1E9E9"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Electricista" />
 
     <CheckBox
-        android:id="@+id/carpintero"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:text="Carpintero"
-        android:textColor="#FDF8F8F8"
-        android:textColorHint="#FDF1E9E9"
-        android:textSize="10sp"
-        app:layout_constraintStart_toEndOf="@+id/Electricista"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
-
-    <CheckBox
-        android:id="@+id/gasista"
-        android:layout_width="99dp"
-        android:layout_height="wrap_content"
-        android:text="Gasista"
-        android:textColor="#FDF8F8F8"
-        android:textColorHint="#FDF1E9E9"
-        android:textSize="10sp"
-        app:layout_constraintStart_toEndOf="@+id/plomero"
-        app:layout_constraintTop_toBottomOf="@+id/carpintero" />
-
-    <CheckBox
         android:id="@+id/albanil"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="Albañil"
-        android:textColor="#FDF8F8F8"
+        android:textColor="@color/black"
         android:textColorHint="#FDF1E9E9"
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/button7"
@@ -396,7 +373,7 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="Cerrajero"
-        android:textColor="#FDF8F8F8"
+        android:textColor="@color/black"
         android:textColorHint="#FDF1E9E9"
         android:textSize="10sp"
         app:layout_constraintStart_toEndOf="@+id/gasista"
@@ -407,7 +384,7 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="Pintor"
-        android:textColor="#FDF8F8F8"
+        android:textColor="@color/black"
         android:textColorHint="#FDF1E9E9"
         android:textSize="10sp"
         app:layout_constraintStart_toEndOf="@+id/carpintero"
@@ -419,11 +396,31 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:text="Computacion"
-        android:textColor="#FDF8F8F8"
+        android:textColor="@color/black"
         android:textColorHint="#FDF1E9E9"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/plomero" />
+
+    <CheckBox
+        android:id="@+id/gasista"
+        android:layout_width="99dp"
+        android:layout_height="wrap_content"
+        android:text="Gasista"
+        android:textColor="@color/black"
+        android:textColorHint="#FDF1E9E9"
+        android:textSize="10sp"
+        app:layout_constraintStart_toEndOf="@+id/plomero"
+        app:layout_constraintTop_toBottomOf="@+id/carpintero" />
+
+    <ImageView
+        android:id="@+id/imageView24"
+        android:layout_width="30dp"
+        android:layout_height="34dp"
+        app:layout_constraintBottom_toBottomOf="@+id/location"
+        app:layout_constraintStart_toStartOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="@+id/location"
+        app:srcCompat="@drawable/dni" />
 
 </androidx.constraintlayout.widget.ConstraintLayout
 
