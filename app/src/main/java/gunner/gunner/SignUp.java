@@ -112,6 +112,8 @@ import static gunner.gunner.R.id.editText;
 import static gunner.gunner.R.id.editText2;
 import static gunner.gunner.R.id.editText3;
 import static gunner.gunner.R.id.editText5;
+import static gunner.gunner.R.id.editText6;
+import static gunner.gunner.R.id.editText7;
 import static gunner.gunner.R.id.greenCircle;
 import static gunner.gunner.R.id.imageView10;
 import static gunner.gunner.R.id.imageView12;
@@ -134,6 +136,7 @@ GoogleApiClient mGoogleApiClient;
     String password;
     String number;
     String location;
+    String lastName;
     Uri selectedImage;
     byte[] byteArray;
     private CircleImageView imageView;
@@ -176,7 +179,8 @@ GoogleApiClient mGoogleApiClient;
 
                             EditText usernamea = (EditText) findViewById(editText);
                             usernamea.setText(acct.getDisplayName());
-
+                            EditText lastname=(EditText)findViewById(editText6);
+                            lastname.setText(acct.getFamilyName());
                             MainActivity.uniqueGoogleId = acct.getId();
                         }
                     });
@@ -247,13 +251,6 @@ GoogleApiClient mGoogleApiClient;
         ImageView phonee = (ImageView) findViewById(imageView4);
         ImageView datee = (ImageView) findViewById(imageView21);
         ImageView locationImage = (ImageView) findViewById(imageView3);
-        emailImage.startAnimation(animationFields);
-        namee.startAnimation(animationFields);
-        passwordd.startAnimation(animationFields);
-        phonee.startAnimation(animationFields);
-        datee.startAnimation(animationFields);
-        locationImage.startAnimation(animationFields);
-
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setNavigationBarColor(getResources().getColor(R.color.black));
@@ -271,7 +268,7 @@ GoogleApiClient mGoogleApiClient;
         list.add("Villa Urquiza");
         list.add("Flores");
         list.add("Lugano");
-        ms.setItems(list, "Zonas de trabajo", this);
+        ms.setItems(list, "Zona", this);
 
 
         //Date of birth
@@ -438,8 +435,10 @@ GoogleApiClient mGoogleApiClient;
                             SignUpService.email = email;
                             EditText usernameText = (EditText) SignUp.this.findViewById(editText);
                             username = usernameText.getText().toString();
-
                             SignUpService.username = username;
+                            EditText lastNamee=(EditText)SignUp.this.findViewById(editText6);
+                            lastName=lastNamee.getText().toString();
+                            SignUpService.lastName=lastName;
                             EditText passwordText = (EditText) SignUp.this.findViewById(editText2);
                             password = passwordText.getText().toString();
                             SignUpService.password = password;
@@ -535,7 +534,7 @@ GoogleApiClient mGoogleApiClient;
                         MainActivity.gasista,
                         MainActivity.albanil,
                         MainActivity.pintor,
-                        MainActivity.cerrajero, MainActivity.esProveedor, SignUpService.dni,WelcomeWindow.uuid,MainActivity.uniqueGoogleId );
+                        MainActivity.cerrajero, MainActivity.esProveedor, SignUpService.dni,WelcomeWindow.uuid,MainActivity.uniqueGoogleId,SignUpService.lastName );
                 try {
                     GMailSender sender = new GMailSender("servyargentina@gmail.com",
                             "servy2019");

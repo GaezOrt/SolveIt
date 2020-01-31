@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static String loggedEmail;
     static String loggedPhone;
     static String loggedLocation;
+    static String lastName;
     static Bitmap profileImage;
     static byte[] loggedImageInDatabaseArray;
     static boolean electricista;

@@ -68,7 +68,7 @@
         android:layout_marginStart="16dp"
         android:text="TextView"
         android:textColor="#FDE4E1E1"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/greenCircle"
         app:layout_constraintTop_toTopOf="parent"

@@ -46,7 +46,7 @@ public class MyListAdaptor extends ArrayAdapter<Electricista> {
             viewHolder.image=(CircleImageView) convertView.findViewById(R.id.greenCircle);
             viewHolder.name=(TextView)convertView.findViewById(R.id.textView);
             viewHolder.image.setImageBitmap(electricista.photo);
-            viewHolder.name.setText(electricista.name);
+            viewHolder.name.setText(electricista.name+" "+ electricista.lastName);
             viewHolder.rating=(RatingBar)convertView.findViewById(R.id.myRating);
             viewHolder.rating.setRating(electricista.promedio);
             LayerDrawable stars = (LayerDrawable) viewHolder.rating.getProgressDrawable();

@@ -22,6 +22,7 @@ public class SignUpService extends IntentService {
     static String email;
     static String phoneNumber;
     static String location;
+    static String lastName;
     static byte[] pathForImage;
     static boolean datosOk;
     static int estado;
@@ -122,7 +123,7 @@ public class SignUpService extends IntentService {
                         MainActivity.gasista,
                         MainActivity.albanil,
                         MainActivity.pintor,
-                        MainActivity.cerrajero,MainActivity.esProveedor,SignUpService.dni,WelcomeWindow.uuid,MainActivity.uniqueGoogleId);
+                        MainActivity.cerrajero,MainActivity.esProveedor,SignUpService.dni,WelcomeWindow.uuid,MainActivity.uniqueGoogleId,SignUpService.lastName);
                 try {
                     GMailSender sender = new GMailSender("servyargentina@gmail.com",
                             "servy2019");

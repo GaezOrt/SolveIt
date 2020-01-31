@@ -117,6 +117,7 @@ public class SignUpProveedor extends AppCompatActivity implements MultiSpinner.M
     String number;
     String location;
     String dni;
+    String lastNamee;
     Uri selectedImage;
     byte[] byteArray;
     private ImageView imageView;
@@ -339,7 +340,6 @@ public class SignUpProveedor extends AppCompatActivity implements MultiSpinner.M
             password.setText(SignUpService.password);
             EditText phone= (EditText)findViewById(editText2);
             phone.setText(SignUpService.phoneNumber);
-
         }
 
 
@@ -372,6 +372,11 @@ public class SignUpProveedor extends AppCompatActivity implements MultiSpinner.M
                         EditText usernameText = (EditText) findViewById(editText);
                         username = usernameText.getText().toString();
                         SignUpService.username=username;
+
+                        EditText lastName= (EditText)findViewById(R.id.editText7);
+                        lastNamee= lastName.getText().toString();
+                        SignUpService.lastName=lastNamee;
+
                         EditText passwordText = (EditText) findViewById(editText2);
                         password = passwordText.getText().toString();
                         SignUpService.password=password;
@@ -505,7 +510,7 @@ public class SignUpProveedor extends AppCompatActivity implements MultiSpinner.M
                         MainActivity.gasista,
                         MainActivity.albanil,
                         MainActivity.pintor,
-                        MainActivity.cerrajero,MainActivity.esProveedor,SignUpService.dni,android_id,MainActivity.uniqueGoogleId);
+                        MainActivity.cerrajero,MainActivity.esProveedor,SignUpService.dni,android_id,MainActivity.uniqueGoogleId,SignUpService.lastName);
                 try {
                     GMailSender sender = new GMailSender("servyargentina@gmail.com",
                             "servy2019");

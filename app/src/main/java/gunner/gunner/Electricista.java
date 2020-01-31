@@ -11,10 +11,11 @@ public class Electricista {
     public String location;
     String number;
     float promedio;
+    String lastName;
     String fechaDeNacimiento;
     float cantidadDeComentarios;
 
-    public Electricista(Bitmap photo, String name, String email, int rating,String location,String number,float promedio,float cantidadDeComentarios,String fechaDeNacimiento){
+    public Electricista(Bitmap photo, String name, String email, int rating,String location,String number,float promedio,float cantidadDeComentarios,String fechaDeNacimiento,String lastName){
         this.photo=photo;
         this.name=name;
         this.email=email;
@@ -24,6 +25,6 @@ public class Electricista {
         this.promedio=promedio;
         this.cantidadDeComentarios=cantidadDeComentarios;
         this.fechaDeNacimiento=fechaDeNacimiento;
-
+        this.lastName=lastName;
     }
 }

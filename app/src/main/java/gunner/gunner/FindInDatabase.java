@@ -276,7 +276,7 @@ public class FindInDatabase extends AppCompatActivity {
                 int blobLength = (int) photo.length();
                 byte[] photoBytes = photo.getBytes(1, blobLength);
                 Bitmap bitmap = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes .length);
-                final Electricista electricista = new Electricista(bitmap, name, email, 9,location2,telefono,obtenerPromedio(email),findAmountOfCommentsEachProvider(email),fechaDeNacimiento);
+                final Electricista electricista = new Electricista(bitmap, name, email, 9,location2,telefono,obtenerPromedio(email),findAmountOfCommentsEachProvider(email),fechaDeNacimiento,rsProfile.getString("lastName"));
                 Electricidad.runOnUI(new Runnable()
                 {
                     public void run()
@@ -429,13 +429,14 @@ public class FindInDatabase extends AppCompatActivity {
                     String telefono=rsProfile.getString("telefono");
                     String location= rsProfile.getString("location");
                     String name = rsProfile.getString("User");
+                    String lastName= rsProfile.getString("lastName");
                     String fechaDeNacimiento=rsProfile.getString("date");
                     X++;
                     Blob photo = rsProfile.getBlob("Foto");
                     int blobLength = (int) photo.length();
                     byte[] photoBytes = photo.getBytes(1, blobLength);
                     Bitmap bitmap = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes .length);
-                    final Electricista electricista = new Electricista(bitmap, name, email, 9,location,telefono,obtenerPromedio(email),findAmountOfCommentsEachProvider(email),fechaDeNacimiento);
+                    final Electricista electricista = new Electricista(bitmap, name, email, 9,location,telefono,obtenerPromedio(email),findAmountOfCommentsEachProvider(email),fechaDeNacimiento,lastName);
                     Electricidad.runOnUI(new Runnable()
                     {
                         public void run()

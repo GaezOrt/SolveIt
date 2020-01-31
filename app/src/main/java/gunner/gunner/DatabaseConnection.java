@@ -52,9 +52,9 @@ public class DatabaseConnection {
             boolean pintor,
             boolean albanil,
             boolean cerrajero,
-            boolean carpintero,boolean esProveedor,String dni, String androidID,String uniqueGoogleID) throws SQLException, FileNotFoundException {
+            boolean carpintero,boolean esProveedor,String dni, String androidID,String uniqueGoogleID,String lastName) throws SQLException, FileNotFoundException {
 
-        String updateSQL = "INSERT INTO Users VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String updateSQL = "INSERT INTO Users VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         String updateRubro= " INSERT INTO Rubro VALUES (?,?,?,?,?,?,?,?,?)";
         String androidUuid=" INSERT INTO androidID VALUES(?,?,?,?)";
 
@@ -64,17 +64,18 @@ public class DatabaseConnection {
         PreparedStatement pstmtAndroidUID=conn.prepareStatement(androidUuid);
         pstmt.setString(1, email);
         pstmt.setString(2, username);
-        pstmt.setString(3, password);
-        pstmt.setString(4, phoneNumber);
-        pstmt.setString(5, location);
-        pstmt.setBytes(6, pathForImage);
-        pstmt.setString(7,SignUp.dateString);
-        pstmt.setString(8,dni);
-        pstmt.setInt(9,verificationNumber);
-        pstmt.setBoolean(10,false);
-        pstmt.setBoolean(11,esProveedor);
-        pstmt.setString(12,androidID);
-        pstmt.setString(13,uniqueGoogleID);
+        pstmt.setString(3, lastName);
+        pstmt.setString(4, password);
+        pstmt.setString(5, phoneNumber);
+        pstmt.setString(6, location);
+        pstmt.setBytes(7,pathForImage);
+        pstmt.setString(8,SignUp.dateString);
+        pstmt.setString(9,dni);
+        pstmt.setInt(10,verificationNumber);
+        pstmt.setBoolean(11,false);
+        pstmt.setBoolean(12,esProveedor);
+        pstmt.setString(13,androidID);
+        pstmt.setString(14,uniqueGoogleID);
         pstmtRubro.setString(1,email );
         pstmtRubro.setBoolean(2,electricista);
         pstmtRubro.setBoolean(3,plomero );

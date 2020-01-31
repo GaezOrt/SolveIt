@@ -13,9 +13,9 @@
     <application
         android:launchMode = "singleTop"
         android:allowBackup="true"
-        android:icon="@mipmap/idease"
+        android:icon="@mipmap/ideas"
         android:label="ServPro"
-        android:roundIcon="@mipmap/idease"
+        android:roundIcon="@mipmap/ideas"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"

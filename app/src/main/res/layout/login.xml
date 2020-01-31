@@ -11,15 +11,13 @@
 
     <ImageView
         android:id="@+id/imageView32"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="65dp"
+        android:layout_height="62dp"
+        android:layout_marginBottom="52dp"
         app:layout_constraintBottom_toTopOf="@+id/button14"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.119"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView30"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/gmail" />
+        app:srcCompat="@drawable/google" />
 
     <Button
         android:id="@+id/button7"
@@ -72,7 +70,7 @@
         android:layout_height="40dp"
         android:layout_above="@+id/editText2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="344dp"
+        android:layout_marginTop="308dp"
         android:background="@drawable/gray_circular_border"
         android:ems="10"
         android:hint="@string/email"
@@ -120,25 +118,26 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="431dp"
-        android:layout_height="312dp"
+        android:layout_width="397dp"
+        android:layout_height="269dp"
         android:layout_marginTop="28dp"
+        android:scaleType="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/idease" />
+        app:srcCompat="@drawable/ideass" />
 
-    <ImageView
-        android:id="@+id/imageView30"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginEnd="24dp"
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Iniciar sesión con Google"
         app:layout_constraintBottom_toTopOf="@+id/button14"
-        app:layout_constraintEnd_toEndOf="@+id/button7"
-        app:layout_constraintTop_toBottomOf="@+id/button7"
-        app:layout_constraintVertical_bias="0.514"
-        app:srcCompat="@drawable/facebook" />
+        app:layout_constraintEnd_toEndOf="@+id/imageView32"
+        app:layout_constraintStart_toStartOf="@+id/imageView32"
+        app:layout_constraintTop_toBottomOf="@+id/imageView32"
+        app:layout_constraintVertical_bias="0.379" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout
