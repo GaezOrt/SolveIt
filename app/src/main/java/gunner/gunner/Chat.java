@@ -40,6 +40,7 @@ public class Chat extends AppCompatActivity {
     private EditText editText;
     static MessageAdapter messageAdapter;
     public ListView listView;
+    static boolean downloadPhoto=true;
     static ArrayList<Mensaje> mensajes =new ArrayList<Mensaje>();
     static boolean vieneDeBusqueda=false;
 
@@ -49,7 +50,7 @@ public class Chat extends AppCompatActivity {
         setContentView(R.layout.message_layour);
         contexte=this;
         mensajes.clear();
-
+        downloadPhoto=true;
         ChatInteraction.lookForEmail2=true;
         Intent u = new Intent(this, ChatInteraction.class);
         DescargarConversacionesDeUsuario descargar= new DescargarConversacionesDeUsuario();

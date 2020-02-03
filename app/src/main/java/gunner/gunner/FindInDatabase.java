@@ -164,7 +164,7 @@ public class FindInDatabase extends AppCompatActivity {
 
             while (rs.next()) {
                 FindInDatabase find= new FindInDatabase();
-                final ConversacionesUsuarioListaTipo conversacion=new ConversacionesUsuarioListaTipo(rs.getString("mensaje"),rs.getString("segundoIntegrante"),find.findPictureFromUser(rs.getString(rs.getString("segundoIntegrante"))));
+                final ConversacionesUsuarioListaTipo conversacion=new ConversacionesUsuarioListaTipo(rs.getString("mensaje"),rs.getString("segundoIntegrante"),find.findPictureFromUser(rs.getString("segundoIntegrante")));
                 ConversacionesUsuario.runOnUI(new Runnable() {
                     public void run() {
                         try {

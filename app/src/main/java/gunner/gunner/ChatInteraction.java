@@ -68,7 +68,6 @@ public class ChatInteraction extends IntentService {
     public void findMensajesBetween2Persons(String persona1, String persona2) {
         try {
 
-
             final DatabaseConnection data = new DatabaseConnection();
 
             con = data.connect();

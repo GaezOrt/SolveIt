@@ -13,56 +13,58 @@
         android:id="@+id/imageView32"
         android:layout_width="65dp"
         android:layout_height="62dp"
-        android:layout_marginBottom="52dp"
-        app:layout_constraintBottom_toTopOf="@+id/button14"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button7"
         app:srcCompat="@drawable/google" />
 
     <Button
         android:id="@+id/button7"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="300dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         android:layout_weight="1"
         android:text="Iniciar sesión"
         android:textAllCaps="false"
-        android:textSize="30sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText2" />
 
     <Button
         android:id="@+id/button14"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="20dp"
         android:layout_weight="1"
-        android:background="@drawable/border"
+        android:background="@color/originalGreen"
         android:text="Crear cuenta como usuario"
-        android:textColor="#090808"
+        android:textColor="@color/white"
         android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button15"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button15"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="16dp"
         android:layout_weight="1"
-        android:background="@drawable/border"
+        android:background="@color/originalGreen"
         android:text="Crear cuenta como proveedor"
-        android:textColor="#090808"
+        android:textColor="@color/white"
         android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/button14" />
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editText"
@@ -71,7 +73,7 @@
         android:layout_above="@+id/editText2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="308dp"
-        android:background="@drawable/gray_circular_border"
+        android:background="@drawable/bottom_line"
         android:ems="10"
         android:hint="@string/email"
         android:inputType="textPersonName"
@@ -91,7 +93,7 @@
         android:layout_alignLeft="@+id/editText"
         android:layout_alignBottom="@+id/cardView"
         android:layout_marginTop="16dp"
-        android:background="@drawable/gray_circular_border"
+        android:background="@drawable/bottom_line"
         android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPassword"
@@ -135,9 +137,10 @@
         android:text="Iniciar sesión con Google"
         app:layout_constraintBottom_toTopOf="@+id/button14"
         app:layout_constraintEnd_toEndOf="@+id/imageView32"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="@+id/imageView32"
         app:layout_constraintTop_toBottomOf="@+id/imageView32"
-        app:layout_constraintVertical_bias="0.379" />
+        app:layout_constraintVertical_bias="0.222" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout

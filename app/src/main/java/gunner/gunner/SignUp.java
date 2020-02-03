@@ -120,9 +120,7 @@ import static gunner.gunner.R.id.imageView12;
 import static gunner.gunner.R.id.imageView13;
 import static gunner.gunner.R.id.imageView18;
 import static gunner.gunner.R.id.imageView2;
-import static gunner.gunner.R.id.imageView21;
 import static gunner.gunner.R.id.imageView3;
-import static gunner.gunner.R.id.imageView4;
 import static gunner.gunner.R.id.imageView8;
 import static gunner.gunner.R.id.imageView9;
 import static gunner.gunner.R.id.location3;
@@ -208,7 +206,7 @@ GoogleApiClient mGoogleApiClient;
         setContentView(R.layout.register);
         SignUpService.signUpClient = true;
 
-        ImageView google= (ImageView)findViewById(R.id.imageView31);
+        Button google= (Button)findViewById(R.id.button3);
         GoogleSignInOptions gso= new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         EditText emaila = (EditText) findViewById(editText3);
         EditText usernamea = (EditText) findViewById(editText);
@@ -248,8 +246,6 @@ GoogleApiClient mGoogleApiClient;
         ImageView emailImage = (ImageView) findViewById(imageView9);
         ImageView namee = (ImageView) findViewById(imageView12);
         ImageView passwordd = (ImageView) findViewById(imageView13);
-        ImageView phonee = (ImageView) findViewById(imageView4);
-        ImageView datee = (ImageView) findViewById(imageView21);
         ImageView locationImage = (ImageView) findViewById(imageView3);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

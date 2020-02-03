@@ -101,10 +101,7 @@ import static gunner.gunner.R.id.imageView12;
 import static gunner.gunner.R.id.imageView13;
 import static gunner.gunner.R.id.imageView18;
 import static gunner.gunner.R.id.imageView2;
-import static gunner.gunner.R.id.imageView21;
 import static gunner.gunner.R.id.imageView3;
-import static gunner.gunner.R.id.imageView4;
-import static gunner.gunner.R.id.imageView8;
 import static gunner.gunner.R.id.imageView9;
 import static gunner.gunner.R.id.location3;
 import static gunner.gunner.R.id.spinner;
@@ -177,14 +174,11 @@ public class SignUpProveedor extends AppCompatActivity implements MultiSpinner.M
         ImageView emailImage=(ImageView)findViewById(imageView9);
         ImageView namee=(ImageView)findViewById(imageView12);
         ImageView passwordd=(ImageView)findViewById(imageView13);
-        ImageView phonee=(ImageView)findViewById(imageView4);
-        ImageView datee=(ImageView)findViewById(imageView21);
+
         ImageView locationImage=(ImageView)findViewById(imageView3);
         emailImage.startAnimation(animationFields);
         namee.startAnimation(animationFields);
         passwordd.startAnimation(animationFields);
-        phonee.startAnimation(animationFields);
-        datee.startAnimation(animationFields);
         locationImage.startAnimation(animationFields);
 
 
