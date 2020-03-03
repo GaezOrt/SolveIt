@@ -24,6 +24,7 @@ public class DatabaseConnection {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
 
+            //Data a encriptar a futuro
             final String userName = "9QFW2Os9pV";
             final String passwordDatabase = "dKObZerUnf";
             final String url = "jdbc:mysql://remotemysql.com:3306/9QFW2Os9pV";
