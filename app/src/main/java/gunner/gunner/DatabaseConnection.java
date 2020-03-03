@@ -1,26 +1,21 @@
 package gunner.gunner;
 
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.StrictMode;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import gunner.gunner.signup.SignUp;
 
 public class DatabaseConnection {
 
     public static Connection conn;
 
 
-    Connection connect() throws SQLException, ClassNotFoundException {
+   public Connection connect() throws SQLException, ClassNotFoundException {
         if(conn==null) {
             System.out.println("Establishing connection");
             final String driver = "com.mysql.jdbc.Driver";
@@ -37,7 +32,7 @@ public class DatabaseConnection {
         return conn;
     }
 
-    void createUser(
+   public void createUser(
             String email,
             String username,
             String password,
@@ -69,7 +64,7 @@ public class DatabaseConnection {
         pstmt.setString(5, phoneNumber);
         pstmt.setString(6, location);
         pstmt.setBytes(7,pathForImage);
-        pstmt.setString(8,SignUp.dateString);
+        pstmt.setString(8, SignUp.dateString);
         pstmt.setString(9,dni);
         pstmt.setInt(10,verificationNumber);
         pstmt.setBoolean(11,false);

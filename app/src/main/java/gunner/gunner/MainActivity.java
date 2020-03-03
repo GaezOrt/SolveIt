@@ -12,7 +12,6 @@ import android.os.Handler;
 import android.os.StrictMode;
 import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -32,6 +31,14 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
+import gunner.gunner.chat.UserConversationsClass;
+import gunner.gunner.login.LogIn;
+import gunner.gunner.login.LogInService;
+import gunner.gunner.rubros.Rubro;
+import gunner.gunner.rubros.RubrosListAdapter;
+import gunner.gunner.rubros.electricistas.Electricidad;
+import gunner.gunner.signup.SignUp;
+
 import static android.view.View.VISIBLE;
 
 import static gunner.gunner.R.id.imageView14;
@@ -49,26 +56,27 @@ import static gunner.gunner.R.id.welcomeMessage;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private boolean requestedFocus = false;
-    static boolean loggedIn = false;
-    static String loggedUsername;
-    static String loggedEmail;
-    static String loggedPhone;
-    static String loggedLocation;
+    public static boolean loggedIn = false;
+   public static String loggedUsername;
+    public static String loggedEmail;
+    public static String loggedPhone;
+    public static String loggedLocation;
     static String lastName;
-    static Bitmap profileImage;
-    static byte[] loggedImageInDatabaseArray;
-    static boolean electricista;
-    static boolean plomero;
-    static boolean computacion;
-    static boolean carpintero;
-    static boolean pintor;
-    static boolean gasista;
-    static boolean cerrajero;
-    static boolean albanil;
-    static String uniqueGoogleId;
+    public static Bitmap profileImage;
+    public static byte[] loggedImageInDatabaseArray;
+    public static boolean electricista;
+    public static boolean plomero;
+    public static boolean computacion;
+    public static boolean carpintero;
+    public static boolean pintor;
+    public static boolean gasista;
+    public static boolean cerrajero;
+    public static boolean albanil;
+    public static String uniqueGoogleId;
     private View hiddenPanel;
     static boolean firstTimeLoogedIn = true;
-    static boolean esProveedor;
+    public static boolean esProveedor;
+    public static boolean downloadPhoto=true;
     CoordinatorLayout coord;
     private Handler mHandler = new Handler();
     static LocationManager locationManager;
@@ -76,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static RubrosListAdapter adapter2;
     ArrayList<Rubro> rubros = new ArrayList<Rubro>();
     ArrayList<Rubro> rubros2 = new ArrayList<Rubro>();
+   public static Bitmap userConvPhoto;
     ListView listView;
     ListView listView2;
     boolean isLeftListEnabled = true;
@@ -92,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setNavigationBarColor(getResources().getColor(R.color.black));
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.originalGreen));
         }
 
 
@@ -232,7 +241,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mensajes.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(MainActivity.this, ConversacionesUsuario.class));
+                    startActivity(new Intent(MainActivity.this, UserConversationsClass.class));
                 }
             });
 

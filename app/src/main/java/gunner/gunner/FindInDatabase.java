@@ -1,10 +1,6 @@
 package gunner.gunner;
 
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -31,6 +27,16 @@ import java.util.Arrays;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import gunner.gunner.chat.Chat;
+import gunner.gunner.chat.Mensaje;
+import gunner.gunner.chat.UserConversations;
+import gunner.gunner.chat.UserConversationsClass;
+import gunner.gunner.login.LogInService;
+import gunner.gunner.reviews.AddComment;
+import gunner.gunner.reviews.Comentarios;
+import gunner.gunner.reviews.CommentsListAdaptor;
+import gunner.gunner.rubros.electricistas.Electricidad;
+import gunner.gunner.rubros.electricistas.Electricista;
 
 import static gunner.gunner.R.id.editText;
 import static gunner.gunner.R.id.editText2;
@@ -46,15 +52,15 @@ import static gunner.gunner.R.id.rate;
 public class FindInDatabase extends AppCompatActivity {
 
 
-    static ArrayList<Comentarios> comentarios =new ArrayList<Comentarios>();
+    public static ArrayList<Comentarios> comentarios =new ArrayList<Comentarios>();
     Connection con;
     static String nombre;
     static String numeroTelefono;
     static String location;
-    static String emailPassed;
-    static int ubicacionElectricista;
+    public static String emailPassed;
+    public static int ubicacionElectricista;
     public static int X;
-    static   CommentsListAdaptor adapter ;
+    static CommentsListAdaptor adapter ;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.Theme_Design_NoActionBar);
@@ -82,7 +88,7 @@ public class FindInDatabase extends AppCompatActivity {
             public void onClick(View v) {
                 MediaPlayer mp = MediaPlayer.create(FindInDatabase.this.getApplicationContext(), R.raw.cli);
                 mp.start();
-                FindInDatabase.this.startActivity(new Intent(FindInDatabase.this, addComment.class));
+                FindInDatabase.this.startActivity(new Intent(FindInDatabase.this, AddComment.class));
             }
         });
 
@@ -126,14 +132,14 @@ public class FindInDatabase extends AppCompatActivity {
 
             while (rs.next()) {
                 FindInDatabase find= new FindInDatabase();
-                final ConversacionesUsuarioListaTipo conversacion=new ConversacionesUsuarioListaTipo(rs.getString("mensaje"),rs.getString("primerIntegrante"),find.findPictureFromUser("primerIntegrante"));
-                ConversacionesUsuario.runOnUI(new Runnable() {
+                final UserConversations conversacion=new UserConversations(rs.getString("mensaje"),rs.getString("primerIntegrante"),find.findPictureFromUser("primerIntegrante"));
+                UserConversationsClass.runOnUI(new Runnable() {
                     public void run() {
                         try {
-                            if(ConversacionesUsuario.conversaciones.contains(conversacion.nombre)) {
+                            if(UserConversationsClass.conversaciones.contains(conversacion.nombre)) {
                             }else{
                                 insertUniqueItem(conversacion);
-                                ConversacionesUsuario.adapter.notifyDataSetChanged();
+                                UserConversationsClass.adapter.notifyDataSetChanged();
                             }
 
                         } catch (Exception e) {
@@ -153,7 +159,7 @@ public class FindInDatabase extends AppCompatActivity {
     public void findConversationsOfUserInDatabase(String email){
         try {
             System.out.println("finding messages");
-            ConversacionesUsuario.conversaciones.clear();
+            UserConversationsClass.conversaciones.clear();
             final DatabaseConnection data = new DatabaseConnection();
 
             con = data.connect();
@@ -164,14 +170,14 @@ public class FindInDatabase extends AppCompatActivity {
 
             while (rs.next()) {
                 FindInDatabase find= new FindInDatabase();
-                final ConversacionesUsuarioListaTipo conversacion=new ConversacionesUsuarioListaTipo(rs.getString("mensaje"),rs.getString("segundoIntegrante"),find.findPictureFromUser(rs.getString("segundoIntegrante")));
-                ConversacionesUsuario.runOnUI(new Runnable() {
+                final UserConversations conversacion=new UserConversations(rs.getString("mensaje"),rs.getString("segundoIntegrante"),find.findPictureFromUser(rs.getString("segundoIntegrante")));
+                UserConversationsClass.runOnUI(new Runnable() {
                     public void run() {
                         try {
-                            if(ConversacionesUsuario.conversaciones.contains(conversacion.nombre)) {
+                            if(UserConversationsClass.conversaciones.contains(conversacion.nombre)) {
                             }else{
                                 insertUniqueItem(conversacion);
-                                ConversacionesUsuario.adapter.notifyDataSetChanged();
+                                UserConversationsClass.adapter.notifyDataSetChanged();
                             }
 
                         } catch (Exception e) {
@@ -189,9 +195,9 @@ public class FindInDatabase extends AppCompatActivity {
         }
     }
 
-    public void insertUniqueItem(ConversacionesUsuarioListaTipo item) {
+    public void insertUniqueItem(UserConversations item) {
         if(!contains(item)) {
-            ConversacionesUsuario.conversaciones.add(item);
+            UserConversationsClass.conversaciones.add(item);
         }
     }
     public  String findBasedOnUuid(String uiid){
@@ -214,8 +220,8 @@ public class FindInDatabase extends AppCompatActivity {
             }
             return email;
     }
-    private boolean contains(ConversacionesUsuarioListaTipo item) {
-        for(ConversacionesUsuarioListaTipo i : ConversacionesUsuario.conversaciones) {
+    private boolean contains(UserConversations item) {
+        for(UserConversations i : UserConversationsClass.conversaciones) {
             if(i.nombre.equals(item.nombre)) {
                 return true;
             }
@@ -228,7 +234,7 @@ public class FindInDatabase extends AppCompatActivity {
             nombre = Electricidad.electricistas.get(ubicacionElectricista).name;
             email = Electricidad.electricistas.get(ubicacionElectricista).email;
             location = Electricidad.electricistas.get(ubicacionElectricista).location;
-            addComment.email=email;
+            AddComment.email=email;
 
             Bitmap bitmap=Electricidad.electricistas.get(ubicacionElectricista).photo;
             CircleImageView image = (CircleImageView) findViewById(imageView2);

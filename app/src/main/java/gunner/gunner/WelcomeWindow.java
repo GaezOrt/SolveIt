@@ -1,34 +1,26 @@
 package gunner.gunner;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentSender;
-import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 
 
-import android.telephony.TelephonyManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import gunner.gunner.background.DownloadStuffInBackground;
+import gunner.gunner.login.LogIn;
+import gunner.gunner.rubros.electricistas.Electricidad;
 
 
 public class WelcomeWindow extends AppCompatActivity {
     private Handler mHandler = new Handler();
-    static String uuid;
+   public static String uuid;
     static String emailHint;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
